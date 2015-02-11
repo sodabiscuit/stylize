@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B11A8B039300A4987A /* StylizeNode.m */; };
+		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
+		1247B7B71A8B048700A4987A /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B61A8B048700A4987A /* StylizeControlNode.m */; };
+		1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */; };
+		1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */; };
+		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
+		12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9F1A8211E400E5E2F5 /* AppDelegate.m */; };
+		12728CA31A8211E400E5E2F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CA21A8211E400E5E2F5 /* ViewController.m */; };
+		12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA41A8211E400E5E2F5 /* Main.storyboard */; };
+		12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA71A8211E400E5E2F5 /* Images.xcassets */; };
+		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
+		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
+		50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		12728CB11A8211E400E5E2F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12728C8F1A8211E300E5E2F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12728C961A8211E300E5E2F5;
+			remoteInfo = StylizeDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.release.xcconfig"; sourceTree = "<group>"; };
+		1247B7B01A8B039300A4987A /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
+		1247B7B11A8B039300A4987A /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
+		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1247B7B51A8B048700A4987A /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
+		1247B7B61A8B048700A4987A /* StylizeControlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeControlNode.m; sourceTree = "<group>"; };
+		1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
+		1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
+		1247B7BB1A8B04FC00A4987A /* Stylize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
+		1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
+		1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
+		1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
+		12728C971A8211E300E5E2F5 /* StylizeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylizeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12728C9B1A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12728C9C1A8211E400E5E2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		12728C9E1A8211E400E5E2F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		12728C9F1A8211E400E5E2F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		12728CA11A8211E400E5E2F5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		12728CA21A8211E400E5E2F5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		12728CA51A8211E400E5E2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		12728CA71A8211E400E5E2F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		12728CAA1A8211E400E5E2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylizeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		12728CB51A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
+		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StylizeDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		12728C941A8211E300E5E2F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */,
+				50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12728CAD1A8211E400E5E2F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1247B7AF1A8B032D00A4987A /* Stylize */ = {
+			isa = PBXGroup;
+			children = (
+				1247B7B01A8B039300A4987A /* StylizeNode.h */,
+				1247B7B11A8B039300A4987A /* StylizeNode.m */,
+				1247B7B51A8B048700A4987A /* StylizeControlNode.h */,
+				1247B7B61A8B048700A4987A /* StylizeControlNode.m */,
+				1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */,
+				1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */,
+				1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */,
+				1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */,
+				1247B7BB1A8B04FC00A4987A /* Stylize.h */,
+				1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */,
+			);
+			path = Stylize;
+			sourceTree = "<group>";
+		};
+		12728C8E1A8211E300E5E2F5 = {
+			isa = PBXGroup;
+			children = (
+				1247B7AF1A8B032D00A4987A /* Stylize */,
+				12728C991A8211E300E5E2F5 /* StylizeDemo */,
+				12728CB31A8211E400E5E2F5 /* StylizeDemoTests */,
+				12728C981A8211E300E5E2F5 /* Products */,
+				A1C349D725D632F731CD9697 /* Pods */,
+				362F8ACE82DC5E727EA396EF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		12728C981A8211E300E5E2F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12728C971A8211E300E5E2F5 /* StylizeDemo.app */,
+				12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12728C991A8211E300E5E2F5 /* StylizeDemo */ = {
+			isa = PBXGroup;
+			children = (
+				12728C9E1A8211E400E5E2F5 /* AppDelegate.h */,
+				12728C9F1A8211E400E5E2F5 /* AppDelegate.m */,
+				12728CA11A8211E400E5E2F5 /* ViewController.h */,
+				12728CA21A8211E400E5E2F5 /* ViewController.m */,
+				12728CA41A8211E400E5E2F5 /* Main.storyboard */,
+				12728CA71A8211E400E5E2F5 /* Images.xcassets */,
+				12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */,
+				12728C9A1A8211E300E5E2F5 /* Supporting Files */,
+			);
+			path = StylizeDemo;
+			sourceTree = "<group>";
+		};
+		12728C9A1A8211E300E5E2F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				12728C9B1A8211E400E5E2F5 /* Info.plist */,
+				12728C9C1A8211E400E5E2F5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12728CB31A8211E400E5E2F5 /* StylizeDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */,
+				12728CB41A8211E400E5E2F5 /* Supporting Files */,
+			);
+			path = StylizeDemoTests;
+			sourceTree = "<group>";
+		};
+		12728CB41A8211E400E5E2F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				12728CB51A8211E400E5E2F5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */,
+				F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1C349D725D632F731CD9697 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */,
+				0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		12728C961A8211E300E5E2F5 /* StylizeDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12728CBA1A8211E400E5E2F5 /* Build configuration list for PBXNativeTarget "StylizeDemo" */;
+			buildPhases = (
+				14DC4866636AA84DCB79C56A /* Check Pods Manifest.lock */,
+				12728C931A8211E300E5E2F5 /* Sources */,
+				12728C941A8211E300E5E2F5 /* Frameworks */,
+				12728C951A8211E300E5E2F5 /* Resources */,
+				4C173A5BFFC874FE73E71DA8 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StylizeDemo;
+			productName = StylizeDemo;
+			productReference = 12728C971A8211E300E5E2F5 /* StylizeDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		12728CAF1A8211E400E5E2F5 /* StylizeDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12728CBD1A8211E400E5E2F5 /* Build configuration list for PBXNativeTarget "StylizeDemoTests" */;
+			buildPhases = (
+				12728CAC1A8211E400E5E2F5 /* Sources */,
+				12728CAD1A8211E400E5E2F5 /* Frameworks */,
+				12728CAE1A8211E400E5E2F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				12728CB21A8211E400E5E2F5 /* PBXTargetDependency */,
+			);
+			name = StylizeDemoTests;
+			productName = StylizeDemoTests;
+			productReference = 12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		12728C8F1A8211E300E5E2F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Yulin Ding";
+				TargetAttributes = {
+					12728C961A8211E300E5E2F5 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					12728CAF1A8211E400E5E2F5 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 12728C961A8211E300E5E2F5;
+					};
+				};
+			};
+			buildConfigurationList = 12728C921A8211E300E5E2F5 /* Build configuration list for PBXProject "StylizeDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 12728C8E1A8211E300E5E2F5;
+			productRefGroup = 12728C981A8211E300E5E2F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				12728C961A8211E300E5E2F5 /* StylizeDemo */,
+				12728CAF1A8211E400E5E2F5 /* StylizeDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		12728C951A8211E300E5E2F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */,
+				12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */,
+				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12728CAE1A8211E400E5E2F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14DC4866636AA84DCB79C56A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4C173A5BFFC874FE73E71DA8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		12728C931A8211E300E5E2F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12728CA31A8211E400E5E2F5 /* ViewController.m in Sources */,
+				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
+				1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */,
+				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
+				1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */,
+				1247B7B71A8B048700A4987A /* StylizeControlNode.m in Sources */,
+				1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12728CAC1A8211E400E5E2F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		12728CB21A8211E400E5E2F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12728C961A8211E300E5E2F5 /* StylizeDemo */;
+			targetProxy = 12728CB11A8211E400E5E2F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		12728CA41A8211E400E5E2F5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12728CA51A8211E400E5E2F5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12728CAA1A8211E400E5E2F5 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		12728CB81A8211E400E5E2F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		12728CB91A8211E400E5E2F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		12728CBB1A8211E400E5E2F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = StylizeDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		12728CBC1A8211E400E5E2F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = StylizeDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		12728CBE1A8211E400E5E2F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = StylizeDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StylizeDemo.app/StylizeDemo";
+			};
+			name = Debug;
+		};
+		12728CBF1A8211E400E5E2F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = StylizeDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StylizeDemo.app/StylizeDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		12728C921A8211E300E5E2F5 /* Build configuration list for PBXProject "StylizeDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12728CB81A8211E400E5E2F5 /* Debug */,
+				12728CB91A8211E400E5E2F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12728CBA1A8211E400E5E2F5 /* Build configuration list for PBXNativeTarget "StylizeDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12728CBB1A8211E400E5E2F5 /* Debug */,
+				12728CBC1A8211E400E5E2F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12728CBD1A8211E400E5E2F5 /* Build configuration list for PBXNativeTarget "StylizeDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12728CBE1A8211E400E5E2F5 /* Debug */,
+				12728CBF1A8211E400E5E2F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 12728C8F1A8211E300E5E2F5 /* Project object */;
+}

@@ -1,0 +1,15 @@
+PODS:
+  - AsyncDisplayKit (1.1.1):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.1.1)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.1.1)
+  - Masonry (0.6.1)
+
+DEPENDENCIES:
+  - AsyncDisplayKit
+  - Masonry
+
+SPEC CHECKSUMS:
+  AsyncDisplayKit: d778ffaa171755c51ed2ef37d8547dde60e331f4
+  Masonry: da0234d9330ac84219045f589cfcb37f6c596eff
+
+COCOAPODS: 0.35.0

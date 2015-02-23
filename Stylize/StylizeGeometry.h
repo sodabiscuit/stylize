@@ -8,6 +8,53 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    StylizeLayoutTypeDefault,
+    StylizeLayoutTypeFlex,
+    StylizeLayoutTypeFlexInline,
+} StylizeLayoutType;
+
+typedef enum {
+    StylizeLayoutFlexDirectionRow,
+    StylizeLayoutFlexDirectionColumn,
+} StylizeLayoutFlexDirection;
+
+typedef enum {
+    StylizeLayoutFlexJustifyContentFlexStart,
+    StylizeLayoutFlexJustifyContentFlexEnd,
+    StylizeLayoutFlexJustifyContentCenter,
+    StylizeLayoutFlexJustifyContentSpaceBetween,
+    StylizeLayoutFlexJustifyContentSpaceAround,
+} StylizeLayoutFlexJustifyContent;
+
+typedef enum {
+    StylizeLayoutFlexAlignItemsFlexStart,
+    StylizeLayoutFlexAlignItemsFlexEnd,
+    StylizeLayoutFlexAlignItemsCenter,
+    StylizeLayoutFlexAlignItemsBaseline,
+    StylizeLayoutFlexAlignItemsStretch,
+} StylizeLayoutFlexAlignItems;
+
+typedef enum {
+    StylizeLayoutFlexFlexWrapNowrap,
+    StylizeLayoutFlexFlexWrapWrap,
+    StylizeLayoutFlexFlexWrapReserve,
+} StylizeLayoutFlexFlexWrap;
+
+typedef enum {
+    StylizeLayoutFlexAlignContentStretch,
+    StylizeLayoutFlexAlignContentFlexStart,
+    StylizeLayoutFlexAlignContentFlexEnd,
+    StylizeLayoutFlexAlignContentCenter,
+    StylizeLayoutFlexAlignContentSpaceBetween,
+    StylizeLayoutFlexAlignContentSpaceAround,
+} StylizeLayoutFlexAlignContent;
+
+typedef struct {
+    StylizeLayoutFlexDirection direction;
+    StylizeLayoutFlexFlexWrap flexWrap;
+} StylizeLayoutFlexFlow;
+
 typedef struct {
     CGFloat paddingTop;
     CGFloat paddingRight;

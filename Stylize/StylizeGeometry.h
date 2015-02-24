@@ -55,6 +55,12 @@ typedef struct {
     StylizeLayoutFlexFlexWrap flexWrap;
 } StylizeLayoutFlexFlow;
 
+
+typedef enum {
+    StylizePositionTypeRelative,
+    StylizePositionTypeAbsolute,
+} StylizePositionType;
+
 typedef struct {
     CGFloat paddingTop;
     CGFloat paddingRight;

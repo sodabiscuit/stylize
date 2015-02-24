@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Stylize.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 22, self.view.frame.size.width, 50)];
+    [button setTitle:@"clickme" forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor grayColor];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:11];
+    [self.view addSubview:button];
 }
 
 - (void)didReceiveMemoryWarning {

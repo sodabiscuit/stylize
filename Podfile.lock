@@ -9,7 +9,7 @@ DEPENDENCIES:
   - Masonry
 
 SPEC CHECKSUMS:
-  AsyncDisplayKit: 897b28140c6c73fbe8d6168f19ce7cbd87c94ee8
-  Masonry: 2cb49fd14d203d2db5ca6bb017135b235dde9980
+  AsyncDisplayKit: d778ffaa171755c51ed2ef37d8547dde60e331f4
+  Masonry: da0234d9330ac84219045f589cfcb37f6c596eff
 
 COCOAPODS: 0.35.0

@@ -8,3 +8,4 @@
 
 #import "StylizeNode.h"
 #import "StylizeControlNode.h"
+#import "UIView+StylizeNode.h"

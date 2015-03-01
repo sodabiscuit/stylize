@@ -14,7 +14,7 @@
 		1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */; };
 		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
 		12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9F1A8211E400E5E2F5 /* AppDelegate.m */; };
-		12728CA31A8211E400E5E2F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CA21A8211E400E5E2F5 /* ViewController.m */; };
+		12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CA21A8211E400E5E2F5 /* StylizeDemoBasicViewController.m */; };
 		12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA41A8211E400E5E2F5 /* Main.storyboard */; };
 		12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA71A8211E400E5E2F5 /* Images.xcassets */; };
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
@@ -51,8 +51,8 @@
 		12728C9C1A8211E400E5E2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		12728C9E1A8211E400E5E2F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		12728C9F1A8211E400E5E2F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		12728CA11A8211E400E5E2F5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		12728CA21A8211E400E5E2F5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		12728CA11A8211E400E5E2F5 /* StylizeDemoBasicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeDemoBasicViewController.h; sourceTree = "<group>"; };
+		12728CA21A8211E400E5E2F5 /* StylizeDemoBasicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoBasicViewController.m; sourceTree = "<group>"; };
 		12728CA51A8211E400E5E2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12728CA71A8211E400E5E2F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		12728CAA1A8211E400E5E2F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -61,6 +61,7 @@
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
 		12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
 		12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
+		12739EB71A9E26BC00960E16 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StylizeDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,9 +98,11 @@
 				1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */,
 				1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */,
 				1247B7BB1A8B04FC00A4987A /* Stylize.h */,
+				12739EB71A9E26BC00960E16 /* StylizeLayoutFlexGeometry.h */,
 				1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */,
 				12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */,
 				12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */,
+				12739EB51A9D743A00960E16 /* ThirdParty */,
 			);
 			path = Stylize;
 			sourceTree = "<group>";
@@ -130,8 +133,8 @@
 			children = (
 				12728C9E1A8211E400E5E2F5 /* AppDelegate.h */,
 				12728C9F1A8211E400E5E2F5 /* AppDelegate.m */,
-				12728CA11A8211E400E5E2F5 /* ViewController.h */,
-				12728CA21A8211E400E5E2F5 /* ViewController.m */,
+				12728CA11A8211E400E5E2F5 /* StylizeDemoBasicViewController.h */,
+				12728CA21A8211E400E5E2F5 /* StylizeDemoBasicViewController.m */,
 				12728CA41A8211E400E5E2F5 /* Main.storyboard */,
 				12728CA71A8211E400E5E2F5 /* Images.xcassets */,
 				12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */,
@@ -164,6 +167,13 @@
 				12728CB51A8211E400E5E2F5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12739EB51A9D743A00960E16 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
@@ -319,7 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12728CA31A8211E400E5E2F5 /* ViewController.m in Sources */,
+				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
 				1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,

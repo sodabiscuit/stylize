@@ -7,54 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StylizeLayoutFlexGeometry.h"
+
+typedef enum {
+    StylizeNodeMeasureAuto,
+} StylizeNodeMeasure;
 
 typedef enum {
     StylizeLayoutTypeDefault,
+    StylizeLayoutTypeBox,
     StylizeLayoutTypeFlex,
     StylizeLayoutTypeFlexInline,
 } StylizeLayoutType;
-
-typedef enum {
-    StylizeLayoutFlexDirectionRow,
-    StylizeLayoutFlexDirectionColumn,
-} StylizeLayoutFlexDirection;
-
-typedef enum {
-    StylizeLayoutFlexJustifyContentFlexStart,
-    StylizeLayoutFlexJustifyContentFlexEnd,
-    StylizeLayoutFlexJustifyContentCenter,
-    StylizeLayoutFlexJustifyContentSpaceBetween,
-    StylizeLayoutFlexJustifyContentSpaceAround,
-} StylizeLayoutFlexJustifyContent;
-
-typedef enum {
-    StylizeLayoutFlexAlignItemsFlexStart,
-    StylizeLayoutFlexAlignItemsFlexEnd,
-    StylizeLayoutFlexAlignItemsCenter,
-    StylizeLayoutFlexAlignItemsBaseline,
-    StylizeLayoutFlexAlignItemsStretch,
-} StylizeLayoutFlexAlignItems;
-
-typedef enum {
-    StylizeLayoutFlexFlexWrapNowrap,
-    StylizeLayoutFlexFlexWrapWrap,
-    StylizeLayoutFlexFlexWrapReserve,
-} StylizeLayoutFlexFlexWrap;
-
-typedef enum {
-    StylizeLayoutFlexAlignContentStretch,
-    StylizeLayoutFlexAlignContentFlexStart,
-    StylizeLayoutFlexAlignContentFlexEnd,
-    StylizeLayoutFlexAlignContentCenter,
-    StylizeLayoutFlexAlignContentSpaceBetween,
-    StylizeLayoutFlexAlignContentSpaceAround,
-} StylizeLayoutFlexAlignContent;
-
-typedef struct {
-    StylizeLayoutFlexDirection direction;
-    StylizeLayoutFlexFlexWrap flexWrap;
-} StylizeLayoutFlexFlow;
-
 
 typedef enum {
     StylizePositionTypeRelative,
@@ -93,3 +57,25 @@ typedef struct {
     CGFloat borderBottom;
     CGFloat borderLeft;
 }  StylizeBorder;
+
+CG_INLINE StylizeMargin
+StylizeMarginMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
+{
+    StylizeMargin margin;
+    margin.marginTop = top;
+    margin.marginRight = right;
+    margin.marginBottom = bottom;
+    margin.marginLeft = right;
+    return margin;
+}
+
+CG_INLINE StylizePadding
+StylizePaddingMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
+{
+    StylizePadding padding;
+    padding.paddingTop = top;
+    padding.paddingRight = right;
+    padding.paddingBottom = bottom;
+    padding.paddingLeft = right;
+    return padding;
+}

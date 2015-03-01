@@ -10,6 +10,8 @@
 
 @interface UIView(StylizeNode)
 
+@property (nonatomic,readonly,strong) NSArray *subnodes;
+
 - (void)addStylizeNode:(StylizeNode *)stylizeNode;
 
 @end

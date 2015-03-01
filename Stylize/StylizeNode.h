@@ -12,6 +12,14 @@
 @interface StylizeNode : NSObject
 
 /**
+ *  id信息
+ */
+@property (nonatomic,readonly,strong) NSString *nodeId;
+/**
+ *  输出的位置信息
+ */
+@property (nonatomic,readonly,assign) CGRect frame;
+/**
  *  宽度
  */
 @property (nonatomic,assign) CGFloat width;
@@ -42,7 +50,11 @@
 /**
  *  样式
  */
-@property (nonatomic,copy) StylizeCSSRule *cssRule;
+@property (nonatomic,copy) StylizeCSSRule *CSSRule;
+/**
+ *  计算完成的样式
+ */
+@property (nonatomic,readonly,strong) StylizeCSSRule *computedCSSRule;
 /**
  *  父节点
  */
@@ -55,7 +67,6 @@
  *  节点所包含的UIView或UIView子类实例
  */
 @property (nonatomic,readonly,strong) UIView *view;
-
 
 /**
  *  以类实例初始化
@@ -111,5 +122,11 @@
  *  从父节点移除
  */
 - (void)removeFromSupernode;
+/**
+ *  添加CSS规则
+ *
+ *  @param CSSRule 需要增加或者覆盖的CSS规则
+ */
+- (void)applyCSSRule:(StylizeCSSRule *)CSSRule;
 
 @end

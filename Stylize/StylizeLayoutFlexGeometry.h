@@ -9,7 +9,9 @@
 
 typedef enum {
     StylizeLayoutFlexDirectionRow,
+    StylizeLayoutFlexDirectionRowReverse,
     StylizeLayoutFlexDirectionColumn,
+    StylizeLayoutFlexDirectionColumnReverse,
 } StylizeLayoutFlexDirection;
 
 typedef enum {
@@ -47,3 +49,11 @@ typedef struct {
     StylizeLayoutFlexDirection direction;
     StylizeLayoutFlexFlexWrap flexWrap;
 } StylizeLayoutFlexFlow;
+
+typedef enum {
+    StylizeLayoutFlexAlignSelfStart,
+    StylizeLayoutFlexAlignSelfEnd,
+    StylizeLayoutFlexAlignSelfCenter,
+    StylizeLayoutFlexAlignSelfBaseline,
+    StylizeLayoutFlexAlignSelfStretch,
+} StylizeLayoutFlexAlignSelf;

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B11A8B039300A4987A /* StylizeNode.m */; };
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
-		1247B7B71A8B048700A4987A /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B61A8B048700A4987A /* StylizeControlNode.m */; };
 		1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */; };
 		1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */; };
 		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
@@ -20,6 +19,7 @@
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
 		12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */; };
+		12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */; };
 		50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +38,6 @@
 		1247B7B01A8B039300A4987A /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
 		1247B7B11A8B039300A4987A /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
 		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1247B7B51A8B048700A4987A /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
-		1247B7B61A8B048700A4987A /* StylizeControlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeControlNode.m; sourceTree = "<group>"; };
 		1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
 		1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
 		1247B7BB1A8B04FC00A4987A /* Stylize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
@@ -62,6 +60,8 @@
 		12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
 		12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
 		12739EB71A9E26BC00960E16 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
+		12739EBE1AAD3AC200960E16 /* StylizeLayoutEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutEvent.h; sourceTree = "<group>"; };
+		12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutEvent.m; sourceTree = "<group>"; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StylizeDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -91,8 +91,8 @@
 			children = (
 				1247B7B01A8B039300A4987A /* StylizeNode.h */,
 				1247B7B11A8B039300A4987A /* StylizeNode.m */,
-				1247B7B51A8B048700A4987A /* StylizeControlNode.h */,
-				1247B7B61A8B048700A4987A /* StylizeControlNode.m */,
+				12739EBE1AAD3AC200960E16 /* StylizeLayoutEvent.h */,
+				12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */,
 				1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */,
 				1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */,
 				1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */,
@@ -335,8 +335,8 @@
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
 				1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */,
 				12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */,
-				1247B7B71A8B048700A4987A /* StylizeControlNode.m in Sources */,
 				1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */,
+				12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

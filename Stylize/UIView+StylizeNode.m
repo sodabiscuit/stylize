@@ -8,6 +8,7 @@
 
 #import <objc/runtime.h>
 #import "UIView+StylizeNode.h"
+#import "StylizeCSSRule.h"
 
 @interface UIView()
 
@@ -31,8 +32,7 @@
 - (void)addStylizeNode:(StylizeNode *)stylizeNode {
     NSAssert(stylizeNode.view != nil, @"StylizeNode instance must own a UIView instance.");
     [self addSubview:stylizeNode.view];
-    
-    stylizeNode.view.frame = (CGRect){stylizeNode.margin.marginLeft, stylizeNode.margin.marginTop, stylizeNode.width, stylizeNode.height};
+    stylizeNode.view.frame = CGRectMake(stylizeNode.computedCSSRule.left+stylizeNode.computedCSSRule.marginLeft, stylizeNode.computedCSSRule.top+stylizeNode.computedCSSRule.marginTop, stylizeNode.computedCSSRule.width, stylizeNode.computedCSSRule.height);
     
     NSMutableArray *subnodes = [self.subnodes mutableCopy];
     [subnodes addObject:stylizeNode];

@@ -7,9 +7,22 @@
 //
 
 #import "StylizeGeometry.h"
-#import "StylizeCSSRule.h"
 
-@interface StylizeNode : NSObject
+@class StylizeCSSRule;
+@class StylizeLayoutEvent;
+
+@protocol StylizeNodeProtocol <NSObject>
+
+/**
+ *  处理接收的布局通知
+ *
+ *  @param layoutEvent 布局事件
+ */
+- (void)handleLayoutEvent:(StylizeLayoutEvent *)layoutEvent;
+
+@end
+
+@interface StylizeNode : NSObject <StylizeNodeProtocol>
 
 /**
  *  id信息
@@ -46,11 +59,11 @@
 /**
  *  位置
  */
-@property (nonatomic,assign) StylizePositionType position;
+//@property (nonatomic,assign) StylizePositionType position;
 /**
  *  样式
  */
-@property (nonatomic,copy) StylizeCSSRule *CSSRule;
+//@property (nonatomic,copy) StylizeCSSRule *CSSRule;
 /**
  *  计算完成的样式
  */
@@ -58,7 +71,7 @@
 /**
  *  父节点
  */
-@property (nonatomic,readonly,strong) StylizeNode *supernode;
+@property (nonatomic,readonly,weak) StylizeNode *supernode;
 /**
  *  子节点列表
  */
@@ -128,5 +141,15 @@
  *  @param CSSRule 需要增加或者覆盖的CSS规则
  */
 - (void)applyCSSRule:(StylizeCSSRule *)CSSRule;
+/**
+ *  通过解析CSS文本添加CSS规则
+ *
+ *  @param CSSRaw CSS文本
+ */
+- (void)applyCSSRaw:(NSString *)CSSRaw;
+/**
+ *  手动触发位置计算
+ */
+- (void)layout;
 
 @end

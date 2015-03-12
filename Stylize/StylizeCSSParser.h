@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 Yulin Ding. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "StylizeCSSRule.h"
 
 @interface StylizeCSSParser : NSObject
+
++ (StylizeCSSRule *)parseCSSRaw:(NSString *)CSSRaw;
 
 @end

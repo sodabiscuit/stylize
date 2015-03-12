@@ -10,4 +10,8 @@
 
 @implementation StylizeCSSParser
 
++ (StylizeCSSRule *)parseCSSRaw:(NSString *)CSSRaw {
+    StylizeCSSRule *CSSRule = [[StylizeCSSRule alloc] init];
+    return CSSRule;
+}
 @end

@@ -14,6 +14,18 @@ typedef enum {
 } StylizeNodeMeasure;
 
 typedef enum {
+    StylizeVisibilityVisible,
+    StylizeVisibilityHidden,
+    StylizeVisibilityCollapse,
+} StylizeVisibility;
+
+typedef enum {
+    StylizeDisplayBlock,
+    StylizeDisplayInline,
+    StylizeDisplayNone,
+} StylizeDisplay;
+
+typedef enum {
     StylizeLayoutTypeDefault,
     StylizeLayoutTypeBox,
     StylizeLayoutTypeFlex,
@@ -21,6 +33,7 @@ typedef enum {
 } StylizeLayoutType;
 
 typedef enum {
+    StylizePositionTypeStatic,
     StylizePositionTypeRelative,
     StylizePositionTypeAbsolute,
 } StylizePositionType;
@@ -45,17 +58,17 @@ typedef enum {
     StylizeBorderTypeDotted
 } StylizeBorderType;
 
-struct StyizeBorderSkeleton {
+typedef struct {
     CGFloat width;
     CGColorRef color;
     StylizeBorderType type;
-};
+} StylizeBorderSkeleton;
 
 typedef struct {
-    CGFloat borderTop;
-    CGFloat borderRight;
-    CGFloat borderBottom;
-    CGFloat borderLeft;
+    StylizeBorderSkeleton borderTop;
+    StylizeBorderSkeleton borderRight;
+    StylizeBorderSkeleton borderBottom;
+    StylizeBorderSkeleton borderLeft;
 }  StylizeBorder;
 
 CG_INLINE StylizeMargin

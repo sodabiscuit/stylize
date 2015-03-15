@@ -32,7 +32,7 @@
 - (void)addStylizeNode:(StylizeNode *)stylizeNode {
     NSAssert(stylizeNode.view != nil, @"StylizeNode instance must own a UIView instance.");
     [self addSubview:stylizeNode.view];
-    stylizeNode.view.frame = CGRectMake(stylizeNode.computedCSSRule.left+stylizeNode.computedCSSRule.marginLeft, stylizeNode.computedCSSRule.top+stylizeNode.computedCSSRule.marginTop, stylizeNode.computedCSSRule.width, stylizeNode.computedCSSRule.height);
+    stylizeNode.view.frame = CGRectMake(stylizeNode.CSSRule.left+stylizeNode.CSSRule.marginLeft, stylizeNode.CSSRule.top+stylizeNode.CSSRule.marginTop, stylizeNode.CSSRule.width, stylizeNode.CSSRule.height);
     
     NSMutableArray *subnodes = [self.subnodes mutableCopy];
     [subnodes addObject:stylizeNode];

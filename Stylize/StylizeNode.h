@@ -11,6 +11,12 @@
 @class StylizeCSSRule;
 @class StylizeLayoutEvent;
 
+typedef enum {
+    StylizeNodeBoxLocationTypeLeading,
+    StylizeNodeBoxLocationTypeTrailing,
+} StylizeNodeBoxLocationType;
+
+
 @protocol StylizeNodeProtocol <NSObject>
 
 /**
@@ -27,7 +33,11 @@
 /**
  *  id信息
  */
-@property (nonatomic,readonly,strong) NSString *nodeId;
+@property (nonatomic,strong) NSString *nodeID;
+/**
+ *  uuid信息
+ */
+@property (nonatomic,readonly,strong) NSString *nodeUUID;
 /**
  *  输出的位置信息
  */
@@ -67,7 +77,7 @@
 /**
  *  计算完成的样式
  */
-@property (nonatomic,readonly,strong) StylizeCSSRule *computedCSSRule;
+@property (nonatomic,strong) StylizeCSSRule *CSSRule;
 /**
  *  父节点
  */
@@ -151,5 +161,38 @@
  *  手动触发位置计算
  */
 - (void)layout;
+/**
+ *  是否为Flex布局中的可扩展尺寸节点
+ *
+ *  @return 如果是返回YES，反之返回NO
+ */
+- (BOOL)isFlex;
+/**
+ *  是否自动折行
+ *
+ *  @return 如果是返回YES，反之返回NO
+ */
+- (BOOL)isFlexWrap;
+
++ (BOOL)isHorizontalDirection:(StylizeLayoutFlexDirection)direction;
++ (BOOL)isVerticalDirection:(StylizeLayoutFlexDirection)direction;
++ (BOOL)isDimensionDefined:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (BOOL)isPositionDefined:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction location:(StylizeNodeBoxLocationType)location;
++ (CGFloat)getDimension:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getNodeDimension:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (void)setNodeDimension:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction value:(CGFloat)value;
++ (CGFloat)getNodePosition:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (void)setNodePosition:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction value:(CGFloat)value;
++ (CGFloat)getLeading:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getTrailing:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getPaddingandBorder:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getPaddingandBorder:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction location:(StylizeNodeBoxLocationType        )location;
++ (CGFloat)getMargin:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getMargin:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction location:(StylizeNodeBoxLocationType)location;
++ (CGFloat)getPadding:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getPadding:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction location:(StylizeNodeBoxLocationType)location;
++ (CGFloat)getBorder:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
++ (CGFloat)getBorder:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction location:(StylizeNodeBoxLocationType)location;
++ (CGFloat)getPosition:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction location:(StylizeNodeBoxLocationType)location;
 
 @end

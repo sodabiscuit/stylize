@@ -10,13 +10,13 @@
 #import "StylizeGeometry.h"
 #import "StylizeLayoutFlexGeometry.h"
 
-@class StylizeNode;
 @protocol StylizeNodeProtocol;
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
 
-@property (nonatomic,weak) id<StylizeNodeProtocol> node;
-@property (nonatomic,assign) NSInteger observerProperty;
+@property (nonatomic,assign) id observerPropertyOther;
+@property (nonatomic,assign) id observerPropertyLayout;
+@property (nonatomic,assign) id observerPropertyAll;
 
 @property (nonatomic,assign) StylizePositionType position;
 @property (nonatomic,assign) StylizeDisplay display;
@@ -45,6 +45,7 @@
 @property (nonatomic,assign) StylizeBorderSkeleton borderRight;
 
 @property (nonatomic,assign) StylizeLayoutFlexDirection flexDirection;
+@property (nonatomic,readonly,assign) StylizeLayoutFlexDirection flexCrossDirection;
 @property (nonatomic,assign) StylizeLayoutFlexJustifyContent justifyContent;
 @property (nonatomic,assign) StylizeLayoutFlexAlignItems alignItems;
 @property (nonatomic,assign) StylizeLayoutFlexFlexWrap flexWrap;
@@ -56,5 +57,8 @@
 @property (nonatomic,assign) NSInteger flexShrink;
 @property (nonatomic,assign) NSInteger flexBasis;
 @property (nonatomic,assign) NSInteger flexGrow;
+@property (nonatomic,assign) NSInteger flex;
+
+- (BOOL)isRuleDefined:(NSString *)rule;
 
 @end

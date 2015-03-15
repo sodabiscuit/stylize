@@ -22,6 +22,7 @@
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
     _rootNode.layoutType = StylizeLayoutTypeFlex;
     _rootNode.width = self.view.frame.size.width;
+    _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentCenter;
     _rootNode.height = self.view.frame.size.height-64;
     _rootNode.margin = StylizeMarginMake(64, 0, 0, 0);
     _rootNode.view.backgroundColor = [UIColor grayColor];
@@ -38,7 +39,7 @@
     StylizeNode *thirdNode = [self createUnitNode:@"third"];
     [_rootNode addSubnode:thirdNode];
     
-//    [_rootNode layout];
+    [_rootNode layout];
 }
 
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {

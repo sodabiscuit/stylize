@@ -245,7 +245,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     subnode.supernode = self;
     [self.view addSubview:subnode.view];
     
-    [self layout];
+    //DISABLED
+//    [self layout];
 }
 
 - (void)insertSubnode:(StylizeNode *)subnode before:(StylizeNode *)before {
@@ -328,7 +329,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 [subnode.CSSRule isRuleDefined:@"bottom"] &&
 //                [StylizeNode isDimensionDefined:self direction:StylizeLayoutFlexDirectionColumn] &&
                 ![StylizeNode isDimensionDefined:subnode direction:StylizeLayoutFlexDirectionColumn]) {
-                dimensionAxis = [StylizeNode getDimension:self direction:StylizeLayoutFlexDirectionColumn] - [StylizeNode getPaddingandBorder:self direction:StylizeLayoutFlexDirectionColumn] - subnode.CSSRule.top - subnode.CSSRule.bottom;
+                dimensionAxis = [StylizeNode getNodeDimension:self direction:StylizeLayoutFlexDirectionColumn] - [StylizeNode getPaddingandBorder:self direction:StylizeLayoutFlexDirectionColumn] - subnode.CSSRule.top - subnode.CSSRule.bottom;
                 [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionColumn value:dimensionAxis];
             }
             
@@ -336,7 +337,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 [subnode.CSSRule isRuleDefined:@"right"] &&
 //                [StylizeNode isDimensionDefined:self direction:StylizeLayoutFlexDirectionRow] &&
                 ![StylizeNode isDimensionDefined:subnode direction:StylizeLayoutFlexDirectionRow]) {
-                dimensionAxis = [StylizeNode getDimension:self direction:StylizeLayoutFlexDirectionRow] - [StylizeNode getPaddingandBorder:self direction:StylizeLayoutFlexDirectionRow] - subnode.CSSRule.left - subnode.CSSRule.right;
+                dimensionAxis = [StylizeNode getNodeDimension:self direction:StylizeLayoutFlexDirectionRow] - [StylizeNode getPaddingandBorder:self direction:StylizeLayoutFlexDirectionRow] - subnode.CSSRule.left - subnode.CSSRule.right;
                 [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionRow value:dimensionAxis];
             }
         }
@@ -379,7 +380,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 if (subnode.CSSRule.position != StylizePositionTypeAbsolute) {
                     nonFlexibleSubnodeCount++;
                     nextContentDim = [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexDirection];
-                    nextContentDim = [StylizeNode getPaddingandBorder:subnode direction:_CSSRule.flexDirection];
+                    nextContentDim += [StylizeNode getPaddingandBorder:subnode direction:_CSSRule.flexDirection];
                     nextContentDim += [StylizeNode getMargin:subnode direction:_CSSRule.flexDirection];
                 }
             }
@@ -480,7 +481,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
         if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
-            [self layout];
+            //DISABLED 
+//            [self layout];
         } else {
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }

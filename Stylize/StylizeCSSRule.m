@@ -34,11 +34,11 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         
         self.flexDirection = StylizeLayoutFlexDirectionRow;
         self.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
-        self.alignItems = StylizeLayoutFlexAlignItemsFlexStart;
+        self.alignItems = StylizeLayoutFlexAlignFlexStart;
         self.flexWrap = StylizeLayoutFlexFlexWrapNowrap;
         self.alignContent = StylizeLayoutFlexAlignContentStretch;
         
-        self.alignSelf = StylizeLayoutFlexAlignSelfStretch;
+        self.alignSelf = StylizeLayoutFlexAlignStretch;
         
         _definedRules = [@[@"postion",
                            @"display", @"visibility",

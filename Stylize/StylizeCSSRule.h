@@ -47,12 +47,12 @@
 @property (nonatomic,assign) StylizeLayoutFlexDirection flexDirection;
 @property (nonatomic,readonly,assign) StylizeLayoutFlexDirection flexCrossDirection;
 @property (nonatomic,assign) StylizeLayoutFlexJustifyContent justifyContent;
-@property (nonatomic,assign) StylizeLayoutFlexAlignItems alignItems;
+@property (nonatomic,assign) StylizeLayoutFlexAlign alignItems;
 @property (nonatomic,assign) StylizeLayoutFlexFlexWrap flexWrap;
 @property (nonatomic,assign) StylizeLayoutFlexAlignContent alignContent;
 @property (nonatomic,assign) StylizeLayoutFlexFlow flexFlow;
 
-@property (nonatomic,assign) StylizeLayoutFlexAlignSelf alignSelf;
+@property (nonatomic,assign) StylizeLayoutFlexAlign alignSelf;
 @property (nonatomic,assign) NSInteger order;
 @property (nonatomic,assign) NSInteger flexShrink;
 @property (nonatomic,assign) NSInteger flexBasis;

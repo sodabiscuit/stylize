@@ -22,22 +22,29 @@
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
     _rootNode.layoutType = StylizeLayoutTypeFlex;
     _rootNode.width = self.view.frame.size.width;
-    _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentCenter;
+    _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
+//    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignCenter;
     _rootNode.height = self.view.frame.size.height-64;
     _rootNode.margin = StylizeMarginMake(64, 0, 0, 0);
     _rootNode.view.backgroundColor = [UIColor grayColor];
-//    _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionColumn;
+    _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionColumn;
 //    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignItemsStretch;
+//    _rootNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
     [self.view addStylizeNode:_rootNode];
     
     StylizeNode *firstNode = [self createUnitNode:@"first"];
+    firstNode.CSSRule.bottom = 0;
     [_rootNode addSubnode:firstNode];
     
     StylizeNode *secondNode = [self createUnitNode:@"second"];
+//    secondNode.CSSRule.flex = 1;
     [_rootNode addSubnode:secondNode];
     
     StylizeNode *thirdNode = [self createUnitNode:@"third"];
     [_rootNode addSubnode:thirdNode];
+    
+    StylizeNode *fourthNode = [self createUnitNode:@"fourth"];
+    [_rootNode addSubnode:fourthNode];
     
     [_rootNode layout];
 }
@@ -48,8 +55,11 @@
     ret.width = 100;
     ret.height = 100;
     ret.nodeID = nodeID;
-    ret.CSSRule.position = StylizePositionTypeRelative;
+//    ret.CSSRule.position = StylizePositionTypeRelative;
+    ret.CSSRule.position = StylizePositionTypeAbsolute;
+//    ret.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexStart;
     ret.CSSRule.marginRight = 10;
+    ret.CSSRule.marginBottom = 10;
 //    ret.CSSRule.top = 50;
 //    ret.CSSRule.bottom = 50;
     ret.view.backgroundColor = [UIColor redColor];

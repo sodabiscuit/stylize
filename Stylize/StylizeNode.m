@@ -319,7 +319,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
         
         CGFloat dimensionAxis;
         if (subnode.CSSRule.position != StylizePositionTypeAbsolute &&
-            _CSSRule.alignItems == StylizeLayoutFlexAlignItemsStretch &&
+            _CSSRule.alignItems == StylizeLayoutFlexAlignStretch &&
 //            [StylizeNode isDimensionDefined:self direction:_CSSRule.flexCrossDirection] &&
             ![StylizeNode isDimensionDefined:subnode direction:_CSSRule.flexCrossDirection]) {
             dimensionAxis = MAX([StylizeNode getDimension:subnode direction:_CSSRule.flexCrossDirection], [StylizeNode getNodeDimension:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection]);
@@ -350,8 +350,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     CGFloat mainContentDim = 0;
     CGFloat nextContentDim = 0;
     
-    CGFloat lineCrossDim = 0;
-    CGFloat lineMainDim = 0;
+    CGFloat linesCrossDim = 0;
+    CGFloat linesMainDim = 0;
     
     NSInteger flexibleSubnodeCount = 0;
     NSInteger totalFlexible = 0;
@@ -449,14 +449,14 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 
                 [StylizeNode setNodePosition:subnode direction:_CSSRule.flexDirection value:offsetMainAxis];
             } else {
-                offsetMainAxis = [StylizeNode getNodePosition:subnode direction:_CSSRule.flexDirection] + mainDim;
+                offsetMainAxis = [StylizeNode getPosition:subnode direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeLeading] + mainDim;
                 [StylizeNode setNodePosition:subnode direction:_CSSRule.flexDirection value:offsetMainAxis];
             }
             
             if (subnode.CSSRule.position == StylizePositionTypeRelative ||
                 subnode.CSSRule.position == StylizePositionTypeStatic) {
                 mainDim += betweenMainDim + [StylizeNode getMargin:subnode direction:_CSSRule.flexDirection] + [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexDirection];
-                crossDim += MAX(crossDim, [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection] + [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexCrossDirection]);
+                crossDim = MAX(crossDim, [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection] + [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexCrossDirection]);
             }
         } //end of third loop
         
@@ -471,9 +471,67 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
         
         for (NSInteger i = startLine; i < endLine; ++i) {
             StylizeNode *subnode = _subnodes[i];
+            CGFloat offsetCrossAxis = 0;
+            
+            if (subnode.CSSRule.position == StylizePositionTypeAbsolute &&
+                [StylizeNode isPositionDefined:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading]) {
+                offsetCrossAxis = [StylizeNode getPosition:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading] + [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading] + [StylizeNode getBorder:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading];
+                [StylizeNode setNodePosition:subnode direction:_CSSRule.flexCrossDirection value:offsetCrossAxis];
+            } else {
+                CGFloat leadingCrossDim = [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading];
+                if (subnode.CSSRule.position == StylizePositionTypeRelative ||
+                    subnode.CSSRule.position == StylizePositionTypeStatic) {
+                    StylizeLayoutFlexAlign alignSelf = subnode.CSSRule.alignSelf;
+                    
+                    if (alignSelf == StylizeLayoutFlexAlignStretch) {
+                        CGFloat itemCrossDim = MAX(containerCrossAxis - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection], [StylizeNode getPaddingandBorder:subnode direction:_CSSRule.flexCrossDirection]);
+                        [StylizeNode setNodeDimension:subnode direction:_CSSRule.flexCrossDirection value:itemCrossDim];
+                    } else if (alignSelf != StylizeLayoutFlexAlignFlexStart){
+                        CGFloat remainingCrossDim = containerCrossAxis - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection];
+                        if (alignSelf == StylizeLayoutFlexAlignCenter) {
+                            leadingCrossDim += remainingCrossDim / 2;
+                        } else {
+                            leadingCrossDim += remainingCrossDim;
+                        }
+                    }
+                }
+                
+                offsetCrossAxis = [StylizeNode getNodePosition:subnode direction:_CSSRule.flexCrossDirection];
+                offsetCrossAxis += linesCrossDim + leadingCrossDim;
+                [StylizeNode setNodePosition:subnode direction:_CSSRule.flexCrossDirection value:offsetCrossAxis];
+            }
+            
         } //end of fourth loop
         
+        linesCrossDim += crossDim;
+        linesMainDim = MAX(linesMainDim, mainDim);
+        startLine = endLine;
     } //end of main while
+    
+    if ([StylizeNode getDimension:self direction:_CSSRule.flexDirection] == 0) {
+        [StylizeNode setNodeDimension:self direction:_CSSRule.flexDirection value:MAX(linesMainDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection])];
+    }
+    
+    if ([StylizeNode getDimension:self direction:_CSSRule.flexCrossDirection] == 0) {
+        [StylizeNode setNodeDimension:self direction:_CSSRule.flexCrossDirection value:MAX(linesCrossDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection])];
+    }
+   
+    for (StylizeNode *subnode in _subnodes) {
+        if (subnode.CSSRule.position == StylizePositionTypeAbsolute) {
+            CGFloat offsetAxis = 0;
+            if ([StylizeNode isPositionDefined:subnode direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing] &&
+                ![StylizeNode isPositionDefined:subnode direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeLeading]) {
+                offsetAxis = [StylizeNode getNodeDimension:self direction:_CSSRule.flexDirection] - [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexDirection] - [StylizeNode getPosition:subnode direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing];
+                [StylizeNode setNodePosition:subnode direction:_CSSRule.flexDirection value:offsetAxis];
+            }
+            
+            if ([StylizeNode isPositionDefined:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeTrailing] &&
+                ![StylizeNode isPositionDefined:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading]) {
+                offsetAxis = [StylizeNode getNodeDimension:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexCrossDirection] - [StylizeNode getPosition:subnode direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeTrailing];
+                [StylizeNode setNodePosition:subnode direction:_CSSRule.flexCrossDirection value:offsetAxis];
+            }
+        }
+    }
 }
 
 #pragma mark - SuperClass Method and Protocol

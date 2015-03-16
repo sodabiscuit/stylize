@@ -23,12 +23,12 @@ typedef enum {
 } StylizeLayoutFlexJustifyContent;
 
 typedef enum {
-    StylizeLayoutFlexAlignItemsFlexStart,
-    StylizeLayoutFlexAlignItemsFlexEnd,
-    StylizeLayoutFlexAlignItemsCenter,
-    StylizeLayoutFlexAlignItemsBaseline,
-    StylizeLayoutFlexAlignItemsStretch,
-} StylizeLayoutFlexAlignItems;
+    StylizeLayoutFlexAlignFlexStart,
+    StylizeLayoutFlexAlignFlexEnd,
+    StylizeLayoutFlexAlignCenter,
+    StylizeLayoutFlexAlignBaseline,
+    StylizeLayoutFlexAlignStretch,
+} StylizeLayoutFlexAlign;
 
 typedef enum {
     StylizeLayoutFlexFlexWrapNowrap,
@@ -49,11 +49,3 @@ typedef struct {
     StylizeLayoutFlexDirection direction;
     StylizeLayoutFlexFlexWrap flexWrap;
 } StylizeLayoutFlexFlow;
-
-typedef enum {
-    StylizeLayoutFlexAlignSelfStart,
-    StylizeLayoutFlexAlignSelfEnd,
-    StylizeLayoutFlexAlignSelfCenter,
-    StylizeLayoutFlexAlignSelfBaseline,
-    StylizeLayoutFlexAlignSelfStretch,
-} StylizeLayoutFlexAlignSelf;

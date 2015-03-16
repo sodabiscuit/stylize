@@ -487,7 +487,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                         CGFloat itemCrossDim = MAX(containerCrossAxis - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection], [StylizeNode getPaddingandBorder:subnode direction:_CSSRule.flexCrossDirection]);
                         [StylizeNode setNodeDimension:subnode direction:_CSSRule.flexCrossDirection value:itemCrossDim];
                     } else if (alignSelf != StylizeLayoutFlexAlignFlexStart){
-                        CGFloat remainingCrossDim = containerCrossAxis - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection];
+                        CGFloat remainingCrossDim = containerCrossAxis - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getNodeDimension:subnode direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection];
                         if (alignSelf == StylizeLayoutFlexAlignCenter) {
                             leadingCrossDim += remainingCrossDim / 2;
                         } else {

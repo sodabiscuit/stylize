@@ -55,9 +55,9 @@
     ret.width = 100;
     ret.height = 100;
     ret.nodeID = nodeID;
-//    ret.CSSRule.position = StylizePositionTypeRelative;
-    ret.CSSRule.position = StylizePositionTypeAbsolute;
-//    ret.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexStart;
+    ret.CSSRule.position = StylizePositionTypeRelative;
+//    ret.CSSRule.position = StylizePositionTypeAbsolute;
+    ret.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
     ret.CSSRule.marginRight = 10;
     ret.CSSRule.marginBottom = 10;
 //    ret.CSSRule.top = 50;

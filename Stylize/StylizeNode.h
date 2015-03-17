@@ -43,6 +43,10 @@ typedef enum {
  */
 @property (nonatomic,readonly,assign) CGRect frame;
 /**
+ *  由subnode决定的实际尺寸
+ */
+@property (nonatomic,readonly,assign) CGSize computedSize;
+/**
  *  宽度
  */
 @property (nonatomic,assign) CGFloat width;

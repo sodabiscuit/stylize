@@ -15,6 +15,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 @interface StylizeNode()
 
 @property (nonatomic,readwrite,assign) CGRect frame;
+@property (nonatomic,readwrite,assign) CGSize computedSize;
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) UIView *view;
@@ -311,9 +312,6 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 }
 
 - (void)layout {
-//    if (!_supernode) {
-//        [self layoutInternal];
-//    }
     if (self.layoutType==StylizeLayoutTypeFlex && [_subnodes count] > 0) {
         [self layoutFlexSubnodes];
     }
@@ -321,18 +319,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 
 #pragma mark - Private Method
 
-- (void)layoutInternal {
-    CGPoint position = (CGPoint){0, 0};
-    CGSize dimension = (CGSize){_CSSRule.width, _CSSRule.height};
-    
-    if (_CSSRule.position == StylizePositionTypeStatic) {
-        position= (CGPoint){_CSSRule.marginLeft, _CSSRule.marginTop};
-    } else {
-        position = (CGPoint){_CSSRule.left+_CSSRule.marginLeft, _CSSRule.top+_CSSRule.marginTop};
-    }
-    
-    _frame = (CGRect){position, dimension};
-    _view.frame = _frame;
+- (CGSize)makeComputedSize:(CGFloat)mainAxisSize cross:(CGFloat)crossAxisSize {
+    return [StylizeNode isHorizontalDirection:_CSSRule.flexDirection] ? (CGSize){mainAxisSize, crossAxisSize} : (CGSize){crossAxisSize, mainAxisSize};
 }
 
 - (void)layoutFlexSubnodes {
@@ -348,6 +336,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
         
         
         NSLog(@"<StylizeNode> %@ PreLoop Before: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+        
         //set or reset
         [StylizeNode setNodePosition:subnode direction:StylizeLayoutFlexDirectionRow value:0];
         [StylizeNode setNodePosition:subnode direction:StylizeLayoutFlexDirectionColumn value:0];
@@ -355,6 +344,11 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
         [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionColumn value:subnode.CSSRule.height];
         
         NSLog(@"<StylizeNode> %@ PreLoop Reset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+        
+        
+        /**
+         *  处理子节点未设置的尺寸的情况,绝对定位元素尺寸由自身位置信息决定，非绝对定位元素如果尺寸由布局信息决定
+         */
         
         CGFloat dimensionAxis;
         if (subnode.CSSRule.position != StylizePositionTypeAbsolute &&
@@ -404,6 +398,9 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     definedMainDim = [StylizeNode getNodeDimension:self direction:_CSSRule.flexDirection] - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection];
     
     while (endLine < [_subnodes count]) {
+        /**
+         *  计算主轴尺寸信息
+         */
         for (NSInteger i = startLine; i < [_subnodes count]; ++i) {
             StylizeNode *subnode = _subnodes[i];
             if (subnode.CSSRule.flex > 0 &&
@@ -449,6 +446,9 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
             flexibleMainDim = remainingMainDim / totalFlexible;
             flexibleMainDim = MAX(flexibleMainDim, 0);
             
+            /**
+             *  子节点在定义flex的属性后，其尺寸将不再受限与已定义的默认尺寸
+             */
             for (NSInteger i = startLine; i < endLine; ++i) {
                 StylizeNode *subnode = _subnodes[i];
                 
@@ -460,6 +460,9 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 }
             } //end of second loop
         } else {
+            /**
+             *  不存在可扩展子节点的情况下结算剩余空间
+             */
             if (_CSSRule.justifyContent == StylizeLayoutFlexJustifyContentCenter) {
                 leadingMainDim = remainingMainDim / 2;
             } else if (_CSSRule.justifyContent == StylizeLayoutFlexJustifyContentFlexEnd) {
@@ -480,6 +483,9 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
         CGFloat crossDim = 0;
         CGFloat mainDim = leadingMainDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeLeading];
         
+        /**
+         *  计算主轴位置信息
+         */
         for (NSInteger i = startLine; i < endLine; ++i) {
             StylizeNode *subnode = _subnodes[i];
             CGFloat offsetMainAxis;
@@ -504,14 +510,14 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
             }
         } //end of third loop
         
-        CGFloat containerMainAxis = [StylizeNode getDimension:self direction:_CSSRule.flexDirection];
-        CGFloat containerCrossAxis = [StylizeNode getDimension:self direction:_CSSRule.flexCrossDirection];
-        if (containerMainAxis == 0) {
-            containerMainAxis = MAX(mainDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection]);
-        }
-        if (containerCrossAxis == 0) {
-            containerMainAxis = MAX(crossDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection]);
-        }
+        CGFloat containerMainAxis = [StylizeNode getNodeDimension:self direction:_CSSRule.flexDirection];
+        CGFloat containerCrossAxis = [StylizeNode getNodeDimension:self direction:_CSSRule.flexCrossDirection];
+        CGFloat computedContainerMainAxis = MAX(mainDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection]);
+        CGFloat computedContainerCrossAxis = MAX(crossDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection]);
+        
+        _computedSize = [self makeComputedSize:computedContainerMainAxis cross:computedContainerCrossAxis];
+        containerMainAxis = containerMainAxis == 0 ? computedContainerMainAxis : containerMainAxis;
+        containerCrossAxis = containerCrossAxis == 0 ? computedContainerCrossAxis : containerCrossAxis;
         
         for (NSInteger i = startLine; i < endLine; ++i) {
             StylizeNode *subnode = _subnodes[i];

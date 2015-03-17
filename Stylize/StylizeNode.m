@@ -48,6 +48,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     if (self=[super init]) {
         [self makeDefaultProperties];
         _view = view;
+        _frame = view.frame;
     }
     return self;
 }

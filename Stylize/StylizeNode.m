@@ -39,6 +39,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     if (self=[super init]) {
         NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
         [self makeDefaultProperties];
+        [self createCSSRuleObserver];
         _view = [[viewClass alloc] initWithFrame:CGRectZero];
     }
     return self;
@@ -49,6 +50,9 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         [self makeDefaultProperties];
         _view = view;
         _frame = view.frame;
+        _CSSRule.width = view.frame.size.width;
+        _CSSRule.height = view.frame.size.height;
+        [self createCSSRuleObserver];
     }
     return self;
 }
@@ -57,8 +61,10 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     _layoutType = StylizeLayoutTypeFlex;
     _frame = CGRectZero;
     _subnodes = [NSArray array];
-    
     _CSSRule = [[StylizeCSSRule alloc] init];
+}
+
+- (void)createCSSRuleObserver {
     [_CSSRule addObserver:self
 forKeyPath:@"observerPropertyLayout" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
     [_CSSRule addObserver:self
@@ -298,10 +304,9 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 }
 
 - (void)layout {
-    if (!_supernode) {
-        [self layoutInternal];
-    }
-    
+//    if (!_supernode) {
+//        [self layoutInternal];
+//    }
     if (self.layoutType==StylizeLayoutTypeFlex && [_subnodes count] > 0) {
         [self layoutFlexSubnodes];
     }
@@ -326,16 +331,23 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 - (void)layoutFlexSubnodes {
     [self layoutFlexSubnodesPreLoop];
     [self layoutFlexSubnodesMainLoop];
+    for (StylizeNode *subnode in _subnodes) {
+        NSLog(@"<StylizeNode> %@ Final: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+    }
 }
 
 - (void)layoutFlexSubnodesPreLoop {
     for (StylizeNode *subnode in self.subnodes) {
         
+        
+        NSLog(@"<StylizeNode> %@ PreLoop Before: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
         //set or reset
         [StylizeNode setNodePosition:subnode direction:StylizeLayoutFlexDirectionRow value:0];
         [StylizeNode setNodePosition:subnode direction:StylizeLayoutFlexDirectionColumn value:0];
         [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionRow value:subnode.CSSRule.width];
         [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionColumn value:subnode.CSSRule.height];
+        
+        NSLog(@"<StylizeNode> %@ PreLoop Reset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
         
         CGFloat dimensionAxis;
         if (subnode.CSSRule.position != StylizePositionTypeAbsolute &&
@@ -361,6 +373,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionRow value:dimensionAxis];
             }
         }
+        
+        NSLog(@"<StylizeNode> %@ PreLoop After: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
     }
 }
 
@@ -435,6 +449,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                     CGFloat dim = flexibleMainDim * subnode.CSSRule.flex + [StylizeNode getPaddingandBorder:subnode direction:_CSSRule.flexDirection];
                     [StylizeNode setNodeDimension:subnode direction:_CSSRule.flexDirection value:dim];
                     [subnode layout];
+                    NSLog(@"<StylizeNode> %@ MainLoop FlexibleDimension: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
                 }
             } //end of second loop
         } else {
@@ -472,6 +487,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 offsetMainAxis = [StylizeNode getPosition:subnode direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeLeading] + mainDim;
                 [StylizeNode setNodePosition:subnode direction:_CSSRule.flexDirection value:offsetMainAxis];
             }
+            
+            NSLog(@"<StylizeNode> %@ MainLoop MainAsixOffset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
             
             if (subnode.CSSRule.position == StylizePositionTypeRelative ||
                 subnode.CSSRule.position == StylizePositionTypeStatic) {
@@ -520,6 +537,8 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 offsetCrossAxis += linesCrossDim + leadingCrossDim;
                 [StylizeNode setNodePosition:subnode direction:_CSSRule.flexCrossDirection value:offsetCrossAxis];
             }
+            
+            NSLog(@"<StylizeNode> %@ MainLoop CrossAsixOffset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
             
         } //end of fourth loop
         

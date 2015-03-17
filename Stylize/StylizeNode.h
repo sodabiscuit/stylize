@@ -92,13 +92,22 @@ typedef enum {
 @property (nonatomic,readonly,strong) UIView *view;
 
 /**
- *  以类实例初始化
+ *  以类初始化
  *
- *  @param viewClass
+ *  @param viewClass 类
  *
  *  @return Stylize节点
  */
 - (instancetype)initWithViewClass:(Class)viewClass;
+/**
+ *  以类初始化，需要指定默认frame信息
+ *
+ *  @param viewClass 类
+ *  @param frame     frame信息
+ *
+ *  @return Stylize节点
+ */
+- (instancetype)initWithViewClass:(Class)viewClass defaultFrame:(CGRect)frame;
 /**
  *  以UIView实例初始化
  *

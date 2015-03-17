@@ -9,6 +9,8 @@
 #import <objc/runtime.h>
 #import "UIView+StylizeNode.h"
 #import "StylizeCSSRule.h"
+#import "StylizeNode.h"
+
 
 @interface UIView()
 

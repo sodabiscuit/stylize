@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Yulin Ding. All rights reserved.
 //
 
-#import "StylizeNode.h"
+@class StylizeNode;
 
 @interface UIView(StylizeNode)
 

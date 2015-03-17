@@ -36,11 +36,18 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
+    return [self initWithViewClass:viewClass defaultFrame:CGRectZero];
+}
+
+- (instancetype)initWithViewClass:(Class)viewClass defaultFrame:(CGRect)frame  {
     if (self=[super init]) {
         NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
         [self makeDefaultProperties];
+        _view = [[viewClass alloc] initWithFrame:frame];
+        _frame = frame;
+        _CSSRule.width = _frame.size.width;
+        _CSSRule.height = _frame.size.height;
         [self createCSSRuleObserver];
-        _view = [[viewClass alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
@@ -50,8 +57,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         [self makeDefaultProperties];
         _view = view;
         _frame = view.frame;
-        _CSSRule.width = view.frame.size.width;
-        _CSSRule.height = view.frame.size.height;
+        _CSSRule.width = _frame.size.width;
+        _CSSRule.height = _frame.size.height;
         [self createCSSRuleObserver];
     }
     return self;

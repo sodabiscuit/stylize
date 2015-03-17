@@ -1,6 +1,6 @@
 //
 //  StylizeNode.m
-//  StylizeDemo
+//  StylizeMobile
 //
 //  Created by Yulin Ding on 2/11/15.
 //  Copyright (c) 2015 Yulin Ding. All rights reserved.
@@ -238,35 +238,54 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 #pragma mark - Public Method
 
 - (void)addSubnode:(StylizeNode *)subnode {
-    NSMutableArray *subnodes = [self.subnodes mutableCopy];
-    [subnodes addObject:subnode];
-    _subnodes = [subnodes copy];
-    
-    subnode.supernode = self;
-    [self.view addSubview:subnode.view];
-    
-    //DISABLED
-//    [self layout];
+    [self insertSubnode:subnode atIndex:[_subnodes count]];
 }
 
 - (void)insertSubnode:(StylizeNode *)subnode before:(StylizeNode *)before {
-    //TODO
+    NSAssert(before.supernode == self, @"the parent of before node should be the current node.");
+    NSInteger index = [_subnodes indexOfObject:before];
+    [self insertSubnode:subnode atIndex:index];
 }
 
 - (void)insertSubnode:(StylizeNode *)subnode after:(StylizeNode *)after {
-    //TODO
+    NSAssert(after.supernode == self, @"the parent of after node should be the current node.");
+    NSInteger index = [_subnodes indexOfObject:after];
+    [self insertSubnode:subnode atIndex:index + 1];
 }
 
 - (void)insertSubnode:(StylizeNode *)subnode atIndex:(NSInteger)index {
-    //TODO
+    if (index > [_subnodes count]) {
+        index = [_subnodes count];
+    }
+    
+    if (subnode.supernode) {
+        [subnode removeFromSupernode];
+    }
+    
+    NSMutableArray *subnodes = [self.subnodes mutableCopy];
+    subnode.supernode = self;
+    [subnodes insertObject:subnode atIndex:index];
+    [self.view insertSubview:subnode.view atIndex:index];
+    _subnodes = [subnodes copy];
+    
+    [self layout];
 }
 
-- (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacementSubnode {
-    //TODO
+- (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacement {
+    NSAssert(subnode.supernode == self, @"the parent of subnode should be the current node.");
+    NSInteger index = [_subnodes indexOfObject:subnode];
+    
+    [subnode removeFromSupernode];
+    [self insertSubnode:replacement atIndex:index];
 }
 
 - (void)removeFromSupernode {
-    //TODO
+    if (_supernode) {
+        [_view removeFromSuperview];
+        NSMutableArray *subnodes = [_supernode.subnodes mutableCopy];
+        [subnodes removeObject:self];
+        _supernode.subnodes = [subnodes copy];
+    }
 }
 
 - (void)applyCSSRule:(StylizeCSSRule *)CSSRule {
@@ -539,8 +558,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
         if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
-            //DISABLED 
-//            [self layout];
+            [self layout];
         } else {
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }

@@ -1,6 +1,6 @@
 //
 //  StylizeNode.h
-//  StylizeDemo
+//  StylizeMobile
 //
 //  Created by Yulin Ding on 2/11/15.
 //  Copyright (c) 2015 Yulin Ding. All rights reserved.
@@ -140,7 +140,7 @@ typedef enum {
  *  @param subnode            新增节点
  *  @param replacementSubnode 原有节点
  */
-- (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacementSubnode;
+- (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacement;
 /**
  *  从父节点移除
  */

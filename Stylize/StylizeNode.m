@@ -19,6 +19,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) UIView *view;
+@property (nonatomic,readwrite,assign) BOOL isDimensionSet;
 
 @end
 
@@ -37,7 +38,13 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
-    return [self initWithViewClass:viewClass defaultFrame:CGRectZero];
+    if (self=[super init]) {
+        NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
+        [self makeDefaultProperties];
+        _view = [[viewClass alloc] initWithFrame:CGRectZero];
+        [self createCSSRuleObserver];
+    }
+    return self;
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass defaultFrame:(CGRect)frame  {
@@ -67,6 +74,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (void)makeDefaultProperties {
     _layoutType = StylizeLayoutTypeFlex;
+    _isDimensionSet = NO;
     _frame = CGRectZero;
     _subnodes = [NSArray array];
     _CSSRule = [[StylizeCSSRule alloc] init];
@@ -127,6 +135,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     }
     node.frame = frame;
     node.view.frame = frame;
+    node.isDimensionSet = YES;
 }
 
 + (CGFloat)getNodePosition:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction {
@@ -312,7 +321,24 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 }
 
 - (void)layout {
-    if (self.layoutType==StylizeLayoutTypeFlex && [_subnodes count] > 0) {
+    if (!_supernode) {
+        CGPoint position= (CGPoint){_CSSRule.marginLeft, _CSSRule.marginTop};
+        if (_CSSRule.position != StylizePositionTypeStatic) {
+            position = (CGPoint){_CSSRule.left + position.x, _CSSRule.top + position.y};
+        }
+        
+        [StylizeNode setNodePosition:self direction:StylizeLayoutFlexDirectionRow value:position.x];
+        [StylizeNode setNodePosition:self direction:StylizeLayoutFlexDirectionColumn value:position.y];
+        
+        if ([StylizeNode isDimensionDefined:self direction:StylizeLayoutFlexDirectionRow]) {
+            [StylizeNode setNodeDimension:self direction:StylizeLayoutFlexDirectionRow value:_CSSRule.width];
+        }
+        [StylizeNode setNodeDimension:self direction:StylizeLayoutFlexDirectionColumn value:_CSSRule.height];
+        
+        _view.frame = _frame;
+    }
+    
+    if (self.layoutType == StylizeLayoutTypeFlex) {
         [self layoutFlexSubnodes];
     }
 }
@@ -333,8 +359,6 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 
 - (void)layoutFlexSubnodesPreLoop {
     for (StylizeNode *subnode in self.subnodes) {
-        
-        
         NSLog(@"<StylizeNode> %@ PreLoop Before: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
         
         //set or reset
@@ -355,7 +379,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
             _CSSRule.alignItems == StylizeLayoutFlexAlignStretch &&
 //            [StylizeNode isDimensionDefined:self direction:_CSSRule.flexCrossDirection] &&
             ![StylizeNode isDimensionDefined:subnode direction:_CSSRule.flexCrossDirection]) {
-            dimensionAxis = MAX([StylizeNode getDimension:subnode direction:_CSSRule.flexCrossDirection], [StylizeNode getNodeDimension:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection]);
+            dimensionAxis = MAX([StylizeNode getNodeDimension:subnode direction:_CSSRule.flexCrossDirection], [StylizeNode getNodeDimension:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection]);
             [StylizeNode setNodeDimension:subnode direction:_CSSRule.flexCrossDirection value:dimensionAxis];
         } else {
             if ([subnode.CSSRule isRuleDefined:@"top"] &&
@@ -531,7 +555,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
                 CGFloat leadingCrossDim = [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeLeading];
                 if (subnode.CSSRule.position == StylizePositionTypeRelative ||
                     subnode.CSSRule.position == StylizePositionTypeStatic) {
-                    StylizeLayoutFlexAlign alignSelf = subnode.CSSRule.alignSelf;
+                    StylizeLayoutFlexAlign alignSelf = [subnode.CSSRule isRuleDefined:@"alignSelf"] ? subnode.CSSRule.alignSelf : _CSSRule.alignItems;
                     
                     if (alignSelf == StylizeLayoutFlexAlignStretch) {
                         CGFloat itemCrossDim = MAX(containerCrossAxis - [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection] - [StylizeNode getMargin:subnode direction:_CSSRule.flexCrossDirection], [StylizeNode getPaddingandBorder:subnode direction:_CSSRule.flexCrossDirection]);
@@ -560,11 +584,11 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
         startLine = endLine;
     } //end of main while
     
-    if ([StylizeNode getDimension:self direction:_CSSRule.flexDirection] == 0) {
+    if ([StylizeNode getNodeDimension:self direction:_CSSRule.flexDirection] == 0) {
         [StylizeNode setNodeDimension:self direction:_CSSRule.flexDirection value:MAX(linesMainDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexDirection])];
     }
     
-    if ([StylizeNode getDimension:self direction:_CSSRule.flexCrossDirection] == 0) {
+    if ([StylizeNode getNodeDimension:self direction:_CSSRule.flexCrossDirection] == 0) {
         [StylizeNode setNodeDimension:self direction:_CSSRule.flexCrossDirection value:MAX(linesCrossDim + [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection], [StylizeNode getPaddingandBorder:self direction:_CSSRule.flexCrossDirection])];
     }
    

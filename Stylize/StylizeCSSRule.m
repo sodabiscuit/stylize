@@ -38,11 +38,11 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         self.flexWrap = StylizeLayoutFlexFlexWrapNowrap;
         self.alignContent = StylizeLayoutFlexAlignContentStretch;
         
-        self.alignSelf = StylizeLayoutFlexAlignStretch;
+//        self.alignSelf = StylizeLayoutFlexAlignStretch;
         
         _definedRules = [@[@"postion",
                            @"display", @"visibility",
-                           @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent", @"alignSelf"] mutableCopy];
+                           @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent"] mutableCopy];
         
 //        [self addObserver:self
 //               forKeyPath:@"observerPropertyAll"
@@ -115,6 +115,11 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 - (void)setFlexFlow:(StylizeLayoutFlexFlow)flexFlow {
     _flexDirection = flexFlow.direction;
     _flexWrap = flexFlow.flexWrap;
+}
+
+- (void)setAlignSelf:(StylizeLayoutFlexAlign)alignSelf {
+    _alignSelf = alignSelf;
+    [self updateDefinedRules:[NSArray arrayWithObject:@"alignSelf"]];
 }
 
 - (StylizeLayoutFlexDirection)flexCrossDirection {

@@ -71,6 +71,10 @@ typedef enum {
  */
 @property (nonatomic,assign) StylizeLayoutType layoutType;
 /**
+ *  已被父节点处理位置信息
+ */
+@property (nonatomic,readonly,assign) BOOL isDimensionSet;
+/**
  *  位置
  */
 //@property (nonatomic,assign) StylizePositionType position;

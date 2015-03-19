@@ -10,4 +10,6 @@
 
 @interface StylizeScrollNode : StylizeNode
 
+@property (nonatomic,readonly,strong) UIScrollView *view;
+
 @end

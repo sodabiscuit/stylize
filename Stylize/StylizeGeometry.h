@@ -92,3 +92,18 @@ StylizePaddingMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
     padding.paddingLeft = right;
     return padding;
 }
+
+typedef enum {
+    StylizeOverflowVisible,
+    StylizeOverflowHidden,
+    StylizeOverflowScroll,
+    StylizeOverflowAuto,
+} StylizeOverflowSkeleton;
+
+typedef struct {
+    StylizeOverflowSkeleton overflowX;
+    StylizeOverflowSkeleton overflowY;
+    
+} StylizeOverflow;
+
+

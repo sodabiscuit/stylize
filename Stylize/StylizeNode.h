@@ -28,7 +28,10 @@ typedef enum {
 
 @end
 
-@interface StylizeNode : NSObject <StylizeNodeProtocol>
+@interface StylizeNode : NSObject <StylizeNodeProtocol> {
+    @protected
+    UIView *_view;
+}
 
 /**
  *  id信息

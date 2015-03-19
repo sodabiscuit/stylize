@@ -58,32 +58,32 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (void)setWidth:(CGFloat)width {
     _width = width;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"width"]];
+    [self updateDefinedRules:@[@"width"]];
 }
 
 - (void)setHeight:(CGFloat)height {
     _height = height;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"height"]];
+    [self updateDefinedRules:@[@"height"]];
 }
 
 - (void)setTop:(CGFloat)top {
     _top = top;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"top"]];
+    [self updateDefinedRules:@[@"top"]];
 }
 
 - (void)setBottom:(CGFloat)bottom {
     _bottom = bottom;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"bottom"]];
+    [self updateDefinedRules:@[@"bottom"]];
 }
 
 - (void)setLeft:(CGFloat)left {
     _left = left;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"left"]];
+    [self updateDefinedRules:@[@"left"]];
 }
 
 - (void)setRight:(CGFloat)right {
     _right = right;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"right"]];
+    [self updateDefinedRules:@[@"right"]];
 }
 
 - (StylizePadding)padding {
@@ -95,6 +95,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     _paddingRight = padding.paddingRight;
     _paddingTop = padding.paddingTop;
     _paddingBottom = padding.paddingBottom;
+    [self updateDefinedRules:@[@"padding", @"paddingLeft", @"paddingRight", @"paddingTop", @"paddingBottom"]];
 }
 
 - (StylizeMargin)margin {
@@ -119,7 +120,17 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (void)setAlignSelf:(StylizeLayoutFlexAlign)alignSelf {
     _alignSelf = alignSelf;
-    [self updateDefinedRules:[NSArray arrayWithObject:@"alignSelf"]];
+    [self updateDefinedRules:@[@"alignSelf"]];
+}
+
+- (StylizeOverflow)overflow {
+    return (StylizeOverflow){self.overflowX, self.overflowY};
+}
+
+- (void)setOverflow:(StylizeOverflow)overflow {
+    _overflowX = overflow.overflowX;
+    _overflowY = overflow.overflowY;
+    [self updateDefinedRules:@[@"overflow", @"overflowX", @"overflowY"]];
 }
 
 - (StylizeLayoutFlexDirection)flexCrossDirection {

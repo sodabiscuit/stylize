@@ -22,6 +22,10 @@
 @property (nonatomic,assign) StylizeDisplay display;
 @property (nonatomic,assign) StylizeVisibility visibility;
 
+@property (nonatomic,assign) StylizeOverflow overflow;
+@property (nonatomic,assign) StylizeOverflowSkeleton overflowX;
+@property (nonatomic,assign) StylizeOverflowSkeleton overflowY;
+
 @property (nonatomic,assign) CGFloat width;
 @property (nonatomic,assign) CGFloat height;
 @property (nonatomic,assign) StylizeMargin margin;

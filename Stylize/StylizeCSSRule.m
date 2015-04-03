@@ -228,4 +228,12 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     }
 }
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    //NOTHING
+}
+
+- (id)valueForUndefinedKey:(NSString *)key {
+    return nil;
+}
+
 @end

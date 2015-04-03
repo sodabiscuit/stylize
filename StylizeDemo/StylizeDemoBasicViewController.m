@@ -21,7 +21,6 @@
     [super viewDidLoad];
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
     _rootNode.nodeID = @"rootNode";
-    _rootNode.layoutType = StylizeLayoutTypeFlex;
     _rootNode.width = self.view.frame.size.width;
     
     _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
@@ -30,7 +29,7 @@
     _rootNode.margin = StylizeMarginMake(64, 0, 0, 0);
     _rootNode.view.backgroundColor = [UIColor purpleColor];
     _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionRow;
-    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignStretch;
+//    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignStretch;
 //    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignCenter;
     _rootNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
     [self.view addStylizeNode:_rootNode];
@@ -39,7 +38,7 @@
     [_rootNode addSubnode:firstNode];
     
     StylizeNode *secondNode = [self createUnitNode:@"second"];
-    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
+//    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
     [_rootNode addSubnode:secondNode];
     
     StylizeNode *thirdNode = [self createUnitNode:@"third"];
@@ -57,8 +56,7 @@
     ret.width = 100;
     ret.height = 100;
     ret.nodeID = nodeID;
-    ret.CSSRule.flex = 1;
-    ret.CSSRule.position = StylizePositionTypeRelative;
+//    ret.CSSRule.flex = 1;
 //    ret.CSSRule.position = StylizePositionTypeAbsolute;
 //    ret.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexStart;
     ret.CSSRule.marginRight = 10;

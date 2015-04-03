@@ -11,6 +11,15 @@
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
 		1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */; };
 		1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */; };
+		124864951ACE642600167353 /* ESCssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248648D1ACE642600167353 /* ESCssParser.m */; };
+		124864961ACE642600167353 /* ESCssTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248648E1ACE642600167353 /* ESCssTokenizer.m */; };
+		124864971ACE642600167353 /* ESCssTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 124864901ACE642600167353 /* ESCssTokens.m */; };
+		124864981ACE642600167353 /* build.command in Resources */ = {isa = PBXBuildFile; fileRef = 124864921ACE642600167353 /* build.command */; };
+		124864991ACE642600167353 /* css.l in Sources */ = {isa = PBXBuildFile; fileRef = 124864931ACE642600167353 /* css.l */; };
+		1248649A1ACE642600167353 /* css.y in Sources */ = {isa = PBXBuildFile; fileRef = 124864941ACE642600167353 /* css.y */; };
+		124864A71ACE66C500167353 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248649D1ACE66C500167353 /* TBXML+Compression.m */; };
+		124864A81ACE66C500167353 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248649E1ACE66C500167353 /* TBXML+HTTP.m */; };
+		124864A91ACE66C500167353 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248649F1ACE66C500167353 /* TBXML.m */; };
 		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
 		12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9F1A8211E400E5E2F5 /* AppDelegate.m */; };
 		12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CA21A8211E400E5E2F5 /* StylizeDemoBasicViewController.m */; };
@@ -20,6 +29,7 @@
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
 		12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */; };
 		12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */; };
+		1281603E1AC00DC500B84CF1 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */; };
 		12F60A4B1AB81F130075B574 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A421AB81F130075B574 /* StylizeCellNode.m */; };
 		12F60A4C1AB81F130075B574 /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A441AB81F130075B574 /* StylizeControlNode.m */; };
 		12F60A4D1AB81F130075B574 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A461AB81F130075B574 /* StylizeImageNode.m */; };
@@ -49,6 +59,22 @@
 		1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
 		1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
 		1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
+		1248648C1ACE642600167353 /* ESCssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssParser.h; sourceTree = "<group>"; };
+		1248648D1ACE642600167353 /* ESCssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssParser.m; sourceTree = "<group>"; };
+		1248648E1ACE642600167353 /* ESCssTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokenizer.m; sourceTree = "<group>"; };
+		1248648F1ACE642600167353 /* ESCssTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssTokens.h; sourceTree = "<group>"; };
+		124864901ACE642600167353 /* ESCssTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokens.m; sourceTree = "<group>"; };
+		124864921ACE642600167353 /* build.command */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = build.command; sourceTree = "<group>"; };
+		124864931ACE642600167353 /* css.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = css.l; sourceTree = "<group>"; };
+		124864941ACE642600167353 /* css.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = css.y; sourceTree = "<group>"; };
+		1248649D1ACE66C500167353 /* TBXML+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+Compression.m"; sourceTree = "<group>"; };
+		1248649E1ACE66C500167353 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
+		1248649F1ACE66C500167353 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		124864A11ACE66C500167353 /* TBXML+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Compression.h"; sourceTree = "<group>"; };
+		124864A21ACE66C500167353 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
+		124864A31ACE66C500167353 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		124864A51ACE66C500167353 /* TBXML-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML-iOS-Prefix.pch"; sourceTree = "<group>"; };
+		124864A61ACE66C500167353 /* TBXML-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML-Prefix.pch"; sourceTree = "<group>"; };
 		12728C971A8211E300E5E2F5 /* StylizeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylizeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728C9B1A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728C9C1A8211E400E5E2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -67,6 +93,8 @@
 		12739EB71A9E26BC00960E16 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		12739EBE1AAD3AC200960E16 /* StylizeLayoutEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutEvent.h; sourceTree = "<group>"; };
 		12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutEvent.m; sourceTree = "<group>"; };
+		1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
+		1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
 		12F60A411AB81F130075B574 /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
 		12F60A421AB81F130075B574 /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
 		12F60A431AB81F130075B574 /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
@@ -117,10 +145,82 @@
 				1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */,
 				12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */,
 				12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */,
+				1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */,
+				1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */,
 				12F60A401AB81F130075B574 /* NodeKit */,
 				12739EB51A9D743A00960E16 /* ThirdParty */,
 			);
 			path = Stylize;
+			sourceTree = "<group>";
+		};
+		1248648A1ACE642600167353 /* ESCssParser */ = {
+			isa = PBXGroup;
+			children = (
+				1248648B1ACE642600167353 /* Parser */,
+				124864911ACE642600167353 /* Syntax */,
+			);
+			path = ESCssParser;
+			sourceTree = "<group>";
+		};
+		1248648B1ACE642600167353 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				1248648C1ACE642600167353 /* ESCssParser.h */,
+				1248648D1ACE642600167353 /* ESCssParser.m */,
+				1248648E1ACE642600167353 /* ESCssTokenizer.m */,
+				1248648F1ACE642600167353 /* ESCssTokens.h */,
+				124864901ACE642600167353 /* ESCssTokens.m */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		124864911ACE642600167353 /* Syntax */ = {
+			isa = PBXGroup;
+			children = (
+				124864921ACE642600167353 /* build.command */,
+				124864931ACE642600167353 /* css.l */,
+				124864941ACE642600167353 /* css.y */,
+			);
+			path = Syntax;
+			sourceTree = "<group>";
+		};
+		1248649B1ACE66C500167353 /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				1248649C1ACE66C500167353 /* TBXML-Code */,
+				124864A01ACE66C500167353 /* TBXML-Headers */,
+				124864A41ACE66C500167353 /* TBXML-Support */,
+			);
+			path = TBXML;
+			sourceTree = "<group>";
+		};
+		1248649C1ACE66C500167353 /* TBXML-Code */ = {
+			isa = PBXGroup;
+			children = (
+				1248649D1ACE66C500167353 /* TBXML+Compression.m */,
+				1248649E1ACE66C500167353 /* TBXML+HTTP.m */,
+				1248649F1ACE66C500167353 /* TBXML.m */,
+			);
+			path = "TBXML-Code";
+			sourceTree = "<group>";
+		};
+		124864A01ACE66C500167353 /* TBXML-Headers */ = {
+			isa = PBXGroup;
+			children = (
+				124864A11ACE66C500167353 /* TBXML+Compression.h */,
+				124864A21ACE66C500167353 /* TBXML+HTTP.h */,
+				124864A31ACE66C500167353 /* TBXML.h */,
+			);
+			path = "TBXML-Headers";
+			sourceTree = "<group>";
+		};
+		124864A41ACE66C500167353 /* TBXML-Support */ = {
+			isa = PBXGroup;
+			children = (
+				124864A51ACE66C500167353 /* TBXML-iOS-Prefix.pch */,
+				124864A61ACE66C500167353 /* TBXML-Prefix.pch */,
+			);
+			path = "TBXML-Support";
 			sourceTree = "<group>";
 		};
 		12728C8E1A8211E300E5E2F5 = {
@@ -188,6 +288,8 @@
 		12739EB51A9D743A00960E16 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				1248649B1ACE66C500167353 /* TBXML */,
+				1248648A1ACE642600167353 /* ESCssParser */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -311,6 +413,7 @@
 			files = (
 				12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */,
 				12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */,
+				124864981ACE642600167353 /* build.command in Resources */,
 				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,15 +467,24 @@
 			files = (
 				12F60A4F1AB81F130075B574 /* StylizeTextNode.m in Sources */,
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
+				124864951ACE642600167353 /* ESCssParser.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
 				12F60A4D1AB81F130075B574 /* StylizeImageNode.m in Sources */,
 				1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */,
+				1248649A1ACE642600167353 /* css.y in Sources */,
+				1281603E1AC00DC500B84CF1 /* StylizeNode+Query.m in Sources */,
+				124864961ACE642600167353 /* ESCssTokenizer.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
+				124864A71ACE66C500167353 /* TBXML+Compression.m in Sources */,
+				124864A91ACE66C500167353 /* TBXML.m in Sources */,
+				124864A81ACE66C500167353 /* TBXML+HTTP.m in Sources */,
 				12F60A4C1AB81F130075B574 /* StylizeControlNode.m in Sources */,
 				1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */,
 				12F60A4E1AB81F130075B574 /* StylizeScrollNode.m in Sources */,
+				124864991ACE642600167353 /* css.l in Sources */,
 				12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */,
 				12F60A4B1AB81F130075B574 /* StylizeCellNode.m in Sources */,
+				124864971ACE642600167353 /* ESCssTokens.m in Sources */,
 				1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */,
 				12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */,
 			);

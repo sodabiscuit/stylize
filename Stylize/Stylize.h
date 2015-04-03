@@ -17,3 +17,4 @@
 #import "StylizeTextNode.h"
 #import "StylizeScrollNode.h"
 #import "StylizeCellNode.h"
+#import "StylizeNode+Query.h"

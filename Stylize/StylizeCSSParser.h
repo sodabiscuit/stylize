@@ -10,6 +10,13 @@
 
 @interface StylizeCSSParser : NSObject
 
+/**
+ *  解析CSS文本
+ *
+ *  @param CSSRaw CSS文本
+ *
+ *  @return StylizeCSSRule
+ */
 + (StylizeCSSRule *)parseCSSRaw:(NSString *)CSSRaw;
 
 @end

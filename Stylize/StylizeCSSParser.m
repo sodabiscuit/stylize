@@ -7,6 +7,7 @@
 //
 
 #import "StylizeCSSParser.h"
+#import "ESCssParser.h"
 
 @implementation StylizeCSSParser
 

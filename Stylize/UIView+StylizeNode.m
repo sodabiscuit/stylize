@@ -10,6 +10,7 @@
 #import "UIView+StylizeNode.h"
 #import "StylizeCSSRule.h"
 #import "StylizeNode.h"
+#import "StylizeNode+Flexbox.h"
 
 
 @interface UIView()

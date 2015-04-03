@@ -48,6 +48,7 @@
     [_rootNode addSubnode:fourthNode];
     
 //    _rootNode.width = 120;
+    [_rootNode layout];
 }
 
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {

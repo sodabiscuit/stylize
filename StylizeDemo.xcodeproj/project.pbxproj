@@ -24,6 +24,7 @@
 		12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */; };
 		12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */; };
 		1281603E1AC00DC500B84CF1 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */; };
+		12BA47691ACF06D6006BB850 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */; };
 		12F60A4B1AB81F130075B574 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A421AB81F130075B574 /* StylizeCellNode.m */; };
 		12F60A4C1AB81F130075B574 /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A441AB81F130075B574 /* StylizeControlNode.m */; };
 		12F60A4D1AB81F130075B574 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A461AB81F130075B574 /* StylizeImageNode.m */; };
@@ -73,11 +74,13 @@
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
 		12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
 		12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
-		12739EB71A9E26BC00960E16 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		12739EBE1AAD3AC200960E16 /* StylizeLayoutEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutEvent.h; sourceTree = "<group>"; };
 		12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutEvent.m; sourceTree = "<group>"; };
 		1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
 		1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
+		12BA47671ACF06D6006BB850 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
+		12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
+		12BA476A1ACF0716006BB850 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		12F60A411AB81F130075B574 /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
 		12F60A421AB81F130075B574 /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
 		12F60A431AB81F130075B574 /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
@@ -124,12 +127,12 @@
 				1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */,
 				1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */,
 				1247B7BB1A8B04FC00A4987A /* Stylize.h */,
-				12739EB71A9E26BC00960E16 /* StylizeLayoutFlexGeometry.h */,
 				1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */,
 				12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */,
 				12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */,
 				1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */,
 				1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */,
+				12BA47661ACF06D6006BB850 /* Layout */,
 				12F60A401AB81F130075B574 /* NodeKit */,
 				12739EB51A9D743A00960E16 /* ThirdParty */,
 			);
@@ -224,6 +227,16 @@
 				1248648A1ACE642600167353 /* ESCssParser */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		12BA47661ACF06D6006BB850 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				12BA476A1ACF0716006BB850 /* StylizeLayoutFlexGeometry.h */,
+				12BA47671ACF06D6006BB850 /* StylizeNode+Flexbox.h */,
+				12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 		12F60A401AB81F130075B574 /* NodeKit */ = {
@@ -397,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12F60A4F1AB81F130075B574 /* StylizeTextNode.m in Sources */,
+				12BA47691ACF06D6006BB850 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
 				124864951ACE642600167353 /* ESCssParser.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,

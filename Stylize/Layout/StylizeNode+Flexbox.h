@@ -44,7 +44,7 @@
  */
 + (BOOL)isVerticalDirection:(StylizeLayoutFlexDirection)direction;
 /**
- *  是否CSS规则中已定义width和height
+ *  是否CSS规则中已定义width或height
  *
  *  @param node      StylizeNode类型节点
  *  @param direction StylizeLayoutFlexDirection枚举类型
@@ -52,6 +52,24 @@
  *  @return 如果是返回YES，反之
  */
 + (BOOL)isDimensionDefined:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
+/**
+ *  是否CSS规则中已定义widthAuto或者heightAuto
+ *
+ *  @param node      StylizeNode类型节点
+ *  @param direction StylizeLayoutFlexDirection枚举类型
+ *
+ *  @return 如果是返回YES，反之
+ */
++ (BOOL)isDimensionAutoDefined:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
+/**
+ *  是否已经主动或者被动设置过width和height
+ *
+ *  @param node      StylizeNode类型节点
+ *  @param direction StylizeLayoutFlexDirection枚举类型
+ *
+ *  @return 如果是返回YES，反之
+ */
++ (BOOL)isNodeDimensionSet:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction;
 /**
  *  是否CSS规则中已定义left、right、top、bottom位置信息
  *

@@ -24,7 +24,7 @@
     _rootNode.width = self.view.frame.size.width;
     
     _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
-    _rootNode.height = self.view.frame.size.height-64;
+//    _rootNode.height = self.view.frame.size.height-64;
 //    _rootNode.height = 120;
     _rootNode.margin = StylizeMarginMake(64, 0, 0, 0);
     _rootNode.view.backgroundColor = [UIColor purpleColor];
@@ -36,6 +36,13 @@
     
     StylizeNode *firstNode = [self createUnitNode:@"first"];
     [_rootNode addSubnode:firstNode];
+    firstNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
+    
+    StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
+    [firstNode addSubnode:interFirstNode];
+    
+    StylizeNode *interSecondNode = [self createInterUnitNode:@"innerSecond"];
+    [firstNode addSubnode:interSecondNode];
     
     StylizeNode *secondNode = [self createUnitNode:@"second"];
 //    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
@@ -75,6 +82,21 @@
     
     return ret;
 }
+
+
+- (StylizeNode *)createInterUnitNode:(NSString *)nodeID {
+    StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
+   
+    ret.width = 100;
+    ret.height = 100;
+//    ret.CSSRule.flex = 1;
+    ret.CSSRule.marginRight = 10;
+    ret.nodeID = nodeID;
+    ret.view.backgroundColor = [UIColor redColor];
+    
+    return ret;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

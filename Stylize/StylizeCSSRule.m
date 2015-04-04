@@ -38,9 +38,12 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         self.flexWrap = StylizeLayoutFlexFlexWrapNowrap;
         self.alignContent = StylizeLayoutFlexAlignContentStretch;
         
+        self.widthAuto = YES;
+        self.heightAuto = YES;
+        
 //        self.alignSelf = StylizeLayoutFlexAlignStretch;
         
-        _definedRules = [@[@"postion",
+        _definedRules = [@[@"postion", @"widthAuto", @"heightAuto",
                            @"display", @"visibility",
                            @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent"] mutableCopy];
         
@@ -58,12 +61,24 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (void)setWidth:(CGFloat)width {
     _width = width;
-    [self updateDefinedRules:@[@"width"]];
+    _widthAuto = NO;
+    [self updateDefinedRules:@[@"width", @"-widthAuto"]];
+}
+
+- (void)setWidthAuto:(BOOL)widthAuto {
+    _widthAuto = widthAuto;
+    [self updateDefinedRules:@[@"widthAuto", @"-width"]];
 }
 
 - (void)setHeight:(CGFloat)height {
     _height = height;
-    [self updateDefinedRules:@[@"height"]];
+    _heightAuto = NO;
+    [self updateDefinedRules:@[@"height", @"-heightAuto"]];
+}
+
+- (void)setHeightAuto:(BOOL)heightAuto {
+    _heightAuto = heightAuto;
+    [self updateDefinedRules:@[@"heightAuto", @"-height"]];
 }
 
 - (void)setTop:(CGFloat)top {
@@ -222,8 +237,18 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     }
     
     for (NSString *rule in rules) {
-        if ([rule isKindOfClass:[NSString class]] && [_definedRules indexOfObject:rules] == NSNotFound) {
-            [_definedRules addObject:rule];
+        if ([rule isKindOfClass:[NSString class]] && rule.length > 0) {
+            NSString *prefix = [rule substringToIndex:1];
+            if ([prefix isEqualToString:@"-"]) {
+                NSString *ruleContent = [rule substringFromIndex:1];
+                [_definedRules enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    if ([obj isEqualToString:ruleContent]) {
+                        [_definedRules removeObject:obj];
+                    }
+                }];
+            } else if ([_definedRules indexOfObject:rules] == NSNotFound) {
+                [_definedRules addObject:rule];
+            }
         }
     }
 }

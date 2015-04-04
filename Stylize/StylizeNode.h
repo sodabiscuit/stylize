@@ -83,6 +83,14 @@ typedef enum {
  */
 @property (nonatomic,readonly,assign) BOOL isDimensionSet;
 /**
+ *  已被父节点处理位置信息
+ */
+@property (nonatomic,readonly,assign) BOOL isDimensionWidthSet;
+/**
+ *  已被父节点处理位置信息
+ */
+@property (nonatomic,readonly,assign) BOOL isDimensionHeightSet;
+/**
  *  位置
  */
 //@property (nonatomic,assign) StylizePositionType position;

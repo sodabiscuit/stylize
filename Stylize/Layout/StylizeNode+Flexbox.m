@@ -17,7 +17,8 @@
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) UIView *view;
-@property (nonatomic,readwrite,assign) BOOL isDimensionSet;
+@property (nonatomic,readwrite,assign) BOOL isDimensionWidthSet;
+@property (nonatomic,readwrite,assign) BOOL isDimensionHeightSet;
 
 @end
 
@@ -38,6 +39,22 @@
         return [node.CSSRule isRuleDefined:@"width"];
     } else {
         return [node.CSSRule isRuleDefined:@"height"];
+    }
+}
+
++ (BOOL)isDimensionAutoDefined:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction {
+    if ([StylizeNode isHorizontalDirection:direction]) {
+        return [node.CSSRule isRuleDefined:@"widthAuto"];
+    } else {
+        return [node.CSSRule isRuleDefined:@"heightAuto"];
+    }
+}
+
++ (BOOL)isNodeDimensionSet:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction {
+    if ([StylizeNode isHorizontalDirection:direction]) {
+        return node.isDimensionWidthSet;
+    } else {
+        return node.isDimensionHeightSet;
     }
 }
 
@@ -65,12 +82,13 @@
     CGRect frame = node.frame;
     if ([StylizeNode isHorizontalDirection:direction]) {
         frame.size.width = value;
+        node.isDimensionWidthSet = YES;
     } else {
         frame.size.height = value;
+        node.isDimensionHeightSet = YES;
     }
     node.frame = frame;
     node.view.frame = frame;
-    node.isDimensionSet = YES;
 }
 
 + (CGFloat)getNodePosition:(StylizeNode *)node direction:(StylizeLayoutFlexDirection)direction {
@@ -177,7 +195,9 @@
         if ([StylizeNode isDimensionDefined:self direction:StylizeLayoutFlexDirectionRow]) {
             [StylizeNode setNodeDimension:self direction:StylizeLayoutFlexDirectionRow value:self.CSSRule.width];
         }
-        [StylizeNode setNodeDimension:self direction:StylizeLayoutFlexDirectionColumn value:self.CSSRule.height];
+        if ([StylizeNode isDimensionDefined:self direction:StylizeLayoutFlexDirectionColumn]) {
+            [StylizeNode setNodeDimension:self direction:StylizeLayoutFlexDirectionColumn value:self.CSSRule.height];
+        }
         
         self.view.frame = self.frame;
     }
@@ -383,8 +403,10 @@
         CGFloat computedContainerCrossAxis = MAX(crossDim + [StylizeNode getPaddingandBorder:self direction:self.CSSRule.flexCrossDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:self.CSSRule.flexCrossDirection]);
         
         self.computedSize = [self makeComputedSize:computedContainerMainAxis cross:computedContainerCrossAxis];
-        containerMainAxis = containerMainAxis == 0 ? computedContainerMainAxis : containerMainAxis;
-        containerCrossAxis = containerCrossAxis == 0 ? computedContainerCrossAxis : containerCrossAxis;
+        
+        //QUESTION #1 等待逻辑校验，原有判断为是否取得的长度或者宽度值为0，后修改为判断是否设置过长宽值
+        containerMainAxis = ![StylizeNode isNodeDimensionSet:self direction:self.CSSRule.flexDirection] ? computedContainerMainAxis : containerMainAxis;
+        containerCrossAxis = ![StylizeNode isNodeDimensionSet:self direction:self.CSSRule.flexCrossDirection] ? computedContainerCrossAxis : containerCrossAxis;
         
         for (NSInteger i = startLine; i < endLine; ++i) {
             StylizeNode *subnode = self.subnodes[i];
@@ -427,11 +449,12 @@
         startLine = endLine;
     } //end of main while
     
-    if ([StylizeNode getNodeDimension:self direction:self.CSSRule.flexDirection] == 0) {
+    //QUESTION #2 原有判断为是否长度或者宽度的值为0，后修改为判断是否样式设置为auto
+    if ([StylizeNode isDimensionAutoDefined:self direction:self.CSSRule.flexDirection]) {
         [StylizeNode setNodeDimension:self direction:self.CSSRule.flexDirection value:MAX(linesMainDim + [StylizeNode getPaddingandBorder:self direction:self.CSSRule.flexDirection location:StylizeNodeBoxLocationTypeTrailing], [StylizeNode getPaddingandBorder:self direction:self.CSSRule.flexDirection])];
     }
     
-    if ([StylizeNode getNodeDimension:self direction:self.CSSRule.flexCrossDirection] == 0) {
+    if ([StylizeNode isDimensionAutoDefined:self direction:self.CSSRule.flexCrossDirection]) {
         [StylizeNode setNodeDimension:self direction:self.CSSRule.flexCrossDirection value:MAX(linesCrossDim + [StylizeNode getPaddingandBorder:self direction:self.CSSRule.flexCrossDirection], [StylizeNode getPaddingandBorder:self direction:self.CSSRule.flexCrossDirection])];
     }
    

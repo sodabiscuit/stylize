@@ -20,7 +20,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) UIView *view;
-@property (nonatomic,readwrite,assign) BOOL isDimensionSet;
+@property (nonatomic,readwrite,assign) BOOL isDimensionWidthSet;
+@property (nonatomic,readwrite,assign) BOOL isDimensionHeightSet;
 @property (nonatomic,assign) BOOL hasLayout;
 
 @end
@@ -77,7 +78,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 - (void)makeDefaultProperties {
     _hasLayout = NO;
     _layoutType = StylizeLayoutTypeFlex;
-    _isDimensionSet = NO;
+    _isDimensionWidthSet = NO;
+    _isDimensionHeightSet = NO;
     _frame = CGRectZero;
     _subnodes = [NSArray array];
     _CSSRule = [[StylizeCSSRule alloc] init];
@@ -118,6 +120,10 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 
 - (void)setPadding:(StylizePadding)padding {
     _padding = padding;
+}
+
+- (BOOL)isDimensionSet {
+    return _isDimensionWidthSet || _isDimensionHeightSet;
 }
 
 #pragma mark - Public Method

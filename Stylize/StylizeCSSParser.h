@@ -17,6 +17,6 @@
  *
  *  @return StylizeCSSRule
  */
-+ (StylizeCSSRule *)parseCSSRaw:(NSString *)CSSRaw;
++ (NSDictionary *)parseCSSRaw:(NSString *)CSSRaw;
 
 @end

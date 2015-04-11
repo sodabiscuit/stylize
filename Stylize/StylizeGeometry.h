@@ -106,4 +106,8 @@ typedef struct {
     
 } StylizeOverflow;
 
-
+typedef enum {
+    StylizeTextAlignLeft,
+    StylizeTextAlignCenter,
+    StylizeTextAlignRight,
+} StylizeTextAlign;

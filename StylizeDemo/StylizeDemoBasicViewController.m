@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSDictionary *ruleSet = [StylizeCSSParser parseCSSRaw:@"body { padding:10; margin-left:10;}"];
+    
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
     _rootNode.nodeID = @"rootNode";
     _rootNode.width = self.view.frame.size.width;

@@ -10,9 +10,13 @@
 #import "StylizeGeometry.h"
 #import "StylizeLayoutFlexGeometry.h"
 
+@class StylizeCSSParser;
+
 @protocol StylizeNodeProtocol;
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
+
+@property (nonatomic,strong) StylizeCSSParser *parser;
 
 @property (nonatomic,assign) id observerPropertyOther;
 @property (nonatomic,assign) id observerPropertyLayout;
@@ -69,6 +73,10 @@
 @property (nonatomic,assign) NSInteger flexBasis;
 @property (nonatomic,assign) NSInteger flexGrow;
 @property (nonatomic,assign) NSInteger flex;
+
+@property (nonatomic,strong) UIColor *backgroundColor;
+@property (nonatomic,strong) UIImage *backgroundImage;
+@property (nonatomic,assign) StylizeTextAlign *textAlign;
 
 - (BOOL)isRuleDefined:(NSString *)rule;
 

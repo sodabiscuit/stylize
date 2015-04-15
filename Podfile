@@ -4,6 +4,9 @@
 target 'StylizeDemo' do
     pod 'AsyncDisplayKit'
     pod 'Masonry'
+    pod 'GRMustache'
+    pod 'AFNetworking'
+    pod 'SDWebImage'
 end
 
 target 'StylizeDemoTests' do

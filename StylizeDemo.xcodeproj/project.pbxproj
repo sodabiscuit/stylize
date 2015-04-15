@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1203A79E1ADB61C100A0F71C /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1203A79D1ADB61C100A0F71C /* StylizeCSSRuleParser.m */; };
 		1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B11A8B039300A4987A /* StylizeNode.m */; };
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
 		1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */; };
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.release.xcconfig"; sourceTree = "<group>"; };
+		1203A79C1ADB61C100A0F71C /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
+		1203A79D1ADB61C100A0F71C /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
 		1247B7B01A8B039300A4987A /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
 		1247B7B11A8B039300A4987A /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
 		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,6 +81,7 @@
 		12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutEvent.m; sourceTree = "<group>"; };
 		1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
 		1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
+		128BC2FF1ADE6A7D004C626E /* NSLogMan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSLogMan.h; path = ThirdParty/NSLogMan.h; sourceTree = "<group>"; };
 		12BA47671ACF06D6006BB850 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
 		12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
 		12BA476A1ACF0716006BB850 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 				12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */,
 				1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */,
 				1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */,
+				1203A79C1ADB61C100A0F71C /* StylizeCSSRuleParser.h */,
+				1203A79D1ADB61C100A0F71C /* StylizeCSSRuleParser.m */,
 				1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */,
 				1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */,
 				1247B7BB1A8B04FC00A4987A /* Stylize.h */,
@@ -135,6 +141,7 @@
 				12BA47661ACF06D6006BB850 /* Layout */,
 				12F60A401AB81F130075B574 /* NodeKit */,
 				12739EB51A9D743A00960E16 /* ThirdParty */,
+				128BC2FF1ADE6A7D004C626E /* NSLogMan.h */,
 			);
 			path = Stylize;
 			sourceTree = "<group>";
@@ -410,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12F60A4F1AB81F130075B574 /* StylizeTextNode.m in Sources */,
+				1203A79E1ADB61C100A0F71C /* StylizeCSSRuleParser.m in Sources */,
 				12BA47691ACF06D6006BB850 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
 				124864951ACE642600167353 /* ESCssParser.m in Sources */,

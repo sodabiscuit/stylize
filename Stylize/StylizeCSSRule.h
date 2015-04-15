@@ -10,13 +10,9 @@
 #import "StylizeGeometry.h"
 #import "StylizeLayoutFlexGeometry.h"
 
-@class StylizeCSSParser;
-
 @protocol StylizeNodeProtocol;
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
-
-@property (nonatomic,strong) StylizeCSSParser *parser;
 
 @property (nonatomic,assign) id observerPropertyOther;
 @property (nonatomic,assign) id observerPropertyLayout;

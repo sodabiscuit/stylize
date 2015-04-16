@@ -218,13 +218,13 @@
     [self layoutFlexSubnodesPreLoop];
     [self layoutFlexSubnodesMainLoop];
     for (StylizeNode *subnode in self.subnodes) {
-        NSLogMan(@"<%@> %@ Final: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+         NSLogManInfo(@"<%@> %@ Final: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
     }
 }
 
 - (void)layoutFlexSubnodesPreLoop {
     for (StylizeNode *subnode in self.subnodes) {
-        NSLogMan(@"<%@> %@ PreLoop Before: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+         NSLogManInfo(@"<%@> %@ PreLoop Before: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
         
         //set or reset
         [StylizeNode setNodePosition:subnode direction:StylizeLayoutFlexDirectionRow value:0];
@@ -232,7 +232,7 @@
         [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionRow value:subnode.CSSRule.width];
         [StylizeNode setNodeDimension:subnode direction:StylizeLayoutFlexDirectionColumn value:subnode.CSSRule.height];
         
-        NSLogMan(@"<%@> %@ PreLoop Reset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+         NSLogManInfo(@"<%@> %@ PreLoop Reset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
         
         
         /**
@@ -264,7 +264,7 @@
             }
         }
         
-        NSLogMan(@"<%@> %@ PreLoop After: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+         NSLogManInfo(@"<%@> %@ PreLoop After: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
     }
 }
 
@@ -344,7 +344,7 @@
                     CGFloat dim = flexibleMainDim * subnode.CSSRule.flex + [StylizeNode getPaddingandBorder:subnode direction:self.CSSRule.flexDirection];
                     [StylizeNode setNodeDimension:subnode direction:self.CSSRule.flexDirection value:dim];
                     [subnode layout];
-                    NSLogMan(@"<%@> %@ MainLoop FlexibleDimension: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+                     NSLogManInfo(@"<%@> %@ MainLoop FlexibleDimension: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
                 }
             } //end of second loop
         } else {
@@ -389,7 +389,7 @@
                 [StylizeNode setNodePosition:subnode direction:self.CSSRule.flexDirection value:offsetMainAxis];
             }
             
-            NSLogMan(@"<%@> %@ MainLoop MainAsixOffset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+             NSLogManInfo(@"<%@> %@ MainLoop MainAsixOffset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
             
             if (subnode.CSSRule.position == StylizePositionTypeRelative ||
                 subnode.CSSRule.position == StylizePositionTypeStatic) {
@@ -441,7 +441,7 @@
                 [StylizeNode setNodePosition:subnode direction:self.CSSRule.flexCrossDirection value:offsetCrossAxis];
             }
             
-            NSLogMan(@"<%@> %@ MainLoop CrossAsixOffset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
+             NSLogManInfo(@"<%@> %@ MainLoop CrossAsixOffset: <StylizeNode> %@, frame = {(%.2f,%.2f),(%.2f,%.2f)}", self.class, self.nodeID, subnode.nodeID, subnode.frame.origin.x, subnode.frame.origin.y, subnode.frame.size.width, subnode.frame.size.height);
             
         } //end of fourth loop
         

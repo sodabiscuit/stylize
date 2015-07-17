@@ -7,14 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1203A79E1ADB61C100A0F71C /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1203A79D1ADB61C100A0F71C /* StylizeCSSRuleParser.m */; };
-		1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B11A8B039300A4987A /* StylizeNode.m */; };
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
-		1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */; };
-		1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */; };
-		124864951ACE642600167353 /* ESCssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248648D1ACE642600167353 /* ESCssParser.m */; };
-		124864961ACE642600167353 /* ESCssTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1248648E1ACE642600167353 /* ESCssTokenizer.m */; };
-		124864971ACE642600167353 /* ESCssTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 124864901ACE642600167353 /* ESCssTokens.m */; };
+		126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC081B58B1F300A62026 /* StylizeNode+Flexbox.m */; };
+		126ABC2F1B58B1F300A62026 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC0B1B58B1F300A62026 /* StylizeCellNode.m */; };
+		126ABC301B58B1F300A62026 /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC0D1B58B1F300A62026 /* StylizeControlNode.m */; };
+		126ABC311B58B1F300A62026 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC0F1B58B1F300A62026 /* StylizeImageNode.m */; };
+		126ABC321B58B1F300A62026 /* StylizeScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC111B58B1F300A62026 /* StylizeScrollNode.m */; };
+		126ABC331B58B1F300A62026 /* StylizeTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC131B58B1F300A62026 /* StylizeTextNode.m */; };
+		126ABC341B58B1F300A62026 /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC161B58B1F300A62026 /* StylizeCSSParser.m */; };
+		126ABC351B58B1F300A62026 /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC181B58B1F300A62026 /* StylizeCSSRule.m */; };
+		126ABC361B58B1F300A62026 /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC1A1B58B1F300A62026 /* StylizeCSSRuleParser.m */; };
+		126ABC371B58B1F300A62026 /* StylizeLayoutEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC1D1B58B1F300A62026 /* StylizeLayoutEvent.m */; };
+		126ABC381B58B1F300A62026 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC1F1B58B1F300A62026 /* StylizeNode+Query.m */; };
+		126ABC391B58B1F300A62026 /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC211B58B1F300A62026 /* StylizeNode.m */; };
+		126ABC3A1B58B1F300A62026 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 126ABC231B58B1F300A62026 /* .gitkeep */; };
+		126ABC3B1B58B1F300A62026 /* ESCssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC271B58B1F300A62026 /* ESCssParser.m */; };
+		126ABC3C1B58B1F300A62026 /* ESCssTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC281B58B1F300A62026 /* ESCssTokenizer.m */; };
+		126ABC3D1B58B1F300A62026 /* ESCssTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC2A1B58B1F300A62026 /* ESCssTokens.m */; };
+		126ABC3E1B58B1F300A62026 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC2D1B58B1F300A62026 /* UIView+StylizeNode.m */; };
 		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
 		12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9F1A8211E400E5E2F5 /* AppDelegate.m */; };
 		12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CA21A8211E400E5E2F5 /* StylizeDemoBasicViewController.m */; };
@@ -22,17 +32,8 @@
 		12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA71A8211E400E5E2F5 /* Images.xcassets */; };
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
-		12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */; };
-		12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */; };
-		1281603E1AC00DC500B84CF1 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */; };
-		12BA47691ACF06D6006BB850 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
-		12F60A4B1AB81F130075B574 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A421AB81F130075B574 /* StylizeCellNode.m */; };
-		12F60A4C1AB81F130075B574 /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A441AB81F130075B574 /* StylizeControlNode.m */; };
-		12F60A4D1AB81F130075B574 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A461AB81F130075B574 /* StylizeImageNode.m */; };
-		12F60A4E1AB81F130075B574 /* StylizeScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A481AB81F130075B574 /* StylizeScrollNode.m */; };
-		12F60A4F1AB81F130075B574 /* StylizeTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A4A1AB81F130075B574 /* StylizeTextNode.m */; };
 		50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -48,22 +49,43 @@
 
 /* Begin PBXFileReference section */
 		0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.release.xcconfig"; sourceTree = "<group>"; };
-		1203A79C1ADB61C100A0F71C /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
-		1203A79D1ADB61C100A0F71C /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
-		1247B7B01A8B039300A4987A /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
-		1247B7B11A8B039300A4987A /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
 		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
-		1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
-		1247B7BB1A8B04FC00A4987A /* Stylize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
-		1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
-		1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
-		1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
-		1248648C1ACE642600167353 /* ESCssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssParser.h; sourceTree = "<group>"; };
-		1248648D1ACE642600167353 /* ESCssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssParser.m; sourceTree = "<group>"; };
-		1248648E1ACE642600167353 /* ESCssTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokenizer.m; sourceTree = "<group>"; };
-		1248648F1ACE642600167353 /* ESCssTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssTokens.h; sourceTree = "<group>"; };
-		124864901ACE642600167353 /* ESCssTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokens.m; sourceTree = "<group>"; };
+		126ABC061B58B1F300A62026 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
+		126ABC071B58B1F300A62026 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
+		126ABC081B58B1F300A62026 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
+		126ABC0A1B58B1F300A62026 /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
+		126ABC0B1B58B1F300A62026 /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
+		126ABC0C1B58B1F300A62026 /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
+		126ABC0D1B58B1F300A62026 /* StylizeControlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeControlNode.m; sourceTree = "<group>"; };
+		126ABC0E1B58B1F300A62026 /* StylizeImageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeImageNode.h; sourceTree = "<group>"; };
+		126ABC0F1B58B1F300A62026 /* StylizeImageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeImageNode.m; sourceTree = "<group>"; };
+		126ABC101B58B1F300A62026 /* StylizeScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeScrollNode.h; sourceTree = "<group>"; };
+		126ABC111B58B1F300A62026 /* StylizeScrollNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeScrollNode.m; sourceTree = "<group>"; };
+		126ABC121B58B1F300A62026 /* StylizeTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeTextNode.h; sourceTree = "<group>"; };
+		126ABC131B58B1F300A62026 /* StylizeTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeTextNode.m; sourceTree = "<group>"; };
+		126ABC141B58B1F300A62026 /* Stylize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
+		126ABC151B58B1F300A62026 /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
+		126ABC161B58B1F300A62026 /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
+		126ABC171B58B1F300A62026 /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
+		126ABC181B58B1F300A62026 /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
+		126ABC191B58B1F300A62026 /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
+		126ABC1A1B58B1F300A62026 /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
+		126ABC1B1B58B1F300A62026 /* StylizeGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
+		126ABC1C1B58B1F300A62026 /* StylizeLayoutEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutEvent.h; sourceTree = "<group>"; };
+		126ABC1D1B58B1F300A62026 /* StylizeLayoutEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutEvent.m; sourceTree = "<group>"; };
+		126ABC1E1B58B1F300A62026 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
+		126ABC1F1B58B1F300A62026 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
+		126ABC201B58B1F300A62026 /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
+		126ABC211B58B1F300A62026 /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
+		126ABC231B58B1F300A62026 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		126ABC261B58B1F300A62026 /* ESCssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssParser.h; sourceTree = "<group>"; };
+		126ABC271B58B1F300A62026 /* ESCssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssParser.m; sourceTree = "<group>"; };
+		126ABC281B58B1F300A62026 /* ESCssTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokenizer.m; sourceTree = "<group>"; };
+		126ABC291B58B1F300A62026 /* ESCssTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssTokens.h; sourceTree = "<group>"; };
+		126ABC2A1B58B1F300A62026 /* ESCssTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokens.m; sourceTree = "<group>"; };
+		126ABC2B1B58B1F300A62026 /* NSLogMan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLogMan.h; sourceTree = "<group>"; };
+		126ABC2C1B58B1F300A62026 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
+		126ABC2D1B58B1F300A62026 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
 		12728C971A8211E300E5E2F5 /* StylizeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylizeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728C9B1A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728C9C1A8211E400E5E2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,28 +99,8 @@
 		12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylizeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728CB51A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
-		12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
-		12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
-		12739EBE1AAD3AC200960E16 /* StylizeLayoutEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutEvent.h; sourceTree = "<group>"; };
-		12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutEvent.m; sourceTree = "<group>"; };
-		1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
-		1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
-		128BC2FF1ADE6A7D004C626E /* NSLogMan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSLogMan.h; path = ThirdParty/NSLogMan.h; sourceTree = "<group>"; };
-		12BA47671ACF06D6006BB850 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
-		12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
-		12BA476A1ACF0716006BB850 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		12F60A411AB81F130075B574 /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
-		12F60A421AB81F130075B574 /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
-		12F60A431AB81F130075B574 /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
-		12F60A441AB81F130075B574 /* StylizeControlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeControlNode.m; sourceTree = "<group>"; };
-		12F60A451AB81F130075B574 /* StylizeImageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeImageNode.h; sourceTree = "<group>"; };
-		12F60A461AB81F130075B574 /* StylizeImageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeImageNode.m; sourceTree = "<group>"; };
-		12F60A471AB81F130075B574 /* StylizeScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeScrollNode.h; sourceTree = "<group>"; };
-		12F60A481AB81F130075B574 /* StylizeScrollNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeScrollNode.m; sourceTree = "<group>"; };
-		12F60A491AB81F130075B574 /* StylizeTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeTextNode.h; sourceTree = "<group>"; };
-		12F60A4A1AB81F130075B574 /* StylizeTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeTextNode.m; sourceTree = "<group>"; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StylizeDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -125,49 +127,86 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1247B7AF1A8B032D00A4987A /* Stylize */ = {
+		126ABC041B58B1F300A62026 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				1247B7B01A8B039300A4987A /* StylizeNode.h */,
-				1247B7B11A8B039300A4987A /* StylizeNode.m */,
-				12739EBE1AAD3AC200960E16 /* StylizeLayoutEvent.h */,
-				12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */,
-				1247B7B81A8B04A800A4987A /* StylizeCSSRule.h */,
-				1247B7B91A8B04A800A4987A /* StylizeCSSRule.m */,
-				1203A79C1ADB61C100A0F71C /* StylizeCSSRuleParser.h */,
-				1203A79D1ADB61C100A0F71C /* StylizeCSSRuleParser.m */,
-				1247B7BD1A8B340E00A4987A /* StylizeCSSParser.h */,
-				1247B7BE1A8B340E00A4987A /* StylizeCSSParser.m */,
-				1247B7BB1A8B04FC00A4987A /* Stylize.h */,
-				1247B7BC1A8B05C600A4987A /* StylizeGeometry.h */,
-				12739EB21A9CB94200960E16 /* UIView+StylizeNode.h */,
-				12739EB31A9CB94200960E16 /* UIView+StylizeNode.m */,
-				1281603C1AC00DC500B84CF1 /* StylizeNode+Query.h */,
-				1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */,
-				12BA47661ACF06D6006BB850 /* Layout */,
-				12F60A401AB81F130075B574 /* NodeKit */,
-				12739EB51A9D743A00960E16 /* ThirdParty */,
-				128BC2FF1ADE6A7D004C626E /* NSLogMan.h */,
+				126ABC051B58B1F300A62026 /* Layout */,
+				126ABC091B58B1F300A62026 /* NodeKit */,
+				126ABC141B58B1F300A62026 /* Stylize.h */,
+				126ABC151B58B1F300A62026 /* StylizeCSSParser.h */,
+				126ABC161B58B1F300A62026 /* StylizeCSSParser.m */,
+				126ABC171B58B1F300A62026 /* StylizeCSSRule.h */,
+				126ABC181B58B1F300A62026 /* StylizeCSSRule.m */,
+				126ABC191B58B1F300A62026 /* StylizeCSSRuleParser.h */,
+				126ABC1A1B58B1F300A62026 /* StylizeCSSRuleParser.m */,
+				126ABC1B1B58B1F300A62026 /* StylizeGeometry.h */,
+				126ABC1C1B58B1F300A62026 /* StylizeLayoutEvent.h */,
+				126ABC1D1B58B1F300A62026 /* StylizeLayoutEvent.m */,
+				126ABC1E1B58B1F300A62026 /* StylizeNode+Query.h */,
+				126ABC1F1B58B1F300A62026 /* StylizeNode+Query.m */,
+				126ABC201B58B1F300A62026 /* StylizeNode.h */,
+				126ABC211B58B1F300A62026 /* StylizeNode.m */,
+				126ABC221B58B1F300A62026 /* ThirdParty */,
+				126ABC2C1B58B1F300A62026 /* UIView+StylizeNode.h */,
+				126ABC2D1B58B1F300A62026 /* UIView+StylizeNode.m */,
 			);
-			path = Stylize;
+			name = Core;
+			path = ../../Pod/Core;
 			sourceTree = "<group>";
 		};
-		1248648A1ACE642600167353 /* ESCssParser */ = {
+		126ABC051B58B1F300A62026 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				1248648B1ACE642600167353 /* Parser */,
+				126ABC061B58B1F300A62026 /* StylizeLayoutFlexGeometry.h */,
+				126ABC071B58B1F300A62026 /* StylizeNode+Flexbox.h */,
+				126ABC081B58B1F300A62026 /* StylizeNode+Flexbox.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		126ABC091B58B1F300A62026 /* NodeKit */ = {
+			isa = PBXGroup;
+			children = (
+				126ABC0A1B58B1F300A62026 /* StylizeCellNode.h */,
+				126ABC0B1B58B1F300A62026 /* StylizeCellNode.m */,
+				126ABC0C1B58B1F300A62026 /* StylizeControlNode.h */,
+				126ABC0D1B58B1F300A62026 /* StylizeControlNode.m */,
+				126ABC0E1B58B1F300A62026 /* StylizeImageNode.h */,
+				126ABC0F1B58B1F300A62026 /* StylizeImageNode.m */,
+				126ABC101B58B1F300A62026 /* StylizeScrollNode.h */,
+				126ABC111B58B1F300A62026 /* StylizeScrollNode.m */,
+				126ABC121B58B1F300A62026 /* StylizeTextNode.h */,
+				126ABC131B58B1F300A62026 /* StylizeTextNode.m */,
+			);
+			path = NodeKit;
+			sourceTree = "<group>";
+		};
+		126ABC221B58B1F300A62026 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				126ABC231B58B1F300A62026 /* .gitkeep */,
+				126ABC241B58B1F300A62026 /* ESCssParser */,
+				126ABC2B1B58B1F300A62026 /* NSLogMan.h */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		126ABC241B58B1F300A62026 /* ESCssParser */ = {
+			isa = PBXGroup;
+			children = (
+				126ABC251B58B1F300A62026 /* Parser */,
 			);
 			path = ESCssParser;
 			sourceTree = "<group>";
 		};
-		1248648B1ACE642600167353 /* Parser */ = {
+		126ABC251B58B1F300A62026 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				1248648C1ACE642600167353 /* ESCssParser.h */,
-				1248648D1ACE642600167353 /* ESCssParser.m */,
-				1248648E1ACE642600167353 /* ESCssTokenizer.m */,
-				1248648F1ACE642600167353 /* ESCssTokens.h */,
-				124864901ACE642600167353 /* ESCssTokens.m */,
+				126ABC261B58B1F300A62026 /* ESCssParser.h */,
+				126ABC271B58B1F300A62026 /* ESCssParser.m */,
+				126ABC281B58B1F300A62026 /* ESCssTokenizer.m */,
+				126ABC291B58B1F300A62026 /* ESCssTokens.h */,
+				126ABC2A1B58B1F300A62026 /* ESCssTokens.m */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -175,7 +214,7 @@
 		12728C8E1A8211E300E5E2F5 = {
 			isa = PBXGroup;
 			children = (
-				1247B7AF1A8B032D00A4987A /* Stylize */,
+				126ABC041B58B1F300A62026 /* Core */,
 				12728C991A8211E300E5E2F5 /* StylizeDemo */,
 				12728CB31A8211E400E5E2F5 /* StylizeDemoTests */,
 				12728C981A8211E300E5E2F5 /* Products */,
@@ -232,41 +271,6 @@
 				12728CB51A8211E400E5E2F5 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		12739EB51A9D743A00960E16 /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				1248648A1ACE642600167353 /* ESCssParser */,
-			);
-			path = ThirdParty;
-			sourceTree = "<group>";
-		};
-		12BA47661ACF06D6006BB850 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				12BA476A1ACF0716006BB850 /* StylizeLayoutFlexGeometry.h */,
-				12BA47671ACF06D6006BB850 /* StylizeNode+Flexbox.h */,
-				12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */,
-			);
-			path = Layout;
-			sourceTree = "<group>";
-		};
-		12F60A401AB81F130075B574 /* NodeKit */ = {
-			isa = PBXGroup;
-			children = (
-				12F60A411AB81F130075B574 /* StylizeCellNode.h */,
-				12F60A421AB81F130075B574 /* StylizeCellNode.m */,
-				12F60A431AB81F130075B574 /* StylizeControlNode.h */,
-				12F60A441AB81F130075B574 /* StylizeControlNode.m */,
-				12F60A451AB81F130075B574 /* StylizeImageNode.h */,
-				12F60A461AB81F130075B574 /* StylizeImageNode.m */,
-				12F60A471AB81F130075B574 /* StylizeScrollNode.h */,
-				12F60A481AB81F130075B574 /* StylizeScrollNode.m */,
-				12F60A491AB81F130075B574 /* StylizeTextNode.h */,
-				12F60A4A1AB81F130075B574 /* StylizeTextNode.m */,
-			);
-			path = NodeKit;
 			sourceTree = "<group>";
 		};
 		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
@@ -374,6 +378,7 @@
 				12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */,
 				12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */,
 				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
+				126ABC3A1B58B1F300A62026 /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,25 +429,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12F60A4F1AB81F130075B574 /* StylizeTextNode.m in Sources */,
-				1203A79E1ADB61C100A0F71C /* StylizeCSSRuleParser.m in Sources */,
-				12BA47691ACF06D6006BB850 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
-				124864951ACE642600167353 /* ESCssParser.m in Sources */,
+				126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
-				12F60A4D1AB81F130075B574 /* StylizeImageNode.m in Sources */,
-				1247B7B21A8B039300A4987A /* StylizeNode.m in Sources */,
-				1281603E1AC00DC500B84CF1 /* StylizeNode+Query.m in Sources */,
-				124864961ACE642600167353 /* ESCssTokenizer.m in Sources */,
+				126ABC331B58B1F300A62026 /* StylizeTextNode.m in Sources */,
+				126ABC351B58B1F300A62026 /* StylizeCSSRule.m in Sources */,
+				126ABC381B58B1F300A62026 /* StylizeNode+Query.m in Sources */,
+				126ABC3B1B58B1F300A62026 /* ESCssParser.m in Sources */,
+				126ABC391B58B1F300A62026 /* StylizeNode.m in Sources */,
+				126ABC371B58B1F300A62026 /* StylizeLayoutEvent.m in Sources */,
+				126ABC3D1B58B1F300A62026 /* ESCssTokens.m in Sources */,
+				126ABC2F1B58B1F300A62026 /* StylizeCellNode.m in Sources */,
+				126ABC3E1B58B1F300A62026 /* UIView+StylizeNode.m in Sources */,
+				126ABC301B58B1F300A62026 /* StylizeControlNode.m in Sources */,
+				126ABC361B58B1F300A62026 /* StylizeCSSRuleParser.m in Sources */,
+				126ABC311B58B1F300A62026 /* StylizeImageNode.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
-				12F60A4C1AB81F130075B574 /* StylizeControlNode.m in Sources */,
-				1247B7BA1A8B04A800A4987A /* StylizeCSSRule.m in Sources */,
-				12F60A4E1AB81F130075B574 /* StylizeScrollNode.m in Sources */,
-				12739EB41A9CB94200960E16 /* UIView+StylizeNode.m in Sources */,
-				12F60A4B1AB81F130075B574 /* StylizeCellNode.m in Sources */,
-				124864971ACE642600167353 /* ESCssTokens.m in Sources */,
-				1247B7BF1A8B340E00A4987A /* StylizeCSSParser.m in Sources */,
-				12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */,
+				126ABC321B58B1F300A62026 /* StylizeScrollNode.m in Sources */,
+				126ABC3C1B58B1F300A62026 /* ESCssTokenizer.m in Sources */,
+				126ABC341B58B1F300A62026 /* StylizeCSSParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,8 @@
 		12739EC01AAD3AC200960E16 /* StylizeLayoutEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739EBF1AAD3AC200960E16 /* StylizeLayoutEvent.m */; };
 		1281603E1AC00DC500B84CF1 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 1281603D1AC00DC500B84CF1 /* StylizeNode+Query.m */; };
 		12BA47691ACF06D6006BB850 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */; };
+		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
+		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
 		12F60A4B1AB81F130075B574 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A421AB81F130075B574 /* StylizeCellNode.m */; };
 		12F60A4C1AB81F130075B574 /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A441AB81F130075B574 /* StylizeControlNode.m */; };
 		12F60A4D1AB81F130075B574 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F60A461AB81F130075B574 /* StylizeImageNode.m */; };
@@ -85,6 +87,8 @@
 		12BA47671ACF06D6006BB850 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
 		12BA47681ACF06D6006BB850 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
 		12BA476A1ACF0716006BB850 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
+		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		12F60A411AB81F130075B574 /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
 		12F60A421AB81F130075B574 /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
 		12F60A431AB81F130075B574 /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */,
+				12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */,
 				1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */,
 				50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */,
 			);
@@ -266,6 +272,8 @@
 		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12C62D801AE6571900B09438 /* SystemConfiguration.framework */,
+				12C62D7E1AE6570B00B09438 /* CFNetwork.framework */,
 				1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */,
 				F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */,
 			);

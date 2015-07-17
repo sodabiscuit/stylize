@@ -8,6 +8,7 @@
 
 #import "StylizeDemoBasicViewController.h"
 #import "Stylize.h"
+#import "NSLogMan.h"
 
 @interface StylizeDemoBasicViewController ()
 
@@ -59,6 +60,10 @@
     
 //    _rootNode.width = 120;
     [_rootNode layout];
+   
+    NSLogMan(@"linetest1");
+    NSLogMan(@"multiple\nline\ntest1");
+    NSLogMan(@"linetest2");
 }
 
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {

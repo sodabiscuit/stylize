@@ -7,6 +7,7 @@ target 'StylizeDemo' do
     pod 'GRMustache'
     pod 'AFNetworking'
     pod 'SDWebImage'
+    pod "NSLogger"
 end
 
 target 'StylizeDemoTests' do

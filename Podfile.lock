@@ -27,6 +27,9 @@ PODS:
     - JRSwizzle (~> 1.0)
   - JRSwizzle (1.0)
   - Masonry (0.6.1)
+  - NSLogger (1.5.1):
+    - NSLogger/Standard (= 1.5.1)
+  - NSLogger/Standard (1.5.1)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
@@ -36,6 +39,7 @@ DEPENDENCIES:
   - AsyncDisplayKit
   - GRMustache
   - Masonry
+  - NSLogger
   - SDWebImage
 
 SPEC CHECKSUMS:
@@ -44,6 +48,7 @@ SPEC CHECKSUMS:
   GRMustache: 9a272c3231844aa7071008d5493d7d80067c2fdd
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
+  NSLogger: 5ed223a2436df96244e033be750656dacdeec034
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
 COCOAPODS: 0.36.3

@@ -1,13 +1,9 @@
 language: objective-c
-
-osx_image: xcode64
-
 before_install:
     - sudo gem update --system
     - sudo gem install cocoapods
     - cd Example/Objective-C
     - pod install
     - cd ..
-
 script:
     - xcodebuild build -workspace Objective-C/StylizeDemo.xcworkspace -scheme StylizeDemo -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'

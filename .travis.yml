@@ -6,7 +6,8 @@ before_install:
     - sudo gem update --system
     - sudo gem install cocoapods
     - cd Example/Objective-C
+    - pod install
     - cd ..
 
 script:
-    - xcodebuild build -workspace Objective-C/StylizeDemo.xcworkspace -scheme StylizeDemo -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+    - xcodebuild build -workspace Objective-C/StylizeDemo.xcworkspace -scheme StylizeDemo -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'

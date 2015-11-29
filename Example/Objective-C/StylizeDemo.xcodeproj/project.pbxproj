@@ -32,6 +32,7 @@
 		12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA71A8211E400E5E2F5 /* Images.xcassets */; };
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
+		1282FBF81C0AEE9A002CE583 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 1282FBF61C0AEE9A002CE583 /* Layout.c */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
 		50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */; };
@@ -99,6 +100,8 @@
 		12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylizeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728CB51A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
+		1282FBF61C0AEE9A002CE583 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
+		1282FBF71C0AEE9A002CE583 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +187,7 @@
 		126ABC221B58B1F300A62026 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				1282FBF51C0AEE9A002CE583 /* css-layout */,
 				126ABC231B58B1F300A62026 /* .gitkeep */,
 				126ABC241B58B1F300A62026 /* ESCssParser */,
 				126ABC2B1B58B1F300A62026 /* NSLogMan.h */,
@@ -271,6 +275,15 @@
 				12728CB51A8211E400E5E2F5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1282FBF51C0AEE9A002CE583 /* css-layout */ = {
+			isa = PBXGroup;
+			children = (
+				1282FBF61C0AEE9A002CE583 /* Layout.c */,
+				1282FBF71C0AEE9A002CE583 /* Layout.h */,
+			);
+			path = "css-layout";
 			sourceTree = "<group>";
 		};
 		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
@@ -440,6 +453,7 @@
 				126ABC371B58B1F300A62026 /* StylizeLayoutEvent.m in Sources */,
 				126ABC3D1B58B1F300A62026 /* ESCssTokens.m in Sources */,
 				126ABC2F1B58B1F300A62026 /* StylizeCellNode.m in Sources */,
+				1282FBF81C0AEE9A002CE583 /* Layout.c in Sources */,
 				126ABC3E1B58B1F300A62026 /* UIView+StylizeNode.m in Sources */,
 				126ABC301B58B1F300A62026 /* StylizeControlNode.m in Sources */,
 				126ABC361B58B1F300A62026 /* StylizeCSSRuleParser.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "StylizeGeometry.h"
+#import "Layout.h"
 
 @class StylizeCSSRule;
 @class StylizeLayoutEvent;
@@ -51,6 +52,10 @@ typedef enum {
  */
 @property (nonatomic,readonly,assign) CGRect frame;
 /**
+ *  初始化尺寸
+ */
+@property (nonatomic,readonly,assign) CGRect defaultFrame;
+/**
  *  由subnode决定的实际尺寸
  */
 @property (nonatomic,readonly,assign) CGSize computedSize;
@@ -79,26 +84,6 @@ typedef enum {
  */
 @property (nonatomic,assign) StylizeLayoutType layoutType;
 /**
- *  已被父节点处理位置信息
- */
-@property (nonatomic,readonly,assign) BOOL isDimensionSet;
-/**
- *  已被父节点处理位置信息
- */
-@property (nonatomic,readonly,assign) BOOL isDimensionWidthSet;
-/**
- *  已被父节点处理位置信息
- */
-@property (nonatomic,readonly,assign) BOOL isDimensionHeightSet;
-/**
- *  位置
- */
-//@property (nonatomic,assign) StylizePositionType position;
-/**
- *  样式
- */
-//@property (nonatomic,copy) StylizeCSSRule *CSSRule;
-/**
  *  计算完成的样式
  */
 @property (nonatomic,strong) StylizeCSSRule *CSSRule;
@@ -114,6 +99,10 @@ typedef enum {
  *  节点所包含的UIView或UIView子类实例
  */
 @property (nonatomic,readonly,strong) UIView *view;
+/**
+ *  flexbox布局节点
+ */
+@property (nonatomic,readonly,assign) css_node_t *node;
 
 /**
  *  以类初始化
@@ -123,6 +112,7 @@ typedef enum {
  *  @return Stylize节点
  */
 - (instancetype)initWithViewClass:(Class)viewClass;
+
 /**
  *  以类初始化，需要指定默认frame信息
  *
@@ -132,6 +122,7 @@ typedef enum {
  *  @return Stylize节点
  */
 - (instancetype)initWithViewClass:(Class)viewClass defaultFrame:(CGRect)frame;
+
 /**
  *  以UIView实例初始化
  *
@@ -140,6 +131,16 @@ typedef enum {
  *  @return Stylize节点
  */
 - (instancetype)initWithView:(UIView *)view;
+
+/**
+ *  手动触发位置计算
+ */
+- (void)layout;
+
+@end
+
+@interface StylizeNode(DOM)
+
 /**
  *  添加子节点，位置为最后一个
  *
@@ -178,6 +179,10 @@ typedef enum {
  *  从父节点移除
  */
 - (void)removeFromSupernode;
+
+@end
+
+@interface StylizeNode(CSS)
 /**
  *  添加CSS规则
  *
@@ -190,9 +195,5 @@ typedef enum {
  *  @param CSSRaw CSS文本
  */
 - (void)applyCSSRaw:(NSString *)CSSRaw;
-/**
- *  手动触发位置计算
- */
-- (void)layout;
 
 @end

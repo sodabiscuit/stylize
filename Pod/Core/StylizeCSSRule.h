@@ -60,7 +60,7 @@
 @property (nonatomic,assign) StylizeLayoutFlexJustifyContent justifyContent;
 @property (nonatomic,assign) StylizeLayoutFlexAlign alignItems;
 @property (nonatomic,assign) StylizeLayoutFlexFlexWrap flexWrap;
-@property (nonatomic,assign) StylizeLayoutFlexAlignContent alignContent;
+@property (nonatomic,assign) StylizeLayoutFlexAlign alignContent;
 @property (nonatomic,assign) StylizeLayoutFlexFlow flexFlow;
 
 @property (nonatomic,assign) StylizeLayoutFlexAlign alignSelf;

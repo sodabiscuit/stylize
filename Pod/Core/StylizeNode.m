@@ -13,6 +13,22 @@
 
 static void *PrivateKVOContext = &PrivateKVOContext;
 
+static bool Stylize_alwaysDirty(void *context) {
+    return YES;
+}
+
+static css_node_t *Stylize_getChild(void *context, int i) {
+    StylizeNode *self = (__bridge StylizeNode*)context;
+    StylizeNode *child = [self.subnodes objectAtIndex:i];
+    return child.node;
+}
+
+static css_dim_t Stylize_flexMeasureNode(void *context, float width) {
+    StylizeNode *self = (__bridge StylizeNode*)context;
+    CGSize size = [self flexComputeSize:(CGSize){width, NAN}];
+    return (css_dim_t){size.width, size.height};
+}
+
 @interface StylizeNode()
 
 @property (nonatomic,readwrite,assign) CGRect frame;
@@ -23,6 +39,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 @property (nonatomic,readwrite,assign) BOOL isDimensionWidthSet;
 @property (nonatomic,readwrite,assign) BOOL isDimensionHeightSet;
 @property (nonatomic,assign) BOOL hasLayout;
+@property (nonatomic,readwrite,assign) css_node_t *node;
 
 @end
 
@@ -36,12 +53,14 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (void)dealloc {
     _subnodes = nil;
+    free_css_node(_node);
+    
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyLayout"];
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyOther"];
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
-    if (self=[super init]) {
+    if (self = [super init]) {
         NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
         [self makeDefaultProperties];
         _view = [[viewClass alloc] initWithFrame:CGRectZero];
@@ -50,14 +69,15 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     return self;
 }
 
-- (instancetype)initWithViewClass:(Class)viewClass defaultFrame:(CGRect)frame  {
-    if (self=[super init]) {
+- (instancetype)initWithViewClass:(Class)viewClass
+                     defaultFrame:(CGRect)frame  {
+    if (self = [super init]) {
         NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
         [self makeDefaultProperties];
         _view = [[viewClass alloc] initWithFrame:frame];
-        _frame = frame;
-        _CSSRule.width = _frame.size.width;
-        _CSSRule.height = _frame.size.height;
+        _defaultFrame = frame;
+        self.width = frame.size.width;
+        self.height = frame.size.height;
         [self createCSSRuleObserver];
     }
     return self;
@@ -67,9 +87,9 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     if (self=[super init]) {
         [self makeDefaultProperties];
         _view = view;
-        _frame = view.frame;
-        _CSSRule.width = _frame.size.width;
-        _CSSRule.height = _frame.size.height;
+        _defaultFrame = view.frame;
+        self.width = _defaultFrame.size.width;
+        self.height = _defaultFrame.size.height;
         [self createCSSRuleObserver];
     }
     return self;
@@ -83,6 +103,12 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     _frame = CGRectZero;
     _subnodes = [NSArray array];
     _CSSRule = [[StylizeCSSRule alloc] init];
+    
+    _node = new_css_node();
+    _node->context = (__bridge void *)self;
+    _node->is_dirty = Stylize_alwaysDirty;
+    _node->get_child = Stylize_getChild;
+    _node->measure = Stylize_flexMeasureNode;
 }
 
 - (void)createCSSRuleObserver {
@@ -122,11 +148,38 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     _padding = padding;
 }
 
-- (BOOL)isDimensionSet {
-    return _isDimensionWidthSet || _isDimensionHeightSet;
+- (void)layout {
+    _hasLayout = YES;
+    if (self.layoutType == StylizeLayoutTypeFlex) {
+        [self layoutFlexbox];
+    }
 }
 
-#pragma mark - Public Method
+#pragma mark - SuperClass Method and Protocol
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context == PrivateKVOContext) {
+        if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
+            if (_hasLayout) {
+                [self layout];
+            }
+        } else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+- (void)handleLayoutEvent:(StylizeLayoutEvent *)layoutEvent {
+    //TODO
+}
+
+@end
+
+#pragma mark - DOM
+
+@implementation StylizeNode(DOM)
 
 - (void)addSubnode:(StylizeNode *)subnode {
     [self insertSubnode:subnode atIndex:[_subnodes count]];
@@ -181,6 +234,12 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     }
 }
 
+@end
+
+#pragma mark - CSS
+
+@implementation StylizeNode(CSS)
+
 - (void)applyCSSRule:(StylizeCSSRule *)CSSRule {
     //TODO
 }
@@ -188,35 +247,5 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 - (void)applyCSSRaw:(NSString *)CSSRaw {
 
 }
-
-- (void)layout {
-    _hasLayout = YES;
-    if (self.layoutType == StylizeLayoutTypeFlex) {
-        if ([self respondsToSelector:@selector(layoutFlexbox)]) {
-            [self performSelector:@selector(layoutFlexbox) withObject:nil];
-        }
-    }
-}
-
-#pragma mark - SuperClass Method and Protocol
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context == PrivateKVOContext) {
-        if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
-            if (_hasLayout) {
-                [self layout];
-            }
-        } else {
-            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-        }
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
-- (void)handleLayoutEvent:(StylizeLayoutEvent *)layoutEvent {
-    //TODO
-}
-
 
 @end

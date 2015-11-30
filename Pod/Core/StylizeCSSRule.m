@@ -34,9 +34,11 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         
         self.flexDirection = StylizeLayoutFlexDirectionRow;
         self.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
-        self.alignItems = StylizeLayoutFlexAlignFlexStart;
+        self.alignItems = StylizeLayoutFlexAlignStretch;
         self.flexWrap = StylizeLayoutFlexFlexWrapNowrap;
-        self.alignContent = StylizeLayoutFlexAlignContentStretch;
+        self.alignContent = StylizeLayoutFlexAlignStretch;
+        self.alignSelf = StylizeLayoutFlexAlignAuto;
+        self.flex = 0;
         
         self.widthAuto = YES;
         self.heightAuto = YES;

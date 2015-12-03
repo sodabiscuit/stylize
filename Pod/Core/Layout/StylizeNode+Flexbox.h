@@ -22,21 +22,7 @@
 - (CGSize)flexComputeSize:(CGSize)aSize;
 
 /**
- *  是否为Flex布局中的可扩展尺寸节点
- *
- *  @return 如果是返回YES，反之返回NO
- */
-- (BOOL)isFlex;
-
-/**
- *  是否自动折行
- *
- *  @return 如果是返回YES，反之返回NO
- */
-- (BOOL)isFlexWrap;
-
-/**
- *  手动触发位置计算
+ *  位置计算
  */
 - (void)flexLayoutNode;
 

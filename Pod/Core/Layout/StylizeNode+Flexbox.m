@@ -23,14 +23,6 @@
 
 #pragma mark - StylizeNodeFlexProtocol
 
-- (BOOL)isFlex {
-    return self.CSSRule.flex > 0 && self.CSSRule.position == StylizePositionTypeRelative;
-}
-
-- (BOOL)isFlexWrap {
-    return self.CSSRule.flexWrap != StylizeLayoutFlexFlexWrapNowrap;
-}
-
 - (void)flexLayoutNode {
     [self flexLayoutSubnodes];
     ((UIView *)self.view).frame = self.frame;
@@ -83,37 +75,6 @@
 }
 
 - (void)flexPrepareForLayout {
-    self.node->style.position_type = (int)self.CSSRule.position;
-    
-    self.node->style.position[CSS_LEFT] = self.CSSRule.left;
-    self.node->style.position[CSS_TOP] = self.CSSRule.top;
-    self.node->style.position[CSS_RIGHT] = self.CSSRule.right;
-    self.node->style.position[CSS_BOTTOM] = self.CSSRule.bottom;
-    
-    self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width > 0 ? self.CSSRule.width : CSS_UNDEFINED;
-    self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height > 0 ? self.CSSRule.height : CSS_UNDEFINED;
-    
-    self.node->style.minDimensions[CSS_WIDTH] = self.CSSRule.minWidth;
-    self.node->style.minDimensions[CSS_HEIGHT] = self.CSSRule.minHeight;
-    
-    self.node->style.maxDimensions[CSS_WIDTH] = self.CSSRule.maxWidth > 0 ? self.CSSRule.maxWidth : CSS_UNDEFINED;
-    self.node->style.maxDimensions[CSS_HEIGHT] = self.CSSRule.maxHeight > 0 ? self.CSSRule.maxHeight : CSS_UNDEFINED;
-    
-    self.node->style.margin[CSS_LEFT] = self.CSSRule.marginLeft;
-    self.node->style.margin[CSS_TOP] = self.CSSRule.marginTop;
-    self.node->style.margin[CSS_RIGHT] = self.CSSRule.marginRight;
-    self.node->style.margin[CSS_BOTTOM] = self.CSSRule.marginBottom;
-    
-    self.node->style.padding[CSS_LEFT] = self.CSSRule.paddingLeft;
-    self.node->style.padding[CSS_TOP] = self.CSSRule.paddingTop;
-    self.node->style.padding[CSS_RIGHT] = self.CSSRule.paddingRight;
-    self.node->style.padding[CSS_BOTTOM] = self.CSSRule.paddingBottom;
-    
-    self.node->style.border[CSS_LEFT] = self.CSSRule.borderLeft.width;
-    self.node->style.border[CSS_TOP] = self.CSSRule.borderTop.width;
-    self.node->style.border[CSS_RIGHT] = self.CSSRule.borderRight.width;
-    self.node->style.border[CSS_BOTTOM] = self.CSSRule.borderBottom.width;
-    
     self.node->style.flex_direction = (int)self.CSSRule.flexDirection;
     self.node->style.flex_wrap = (int)self.CSSRule.flexWrap;
     self.node->style.flex = self.CSSRule.flex;

@@ -9,6 +9,7 @@
 #import <objc/runtime.h>
 #import "StylizeCSSRule.h"
 #import "StylizeNode.h"
+#import "StylizeCSSRuleParser.h"
 
 static void *PrivateKVOContext = &PrivateKVOContext;
 
@@ -37,10 +38,14 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         self.alignSelf = StylizeLayoutFlexAlignAuto;
         self.flex = 0;
         
+        self.backgroundColor = [UIColor whiteColor];
+        self.color = [UIColor blackColor];
+        
         self.widthAuto = YES;
         self.heightAuto = YES;
         
-        _definedRules = [@[@"postion", @"widthAuto", @"heightAuto",
+        _definedRules = [@[@"color", @"backgroundColor",
+                           @"postion", @"widthAuto", @"heightAuto",
                            @"display", @"visibility",
                            @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent", @"alignSelf", @"flex"] mutableCopy];
         
@@ -246,11 +251,11 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 }
 
 - (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary {
-    //TODO
+    [StylizeCSSRuleParser applyCSSDictionary:ruleDictionary to:self];
 }
 
 - (void)updateRuleFromRaw:(NSString *)ruleRaw {
-    //TODO
+    [StylizeCSSRuleParser applyCSSRaw:ruleRaw to:self];
 }
 
 - (void)updateRuleFromRule:(StylizeCSSRule *)rule {

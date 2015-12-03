@@ -35,6 +35,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) id view;
+@property (nonatomic,readwrite,strong) StylizeCSSRule *CSSRule;
 @property (nonatomic,assign) BOOL hasLayout;
 @property (nonatomic,readwrite,assign) css_node_t *node;
 
@@ -123,7 +124,8 @@ static css_node_t *Stylize_getChild(void *context, int i) {
                         change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
         if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
-            [self syncCSS];
+            [self syncLayoutRules];
+            [self renderNode];
         } else {
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
@@ -132,7 +134,43 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     }
 }
 
-- (void)syncCSS {
+- (void)renderNode {
+    UIView *view = (UIView *)self.view;
+    view.backgroundColor = self.CSSRule.backgroundColor;
+}
+
+- (void)syncLayoutRules {
+    self.node->style.position_type = (int)self.CSSRule.position;
+    
+    self.node->style.position[CSS_LEFT] = self.CSSRule.left;
+    self.node->style.position[CSS_TOP] = self.CSSRule.top;
+    self.node->style.position[CSS_RIGHT] = self.CSSRule.right;
+    self.node->style.position[CSS_BOTTOM] = self.CSSRule.bottom;
+    
+    self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width > 0 ? self.CSSRule.width : CSS_UNDEFINED;
+    self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height > 0 ? self.CSSRule.height : CSS_UNDEFINED;
+    
+    self.node->style.minDimensions[CSS_WIDTH] = self.CSSRule.minWidth;
+    self.node->style.minDimensions[CSS_HEIGHT] = self.CSSRule.minHeight;
+    
+    self.node->style.maxDimensions[CSS_WIDTH] = self.CSSRule.maxWidth > 0 ? self.CSSRule.maxWidth : CSS_UNDEFINED;
+    self.node->style.maxDimensions[CSS_HEIGHT] = self.CSSRule.maxHeight > 0 ? self.CSSRule.maxHeight : CSS_UNDEFINED;
+    
+    self.node->style.margin[CSS_LEFT] = self.CSSRule.marginLeft;
+    self.node->style.margin[CSS_TOP] = self.CSSRule.marginTop;
+    self.node->style.margin[CSS_RIGHT] = self.CSSRule.marginRight;
+    self.node->style.margin[CSS_BOTTOM] = self.CSSRule.marginBottom;
+    
+    self.node->style.padding[CSS_LEFT] = self.CSSRule.paddingLeft;
+    self.node->style.padding[CSS_TOP] = self.CSSRule.paddingTop;
+    self.node->style.padding[CSS_RIGHT] = self.CSSRule.paddingRight;
+    self.node->style.padding[CSS_BOTTOM] = self.CSSRule.paddingBottom;
+    
+    self.node->style.border[CSS_LEFT] = self.CSSRule.borderLeft.width;
+    self.node->style.border[CSS_TOP] = self.CSSRule.borderTop.width;
+    self.node->style.border[CSS_RIGHT] = self.CSSRule.borderRight.width;
+    self.node->style.border[CSS_BOTTOM] = self.CSSRule.borderBottom.width;
+    
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexPrepareForLayout];
     }
@@ -152,6 +190,11 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 #pragma mark - DOM
 
 @implementation StylizeNode(DOM)
+
+- (void)addSubview:(UIView *)view {
+    StylizeNode *node = [[StylizeNode alloc] initWithView:view];
+    [self addSubnode:node];
+}
 
 - (void)addSubnode:(StylizeNode *)subnode {
     [self insertSubnode:subnode atIndex:[_subnodes count]];
@@ -217,7 +260,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)applyCSSRaw:(NSString *)CSSRaw {
-    //TODO
+    [self.CSSRule updateRuleFromRaw:CSSRaw];
 }
 
 - (void)applyCSSDictionary:(NSDictionary *)CSSDictionary {

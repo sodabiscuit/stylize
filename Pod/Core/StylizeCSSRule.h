@@ -35,6 +35,10 @@
 @property (nonatomic,assign) StylizeOverflowSkeleton overflowX;
 @property (nonatomic,assign) StylizeOverflowSkeleton overflowY;
 
+@property (nonatomic,assign) CGFloat top;
+@property (nonatomic,assign) CGFloat bottom;
+@property (nonatomic,assign) CGFloat left;
+@property (nonatomic,assign) CGFloat right;
 @property (nonatomic,readonly,assign) CGSize maxSize;
 @property (nonatomic,readonly,assign) CGSize minSize;
 @property (nonatomic,assign) CGFloat width;
@@ -60,25 +64,37 @@
 @property (nonatomic,assign) CGFloat paddingBottom;
 @property (nonatomic,assign) CGFloat paddingLeft;
 @property (nonatomic,assign) CGFloat paddingRight;
-@property (nonatomic,assign) CGFloat top;
-@property (nonatomic,assign) CGFloat bottom;
-@property (nonatomic,assign) CGFloat left;
-@property (nonatomic,assign) CGFloat right;
+
 @property (nonatomic,assign) StylizeBorder border;
+
 @property (nonatomic,assign) StylizeBorderSkeleton borderTop;
+@property (nonatomic,assign) CGFloat borderTopWidth;
+@property (nonatomic,assign) StylizeBorderType borderTopStyle;
+@property (nonatomic,strong) UIColor *borderTopColor;
+
 @property (nonatomic,assign) StylizeBorderSkeleton borderBottom;
+@property (nonatomic,assign) CGFloat borderBottomWidth;
+@property (nonatomic,assign) StylizeBorderType borderBottomStyle;
+@property (nonatomic,strong) UIColor *borderBottomColor;
+
 @property (nonatomic,assign) StylizeBorderSkeleton borderLeft;
+@property (nonatomic,assign) CGFloat borderLeftWidth;
+@property (nonatomic,assign) StylizeBorderType borderLeftStyle;
+@property (nonatomic,strong) UIColor *borderLeftColor;
+
 @property (nonatomic,assign) StylizeBorderSkeleton borderRight;
+@property (nonatomic,assign) CGFloat borderRightWidth;
+@property (nonatomic,assign) StylizeBorderType borderRightStyle;
+@property (nonatomic,strong) UIColor *borderRightColor;
 
 @property (nonatomic,assign) StylizeLayoutFlexDirection flexDirection;
 @property (nonatomic,readonly,assign) StylizeLayoutFlexDirection flexCrossDirection;
 @property (nonatomic,assign) StylizeLayoutFlexJustifyContent justifyContent;
 @property (nonatomic,assign) StylizeLayoutFlexAlign alignItems;
-@property (nonatomic,assign) StylizeLayoutFlexFlexWrap flexWrap;
 @property (nonatomic,assign) StylizeLayoutFlexAlign alignContent;
-@property (nonatomic,assign) StylizeLayoutFlexFlow flexFlow;
-
 @property (nonatomic,assign) StylizeLayoutFlexAlign alignSelf;
+@property (nonatomic,assign) StylizeLayoutFlexFlexWrap flexWrap;
+@property (nonatomic,assign) StylizeLayoutFlexFlow flexFlow;
 @property (nonatomic,assign) NSInteger order;
 @property (nonatomic,assign) NSInteger flexShrink;
 @property (nonatomic,assign) NSInteger flexBasis;
@@ -88,6 +104,11 @@
 @property (nonatomic,strong) UIColor *backgroundColor;
 @property (nonatomic,strong) UIImage *backgroundImage;
 @property (nonatomic,assign) StylizeTextAlign *textAlign;
+@property (nonatomic,strong) UIColor *color;
+@property (nonatomic,assign) NSInteger fontSize;
+@property (nonatomic,strong) NSString *fontFamily;
+@property (nonatomic,assign) NSInteger fontWeight;
+@property (nonatomic,assign) UIFont *font;
 
 - (BOOL)isRuleDefined:(NSString *)ruleKey;
 - (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary;

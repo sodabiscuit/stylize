@@ -12,12 +12,6 @@
 @class StylizeCSSRule;
 @class StylizeLayoutEvent;
 
-typedef enum {
-    StylizeNodeBoxLocationTypeLeading,
-    StylizeNodeBoxLocationTypeTrailing,
-} StylizeNodeBoxLocationType;
-
-
 @interface StylizeNode : NSObject {
     @protected
     id _view;
@@ -48,9 +42,9 @@ typedef enum {
  */
 @property (nonatomic,assign) StylizeLayoutType layoutType;
 /**
- *  计算完成的样式
+ *  样式
  */
-@property (nonatomic,strong) StylizeCSSRule *CSSRule;
+@property (nonatomic,readonly,strong) StylizeCSSRule *CSSRule;
 /**
  *  父节点
  */
@@ -107,9 +101,21 @@ typedef enum {
  */
 - (NSArray *)allSubnodesForLayout;
 
+/**
+ *  布局之外的渲染
+ */
+- (void)renderNode;
+
 @end
 
 @interface StylizeNode(DOM)
+
+/**
+ *  通过添加view添加子节点
+ *
+ *  @param view 需要添加的子节点
+ */
+- (void)addSubview:(UIView *)view;
 
 /**
  *  添加子节点，位置为最后一个
@@ -117,6 +123,7 @@ typedef enum {
  *  @param subnode 需要添加的子节点
  */
 - (void)addSubnode:(StylizeNode *)subnode;
+
 /**
  *  在某原有节点之前插入新节点
  *
@@ -124,6 +131,7 @@ typedef enum {
  *  @param before  新增节点在其之前的节点
  */
 - (void)insertSubnode:(StylizeNode *)subnode before:(StylizeNode *)before;
+
 /**
  *  在某原有节点之后插入新节点
  *

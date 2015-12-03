@@ -22,20 +22,16 @@
     
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
     _rootNode.nodeID = @"rootNode";
-//    _rootNode.width = 500;
-//    _rootNode.node->layout.dimensions[CSS_WIDTH] = self.view.frame.size.width;
-    _rootNode.CSSRule.width = self.view.frame.size.width;
+    [_rootNode applyCSSDictionary:@{
+                                    @"margin-top" : @"64",
+                                    @"width" : [NSString stringWithFormat:@"%ld", (long)self.view.frame.size.width],
+                                    @"flex-direciton" : @"row",
+                                    @"justify-content" : @"flex-start",
+                                    @"background-color" : @"purple",
+                                    @"align-items" : @"flex-start",
+                                    @"flex-wrap" : @"wrap"
+                                    }];
     
-    _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionRow;
-    _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
-//    _rootNode.height = self.view.frame.size.height-64;
-//    _rootNode.height = 120;
-    _rootNode.CSSRule.margin = StylizeMarginMake(64, 0, 0, 0);
-    ((UIView *)_rootNode.view).backgroundColor = [UIColor purpleColor];
-    _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionRow;
-//    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignStretch;
-    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignFlexStart;
-    _rootNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
     [self.view addStylizeNode:_rootNode];
     
     StylizeNode *firstNode = [self createUnitNode:@"first"];
@@ -79,7 +75,8 @@
     ret.CSSRule.marginBottom = 10;
 //    ret.CSSRule.top = 50;
 //    ret.CSSRule.bottom = 50;
-    ((UIView *)ret.view).backgroundColor = [UIColor orangeColor];
+//    ((UIView *)ret.view).backgroundColor = [UIColor orangeColor];
+    ret.CSSRule.backgroundColor = [UIColor orangeColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ret.CSSRule.width, 20)];
     label.backgroundColor = [UIColor clearColor];

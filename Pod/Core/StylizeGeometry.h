@@ -61,7 +61,7 @@ typedef enum {
 typedef struct {
     CGFloat width;
     CGColorRef color;
-    StylizeBorderType type;
+    StylizeBorderType style;
 } StylizeBorderSkeleton;
 
 typedef struct {
@@ -107,7 +107,8 @@ typedef struct {
 } StylizeOverflow;
 
 typedef enum {
-    StylizeTextAlignLeft,
-    StylizeTextAlignCenter,
-    StylizeTextAlignRight,
+    StylizeTextAlignLeft = NSTextAlignmentLeft,
+    StylizeTextAlignCenter = NSTextAlignmentCenter,
+    StylizeTextAlignRight = NSTextAlignmentRight,
+    StylizeTextAlignJustify = NSTextAlignmentJustified,
 } StylizeTextAlign;

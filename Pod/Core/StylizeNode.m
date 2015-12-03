@@ -18,14 +18,15 @@ static bool Stylize_alwaysDirty(void *context) {
 }
 
 static css_node_t *Stylize_getChild(void *context, int i) {
-    StylizeNode *self = (__bridge StylizeNode*)context;
-    StylizeNode *child = [self.subnodes objectAtIndex:i];
+    StylizeNode *node = (__bridge StylizeNode*)context;
+    NSArray *children = [node flexSubnodesForLayout];
+    StylizeNode *child = [children objectAtIndex:i];
     return child.node;
 }
 
-static css_dim_t Stylize_flexMeasureNode(void *context, float width) {
-    StylizeNode *self = (__bridge StylizeNode*)context;
-    CGSize size = [self flexComputeSize:(CGSize){width, NAN}];
+static css_dim_t Stylize_measureNode(void *context, float width) {
+    StylizeNode *node = (__bridge StylizeNode*)context;
+    CGSize size = [node flexComputeSize:(CGSize){width, NAN}];
     return (css_dim_t){size.width, size.height};
 }
 
@@ -52,35 +53,23 @@ static css_dim_t Stylize_flexMeasureNode(void *context, float width) {
 }
 
 - (void)dealloc {
-    _subnodes = nil;
     free_css_node(_node);
-    
+//    _subnodes = nil;
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyLayout"];
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyOther"];
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
-    if (self = [super init]) {
-        NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
-        [self makeDefaultProperties];
-        _view = [[viewClass alloc] initWithFrame:CGRectZero];
-        [self createCSSRuleObserver];
-    }
-    return self;
+    NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
+    UIView *view = [[viewClass alloc] initWithFrame:CGRectZero];
+    return [self initWithView:view];
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass
                      defaultFrame:(CGRect)frame  {
-    if (self = [super init]) {
-        NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
-        [self makeDefaultProperties];
-        _view = [[viewClass alloc] initWithFrame:frame];
-        _defaultFrame = frame;
-        self.width = frame.size.width;
-        self.height = frame.size.height;
-        [self createCSSRuleObserver];
-    }
-    return self;
+    NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
+    UIView *view = [[viewClass alloc] initWithFrame:frame];
+    return [self initWithView:view];
 }
 
 - (instancetype)initWithView:(UIView *)view {
@@ -88,14 +77,20 @@ static css_dim_t Stylize_flexMeasureNode(void *context, float width) {
         [self makeDefaultProperties];
         _view = view;
         _defaultFrame = view.frame;
-        self.width = _defaultFrame.size.width;
-        self.height = _defaultFrame.size.height;
+        
+        self.CSSRule.top = _defaultFrame.origin.x;
+        self.CSSRule.left = _defaultFrame.origin.y;
+        self.CSSRule.width = _defaultFrame.size.width;
+        self.CSSRule.height = _defaultFrame.size.height;
+        
         [self createCSSRuleObserver];
     }
     return self;
 }
 
 - (void)makeDefaultProperties {
+    _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
+    
     _hasLayout = NO;
     _layoutType = StylizeLayoutTypeFlex;
     _isDimensionWidthSet = NO;
@@ -108,7 +103,7 @@ static css_dim_t Stylize_flexMeasureNode(void *context, float width) {
     _node->context = (__bridge void *)self;
     _node->is_dirty = Stylize_alwaysDirty;
     _node->get_child = Stylize_getChild;
-    _node->measure = Stylize_flexMeasureNode;
+    _node->measure = Stylize_measureNode;
 }
 
 - (void)createCSSRuleObserver {
@@ -120,49 +115,26 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 
 #pragma mark - Setter and Getter
 
-- (CGFloat)width {
-    return self.CSSRule.width;
+- (CGRect)frame {
+    return (CGRect){(CGPoint){self.node->layout.position[CSS_LEFT], self.node->layout.position[CSS_TOP]},
+                    (CGSize){self.node->layout.dimensions[CSS_WIDTH], self.node->layout.dimensions[CSS_HEIGHT]}};
 }
 
-- (void)setWidth:(CGFloat)width {
-    self.CSSRule.width = width;
-}
-
-- (CGFloat)height {
-    return self.CSSRule.height;
-}
-
-- (void)setHeight:(CGFloat)height {
-    self.CSSRule.height = height;
-}
-
-- (StylizeMargin)margin {
-    return self.CSSRule.margin;
-}
-
-- (void)setMargin:(StylizeMargin)margin {
-    self.CSSRule.margin = margin;
-}
-
-- (void)setPadding:(StylizePadding)padding {
-    _padding = padding;
-}
-
-- (void)layout {
+- (void)layoutNode {
     _hasLayout = YES;
     if (self.layoutType == StylizeLayoutTypeFlex) {
-        [self layoutFlexbox];
+        [self flexLayoutNode];
     }
 }
 
 #pragma mark - SuperClass Method and Protocol
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
         if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
-            if (_hasLayout) {
-                [self layout];
-            }
+            [self syncCSS];
         } else {
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
@@ -174,6 +146,13 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 - (void)handleLayoutEvent:(StylizeLayoutEvent *)layoutEvent {
     //TODO
 }
+
+- (void)syncCSS {
+    if (self.layoutType == StylizeLayoutTypeFlex) {
+        [self flexPrepareForLayout];
+    }
+}
+
 
 @end
 
@@ -213,7 +192,7 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
     _subnodes = [subnodes copy];
     
     if (_hasLayout) {
-        [self layout];
+        [self layoutNode];
     }
 }
 
@@ -246,6 +225,10 @@ forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKey
 
 - (void)applyCSSRaw:(NSString *)CSSRaw {
 
+}
+
+- (BOOL)isVisibile {
+    return self.CSSRule.visibility != StylizeVisibilityHidden && self.CSSRule.display != StylizeDisplayNone;
 }
 
 @end

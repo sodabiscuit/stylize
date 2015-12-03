@@ -33,9 +33,9 @@ typedef enum {
 } StylizeLayoutType;
 
 typedef enum {
-    StylizePositionTypeStatic,
-    StylizePositionTypeRelative,
-    StylizePositionTypeAbsolute,
+//    StylizePositionTypeStatic = CSS_POSITION_RELATIVE,
+    StylizePositionTypeRelative = CSS_POSITION_RELATIVE,
+    StylizePositionTypeAbsolute = CSS_POSITION_ABSOLUTE,
 } StylizePositionType;
 
 typedef struct {

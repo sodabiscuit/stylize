@@ -8,6 +8,7 @@ target 'StylizeDemo' do
     pod 'AFNetworking'
     pod 'SDWebImage'
     pod "NSLogger"
+    pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 end
 
 target 'StylizeDemoTests' do

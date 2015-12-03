@@ -30,6 +30,7 @@ PODS:
   - NSLogger (1.5.1):
     - NSLogger/Standard (= 1.5.1)
   - NSLogger/Standard (1.5.1)
+  - Reveal-iOS-SDK (1.6.2)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - GRMustache
   - Masonry
   - NSLogger
+  - Reveal-iOS-SDK
   - SDWebImage
 
 SPEC CHECKSUMS:
@@ -49,6 +51,7 @@ SPEC CHECKSUMS:
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   NSLogger: 5ed223a2436df96244e033be750656dacdeec034
+  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0

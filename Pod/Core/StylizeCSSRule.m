@@ -28,7 +28,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 - (instancetype)init {
     if (self = [super init]) {
         
-        self.position = StylizePositionTypeStatic;
+        self.ruleUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
+        self.position = StylizePositionTypeRelative;
         self.display = StylizeDisplayBlock;
         self.visibility = StylizeVisibilityVisible;
         
@@ -42,8 +43,6 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         
         self.widthAuto = YES;
         self.heightAuto = YES;
-        
-//        self.alignSelf = StylizeLayoutFlexAlignStretch;
         
         _definedRules = [@[@"postion", @"widthAuto", @"heightAuto",
                            @"display", @"visibility",
@@ -150,6 +149,14 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     [self updateDefinedRules:@[@"overflow", @"overflowX", @"overflowY"]];
 }
 
+- (CGSize)maxSize {
+    return (CGSize){_maxWidth, _maxHeight};
+}
+
+- (CGSize)minSize {
+    return (CGSize){_minWidth, _minHeight};
+}
+
 - (StylizeLayoutFlexDirection)flexCrossDirection {
     StylizeLayoutFlexDirection ret = StylizeLayoutFlexDirectionColumn;
     if (_flexDirection == StylizeLayoutFlexDirectionColumn) {
@@ -207,27 +214,6 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     free(properties);
     return [NSSet setWithArray:keys];
 }
-
-//+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-//    NSSet *ret = [super keyPathsForValuesAffectingValueForKey:key];
-//    
-//    if ([key isEqualToString:@"observerPropertyLayout"]) {
-//        NSMutableArray *keys = [NSMutableArray array];
-//        unsigned int count;
-//        objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
-//        for (size_t i = 0; i < count; ++i) {
-//            NSString *property = [NSString stringWithCString:property_getName(properties[i])
-//                                                    encoding:NSASCIIStringEncoding];
-//            
-//            if (![property isEqualToString:@"observerPropertyLayout"]) {
-//                [keys addObject: property];
-//            }
-//        }
-//        free(properties);
-//        ret = [ret setByAddingObjectsFromArray: keys];
-//    }
-//    return ret;
-//}
 
 - (BOOL)isRuleDefined:(NSString *)rule {
     return [_definedRules indexOfObject:rule] != NSNotFound;

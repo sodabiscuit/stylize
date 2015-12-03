@@ -60,26 +60,6 @@ typedef enum {
  */
 @property (nonatomic,readonly,assign) CGSize computedSize;
 /**
- *  宽度
- */
-@property (nonatomic,assign) CGFloat width;
-/**
- *  高度
- */
-@property (nonatomic,assign) CGFloat height;
-/**
- *  外边距
- */
-@property (nonatomic,assign) StylizeMargin margin;
-/**
- *  内边距
- */
-@property (nonatomic,assign) StylizePadding padding;
-/**
- *  边框
- */
-@property (nonatomic,assign) StylizeBorder border;
-/**
  *  布局类型
  */
 @property (nonatomic,assign) StylizeLayoutType layoutType;
@@ -121,7 +101,8 @@ typedef enum {
  *
  *  @return Stylize节点
  */
-- (instancetype)initWithViewClass:(Class)viewClass defaultFrame:(CGRect)frame;
+- (instancetype)initWithViewClass:(Class)viewClass
+                     defaultFrame:(CGRect)frame;
 
 /**
  *  以UIView实例初始化
@@ -135,7 +116,7 @@ typedef enum {
 /**
  *  手动触发位置计算
  */
-- (void)layout;
+- (void)layoutNode;
 
 @end
 

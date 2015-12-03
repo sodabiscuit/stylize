@@ -11,6 +11,13 @@
 @protocol StylizeNodeFlexProtocol <NSObject>
 
 @required
+
+/**
+ *  获取可布局子节点
+ *
+ *  @return 可布局子节点
+ */
+- (NSArray *)flexSubnodesForLayout;
 /**
  *  计算尺寸
  *
@@ -34,7 +41,11 @@
 /**
  *  手动触发位置计算
  */
-- (void)layoutFlexbox;
+- (void)flexLayoutNode;
+/**
+ *  设置布局初始化参数
+ */
+- (void)flexPrepareForLayout;
 
 @end
 

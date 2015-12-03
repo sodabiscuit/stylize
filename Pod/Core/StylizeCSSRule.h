@@ -10,6 +10,10 @@
 #import "StylizeGeometry.h"
 #import "StylizeLayoutFlexGeometry.h"
 
+#define kStylizeNofificationStyleDimension @"kStylizeNofificationStyleDimension"
+#define kStylizeNofificationStylePosition @"kStylizeNofificationStylePosition"
+#define kStylizeNofificationStyleNormal @"kStylizeNofificationStyleNormal"
+
 @protocol StylizeNodeProtocol;
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
@@ -22,13 +26,24 @@
 @property (nonatomic,assign) StylizeDisplay display;
 @property (nonatomic,assign) StylizeVisibility visibility;
 
+/**
+ *  uuid信息
+ */
+@property (nonatomic,strong) NSString *ruleUUID;
+
 @property (nonatomic,assign) StylizeOverflow overflow;
 @property (nonatomic,assign) StylizeOverflowSkeleton overflowX;
 @property (nonatomic,assign) StylizeOverflowSkeleton overflowY;
 
+@property (nonatomic,readonly,assign) CGSize maxSize;
+@property (nonatomic,readonly,assign) CGSize minSize;
 @property (nonatomic,assign) CGFloat width;
+@property (nonatomic,assign) CGFloat minWidth;
+@property (nonatomic,assign) CGFloat maxWidth;
 @property (nonatomic,assign) BOOL widthAuto;
 @property (nonatomic,assign) CGFloat height;
+@property (nonatomic,assign) CGFloat minHeight;
+@property (nonatomic,assign) CGFloat maxHeight;
 @property (nonatomic,assign) BOOL heightAuto;
 @property (nonatomic,assign) StylizeMargin margin;
 @property (nonatomic,assign) BOOL marginAuto;

@@ -21,32 +21,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSDictionary *ruleSet = [StylizeCSSParser parseCSSRaw:@"body { padding:10; margin-left:10;}"];
+//    NSDictionary *ruleSet = [StylizeCSSParser parseCSSRaw:@"body { padding:10; margin-left:10;}"];
     
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
     _rootNode.nodeID = @"rootNode";
-    _rootNode.width = self.view.frame.size.width;
+//    _rootNode.width = 500;
+//    _rootNode.node->layout.dimensions[CSS_WIDTH] = self.view.frame.size.width;
+    _rootNode.CSSRule.width = self.view.frame.size.width;
     
     _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
 //    _rootNode.height = self.view.frame.size.height-64;
 //    _rootNode.height = 120;
-    _rootNode.margin = StylizeMarginMake(64, 0, 0, 0);
+    _rootNode.CSSRule.margin = StylizeMarginMake(64, 0, 0, 0);
     _rootNode.view.backgroundColor = [UIColor purpleColor];
     _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionRow;
 //    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignStretch;
-//    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignCenter;
+    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignCenter;
     _rootNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
     [self.view addStylizeNode:_rootNode];
     
     StylizeNode *firstNode = [self createUnitNode:@"first"];
     [_rootNode addSubnode:firstNode];
+//    firstNode.CSSRule.flex = 2;
     firstNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
+//    firstNode.CSSRule.visibility = StylizeVisibilityHidden;
     
-    StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
-    [firstNode addSubnode:interFirstNode];
-    
-    StylizeNode *interSecondNode = [self createInterUnitNode:@"innerSecond"];
-    [firstNode addSubnode:interSecondNode];
+//    StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
+//    [firstNode addSubnode:interFirstNode];
+//    
+//    StylizeNode *interSecondNode = [self createInterUnitNode:@"innerSecond"];
+//    [firstNode addSubnode:interSecondNode];
     
     StylizeNode *secondNode = [self createUnitNode:@"second"];
 //    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
@@ -59,7 +63,7 @@
     [_rootNode addSubnode:fourthNode];
     
 //    _rootNode.width = 120;
-    [_rootNode layout];
+    [_rootNode layoutNode];
    
     NSLogMan(@"linetest1");
     NSLogMan(@"multiple\nline\ntest1");
@@ -69,8 +73,8 @@
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {
     StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
    
-    ret.width = 100;
-    ret.height = 100;
+    ret.CSSRule.width = 100;
+    ret.CSSRule.height = 100;
     ret.nodeID = nodeID;
 //    ret.CSSRule.flex = 1;
 //    ret.CSSRule.position = StylizePositionTypeAbsolute;
@@ -81,7 +85,7 @@
 //    ret.CSSRule.bottom = 50;
     ret.view.backgroundColor = [UIColor orangeColor];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ret.width, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ret.CSSRule.width, 20)];
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor blackColor];
     label.font = [UIFont systemFontOfSize:12];
@@ -95,8 +99,8 @@
 - (StylizeNode *)createInterUnitNode:(NSString *)nodeID {
     StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
    
-    ret.width = 100;
-    ret.height = 100;
+    ret.CSSRule.width = 100;
+    ret.CSSRule.height = 100;
 //    ret.CSSRule.flex = 1;
     ret.CSSRule.marginRight = 10;
     ret.nodeID = nodeID;

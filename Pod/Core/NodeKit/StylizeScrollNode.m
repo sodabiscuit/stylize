@@ -19,7 +19,7 @@
 @implementation StylizeScrollNode
 
 - (void)layout {
-    [super layout];
+    [super layoutNode];
     
     CGSize contentSize = self.frame.size;
     

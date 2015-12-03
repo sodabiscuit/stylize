@@ -40,7 +40,7 @@
 //        [StylizeNode setNodeDimension:stylizeNode direction:StylizeLayoutFlexDirectionRow value:self.frame.size.width];
 //    }
     
-    [stylizeNode layout];
+//    [stylizeNode layoutSubnodes];
     NSMutableArray *subnodes = [self.subnodes mutableCopy];
     [subnodes addObject:stylizeNode];
     objc_setAssociatedObject(self, @selector(subnodes), [subnodes copy], OBJC_ASSOCIATION_RETAIN_NONATOMIC);

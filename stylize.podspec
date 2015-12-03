@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Yulin Ding" => "sodabiscuit@gmail.com" }
   s.source           = { :git => "https://github.com/sodabiscuit/stylize.git", :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/sodabiscuit>'
+  s.social_media_url = 'https://twitter.com/sodabiscuit'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true

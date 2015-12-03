@@ -27,8 +27,10 @@
     _rootNode.nodeID = @"rootNode";
 //    _rootNode.width = 500;
 //    _rootNode.node->layout.dimensions[CSS_WIDTH] = self.view.frame.size.width;
-    _rootNode.CSSRule.width = self.view.frame.size.width;
+    _rootNode.CSSRule.maxWidth = self.view.frame.size.width;
+    _rootNode.CSSRule.height = 600;
     
+    _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionColumn;
     _rootNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
 //    _rootNode.height = self.view.frame.size.height-64;
 //    _rootNode.height = 120;
@@ -36,7 +38,7 @@
     _rootNode.view.backgroundColor = [UIColor purpleColor];
     _rootNode.CSSRule.flexDirection = StylizeLayoutFlexDirectionRow;
 //    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignStretch;
-    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignCenter;
+    _rootNode.CSSRule.alignItems = StylizeLayoutFlexAlignFlexStart;
     _rootNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
     [self.view addStylizeNode:_rootNode];
     
@@ -44,16 +46,17 @@
     [_rootNode addSubnode:firstNode];
 //    firstNode.CSSRule.flex = 2;
     firstNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
-//    firstNode.CSSRule.visibility = StylizeVisibilityHidden;
+    firstNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentSpaceAround;
+    firstNode.CSSRule.visibility = StylizeVisibilityHidden;
     
-//    StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
-//    [firstNode addSubnode:interFirstNode];
-//    
-//    StylizeNode *interSecondNode = [self createInterUnitNode:@"innerSecond"];
-//    [firstNode addSubnode:interSecondNode];
+    StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
+    [firstNode addSubnode:interFirstNode];
+    
+    StylizeNode *interSecondNode = [self createInterUnitNode:@"innerSecond"];
+    [firstNode addSubnode:interSecondNode];
     
     StylizeNode *secondNode = [self createUnitNode:@"second"];
-//    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
+    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
     [_rootNode addSubnode:secondNode];
     
     StylizeNode *thirdNode = [self createUnitNode:@"third"];
@@ -99,8 +102,8 @@
 - (StylizeNode *)createInterUnitNode:(NSString *)nodeID {
     StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
    
-    ret.CSSRule.width = 100;
-    ret.CSSRule.height = 100;
+    ret.CSSRule.width = 20;
+    ret.CSSRule.height = 20;
 //    ret.CSSRule.flex = 1;
     ret.CSSRule.marginRight = 10;
     ret.nodeID = nodeID;

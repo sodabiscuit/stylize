@@ -24,11 +24,11 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     return child.node;
 }
 
-static css_dim_t Stylize_measureNode(void *context, float width) {
-    StylizeNode *node = (__bridge StylizeNode*)context;
-    CGSize size = [node flexComputeSize:(CGSize){width, NAN}];
-    return (css_dim_t){size.width, size.height};
-}
+//static css_dim_t Stylize_measureNode(void *context, float width) {
+//    StylizeNode *node = (__bridge StylizeNode*)context;
+//    CGSize size = [node flexComputeSize:(CGSize){width, NAN}];
+//    return (css_dim_t){size.width, size.height};
+//}
 
 @interface StylizeNode()
 
@@ -37,8 +37,6 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) UIView *view;
-@property (nonatomic,readwrite,assign) BOOL isDimensionWidthSet;
-@property (nonatomic,readwrite,assign) BOOL isDimensionHeightSet;
 @property (nonatomic,assign) BOOL hasLayout;
 @property (nonatomic,readwrite,assign) css_node_t *node;
 
@@ -53,10 +51,9 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 }
 
 - (void)dealloc {
-    free_css_node(_node);
-//    _subnodes = nil;
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyLayout"];
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyOther"];
+    free_css_node(_node);
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
@@ -74,43 +71,32 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 
 - (instancetype)initWithView:(UIView *)view {
     if (self=[super init]) {
-        [self makeDefaultProperties];
         _view = view;
         _defaultFrame = view.frame;
+        
+        _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
+        _hasLayout = NO;
+        _layoutType = StylizeLayoutTypeFlex;
+        _subnodes = [NSArray array];
+        _CSSRule = [[StylizeCSSRule alloc] init];
+        
+        _node = new_css_node();
+        _node->context = (__bridge void *)self;
+        _node->is_dirty = Stylize_alwaysDirty;
+        _node->get_child = Stylize_getChild;
+        //    _node->measure = Stylize_measureNode;
+        
+        [_CSSRule addObserver:self
+                   forKeyPath:@"observerPropertyLayout" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
+        [_CSSRule addObserver:self
+                   forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
         
         self.CSSRule.top = _defaultFrame.origin.x;
         self.CSSRule.left = _defaultFrame.origin.y;
         self.CSSRule.width = _defaultFrame.size.width;
         self.CSSRule.height = _defaultFrame.size.height;
-        
-        [self createCSSRuleObserver];
     }
     return self;
-}
-
-- (void)makeDefaultProperties {
-    _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
-    
-    _hasLayout = NO;
-    _layoutType = StylizeLayoutTypeFlex;
-    _isDimensionWidthSet = NO;
-    _isDimensionHeightSet = NO;
-    _frame = CGRectZero;
-    _subnodes = [NSArray array];
-    _CSSRule = [[StylizeCSSRule alloc] init];
-    
-    _node = new_css_node();
-    _node->context = (__bridge void *)self;
-    _node->is_dirty = Stylize_alwaysDirty;
-    _node->get_child = Stylize_getChild;
-    _node->measure = Stylize_measureNode;
-}
-
-- (void)createCSSRuleObserver {
-    [_CSSRule addObserver:self
-forKeyPath:@"observerPropertyLayout" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
-    [_CSSRule addObserver:self
-forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
 }
 
 #pragma mark - Setter and Getter

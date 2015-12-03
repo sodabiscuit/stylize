@@ -97,14 +97,21 @@
     self.node->style.position[CSS_RIGHT] = self.CSSRule.right;
     self.node->style.position[CSS_BOTTOM] = self.CSSRule.bottom;
     
-    self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width;
-    self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height;
+//    if (self.CSSRule.widthAuto) {
+//    } else {
+        self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width > 0 ? self.CSSRule.width : CSS_UNDEFINED;
+//    }
+    
+//    if (self.CSSRule.heightAuto) {
+//    } else {
+        self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height > 0 ? self.CSSRule.height : CSS_UNDEFINED;
+//    }
     
     self.node->style.minDimensions[CSS_WIDTH] = self.CSSRule.minWidth;
     self.node->style.minDimensions[CSS_HEIGHT] = self.CSSRule.minHeight;
     
-    self.node->style.maxDimensions[CSS_WIDTH] = self.CSSRule.maxWidth;
-    self.node->style.maxDimensions[CSS_HEIGHT] = self.CSSRule.maxHeight;
+    self.node->style.maxDimensions[CSS_WIDTH] = self.CSSRule.maxWidth > 0 ? self.CSSRule.maxWidth : CSS_UNDEFINED;
+    self.node->style.maxDimensions[CSS_HEIGHT] = self.CSSRule.maxHeight > 0 ? self.CSSRule.maxHeight : CSS_UNDEFINED;
     
     self.node->style.margin[CSS_LEFT] = self.CSSRule.marginLeft;
     self.node->style.margin[CSS_TOP] = self.CSSRule.marginTop;
@@ -135,7 +142,7 @@
    
     NSArray *subnodes = [self flexSubnodesForLayout];
     self.node->children_count = (int)[subnodes count];
-    layoutNode(self.node, self.frame.size.width, self.node->style.direction);
+    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
     
     [subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StylizeNode *subnode = (StylizeNode *)obj;

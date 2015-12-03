@@ -12,7 +12,7 @@
 
 @interface UIView(StylizeNode)
 
-@property (nonatomic,readonly,strong) NSArray *subnodes;
+@property (nonatomic, readonly, strong) NSArray *subnodes;
 
 - (void)addStylizeNode:(StylizeNode *)stylizeNode;
 

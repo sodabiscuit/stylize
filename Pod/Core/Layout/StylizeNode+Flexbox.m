@@ -12,10 +12,10 @@
 
 @interface StylizeNode()
 
-@property (nonatomic,readwrite,assign) CGRect frame;
-@property (nonatomic,readwrite,strong) NSArray *subnodes;
-@property (nonatomic,readwrite,weak) StylizeNode *supernode;
-@property (nonatomic,readwrite,strong) UIView *view;
+@property (nonatomic, readwrite, assign) CGRect frame;
+@property (nonatomic, readwrite, strong) NSArray *subnodes;
+@property (nonatomic, readwrite, weak) StylizeNode *supernode;
+@property (nonatomic, readwrite, strong) UIView *view;
 
 @end
 

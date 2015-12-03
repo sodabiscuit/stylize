@@ -20,57 +20,57 @@
 /**
  *  id信息
  */
-@property (nonatomic,strong) NSString *nodeID;
+@property (nonatomic, strong) NSString *nodeID;
 
 /**
  *  class选择符信息
  */
-@property (nonatomic,readonly,strong) NSSet *nodeClass;
+@property (nonatomic, readonly, strong) NSSet *nodeClass;
 
 /**
  *  uuid信息
  */
-@property (nonatomic,readonly,strong) NSString *nodeUUID;
+@property (nonatomic, readonly, strong) NSString *nodeUUID;
 
 /**
  *  输出的位置信息
  */
-@property (nonatomic,readonly,assign) CGRect frame;
+@property (nonatomic, readonly, assign) CGRect frame;
 
 /**
  *  初始化尺寸
  */
-@property (nonatomic,readonly,assign) CGRect defaultFrame;
+@property (nonatomic, readonly, assign) CGRect defaultFrame;
 
 /**
  *  布局类型
  */
-@property (nonatomic,assign) StylizeLayoutType layoutType;
+@property (nonatomic, assign) StylizeLayoutType layoutType;
 
 /**
  *  样式
  */
-@property (nonatomic,readonly,strong) StylizeCSSRule *CSSRule;
+@property (nonatomic, readonly, strong) StylizeCSSRule *CSSRule;
 
 /**
  *  父节点
  */
-@property (nonatomic,readonly,weak) StylizeNode *supernode;
+@property (nonatomic, readonly, weak) StylizeNode *supernode;
 
 /**
  *  子节点列表
  */
-@property (nonatomic,readonly,strong) NSArray *subnodes;
+@property (nonatomic, readonly, strong) NSArray *subnodes;
 
 /**
  *  节点所包含的UIView或UIView子类实例
  */
-@property (nonatomic,readonly,strong) id view;
+@property (nonatomic, readonly, strong) id view;
 
 /**
  *  flexbox布局节点
  */
-@property (nonatomic,readonly,assign) css_node_t *node;
+@property (nonatomic, readonly, assign) css_node_t *node;
 
 /**
  *  以类初始化
@@ -195,6 +195,14 @@
  *  @param CSSDictionary 需要增加或者覆盖的CSS规则
  */
 - (void)applyCSSDictionary:(NSDictionary *)CSSDictionary;
+
+/**
+ *  增加单条CSS规则
+ *
+ *  @param key   ruleKey
+ *  @param value ruleValue
+ */
+- (void)applyRule:(NSString *)ruleKey value:(NSString *)ruleValue;
 
 /**
  *  通过解析CSS文本添加CSS规则

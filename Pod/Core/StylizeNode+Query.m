@@ -8,6 +8,18 @@
 
 #import "StylizeNode+Query.h"
 
+NS_INLINE NSArray *stylize_find_children(StylizeNode *root, NSString *selector, bool deep) {
+    NSMutableArray *ret = [@[] mutableCopy];
+    return ret;
+}
+
 @implementation StylizeNode(Query)
+
+- (StylizeNodeQueryBlockAS)Query {
+    StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
+        return stylize_find_children(self, selector, true);
+    };
+    return block;
+}
 
 @end

@@ -15,7 +15,7 @@
 
 @interface UIView()
 
-@property (nonatomic,readwrite,strong) NSArray *subnodes;
+@property (nonatomic, readwrite, strong) NSArray *subnodes;
 
 @end
 

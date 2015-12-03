@@ -31,13 +31,13 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 @interface StylizeNode()
 
-@property (nonatomic,readwrite,assign) CGRect frame;
-@property (nonatomic,readwrite,strong) NSArray *subnodes;
-@property (nonatomic,readwrite,weak) StylizeNode *supernode;
-@property (nonatomic,readwrite,strong) id view;
-@property (nonatomic,readwrite,strong) StylizeCSSRule *CSSRule;
-@property (nonatomic,assign) BOOL hasLayout;
-@property (nonatomic,readwrite,assign) css_node_t *node;
+@property (nonatomic, readwrite, assign) CGRect frame;
+@property (nonatomic, readwrite, strong) NSArray *subnodes;
+@property (nonatomic, readwrite, weak) StylizeNode *supernode;
+@property (nonatomic, readwrite, strong) id view;
+@property (nonatomic, readwrite, strong) StylizeCSSRule *CSSRule;
+@property (nonatomic, assign) BOOL hasLayout;
+@property (nonatomic, readwrite, assign) css_node_t *node;
 
 @end
 
@@ -265,6 +265,12 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)applyCSSRaw:(NSString *)CSSRaw {
     [self.CSSRule updateRuleFromRaw:CSSRaw];
+}
+
+- (void)applyRule:(NSString *)ruleKey
+            value:(NSString *)ruleValue {
+    NSDictionary *dict = @{ruleKey : ruleValue};
+    [self.CSSRule updateRuleFromDictionay:dict];
 }
 
 - (void)applyCSSDictionary:(NSDictionary *)CSSDictionary {

@@ -15,8 +15,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 @interface StylizeCSSRule()
 
-@property (nonatomic,strong) NSArray *layoutProperties;
-@property (nonatomic,strong) NSMutableArray *definedRules;
+@property (nonatomic, strong) NSArray *layoutProperties;
+@property (nonatomic, strong) NSMutableArray *definedRules;
 
 @end
 

@@ -116,6 +116,13 @@
  */
 - (void)renderNode;
 
+/**
+ *  添加class类
+ *
+ *  @param objects
+ */
+- (void)addNodeClass:(NSString *)className;
+
 @end
 
 @interface StylizeNode(DOM)

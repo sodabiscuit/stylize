@@ -98,6 +98,10 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     return self;
 }
 
+- (void)addNodeClass:(NSString *)className {
+
+}
+
 #pragma mark - Setter and Getter
 
 - (CGRect)frame {

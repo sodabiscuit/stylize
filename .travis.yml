@@ -2,7 +2,8 @@ language: objective-c
 osx_image: xcode7.1
 before_install:
     - sudo gem update --system
-    - sudo gem install cocoapods
+    - gem install cocoapods --no-rdoc --no-ri --no-document --quiet
+    - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
     - cd Example/Objective-C
     - pod install
     - cd ..

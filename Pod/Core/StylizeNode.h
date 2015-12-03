@@ -21,42 +21,52 @@
  *  id信息
  */
 @property (nonatomic,strong) NSString *nodeID;
+
 /**
  *  class选择符信息
  */
-@property (nonatomic,strong) NSSet *nodeClass;
+@property (nonatomic,readonly,strong) NSSet *nodeClass;
+
 /**
  *  uuid信息
  */
 @property (nonatomic,readonly,strong) NSString *nodeUUID;
+
 /**
  *  输出的位置信息
  */
 @property (nonatomic,readonly,assign) CGRect frame;
+
 /**
  *  初始化尺寸
  */
 @property (nonatomic,readonly,assign) CGRect defaultFrame;
+
 /**
  *  布局类型
  */
 @property (nonatomic,assign) StylizeLayoutType layoutType;
+
 /**
  *  样式
  */
 @property (nonatomic,readonly,strong) StylizeCSSRule *CSSRule;
+
 /**
  *  父节点
  */
 @property (nonatomic,readonly,weak) StylizeNode *supernode;
+
 /**
  *  子节点列表
  */
 @property (nonatomic,readonly,strong) NSArray *subnodes;
+
 /**
  *  节点所包含的UIView或UIView子类实例
  */
 @property (nonatomic,readonly,strong) id view;
+
 /**
  *  flexbox布局节点
  */

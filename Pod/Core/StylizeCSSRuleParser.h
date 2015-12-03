@@ -14,5 +14,6 @@
 
 - (instancetype)initWithCSSRaw:(NSString *)CSSRaw;
 - (StylizeCSSRule *)parseCSSRaw:(NSString *)CSSRaw;
+- (StylizeCSSRule *)parseCSSDictionary:(NSDictionary *)CSSDictionary;
 
 @end

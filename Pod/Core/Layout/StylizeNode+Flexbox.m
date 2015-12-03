@@ -8,14 +8,11 @@
 
 #import "StylizeNode+Flexbox.h"
 #import "StylizeCSSRule.h"
-#import "StylizeLayoutEvent.h"
-#import "NSLogMan.h"
 #import "Layout.h"
 
-@interface StylizeNode() <StylizeNodeProtocol>
+@interface StylizeNode()
 
 @property (nonatomic,readwrite,assign) CGRect frame;
-@property (nonatomic,readwrite,assign) CGSize computedSize;
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
 @property (nonatomic,readwrite,strong) UIView *view;
@@ -35,12 +32,8 @@
 }
 
 - (void)flexLayoutNode {
-    if (!self.supernode) {
-        //TODO
-    }
-    
-    [self flexLayoutSubnodesInternal];
-    self.view.frame = self.frame;
+    [self flexLayoutSubnodes];
+    ((UIView *)self.view).frame = self.frame;
 }
 
 - (CGSize)flexComputeSize:(CGSize)aSize {
@@ -97,15 +90,8 @@
     self.node->style.position[CSS_RIGHT] = self.CSSRule.right;
     self.node->style.position[CSS_BOTTOM] = self.CSSRule.bottom;
     
-//    if (self.CSSRule.widthAuto) {
-//    } else {
-        self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width > 0 ? self.CSSRule.width : CSS_UNDEFINED;
-//    }
-    
-//    if (self.CSSRule.heightAuto) {
-//    } else {
-        self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height > 0 ? self.CSSRule.height : CSS_UNDEFINED;
-//    }
+    self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width > 0 ? self.CSSRule.width : CSS_UNDEFINED;
+    self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height > 0 ? self.CSSRule.height : CSS_UNDEFINED;
     
     self.node->style.minDimensions[CSS_WIDTH] = self.CSSRule.minWidth;
     self.node->style.minDimensions[CSS_HEIGHT] = self.CSSRule.minHeight;
@@ -137,17 +123,12 @@
     self.node->style.justify_content = (int)self.CSSRule.justifyContent;
 }
 
-- (void)flexLayoutSubnodesInternal {
-    [self flexPrepareForLayout];
-   
+- (void)flexLayoutSubnodes {
     NSArray *subnodes = [self flexSubnodesForLayout];
     self.node->children_count = (int)[subnodes count];
-    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
     
-    [subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        StylizeNode *subnode = (StylizeNode *)obj;
-        [subnode layoutNode];
-    }];
+    [self flexPrepareForLayout];
+    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
 }
 
 @end

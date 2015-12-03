@@ -21,10 +21,6 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 @implementation StylizeCSSRule
 
-- (void)dealloc {
-//    [self removeObserver:self forKeyPath:@"observerPropertyAll"];
-}
-
 - (instancetype)init {
     if (self = [super init]) {
         
@@ -46,7 +42,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         
         _definedRules = [@[@"postion", @"widthAuto", @"heightAuto",
                            @"display", @"visibility",
-                           @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent"] mutableCopy];
+                           @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent", @"alignSelf", @"flex"] mutableCopy];
         
 //        [self addObserver:self
 //               forKeyPath:@"observerPropertyAll"
@@ -215,8 +211,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     return [NSSet setWithArray:keys];
 }
 
-- (BOOL)isRuleDefined:(NSString *)rule {
-    return [_definedRules indexOfObject:rule] != NSNotFound;
+- (BOOL)isRuleDefined:(NSString *)ruleKey {
+    return [_definedRules indexOfObject:ruleKey] != NSNotFound;
 }
 
 - (void)updateDefinedRules:(NSArray *)rules {
@@ -247,6 +243,18 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (id)valueForUndefinedKey:(NSString *)key {
     return nil;
+}
+
+- (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary {
+    //TODO
+}
+
+- (void)updateRuleFromRaw:(NSString *)ruleRaw {
+    //TODO
+}
+
+- (void)updateRuleFromRule:(StylizeCSSRule *)rule {
+    //TODO
 }
 
 @end

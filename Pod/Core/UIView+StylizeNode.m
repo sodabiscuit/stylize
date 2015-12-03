@@ -35,12 +35,6 @@
 - (void)addStylizeNode:(StylizeNode *)stylizeNode {
     NSAssert(stylizeNode.view != nil, @"StylizeNode instance must own a UIView instance.");
     [self addSubview:stylizeNode.view];
-    
-//    if (![StylizeNode isDimensionDefined:stylizeNode direction:StylizeLayoutFlexDirectionRow]) {
-//        [StylizeNode setNodeDimension:stylizeNode direction:StylizeLayoutFlexDirectionRow value:self.frame.size.width];
-//    }
-    
-//    [stylizeNode layoutSubnodes];
     NSMutableArray *subnodes = [self.subnodes mutableCopy];
     [subnodes addObject:stylizeNode];
     objc_setAssociatedObject(self, @selector(subnodes), [subnodes copy], OBJC_ASSOCIATION_RETAIN_NONATOMIC);

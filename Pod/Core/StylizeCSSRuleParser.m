@@ -12,6 +12,7 @@
 @interface StylizeCSSRuleParser()
 
 @property (nonatomic,strong) NSString *CSSRaw;
+
 @end
 
 @implementation StylizeCSSRuleParser

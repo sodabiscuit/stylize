@@ -18,21 +18,9 @@ typedef enum {
 } StylizeNodeBoxLocationType;
 
 
-@protocol StylizeNodeProtocol <NSObject>
-
-/**
- *  处理接收的布局通知
- *
- *  @param layoutEvent 布局事件
- */
-- (void)handleLayoutEvent:(StylizeLayoutEvent *)layoutEvent;
-
-
-@end
-
-@interface StylizeNode : NSObject <StylizeNodeProtocol> {
+@interface StylizeNode : NSObject {
     @protected
-    UIView *_view;
+    id _view;
 }
 
 /**
@@ -56,10 +44,6 @@ typedef enum {
  */
 @property (nonatomic,readonly,assign) CGRect defaultFrame;
 /**
- *  由subnode决定的实际尺寸
- */
-@property (nonatomic,readonly,assign) CGSize computedSize;
-/**
  *  布局类型
  */
 @property (nonatomic,assign) StylizeLayoutType layoutType;
@@ -78,7 +62,7 @@ typedef enum {
 /**
  *  节点所包含的UIView或UIView子类实例
  */
-@property (nonatomic,readonly,strong) UIView *view;
+@property (nonatomic,readonly,strong) id view;
 /**
  *  flexbox布局节点
  */
@@ -118,6 +102,11 @@ typedef enum {
  */
 - (void)layoutNode;
 
+/**
+ *  需要布局的节点
+ */
+- (NSArray *)allSubnodesForLayout;
+
 @end
 
 @interface StylizeNode(DOM)
@@ -142,12 +131,14 @@ typedef enum {
  *  @param after   新增节点在其之后的节点
  */
 - (void)insertSubnode:(StylizeNode *)subnode after:(StylizeNode *)after;
+
 /**
  *  插入新节点在指定位置
  *
  *  @param subnode 新增节点
  *  @param index   位置下标值
  */
+
 - (void)insertSubnode:(StylizeNode *)subnode atIndex:(NSInteger)index;
 /**
  *  使用新节点替换原有节点
@@ -156,6 +147,7 @@ typedef enum {
  *  @param replacementSubnode 原有节点
  */
 - (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacement;
+
 /**
  *  从父节点移除
  */
@@ -164,12 +156,21 @@ typedef enum {
 @end
 
 @interface StylizeNode(CSS)
+
 /**
  *  添加CSS规则
  *
  *  @param CSSRule 需要增加或者覆盖的CSS规则
  */
 - (void)applyCSSRule:(StylizeCSSRule *)CSSRule;
+
+/**
+ *  添加CSS规则字典
+ *
+ *  @param CSSDictionary 需要增加或者覆盖的CSS规则
+ */
+- (void)applyCSSDictionary:(NSDictionary *)CSSDictionary;
+
 /**
  *  通过解析CSS文本添加CSS规则
  *

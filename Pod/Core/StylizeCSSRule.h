@@ -89,6 +89,9 @@
 @property (nonatomic,strong) UIImage *backgroundImage;
 @property (nonatomic,assign) StylizeTextAlign *textAlign;
 
-- (BOOL)isRuleDefined:(NSString *)rule;
+- (BOOL)isRuleDefined:(NSString *)ruleKey;
+- (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary;
+- (void)updateRuleFromRaw:(NSString *)ruleRaw;
+- (void)updateRuleFromRule:(StylizeCSSRule *)rule;
 
 @end

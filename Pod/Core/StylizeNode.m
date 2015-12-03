@@ -8,7 +8,6 @@
 
 #import "StylizeNode.h"
 #import "StylizeCSSRule.h"
-#import "StylizeLayoutEvent.h"
 #import "StylizeNode+Flexbox.h"
 
 static void *PrivateKVOContext = &PrivateKVOContext;
@@ -19,7 +18,7 @@ static bool Stylize_alwaysDirty(void *context) {
 
 static css_node_t *Stylize_getChild(void *context, int i) {
     StylizeNode *node = (__bridge StylizeNode*)context;
-    NSArray *children = [node flexSubnodesForLayout];
+    NSArray *children = [node allSubnodesForLayout];
     StylizeNode *child = [children objectAtIndex:i];
     return child.node;
 }
@@ -33,10 +32,9 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 @interface StylizeNode()
 
 @property (nonatomic,readwrite,assign) CGRect frame;
-@property (nonatomic,readwrite,assign) CGSize computedSize;
 @property (nonatomic,readwrite,strong) NSArray *subnodes;
 @property (nonatomic,readwrite,weak) StylizeNode *supernode;
-@property (nonatomic,readwrite,strong) UIView *view;
+@property (nonatomic,readwrite,strong) id view;
 @property (nonatomic,assign) BOOL hasLayout;
 @property (nonatomic,readwrite,assign) css_node_t *node;
 
@@ -84,7 +82,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         _node->context = (__bridge void *)self;
         _node->is_dirty = Stylize_alwaysDirty;
         _node->get_child = Stylize_getChild;
-        //    _node->measure = Stylize_measureNode;
+        //_node->measure = Stylize_measureNode;
         
         [_CSSRule addObserver:self
                    forKeyPath:@"observerPropertyLayout" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
@@ -111,6 +109,11 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexLayoutNode];
     }
+    
+    [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StylizeNode *subnode = (StylizeNode *)obj;
+        [subnode layoutNode];
+    }];
 }
 
 #pragma mark - SuperClass Method and Protocol
@@ -129,16 +132,20 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     }
 }
 
-- (void)handleLayoutEvent:(StylizeLayoutEvent *)layoutEvent {
-    //TODO
-}
-
 - (void)syncCSS {
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexPrepareForLayout];
     }
 }
 
+- (NSArray *)allSubnodesForLayout {
+    NSArray *ret = self.subnodes;
+    if (self.layoutType == StylizeLayoutTypeFlex) {
+        ret = [self flexSubnodesForLayout];
+    }
+    
+    return ret;
+}
 
 @end
 
@@ -191,8 +198,8 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)removeFromSupernode {
+    [_view removeFromSuperview];
     if (_supernode) {
-        [_view removeFromSuperview];
         NSMutableArray *subnodes = [_supernode.subnodes mutableCopy];
         [subnodes removeObject:self];
         _supernode.subnodes = [subnodes copy];
@@ -210,11 +217,16 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)applyCSSRaw:(NSString *)CSSRaw {
+    //TODO
+}
 
+- (void)applyCSSDictionary:(NSDictionary *)CSSDictionary {
+    [self.CSSRule updateRuleFromDictionay:CSSDictionary];
 }
 
 - (BOOL)isVisibile {
-    return self.CSSRule.visibility != StylizeVisibilityHidden && self.CSSRule.display != StylizeDisplayNone;
+    return self.CSSRule.visibility != StylizeVisibilityHidden &&
+            self.CSSRule.display != StylizeDisplayNone;
 }
 
 @end

@@ -10,4 +10,16 @@
 
 @implementation StylizeTextNode
 
+- (instancetype)init {
+    return [super initWithViewClass:[UILabel class]];
+}
+
+- (void)layoutNode {
+    [super layoutNode];
+}
+
+- (void)renderNode {
+    [super renderNode];
+}
+
 @end

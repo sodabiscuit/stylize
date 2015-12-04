@@ -51,7 +51,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)dealloc {
     [_CSSRule removeObserver:self forKeyPath:@"observerPropertyLayout"];
-    [_CSSRule removeObserver:self forKeyPath:@"observerPropertyOther"];
     free_css_node(_node);
 }
 
@@ -87,8 +86,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         
         [_CSSRule addObserver:self
                    forKeyPath:@"observerPropertyLayout" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
-        [_CSSRule addObserver:self
-                   forKeyPath:@"observerPropertyOther" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
         
         self.CSSRule.top = _defaultFrame.origin.x;
         self.CSSRule.left = _defaultFrame.origin.y;
@@ -145,8 +142,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
             [self syncLayoutRules];
             [self renderNode];
-        } else {
-            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         }
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

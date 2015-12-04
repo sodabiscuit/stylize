@@ -15,50 +15,47 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 @interface StylizeCSSRule()
 
-@property (nonatomic, strong) NSArray *layoutProperties;
-@property (nonatomic, strong) NSMutableArray *definedRules;
-
 @end
 
 @implementation StylizeCSSRule
 
 - (instancetype)init {
     if (self = [super init]) {
+        _ruleUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
+        _position = StylizePositionTypeRelative;
+        _display = StylizeDisplayBlock;
+        _visibility = StylizeVisibilityVisible;
         
-        self.ruleUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
-        self.position = StylizePositionTypeRelative;
-        self.display = StylizeDisplayBlock;
-        self.visibility = StylizeVisibilityVisible;
+        _flexDirection = StylizeLayoutFlexDirectionRow;
+        _justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
+        _alignItems = StylizeLayoutFlexAlignStretch;
+        _flexWrap = StylizeLayoutFlexFlexWrapNowrap;
+        _alignContent = StylizeLayoutFlexAlignStretch;
+        _alignSelf = StylizeLayoutFlexAlignAuto;
+        _flex = 0;
         
-        self.flexDirection = StylizeLayoutFlexDirectionRow;
-        self.justifyContent = StylizeLayoutFlexJustifyContentFlexStart;
-        self.alignItems = StylizeLayoutFlexAlignStretch;
-        self.flexWrap = StylizeLayoutFlexFlexWrapNowrap;
-        self.alignContent = StylizeLayoutFlexAlignStretch;
-        self.alignSelf = StylizeLayoutFlexAlignAuto;
-        self.flex = 0;
+        _backgroundColor = [UIColor whiteColor];
+        _color = [UIColor blackColor];
         
-        self.backgroundColor = [UIColor whiteColor];
-        self.color = [UIColor blackColor];
-        
-        self.widthAuto = YES;
-        self.heightAuto = YES;
-        
-        _definedRules = [@[@"color", @"backgroundColor",
-                           @"postion", @"widthAuto", @"heightAuto",
-                           @"display", @"visibility",
-                           @"flexDirection", @"justifyContent", @"alignItems", @"flexWrap", @"alignContent", @"alignSelf", @"flex"] mutableCopy];
-        
-//        [self addObserver:self
-//               forKeyPath:@"observerPropertyAll"
-//                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-//                  context:PrivateKVOContext];
+        _widthAuto = YES;
+        _heightAuto = YES;
     }
     return self;
 }
 
 - (NSArray *)layoutProperties {
-    return @[@"top", @"left"];
+    return @[@"top", @"right", @"bottom", @"left",
+             @"marginTop", @"marginRight", @"marginBottom", @"marginLeft",
+             @"paddingTop", @"paddingRight", @"paddingBottom", @"paddingBottom",
+             @"width", @"height", @"maxWidth", @"maxHeight", @"minWidth", @"minHeight",
+             @"borderTopWidth", @"borderRightWidth", @"borderBottomWidth", @"borderLeftWidth",
+             @"flexDirection", @"justifyContent", @"alignItems", @"alignContent", @"alignSelf", @"flexWrap", @"flex",
+             @"position", @"display", @"visibility", @"overflowX", @"overflowY",
+             @"font"];
+}
+
+- (NSArray *)emptyProperties {
+    return @[@"ruleUUID"];
 }
 
 - (void)setWidth:(CGFloat)width {
@@ -158,16 +155,26 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     return (CGSize){_minWidth, _minHeight};
 }
 
-- (StylizeLayoutFlexDirection)flexCrossDirection {
-    StylizeLayoutFlexDirection ret = StylizeLayoutFlexDirectionColumn;
-    if (_flexDirection == StylizeLayoutFlexDirectionColumn) {
-        ret = StylizeLayoutFlexDirectionRow;
-    } else if (_flexDirection == StylizeLayoutFlexDirectionColumnReverse) {
-        ret = StylizeLayoutFlexDirectionRowReverse;
-    } else if (_flex == StylizeLayoutFlexDirectionRowReverse) {
-        ret = StylizeLayoutFlexDirectionColumnReverse;
+- (UIFont *)font {
+    if (_font) {
+        return _font;
     }
-    return ret;
+    
+    if (_fontWeight >= 700) {
+        if (_fontFamily.length > 0) {
+            return [UIFont fontWithName:_fontFamily size:_fontSize];
+        } else {
+            return [UIFont systemFontOfSize:_fontSize];
+        }
+    } else {
+        if (_fontFamily.length > 0) {
+            return [UIFont fontWithName:_fontFamily size:_fontSize];
+        } else {
+            return [UIFont boldSystemFontOfSize:_fontSize];
+        }
+    }
+    
+    return [UIFont systemFontOfSize:14];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -188,7 +195,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
                                                 encoding:NSASCIIStringEncoding];
         
         if (![property isEqualToString:@"observerPropertyLayout"] &&
-            ![property isEqualToString:@"observerPropertyOther"] &&
+            ![property isEqualToString:@"observerPropertyRender"] &&
             ![property isEqualToString:@"observerPropertyAll"]) {
             [keys addObject:property];
         }
@@ -196,6 +203,24 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     free(properties);
     return [NSSet setWithArray:keys];
     
+}
+
++ (NSSet *)keyPathsForValuesAffectingObserverPropertyRender {
+    NSMutableArray *keys = [NSMutableArray array];
+    unsigned int count;
+    objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
+    for (size_t i = 0; i < count; ++i) {
+        NSString *property = [NSString stringWithCString:property_getName(properties[i])
+                                                encoding:NSASCIIStringEncoding];
+        
+        if (![property isEqualToString:@"observerPropertyLayout"] &&
+            ![property isEqualToString:@"observerPropertyRender"] &&
+            ![property isEqualToString:@"observerPropertyAll"]) {
+            [keys addObject:property];
+        }
+    }
+    free(properties);
+    return [NSSet setWithArray:keys];
 }
 
 + (NSSet *)keyPathsForValuesAffectingObserverPropertyAll {
@@ -207,17 +232,13 @@ static void *PrivateKVOContext = &PrivateKVOContext;
                                                 encoding:NSASCIIStringEncoding];
         
         if (![property isEqualToString:@"observerPropertyLayout"] &&
-            ![property isEqualToString:@"observerPropertyOther"] &&
+            ![property isEqualToString:@"observerPropertyRender"] &&
             ![property isEqualToString:@"observerPropertyAll"]) {
             [keys addObject:property];
         }
     }
     free(properties);
     return [NSSet setWithArray:keys];
-}
-
-- (BOOL)isRuleDefined:(NSString *)ruleKey {
-    return [_definedRules indexOfObject:ruleKey] != NSNotFound;
 }
 
 - (void)updateDefinedRules:(NSArray *)rules {
@@ -229,17 +250,15 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         if ([rule isKindOfClass:[NSString class]] && rule.length > 0) {
             NSString *prefix = [rule substringToIndex:1];
             if ([prefix isEqualToString:@"-"]) {
-                NSString *ruleContent = [rule substringFromIndex:1];
-                [_definedRules enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    if ([obj isEqualToString:ruleContent]) {
-                        [_definedRules removeObject:obj];
-                    }
-                }];
-            } else if ([_definedRules indexOfObject:rules] == NSNotFound) {
-                [_definedRules addObject:rule];
+                NSString *ruleKey = [rule substringFromIndex:1];
+                [self resetDefault:ruleKey];
             }
         }
     }
+}
+
+- (void)resetDefault:(NSString *)key {
+    //TODO
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {

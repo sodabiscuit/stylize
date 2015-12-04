@@ -18,9 +18,12 @@
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
 
-@property (nonatomic, assign) id observerPropertyOther;
+@property (nonatomic, assign) id observerPropertyRender;
 @property (nonatomic, assign) id observerPropertyLayout;
 @property (nonatomic, assign) id observerPropertyAll;
+
+@property (nonatomic, readonly, copy) NSArray *layoutProperties;
+@property (nonatomic, readonly, copy) NSArray *emptyProperties;
 
 @property (nonatomic, assign) StylizePositionType position;
 @property (nonatomic, assign) StylizeDisplay display;
@@ -88,7 +91,6 @@
 @property (nonatomic, strong) UIColor *borderRightColor;
 
 @property (nonatomic, assign) StylizeLayoutFlexDirection flexDirection;
-@property (nonatomic, readonly, assign) StylizeLayoutFlexDirection flexCrossDirection;
 @property (nonatomic, assign) StylizeLayoutFlexJustifyContent justifyContent;
 @property (nonatomic, assign) StylizeLayoutFlexAlign alignItems;
 @property (nonatomic, assign) StylizeLayoutFlexAlign alignContent;
@@ -110,7 +112,6 @@
 @property (nonatomic, assign) NSInteger fontWeight;
 @property (nonatomic, assign) UIFont *font;
 
-- (BOOL)isRuleDefined:(NSString *)ruleKey;
 - (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary;
 - (void)updateRuleFromRaw:(NSString *)ruleRaw;
 - (void)updateRuleFromRule:(StylizeCSSRule *)rule;

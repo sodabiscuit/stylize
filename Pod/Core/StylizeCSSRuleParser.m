@@ -31,11 +31,14 @@
 + (void)applyCSSDictionary:(NSDictionary *)CSSDictionary
                         to:(StylizeCSSRule *)CSSRule {
     [CSSDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if ([key isKindOfClass:[NSString class]] &&
-            [obj isKindOfClass:[NSString class]]) {
+        if ([key isKindOfClass:[NSString class]]) {
             NSString *k = [key stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            NSString *val = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            [self setRule:val forKey:k inRule:CSSRule];
+            if ([obj isKindOfClass:[NSString class]]) {
+                NSString *val = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                [self setRule:val forKey:k inRule:CSSRule];
+            } else {
+                [self setRuleObject:obj forKey:k inRule:CSSRule];
+            }
         }
     }];
 }
@@ -60,6 +63,18 @@
     return ret;
 }
 
++ (void)setRuleObject:(id)value
+               forKey:(NSString *)key
+               inRule:(StylizeCSSRule *)CSSRule {
+    NSString *ruleKey = [self getRuleKey:key];
+    
+    if ([ruleKey isEqualToString:@"font"]) {
+        if ([value isKindOfClass:[UIFont class]]) {
+            [CSSRule setValue:value forKey:ruleKey];
+        }
+    }
+}
+
 + (void)setRule:(NSString *)value
          forKey:(NSString *)key
          inRule:(StylizeCSSRule *)CSSRule {
@@ -80,6 +95,17 @@
         ) {
         [CSSRule setValue:[NSNumber numberWithDouble:[value doubleValue]] forKey:ruleKey];
         return;
+    }
+    
+    if ([ruleKey isEqualToString:@"fontSize"] ||
+        [ruleKey isEqualToString:@"fontWeight"]) {
+        if ([value isEqualToString:@"normal"]) {
+            [CSSRule setValue:[NSNumber numberWithInteger:400] forKey:ruleKey];
+        } else if ([value isEqualToString:@"bold"]) {
+            [CSSRule setValue:[NSNumber numberWithInteger:700] forKey:ruleKey];
+        } else if ([value integerValue] >= 100) {
+            [CSSRule setValue:[NSNumber numberWithInteger:[value integerValue]] forKey:ruleKey];
+        }
     }
     
     if ([ruleKey isEqualToString:@"flex"]) {

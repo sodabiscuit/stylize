@@ -24,19 +24,19 @@
     
     CGSize contentSize = self.frame.size;
     
-    if ([self.CSSRule isRuleDefined:@"overflowX"]) {
-        if (self.CSSRule.overflowX == StylizeOverflowScroll ||
-            self.CSSRule.overflowX == StylizeOverflowAuto) {
-            //TODO
-        }
-    }
-    
-    if ([self.CSSRule isRuleDefined:@"overflowY"]) {
-        if (self.CSSRule.overflowY == StylizeOverflowScroll ||
-            self.CSSRule.overflowY == StylizeOverflowAuto) {
-            //TODO
-        }
-    }
+//    if ([self.CSSRule isRuleDefined:@"overflowX"]) {
+//        if (self.CSSRule.overflowX == StylizeOverflowScroll ||
+//            self.CSSRule.overflowX == StylizeOverflowAuto) {
+//            //TODO
+//        }
+//    }
+//    
+//    if ([self.CSSRule isRuleDefined:@"overflowY"]) {
+//        if (self.CSSRule.overflowY == StylizeOverflowScroll ||
+//            self.CSSRule.overflowY == StylizeOverflowAuto) {
+//            //TODO
+//        }
+//    }
     
     if ([_view isKindOfClass:[UIScrollView class]]) {
         ((UIScrollView *)self.view).contentSize = contentSize;

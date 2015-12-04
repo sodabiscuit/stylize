@@ -21,25 +21,28 @@
     [super viewDidLoad];
     
     _rootNode = [[StylizeNode alloc] initWithViewClass:[UIView class]];
-    _rootNode.nodeID = @"rootNode";
-    [_rootNode applyCSSDictionary:@{
-                                    @"margin-top" : @"64",
-                                    @"width" : [NSString stringWithFormat:@"%ld", (long)self.view.frame.size.width],
-                                    @"flex-direciton" : @"row",
-                                    @"justify-content" : @"flex-start",
-                                    @"background-color" : @"purple",
-                                    @"align-items" : @"flex-start",
-                                    @"flex-wrap" : @"wrap"
-                                    }];
+    
+    _rootNode
+        .ID(@"rootNode")
+        .Class(@"root")
+        .CSS(@{
+               @"margin-top" : @"64",
+               @"width" : [NSString stringWithFormat:@"%ld", (long)self.view.frame.size.width],
+               @"flex-direciton" : @"row",
+               @"justify-content" : @"flex-start",
+               @"background-color" : @"purple",
+               @"align-items" : @"flex-start",
+               @"flex-wrap" : @"wrap"
+               },nil);
     
     [self.view addStylizeNode:_rootNode];
     
     StylizeNode *firstNode = [self createUnitNode:@"first"];
     [_rootNode addSubnode:firstNode];
-//    firstNode.CSSRule.flex = 2;
-    firstNode.CSSRule.flexWrap = StylizeLayoutFlexFlexWrapWrap;
-    firstNode.CSSRule.justifyContent = StylizeLayoutFlexJustifyContentSpaceAround;
-//    firstNode.CSSRule.visibility = StylizeVisibilityHidden;
+    firstNode.CSS(@{
+                    @"justify-content" : @"space-around",
+                    @"flex-wrap" : @"wrap"
+                    }, nil);
     
     StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
     [firstNode addSubnode:interFirstNode];
@@ -64,19 +67,16 @@
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {
     StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
    
-    ret.CSSRule.width = 100;
-    ret.CSSRule.height = 100;
-    ret.CSSRule.flex = 1;
-    ret.nodeID = nodeID;
-//    ret.CSSRule.flex = 1;
-//    ret.CSSRule.position = StylizePositionTypeAbsolute;
-//    ret.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexStart;
-    ret.CSSRule.marginRight = 10;
-    ret.CSSRule.marginBottom = 10;
-//    ret.CSSRule.top = 50;
-//    ret.CSSRule.bottom = 50;
-//    ((UIView *)ret.view).backgroundColor = [UIColor orangeColor];
-    ret.CSSRule.backgroundColor = [UIColor orangeColor];
+    ret.CSS(@{
+              @"margin-right" : @"10",
+              @"margin-bottom" : @"10",
+              @"width" : @"100",
+              @"height" : @"100",
+              @"flex" : @"1",
+              @"background-color" : @"orange"
+              }, nil)
+        .Class(@"child")
+        .ID(nodeID);
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ret.CSSRule.width, 20)];
     label.backgroundColor = [UIColor clearColor];

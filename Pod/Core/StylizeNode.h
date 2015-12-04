@@ -25,7 +25,7 @@
 /**
  *  class选择符信息
  */
-@property (nonatomic, readonly, strong) NSSet *nodeClass;
+@property (nonatomic, readonly, strong) NSSet *nodeClasses;
 
 /**
  *  uuid信息
@@ -60,7 +60,7 @@
 /**
  *  子节点列表
  */
-@property (nonatomic, readonly, strong) NSArray *subnodes;
+@property (nonatomic, readonly, copy) NSArray *subnodes;
 
 /**
  *  节点所包含的UIView或UIView子类实例
@@ -119,9 +119,16 @@
 /**
  *  添加class类
  *
- *  @param objects
+ *  @param className 样式类名
  */
 - (void)addNodeClass:(NSString *)className;
+
+/**
+ *  是否存在class
+ *
+ *  @param className 样式类名
+ */
+- (BOOL)hasNodeClass:(NSString *)className;
 
 @end
 

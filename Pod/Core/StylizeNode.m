@@ -32,7 +32,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 @interface StylizeNode()
 
 @property (nonatomic, readwrite, assign) CGRect frame;
-@property (nonatomic, readwrite, strong) NSArray *subnodes;
+@property (nonatomic, readwrite, copy) NSArray *subnodes;
 @property (nonatomic, readwrite, weak) StylizeNode *supernode;
 @property (nonatomic, readwrite, strong) id view;
 @property (nonatomic, readwrite, strong) StylizeCSSRule *CSSRule;
@@ -99,7 +99,22 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)addNodeClass:(NSString *)className {
+    NSMutableArray *classes = [@[] mutableCopy];
+    
+    if (_nodeClasses) {
+        classes = [[_nodeClasses allObjects] mutableCopy];
+    }
+    
+    [classes addObject:className];
+    _nodeClasses = [NSSet setWithArray:classes];
+}
 
+- (BOOL)hasNodeClass:(NSString *)className {
+    if (!_nodeClasses || [_nodeClasses count] == 0) {
+        return NO;
+    }
+    
+    return [[_nodeClasses allObjects] indexOfObject:className] != NSNotFound;
 }
 
 #pragma mark - Setter and Getter

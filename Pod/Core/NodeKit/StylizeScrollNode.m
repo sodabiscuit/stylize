@@ -15,6 +15,10 @@
 
 @implementation StylizeScrollNode
 
+- (instancetype)init {
+    return [super initWithViewClass:[UIScrollView class]];
+}
+
 - (void)layoutNode {
     [super layoutNode];
     

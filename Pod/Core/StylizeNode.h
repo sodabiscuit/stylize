@@ -102,6 +102,11 @@
 - (instancetype)initWithView:(UIView *)view;
 
 /**
+ *  布局前处理
+ */
+-(void)prepareForLayout;
+
+/**
  *  手动触发位置计算
  */
 - (void)layoutNode;

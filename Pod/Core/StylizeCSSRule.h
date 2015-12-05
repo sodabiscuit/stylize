@@ -18,21 +18,11 @@
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
 
-@property (nonatomic, assign) id observerPropertyRender;
-@property (nonatomic, assign) id observerPropertyLayout;
-@property (nonatomic, assign) id observerPropertyAll;
-
-@property (nonatomic, readonly, copy) NSArray *layoutProperties;
-@property (nonatomic, readonly, copy) NSArray *emptyProperties;
+@property (nonatomic, strong) NSString *ruleUUID;
 
 @property (nonatomic, assign) StylizePositionType position;
 @property (nonatomic, assign) StylizeDisplay display;
 @property (nonatomic, assign) StylizeVisibility visibility;
-
-/**
- *  uuid信息
- */
-@property (nonatomic, strong) NSString *ruleUUID;
 
 @property (nonatomic, assign) StylizeOverflow overflow;
 @property (nonatomic, assign) StylizeOverflowSkeleton overflowX;
@@ -105,12 +95,21 @@
 
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIImage *backgroundImage;
-@property (nonatomic, assign) StylizeTextAlign *textAlign;
+
 @property (nonatomic, strong) UIColor *color;
+
+@property (nonatomic, assign) CGFloat opacity;
+
+@property (nonatomic, assign) StylizeTextAlign *textAlign;
 @property (nonatomic, assign) NSInteger fontSize;
 @property (nonatomic, strong) NSString *fontFamily;
 @property (nonatomic, assign) NSInteger fontWeight;
 @property (nonatomic, assign) UIFont *font;
+
++ (NSArray *)getLayoutAffectedRuleKeys;
++ (NSArray *)getRenderAffectedRuleKeys;
++ (NSArray *)getBothAffectedRuleKeys;
++ (NSArray *)getUnAffectedRuleKeys;
 
 - (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary;
 - (void)updateRuleFromRaw:(NSString *)ruleRaw;

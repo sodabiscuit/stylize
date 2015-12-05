@@ -23,8 +23,20 @@
 #pragma mark - StylizeNodeFlexProtocol
 
 - (void)flexLayoutNode {
-    [self flexLayoutSubnodes];
-    ((UIView *)self.view).frame = self.frame;
+    NSArray *subnodes = [self flexSubnodesForLayout];
+    self.node->children_count = (int)[subnodes count];
+    
+    if (!self.supernode) {
+        [self resetPositionsAndDimensions];
+    }
+    
+    [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StylizeNode *subnode = (StylizeNode *)obj;
+        [subnode prepareForLayout];
+        [subnode resetPositionsAndDimensions];
+    }];
+    
+    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
 }
 
 - (CGSize)flexComputeSize:(CGSize)aSize {
@@ -83,12 +95,13 @@
     self.node->style.justify_content = (int)self.CSSRule.justifyContent;
 }
 
-- (void)flexLayoutSubnodes {
-    NSArray *subnodes = [self flexSubnodesForLayout];
-    self.node->children_count = (int)[subnodes count];
-    
-    [self flexPrepareForLayout];
-    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
+- (void)resetPositionsAndDimensions {
+    self.node->layout.position[CSS_LEFT] = 0;
+    self.node->layout.position[CSS_RIGHT] = 0;
+    self.node->layout.position[CSS_TOP] = 0;
+    self.node->layout.position[CSS_BOTTOM] = 0;
+    self.node->layout.dimensions[CSS_WIDTH] = CSS_UNDEFINED;
+    self.node->layout.dimensions[CSS_HEIGHT] = CSS_UNDEFINED;
 }
 
 @end

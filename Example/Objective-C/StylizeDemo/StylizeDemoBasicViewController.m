@@ -62,6 +62,16 @@
     
 //    _rootNode.width = 120;
     [_rootNode layoutNode];
+    
+    fourthNode.CSS(@{
+                     @"background-color" : @"cyan",
+                     @"opacity" : @"0.5"
+                     }, nil);
+    
+//    StylizeNode *fifthNode = [self createUnitNode:@"fifth"];
+//    [_rootNode addSubnode:fifthNode];
+    
+//    [_rootNode layoutNode];
 }
 
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {
@@ -78,12 +88,16 @@
         .Class(@"child")
         .ID(nodeID);
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ret.CSSRule.width, 20)];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor blackColor];
-    label.font = [UIFont systemFontOfSize:12];
-    [ret.view addSubview:label];
-    label.text = nodeID;
+    StylizeTextNode *textNode = [StylizeTextNode new];
+    textNode.CSS(@{
+                   @"position" : @"absolute",
+                   @"background-color" : @"transparent",
+                   @"font-size" : @"12",
+                   @"width" : @"100",
+                   @"height" : @"20"
+                   }, nil);
+    textNode.text = nodeID;
+    [ret addSubnode:textNode];
     
     return ret;
 }
@@ -92,12 +106,13 @@
 - (StylizeNode *)createInterUnitNode:(NSString *)nodeID {
     StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
    
-    ret.CSSRule.width = 20;
-    ret.CSSRule.height = 20;
-    ret.CSSRule.flex = 1;
-    ret.CSSRule.marginRight = 10;
-    ret.nodeID = nodeID;
-    ((UIView *)ret.view).backgroundColor = [UIColor redColor];
+    ret.ID(nodeID).CSS(@{
+              @"width" : @"20",
+              @"height" : @"20",
+              @"flex" : @"1",
+              @"margin-right" : @"10",
+              @"background-color" : @"red"
+              }, nil);
     
     return ret;
 }

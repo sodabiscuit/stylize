@@ -22,6 +22,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 - (instancetype)init {
     if (self = [super init]) {
         _ruleUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
+        
         _position = StylizePositionTypeRelative;
         _display = StylizeDisplayBlock;
         _visibility = StylizeVisibilityVisible;
@@ -37,25 +38,16 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         _backgroundColor = [UIColor whiteColor];
         _color = [UIColor blackColor];
         
+        _textAlign = StylizeTextAlignLeft;
+        _opacity = 1;
+        
+        _fontSize = 14;
+        _fontWeight = 400;
+        
         _widthAuto = YES;
         _heightAuto = YES;
     }
     return self;
-}
-
-- (NSArray *)layoutProperties {
-    return @[@"top", @"right", @"bottom", @"left",
-             @"marginTop", @"marginRight", @"marginBottom", @"marginLeft",
-             @"paddingTop", @"paddingRight", @"paddingBottom", @"paddingBottom",
-             @"width", @"height", @"maxWidth", @"maxHeight", @"minWidth", @"minHeight",
-             @"borderTopWidth", @"borderRightWidth", @"borderBottomWidth", @"borderLeftWidth",
-             @"flexDirection", @"justifyContent", @"alignItems", @"alignContent", @"alignSelf", @"flexWrap", @"flex",
-             @"position", @"display", @"visibility", @"overflowX", @"overflowY",
-             @"font"];
-}
-
-- (NSArray *)emptyProperties {
-    return @[@"ruleUUID"];
 }
 
 - (void)setWidth:(CGFloat)width {
@@ -164,17 +156,27 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         if (_fontFamily.length > 0) {
             return [UIFont fontWithName:_fontFamily size:_fontSize];
         } else {
-            return [UIFont systemFontOfSize:_fontSize];
+            return [UIFont boldSystemFontOfSize:_fontSize];
         }
     } else {
         if (_fontFamily.length > 0) {
             return [UIFont fontWithName:_fontFamily size:_fontSize];
         } else {
-            return [UIFont boldSystemFontOfSize:_fontSize];
+            return [UIFont systemFontOfSize:_fontSize];
         }
     }
     
     return [UIFont systemFontOfSize:14];
+}
+
+- (void)setOpacity:(CGFloat)opacity {
+    if (opacity < 0) {
+        _opacity = 0;
+    } else if (opacity > 1) {
+        _opacity = 1;
+    } else {
+        _opacity = opacity;
+    }
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -186,59 +188,37 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     return CSSRule;
 }
 
-+ (NSSet *)keyPathsForValuesAffectingObserverPropertyLayout {
-    NSMutableArray *keys = [NSMutableArray array];
-    unsigned int count;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
-    for (size_t i = 0; i < count; ++i) {
-        NSString *property = [NSString stringWithCString:property_getName(properties[i])
-                                                encoding:NSASCIIStringEncoding];
-        
-        if (![property isEqualToString:@"observerPropertyLayout"] &&
-            ![property isEqualToString:@"observerPropertyRender"] &&
-            ![property isEqualToString:@"observerPropertyAll"]) {
-            [keys addObject:property];
-        }
-    }
-    free(properties);
-    return [NSSet setWithArray:keys];
+//+ (NSSet *)keyPathsForValuesAffectingValueForKey {
+//}
+//
+//+ (NSSet *)keyPathsForValuesAffectingObserverPropertyLayout {
+//    NSMutableArray *keys = [NSMutableArray array];
+//    unsigned int count;
+//    objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
+//    for (size_t i = 0; i < count; ++i) {
+//        NSString *property = [NSString stringWithCString:property_getName(properties[i])
+//                                                encoding:NSASCIIStringEncoding];
+//        
+//        if (![property isEqualToString:@"observerPropertyLayout"] &&
+//            ![property isEqualToString:@"observerPropertyRender"] &&
+//            ![property isEqualToString:@"observerPropertyAll"]) {
+//            [keys addObject:property];
+//        }
+//    }
+//    free(properties);
+//    return [NSSet setWithArray:keys];
+//    
+//}
+
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
+    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
     
-}
-
-+ (NSSet *)keyPathsForValuesAffectingObserverPropertyRender {
-    NSMutableArray *keys = [NSMutableArray array];
-    unsigned int count;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
-    for (size_t i = 0; i < count; ++i) {
-        NSString *property = [NSString stringWithCString:property_getName(properties[i])
-                                                encoding:NSASCIIStringEncoding];
-        
-        if (![property isEqualToString:@"observerPropertyLayout"] &&
-            ![property isEqualToString:@"observerPropertyRender"] &&
-            ![property isEqualToString:@"observerPropertyAll"]) {
-            [keys addObject:property];
-        }
-    }
-    free(properties);
-    return [NSSet setWithArray:keys];
-}
-
-+ (NSSet *)keyPathsForValuesAffectingObserverPropertyAll {
-    NSMutableArray *keys = [NSMutableArray array];
-    unsigned int count;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
-    for (size_t i = 0; i < count; ++i) {
-        NSString *property = [NSString stringWithCString:property_getName(properties[i])
-                                                encoding:NSASCIIStringEncoding];
-        
-        if (![property isEqualToString:@"observerPropertyLayout"] &&
-            ![property isEqualToString:@"observerPropertyRender"] &&
-            ![property isEqualToString:@"observerPropertyAll"]) {
-            [keys addObject:property];
-        }
-    }
-    free(properties);
-    return [NSSet setWithArray:keys];
+//    if ([key isEqualToString:@"todoSectionTitle"]) {
+//        NSSet *affectingKeys = [NSSet setWithObjects:@"todoStatus", @"todoStartDate", @"timeNow", nil];
+//        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKeys];
+//    }
+    
+    return keyPaths;
 }
 
 - (void)updateDefinedRules:(NSArray *)rules {
@@ -280,5 +260,44 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 - (void)updateRuleFromRule:(StylizeCSSRule *)rule {
     //TODO
 }
+
++ (NSArray *)getLayoutAffectedRuleKeys {
+    return @[@"top", @"right", @"bottom", @"left",
+             @"margin", @"marginTop", @"marginRight", @"marginBottom", @"marginLeft",
+             @"padding", @"paddingTop", @"paddingRight", @"paddingBottom", @"paddingBottom",
+             @"width", @"height", @"maxWidth", @"maxHeight", @"minWidth", @"minHeight",
+             @"borderTopWidth", @"borderRightWidth", @"borderBottomWidth", @"borderLeftWidth",
+             @"flexDirection", @"justifyContent", @"alignItems", @"alignContent", @"alignSelf", @"flexWrap", @"flex",
+             @"position", @"display", @"visibility", @"overflow", @"overflowX", @"overflowY",
+             @"font"];
+}
+
++ (NSArray *)getBothAffectedRuleKeys {
+    return @[@"display", @"visibility"];
+}
+
++ (NSArray *)getUnAffectedRuleKeys {
+    return @[@"ruleUUID"];
+}
+
++ (NSArray *)getRenderAffectedRuleKeys {
+    NSMutableArray *ret = [@[] mutableCopy];
+    unsigned int count;
+    
+    objc_property_t *properties = class_copyPropertyList(self, &count);  // see imports above!
+    for (size_t i = 0; i < count; ++i) {
+        NSString *property = [NSString stringWithCString:property_getName(properties[i])
+                                                encoding:NSASCIIStringEncoding];
+        
+        if ([[self getLayoutAffectedRuleKeys] indexOfObject:property] == NSNotFound &&
+            [[self getUnAffectedRuleKeys] indexOfObject:property] == NSNotFound) {
+            [ret addObject: property];
+        }
+    }
+    free(properties);
+    
+    return [ret copy];
+}
+
 
 @end

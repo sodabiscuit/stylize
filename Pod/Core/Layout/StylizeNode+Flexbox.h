@@ -38,11 +38,6 @@
  */
 - (NSArray *)flexSubnodesForLayout;
 
-/**
- *  子节点布局
- */
-- (void)flexLayoutSubnodes;
-
 @end
 
 @interface StylizeNode(Flexbox) <StylizeNodeFlexProtocol>

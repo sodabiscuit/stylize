@@ -72,6 +72,7 @@
         if ([value isKindOfClass:[UIFont class]]) {
             [CSSRule setValue:value forKey:ruleKey];
         }
+        return;
     }
 }
 
@@ -91,14 +92,16 @@
         [ruleKey isEqualToString:@"minWidth"] ||
         [ruleKey isEqualToString:@"minHeight"] ||
         ([ruleKey hasPrefix:@"margin"] && ![ruleKey isEqualToString:@"margin"]) ||
-        ([ruleKey hasPrefix:@"padding"] && ![ruleKey isEqualToString:@"padding"])
+        ([ruleKey hasPrefix:@"padding"] && ![ruleKey isEqualToString:@"padding"]) ||
+        [ruleKey isEqualToString:@"opacity"] ||
+        [ruleKey isEqualToString:@"fontSize"]
         ) {
         [CSSRule setValue:[NSNumber numberWithDouble:[value doubleValue]] forKey:ruleKey];
         return;
     }
     
-    if ([ruleKey isEqualToString:@"fontSize"] ||
-        [ruleKey isEqualToString:@"fontWeight"]) {
+    if ([ruleKey isEqualToString:@"fontWeight"]
+        ) {
         if ([value isEqualToString:@"normal"]) {
             [CSSRule setValue:[NSNumber numberWithInteger:400] forKey:ruleKey];
         } else if ([value isEqualToString:@"bold"]) {
@@ -108,33 +111,44 @@
         }
     }
     
+    if ([ruleKey isEqualToString:@"position"] ||
+        [ruleKey isEqualToString:@"flexDirection"] ||
+        [ruleKey isEqualToString:@"flexWrap"] ||
+        [ruleKey isEqualToString:@"justifyContent"] ||
+        [ruleKey isEqualToString:@"alignItems"] ||
+        [ruleKey isEqualToString:@"alignSelf"] ||
+        [ruleKey isEqualToString:@"alignContent"]
+        ) {
+        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
+        return;
+    }
+    
     if ([ruleKey isEqualToString:@"flex"]) {
         [CSSRule setValue:[NSNumber numberWithInteger:[value integerValue]] forKey:ruleKey];
         return;
     }
     
-    if ([ruleKey isEqualToString:@"textAlign"]) {
-        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
-        return;
-    }
     
-    if ([ruleKey isEqualToString:@"flexDirection"] ||
-        [ruleKey isEqualToString:@"flexWrap"] ||
-        [ruleKey isEqualToString:@"justifyContent"] ||
-        [ruleKey isEqualToString:@"alignItems"] ||
-        [ruleKey isEqualToString:@"alignSelf"] ||
-        [ruleKey isEqualToString:@"alignContent"]) {
+    if ([ruleKey isEqualToString:@"display"] ||
+        [ruleKey isEqualToString:@"visibility"]
+        ) {
         [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
         return;
     }
     
     if ([ruleKey isEqualToString:@"color"] ||
-        [ruleKey isEqualToString:@"backgroundColor"]) {
+        [ruleKey isEqualToString:@"backgroundColor"]
+        ) {
         if ([value hasPrefix:@"#"]) {
             [CSSRule setValue:[self colorWithHexString:value] forKey:ruleKey];
         } else {
             [CSSRule setValue:[self getPresetColor:value] forKey:ruleKey];
         }
+        return;
+    }
+    
+    if ([ruleKey isEqualToString:@"textAlign"]) {
+        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
         return;
     }
 }
@@ -200,14 +214,30 @@
                                    @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
                                    @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
                                },
+                               @"position" : @{
+                                   @"relative" : [NSNumber numberWithInt:StylizePositionTypeRelative],
+                                   @"absolute" : [NSNumber numberWithInt:StylizePositionTypeAbsolute],
+                                   @"_" : [NSNumber numberWithInt:StylizePositionTypeRelative]
+                               },
+                               @"visibility" : @{
+                                   @"visible" : [NSNumber numberWithInt:StylizeVisibilityVisible],
+                                   @"hidden" : [NSNumber numberWithInt:StylizeVisibilityHidden],
+                                   @"_" : [NSNumber numberWithInt:StylizeVisibilityVisible]
+                               },
+                               @"display" : @{
+                                   @"block" : [NSNumber numberWithInt:StylizeDisplayBlock],
+                                   @"inline" : [NSNumber numberWithInt:StylizeDisplayInline],
+                                   @"none" : [NSNumber numberWithInt:StylizeDisplayNone],
+                                   @"_" : [NSNumber numberWithInt:StylizeDisplayBlock]
+                               },
                            };
     
     
     if (dict[key] && [dict[key] count] > 0) {
-        if (dict[value]) {
-            ret = dict[value];
-        } else if (dict[@"_"]) {
-            ret = dict[@"_"];
+        if (dict[key][value]) {
+            ret = dict[key][value];
+        } else if (dict[key][@"_"]) {
+            ret = dict[key][@"_"];
         }
     }
     

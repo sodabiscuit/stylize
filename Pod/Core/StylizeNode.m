@@ -50,8 +50,18 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)dealloc {
-    [_CSSRule removeObserver:self forKeyPath:@"observerPropertyLayout"];
     free_css_node(_node);
+    [[StylizeCSSRule getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [_CSSRule removeObserver:self
+                      forKeyPath:obj
+                         context:PrivateKVOContext];
+    }];
+    
+    [[StylizeCSSRule getRenderAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [_CSSRule removeObserver:self
+                      forKeyPath:obj
+                         context:PrivateKVOContext];
+    }];
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
@@ -84,8 +94,19 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         _node->get_child = Stylize_getChild;
         //_node->measure = Stylize_measureNode;
         
-        [_CSSRule addObserver:self
-                   forKeyPath:@"observerPropertyLayout" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:PrivateKVOContext];
+        [[StylizeCSSRule getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [_CSSRule addObserver:self
+                       forKeyPath:obj
+                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                          context:PrivateKVOContext];
+        }];
+        
+        [[StylizeCSSRule getRenderAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [_CSSRule addObserver:self
+                       forKeyPath:obj
+                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                          context:PrivateKVOContext];
+        }];
         
         self.CSSRule.top = _defaultFrame.origin.x;
         self.CSSRule.left = _defaultFrame.origin.y;
@@ -117,15 +138,27 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 #pragma mark - Setter and Getter
 
 - (CGRect)frame {
-    return (CGRect){(CGPoint){self.node->layout.position[CSS_LEFT], self.node->layout.position[CSS_TOP]},
-                    (CGSize){self.node->layout.dimensions[CSS_WIDTH], self.node->layout.dimensions[CSS_HEIGHT]}};
+    CGFloat x = self.node->layout.position[CSS_LEFT];
+    CGFloat y = self.node->layout.position[CSS_TOP];
+    CGFloat w = self.node->layout.dimensions[CSS_WIDTH];
+    CGFloat h = self.node->layout.dimensions[CSS_HEIGHT];
+    
+    x = isnan(x) ? 0 : x;
+    y = isnan(y) ? 0 : y;
+    w = isnan(w) ? 0 : w;
+    h = isnan(h) ? 0 : h;
+    
+    return (CGRect){(CGPoint){x, y}, (CGSize){w, h}};
 }
 
 - (void)layoutNode {
     _hasLayout = YES;
+    
+    [self prepareForLayout];
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexLayoutNode];
     }
+    ((UIView *)self.view).frame = self.frame;
     
     [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StylizeNode *subnode = (StylizeNode *)obj;
@@ -139,9 +172,15 @@ static css_node_t *Stylize_getChild(void *context, int i) {
                       ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
-        if ([keyPath isEqualToString:@"observerPropertyLayout"]) {
-            [self syncLayoutRules];
+        if ([[StylizeCSSRule getLayoutAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+            [self prepareForLayout];
+            if ([[StylizeCSSRule getBothAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+                [self renderNode];
+            }
+        } else if ([[StylizeCSSRule getRenderAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
             [self renderNode];
+        } else {
+            //NOTHING
         }
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -150,10 +189,13 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)renderNode {
     UIView *view = (UIView *)self.view;
+    
     view.backgroundColor = self.CSSRule.backgroundColor;
+    view.hidden = self.CSSRule.visibility == StylizeVisibilityHidden || self.CSSRule.display == StylizeDisplayNone;
+    view.alpha = self.CSSRule.opacity;
 }
 
-- (void)syncLayoutRules {
+- (void)prepareForLayout {
     self.node->style.position_type = (int)self.CSSRule.position;
     
     self.node->style.position[CSS_LEFT] = self.CSSRule.left;
@@ -195,7 +237,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     if (self.layoutType == StylizeLayoutTypeFlex) {
         ret = [self flexSubnodesForLayout];
     }
-    
     return ret;
 }
 
@@ -234,6 +275,8 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     if (subnode.supernode) {
         [subnode removeFromSupernode];
     }
+    
+    [subnode prepareForLayout];
     
     NSMutableArray *subnodes = [self.subnodes mutableCopy];
     subnode.supernode = self;

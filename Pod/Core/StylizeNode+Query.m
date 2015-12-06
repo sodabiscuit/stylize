@@ -65,7 +65,7 @@ NS_INLINE NSArray *stylize_find_children(StylizeNode *root, NSString *selector, 
             [ret addObject:root.subnodes[i]];
         }
     }
-    return ret;
+    return [ret copy];
 }
 
 NS_INLINE NSArray *stylize_find_parents(StylizeNode *root, NSString *selector, bool deep) {
@@ -81,7 +81,7 @@ NS_INLINE NSArray *stylize_find_parents(StylizeNode *root, NSString *selector, b
             }
         }
     }
-    return ret;
+    return [ret copy];
 }
 
 
@@ -118,49 +118,49 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
         }
     }
     
-    return ret;
+    return [ret copy];
 }
 
 @implementation StylizeNode(Query)
 
 - (StylizeNodeQueryBlockAS)Query {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
-        return stylize_find_children(self, selector, true);
+        return [StylizeNodeQuery arrayWithArray:stylize_find_children(self, selector, true)];
     };
     return block;
 }
 
 - (StylizeNodeQueryBlockAS)children {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
-        return stylize_find_children(self, selector, false);
+        return [StylizeNodeQuery arrayWithArray:stylize_find_children(self, selector, false)];
     };
     return block;
 }
 
 - (StylizeNodeQueryBlockAS)parents {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
-        return stylize_find_parents(self, selector, true);
+        return [StylizeNodeQuery arrayWithArray:stylize_find_parents(self, selector, true)];
     };
     return block;
 }
 
 - (StylizeNodeQueryBlockAS)prevAll {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
-        return stylize_find_sibling(self, selector, 1);
+        return [StylizeNodeQuery arrayWithArray:stylize_find_sibling(self, selector, 1)];
     };
     return block;
 }
 
 - (StylizeNodeQueryBlockAS)nextAll {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
-        return stylize_find_sibling(self, selector, 2);
+        return [StylizeNodeQuery arrayWithArray:stylize_find_sibling(self, selector, 2)];
     };
     return block;
 }
 
 - (StylizeNodeQueryBlockAS)siblings {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
-        return stylize_find_sibling(self, selector, 0);
+        return [StylizeNodeQuery arrayWithArray:stylize_find_sibling(self, selector, 0)];
     };
     return block;
 }
@@ -252,7 +252,50 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
 
 @end
 
+@interface StylizeNodeQuery()
+
+@property (nonatomic, readwrite, strong) NSArray *array;
+
+@end
+
 @implementation StylizeNodeQuery
+
++ (instancetype)arrayWithArray:(NSArray *)anArray {
+    StylizeNodeQuery *ret = [[StylizeNodeQuery alloc] init];
+    ret.array = anArray;
+    return ret;
+}
+
+- (NSUInteger)count {
+    return [self.array count];
+}
+
+- (id)objectAtIndex:(NSUInteger)index {
+    if (index < self.count) {
+        return [self.array objectAtIndex:index];
+    }
+    return nil;
+}
+
+- (NSUInteger)indexOfObject:(id)anObject {
+    return [self.array indexOfObject:anObject];
+}
+
+- (id)firstObject {
+    return [self.array firstObject];
+}
+
+- (id)lastObject {
+    return [self.array lastObject];
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                  objects:(__unsafe_unretained id [])buffer
+                                    count:(NSUInteger)len {
+    return [self.array countByEnumeratingWithState:state
+                                           objects:buffer
+                                             count:len];
+}
 
 - (StylizeNodeQueryBlockAS)find {
     StylizeNodeQueryBlockAS block = ^id(NSString *selector) {
@@ -264,7 +307,7 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
             }
         }
         
-        return (StylizeNodeQuery *)[ret copy];
+        return [StylizeNodeQuery arrayWithArray:ret];
     };
     return block;
 }
@@ -299,9 +342,46 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
 - (StylizeNodeQueryBlockNI)get {
     StylizeNodeQueryBlockNI block = ^id(NSUInteger index) {
         if (index > 0 && index < [self count] - 1) {
-            return self[index];
+            return [self objectAtIndex:index];
         }
         return nil;
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockAOO)CSS {
+    StylizeNodeQueryBlockAOO block = ^id(id key, id val) {
+        NSMutableArray *ret = [NSMutableArray array];
+        
+        for (StylizeNode *child in self) {
+            if ([key isKindOfClass:[NSDictionary class]]) {
+                [child applyCSSDictionary:key];
+            } else if ([key isKindOfClass:[NSString class]] && [val isKindOfClass:[NSString class]]) {
+                NSString *k = (NSString *)key;
+                NSString *v = (NSString *)val;
+                if (k.length > 0 && v.length > 0) {
+                    [child applyRule:k value:v];
+                }
+            }
+            [ret addObject:child];
+        }
+        
+        return [StylizeNodeQuery arrayWithArray:ret];
+    };
+    return block;
+}
+
+
+- (StylizeNodeQueryBlockAS)Class {
+    StylizeNodeQueryBlockAS block = ^id(NSString *cls) {
+        NSMutableArray *ret = [NSMutableArray array];
+        
+        for (StylizeNode *child in self) {
+            [child addNodeClass:cls];
+            [ret addObject:child];
+        }
+        
+        return [StylizeNodeQuery arrayWithArray:ret];
     };
     return block;
 }
@@ -316,7 +396,7 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
             }
         }
         
-        return (StylizeNodeQuery *)[ret copy];
+        return [StylizeNodeQuery arrayWithArray:ret];
     };
     return block;
 }
@@ -325,13 +405,13 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
     StylizeNodeQueryBlockAFilter block = ^id(StylizeNodeQueryBlockBOI filterBlock) {
         NSMutableArray *ret = [@[] mutableCopy];
         for (int i = 0; i < [self count]; i++) {
-            BOOL has = filterBlock(self[i], i);
+            BOOL has = filterBlock([self objectAtIndex:i], i);
             if (has) {
-                [ret addObject:self[i]];
+                [ret addObject:[self objectAtIndex:i]];
             }
         }
         
-        return (StylizeNodeQuery *)[ret copy];
+        return [StylizeNodeQuery arrayWithArray:ret];
     };
     return block;
 }
@@ -340,13 +420,13 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
     StylizeNodeQueryBlockAEach block = ^id(StylizeNodeQueryBlockNOI eachBlock) {
         NSMutableArray *ret = [@[] mutableCopy];
         for (int i = 0; i < [self count]; i++) {
-            StylizeNode *node = eachBlock(self[i], i);
+            StylizeNode *node = eachBlock([self objectAtIndex:i], i);
             if (node) {
                 [ret addObject:node];
             }
         }
         
-        return (StylizeNodeQuery *)[ret copy];
+        return [StylizeNodeQuery arrayWithArray:ret];
     };
     return block;
 }

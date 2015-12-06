@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		123990E51C1406B100E5A6D3 /* StylizeButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 123990E41C1406B100E5A6D3 /* StylizeButtonNode.m */; };
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
 		126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC081B58B1F300A62026 /* StylizeNode+Flexbox.m */; };
 		126ABC2F1B58B1F300A62026 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC0B1B58B1F300A62026 /* StylizeCellNode.m */; };
@@ -44,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.release.xcconfig"; sourceTree = "<group>"; };
+		123990E31C1406B100E5A6D3 /* StylizeButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeButtonNode.h; sourceTree = "<group>"; };
+		123990E41C1406B100E5A6D3 /* StylizeButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeButtonNode.m; sourceTree = "<group>"; };
 		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		126ABC061B58B1F300A62026 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		126ABC071B58B1F300A62026 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				126ABC111B58B1F300A62026 /* StylizeScrollNode.m */,
 				126ABC121B58B1F300A62026 /* StylizeTextNode.h */,
 				126ABC131B58B1F300A62026 /* StylizeTextNode.m */,
+				123990E31C1406B100E5A6D3 /* StylizeButtonNode.h */,
+				123990E41C1406B100E5A6D3 /* StylizeButtonNode.m */,
 			);
 			path = NodeKit;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
 				126ABC331B58B1F300A62026 /* StylizeTextNode.m in Sources */,
+				123990E51C1406B100E5A6D3 /* StylizeButtonNode.m in Sources */,
 				126ABC351B58B1F300A62026 /* StylizeCSSRule.m in Sources */,
 				126ABC381B58B1F300A62026 /* StylizeNode+Query.m in Sources */,
 				126ABC391B58B1F300A62026 /* StylizeNode.m in Sources */,

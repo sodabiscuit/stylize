@@ -25,7 +25,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 //static css_dim_t Stylize_measureNode(void *context, float width) {
 //    StylizeNode *node = (__bridge StylizeNode*)context;
-//    CGSize size = [node flexComputeSize:(CGSize){width, NAN}];
+//    CGSize size = node.measure ? node.measure(width) : node.classMeasure(width);
 //    return (css_dim_t){size.width, size.height};
 //}
 
@@ -92,7 +92,10 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         _node->context = (__bridge void *)self;
         _node->is_dirty = Stylize_alwaysDirty;
         _node->get_child = Stylize_getChild;
-        //_node->measure = Stylize_measureNode;
+        
+//        if (self.measure || self.classMeasure) {
+//            _node->measure = Stylize_measureNode;
+//        }
         
         [[StylizeCSSRule getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [_CSSRule addObserver:self
@@ -158,6 +161,20 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexLayoutNode];
     }
+    
+    /**
+     *  TODO 需要确认是否存在问题
+     */
+    if (self.measure) {
+        CGSize measureSize = self.measure(self.frame.size.width);
+        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
+        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
+    } else if (self.classMeasure) {
+        CGSize measureSize = self.classMeasure(self.frame.size.width);
+        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
+        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
+    }
+    
     ((UIView *)self.view).frame = self.frame;
     
     [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -284,9 +301,9 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     [self.view insertSubview:subnode.view atIndex:index];
     _subnodes = [subnodes copy];
     
-    if (_hasLayout) {
-        [self layoutNode];
-    }
+//    if (_hasLayout) {
+//        [self layoutNode];
+//    }
 }
 
 - (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacement {

@@ -11,6 +11,9 @@
 
 @class StylizeCSSRule;
 @class StylizeLayoutEvent;
+@class StylizeNode;
+
+typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 
 @interface StylizeNode : NSObject {
     @protected
@@ -73,6 +76,20 @@
 @property (nonatomic, readonly, assign) css_node_t *node;
 
 /**
+ *  自身的尺寸计算方法
+ *  1. 优先级低于measure方法；
+ *  2. 当前实现导致此方法在父节点布局完成后调用，因此不会影响父节点的调用。
+ */
+@property (nonatomic, readonly, weak) StylizeNodeMeasureBlock classMeasure;
+
+/**
+ *  自身的尺寸计算方法
+ *  1. 使用时注意避免循环引用；
+ *  2. 当前实现导致此方法在父节点布局完成后调用，因此不会影响父节点的调用。
+ */
+@property (nonatomic, strong) StylizeNodeMeasureBlock measure;
+
+/**
  *  以类初始化
  *
  *  @param viewClass 类
@@ -85,7 +102,7 @@
  *  以类初始化，需要指定默认frame信息
  *
  *  @param viewClass 类
- *  @param frame     frame信息
+ *  @param frame frame
  *
  *  @return Stylize节点
  */

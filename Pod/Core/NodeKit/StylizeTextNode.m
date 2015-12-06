@@ -12,7 +12,7 @@
 @implementation StylizeTextNode
 
 - (instancetype)init {
-    return [super initWithViewClass:[UILabel class]];
+    return [self initWithViewClass:[UILabel class]];
 }
 
 - (void)layoutNode {
@@ -38,6 +38,13 @@
     _text = text;
     UILabel *label = (UILabel *)self.view;
     [label setText:text];
+}
+
+- (StylizeNodeMeasureBlock)classMeasure {
+    StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
+        return CGSizeMake(100, 50);
+    };
+    return block;
 }
 
 @end

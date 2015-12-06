@@ -10,4 +10,16 @@
 
 @implementation StylizeControlNode
 
+- (instancetype)init {
+    return [self initWithViewClass:[UIControl class]];
+}
+
+- (void)layoutNode {
+    [super layoutNode];
+}
+
+- (void)renderNode {
+    [super renderNode];
+}
+
 @end

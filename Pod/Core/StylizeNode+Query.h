@@ -26,6 +26,7 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAA)(StylizeNodeQuery *);
 
 //specical
 typedef StylizeNode* (^StylizeNodeQueryBlockNOO)(id, id);
+typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAOO)(id, id);
 typedef StylizeNode* (^StylizeNodeQueryBlockNOI)(id, NSUInteger);
 typedef BOOL (^StylizeNodeQueryBlockBOI)(id, NSUInteger);
 
@@ -81,14 +82,17 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI
  *  应用CSS规则，单个参数时传入字典
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockNOO CSS;
+
 /**
  *  增加nodeclass
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockNS Class;
+
 /**
  *  设置nodeId
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockNS ID;
+
 /**
  *  nodeClasses是否包含class
  */
@@ -96,7 +100,16 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI
 
 @end
 
-@interface StylizeNodeQuery : NSArray
+@interface StylizeNodeQuery : NSObject <NSFastEnumeration>
+
+@property (nonatomic, readonly, strong) NSArray *array;
+
++ (instancetype)arrayWithArray:(NSArray *)anArray;
+- (NSUInteger)count;
+- (id)objectAtIndex:(NSUInteger)index;
+- (NSUInteger)indexOfObject:(id)anObject;
+- (id)firstObject;
+- (id)lastObject;
 
 #pragma mark - traversing
 
@@ -123,6 +136,16 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI
 
 
 #pragma mark - manipulation
+
+/**
+ *  应用CSS规则，单个参数时传入字典
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockAOO CSS;
+
+/**
+ *  增加nodeclass
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockAS Class;
 
 /**
  *  map方法

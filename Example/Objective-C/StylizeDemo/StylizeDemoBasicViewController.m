@@ -57,21 +57,24 @@
     StylizeNode *thirdNode = [self createUnitNode:@"third"];
     [_rootNode addSubnode:thirdNode];
     
+//    thirdNode.measure = ^CGSize(CGFloat width) {
+//        return CGSizeMake(100, 50);
+//    };
+    
     StylizeNode *fourthNode = [self createUnitNode:@"fourth"];
     [_rootNode addSubnode:fourthNode];
     
-//    _rootNode.width = 120;
     [_rootNode layoutNode];
     
-    fourthNode.CSS(@{
+    _rootNode.Query(@"#fourth").CSS(@{
                      @"background-color" : @"cyan",
                      @"opacity" : @"0.5"
                      }, nil);
     
-//    StylizeNode *fifthNode = [self createUnitNode:@"fifth"];
-//    [_rootNode addSubnode:fifthNode];
+    StylizeNode *fifthNode = [self createUnitNode:@"fifth"];
+    [_rootNode addSubnode:fifthNode];
     
-//    [_rootNode layoutNode];
+    [_rootNode layoutNode];
 }
 
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {
@@ -93,8 +96,6 @@
                    @"position" : @"absolute",
                    @"background-color" : @"transparent",
                    @"font-size" : @"12",
-                   @"width" : @"100",
-                   @"height" : @"20"
                    }, nil);
     textNode.text = nodeID;
     [ret addSubnode:textNode];

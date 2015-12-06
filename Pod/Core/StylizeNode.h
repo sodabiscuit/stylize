@@ -10,8 +10,8 @@
 #import "Layout.h"
 
 @class StylizeCSSRule;
-@class StylizeLayoutEvent;
 @class StylizeNode;
+@protocol StylizeCSSRuleProtocol;
 
 typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 
@@ -151,6 +151,14 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  @param className 样式类名
  */
 - (BOOL)hasNodeClass:(NSString *)className;
+
+/**
+ *  规则类
+ *
+ *  @return 规则类
+ */
++ (Class)CSSRuleClass;
+
 
 @end
 

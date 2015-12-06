@@ -10,4 +10,7 @@
 
 @interface StylizeImageNode : StylizeNode
 
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSURL *imageURL;
+
 @end

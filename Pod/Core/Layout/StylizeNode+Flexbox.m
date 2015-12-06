@@ -41,6 +41,7 @@
 
 - (CGSize)flexComputeSize:(CGSize)aSize {
     CGSize ret = CGSizeZero;
+    StylizeCSSRule *CSSRule = self.CSSRule;
     
     if (!isnan(aSize.width) &&
         aSize.width > 0) {
@@ -52,8 +53,8 @@
         ret.height = aSize.height;
     }
     
-    CGSize maxSize = self.CSSRule.maxSize;
-    CGSize minSize = self.CSSRule.minSize;
+    CGSize maxSize = CSSRule.maxSize;
+    CGSize minSize = CSSRule.minSize;
     
     if (!CGSizeEqualToSize(maxSize, CGSizeZero) &&
         !CGSizeEqualToSize(maxSize, (CGSize){CGFLOAT_MAX, CGFLOAT_MAX})) {
@@ -75,9 +76,10 @@
     
     [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StylizeNode *node = (StylizeNode *)obj;
+        StylizeCSSRule *CSSRule = node.CSSRule;
         
-        if (node.CSSRule.visibility != StylizeVisibilityHidden &&
-            node.CSSRule.display != StylizeDisplayNone) {
+        if (CSSRule.visibility != StylizeVisibilityHidden &&
+            CSSRule.display != StylizeDisplayNone) {
             [ret addObject:node];
         }
     }];
@@ -86,13 +88,15 @@
 }
 
 - (void)flexPrepareForLayout {
-    self.node->style.flex_direction = (int)self.CSSRule.flexDirection;
-    self.node->style.flex_wrap = (int)self.CSSRule.flexWrap;
-    self.node->style.flex = self.CSSRule.flex;
-    self.node->style.align_content = (int)self.CSSRule.alignContent;
-    self.node->style.align_items = (int)self.CSSRule.alignItems;
-    self.node->style.align_self = (int)self.CSSRule.alignSelf;
-    self.node->style.justify_content = (int)self.CSSRule.justifyContent;
+    StylizeCSSRule *CSSRule = self.CSSRule;
+    
+    self.node->style.flex_direction = (int)CSSRule.flexDirection;
+    self.node->style.flex_wrap = (int)CSSRule.flexWrap;
+    self.node->style.flex = CSSRule.flex;
+    self.node->style.align_content = (int)CSSRule.alignContent;
+    self.node->style.align_items = (int)CSSRule.alignItems;
+    self.node->style.align_self = (int)CSSRule.alignSelf;
+    self.node->style.justify_content = (int)CSSRule.justifyContent;
 }
 
 - (void)resetPositionsAndDimensions {

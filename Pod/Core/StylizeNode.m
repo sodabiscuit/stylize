@@ -51,13 +51,13 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)dealloc {
     free_css_node(_node);
-    [[StylizeCSSRule getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [_CSSRule removeObserver:self
                       forKeyPath:obj
                          context:PrivateKVOContext];
     }];
     
-    [[StylizeCSSRule getRenderAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [[[self.class CSSRuleClass] getRenderAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [_CSSRule removeObserver:self
                       forKeyPath:obj
                          context:PrivateKVOContext];
@@ -65,19 +65,20 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {
-    NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
     UIView *view = [[viewClass alloc] initWithFrame:CGRectZero];
     return [self initWithView:view];
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass
                      defaultFrame:(CGRect)frame  {
-    NSAssert([viewClass isSubclassOfClass:[UIView class]], @"viewClass must be a UIView or a subclass of UIView.");
     UIView *view = [[viewClass alloc] initWithFrame:frame];
     return [self initWithView:view];
 }
 
 - (instancetype)initWithView:(UIView *)view {
+    NSAssert([[view class] isSubclassOfClass:[UIView class]], @"view Class must be a UIView or a subclass of it.");
+    NSAssert([[self.class CSSRuleClass] isSubclassOfClass:[StylizeCSSRule class]], @"CSSRuleClass must be a StylizeCSSRule or a subclass of it.");
+    
     if (self=[super init]) {
         _view = view;
         _defaultFrame = view.frame;
@@ -86,7 +87,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         _hasLayout = NO;
         _layoutType = StylizeLayoutTypeFlex;
         _subnodes = [NSArray array];
-        _CSSRule = [[StylizeCSSRule alloc] init];
+        _CSSRule = (StylizeCSSRule *)[[[self.class CSSRuleClass] alloc] init];
         
         _node = new_css_node();
         _node->context = (__bridge void *)self;
@@ -97,24 +98,21 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 //            _node->measure = Stylize_measureNode;
 //        }
         
-        [[StylizeCSSRule getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [_CSSRule addObserver:self
                        forKeyPath:obj
                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                           context:PrivateKVOContext];
         }];
         
-        [[StylizeCSSRule getRenderAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [[[self.class CSSRuleClass] getRenderAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [_CSSRule addObserver:self
                        forKeyPath:obj
                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                           context:PrivateKVOContext];
         }];
         
-        self.CSSRule.top = _defaultFrame.origin.x;
-        self.CSSRule.left = _defaultFrame.origin.y;
-        self.CSSRule.width = _defaultFrame.size.width;
-        self.CSSRule.height = _defaultFrame.size.height;
+        [_CSSRule updatePositionAndDimensionFromRect:_defaultFrame];
     }
     return self;
 }
@@ -189,12 +187,12 @@ static css_node_t *Stylize_getChild(void *context, int i) {
                       ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
-        if ([[StylizeCSSRule getLayoutAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+        if ([[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
             [self prepareForLayout];
-            if ([[StylizeCSSRule getBothAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+            if ([[[self.class CSSRuleClass] getBothAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
                 [self renderNode];
             }
-        } else if ([[StylizeCSSRule getRenderAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+        } else if ([[[self.class CSSRuleClass] getRenderAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
             [self renderNode];
         } else {
             //NOTHING
@@ -206,43 +204,46 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)renderNode {
     UIView *view = (UIView *)self.view;
+    StylizeCSSRule *CSSRule = self.CSSRule;
     
-    view.backgroundColor = self.CSSRule.backgroundColor;
-    view.hidden = self.CSSRule.visibility == StylizeVisibilityHidden || self.CSSRule.display == StylizeDisplayNone;
-    view.alpha = self.CSSRule.opacity;
+    view.backgroundColor = CSSRule.backgroundColor;
+    view.hidden = CSSRule.visibility == StylizeVisibilityHidden || CSSRule.display == StylizeDisplayNone;
+    view.alpha = CSSRule.opacity;
 }
 
 - (void)prepareForLayout {
-    self.node->style.position_type = (int)self.CSSRule.position;
+    StylizeCSSRule *CSSRule = self.CSSRule;
     
-    self.node->style.position[CSS_LEFT] = self.CSSRule.left;
-    self.node->style.position[CSS_TOP] = self.CSSRule.top;
-    self.node->style.position[CSS_RIGHT] = self.CSSRule.right;
-    self.node->style.position[CSS_BOTTOM] = self.CSSRule.bottom;
+    self.node->style.position_type = (int)CSSRule.position;
     
-    self.node->style.dimensions[CSS_WIDTH] = self.CSSRule.width > 0 ? self.CSSRule.width : CSS_UNDEFINED;
-    self.node->style.dimensions[CSS_HEIGHT] = self.CSSRule.height > 0 ? self.CSSRule.height : CSS_UNDEFINED;
+    self.node->style.position[CSS_LEFT] = CSSRule.left;
+    self.node->style.position[CSS_TOP] = CSSRule.top;
+    self.node->style.position[CSS_RIGHT] = CSSRule.right;
+    self.node->style.position[CSS_BOTTOM] = CSSRule.bottom;
     
-    self.node->style.minDimensions[CSS_WIDTH] = self.CSSRule.minWidth;
-    self.node->style.minDimensions[CSS_HEIGHT] = self.CSSRule.minHeight;
+    self.node->style.dimensions[CSS_WIDTH] = CSSRule.width > 0 ? CSSRule.width : CSS_UNDEFINED;
+    self.node->style.dimensions[CSS_HEIGHT] = CSSRule.height > 0 ? CSSRule.height : CSS_UNDEFINED;
     
-    self.node->style.maxDimensions[CSS_WIDTH] = self.CSSRule.maxWidth > 0 ? self.CSSRule.maxWidth : CSS_UNDEFINED;
-    self.node->style.maxDimensions[CSS_HEIGHT] = self.CSSRule.maxHeight > 0 ? self.CSSRule.maxHeight : CSS_UNDEFINED;
+    self.node->style.minDimensions[CSS_WIDTH] = CSSRule.minWidth;
+    self.node->style.minDimensions[CSS_HEIGHT] = CSSRule.minHeight;
     
-    self.node->style.margin[CSS_LEFT] = self.CSSRule.marginLeft;
-    self.node->style.margin[CSS_TOP] = self.CSSRule.marginTop;
-    self.node->style.margin[CSS_RIGHT] = self.CSSRule.marginRight;
-    self.node->style.margin[CSS_BOTTOM] = self.CSSRule.marginBottom;
+    self.node->style.maxDimensions[CSS_WIDTH] = CSSRule.maxWidth > 0 ? CSSRule.maxWidth : CSS_UNDEFINED;
+    self.node->style.maxDimensions[CSS_HEIGHT] = CSSRule.maxHeight > 0 ? CSSRule.maxHeight : CSS_UNDEFINED;
     
-    self.node->style.padding[CSS_LEFT] = self.CSSRule.paddingLeft;
-    self.node->style.padding[CSS_TOP] = self.CSSRule.paddingTop;
-    self.node->style.padding[CSS_RIGHT] = self.CSSRule.paddingRight;
-    self.node->style.padding[CSS_BOTTOM] = self.CSSRule.paddingBottom;
+    self.node->style.margin[CSS_LEFT] = CSSRule.marginLeft;
+    self.node->style.margin[CSS_TOP] = CSSRule.marginTop;
+    self.node->style.margin[CSS_RIGHT] = CSSRule.marginRight;
+    self.node->style.margin[CSS_BOTTOM] = CSSRule.marginBottom;
     
-    self.node->style.border[CSS_LEFT] = self.CSSRule.borderLeft.width;
-    self.node->style.border[CSS_TOP] = self.CSSRule.borderTop.width;
-    self.node->style.border[CSS_RIGHT] = self.CSSRule.borderRight.width;
-    self.node->style.border[CSS_BOTTOM] = self.CSSRule.borderBottom.width;
+    self.node->style.padding[CSS_LEFT] = CSSRule.paddingLeft;
+    self.node->style.padding[CSS_TOP] = CSSRule.paddingTop;
+    self.node->style.padding[CSS_RIGHT] = CSSRule.paddingRight;
+    self.node->style.padding[CSS_BOTTOM] = CSSRule.paddingBottom;
+    
+    self.node->style.border[CSS_LEFT] = CSSRule.borderLeft.width;
+    self.node->style.border[CSS_TOP] = CSSRule.borderTop.width;
+    self.node->style.border[CSS_RIGHT] = CSSRule.borderRight.width;
+    self.node->style.border[CSS_BOTTOM] = CSSRule.borderBottom.width;
     
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexPrepareForLayout];
@@ -255,6 +256,10 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         ret = [self flexSubnodesForLayout];
     }
     return ret;
+}
+
++ (Class)CSSRuleClass {
+    return [StylizeCSSRule class];
 }
 
 @end
@@ -345,11 +350,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)applyCSSDictionary:(NSDictionary *)CSSDictionary {
     [self.CSSRule updateRuleFromDictionay:CSSDictionary];
-}
-
-- (BOOL)isVisibile {
-    return self.CSSRule.visibility != StylizeVisibilityHidden &&
-            self.CSSRule.display != StylizeDisplayNone;
 }
 
 @end

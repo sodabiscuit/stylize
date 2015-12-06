@@ -10,11 +10,7 @@
 #import "StylizeGeometry.h"
 #import "StylizeLayoutFlexGeometry.h"
 
-#define kStylizeNofificationStyleDimension @"kStylizeNofificationStyleDimension"
-#define kStylizeNofificationStylePosition @"kStylizeNofificationStylePosition"
-#define kStylizeNofificationStyleNormal @"kStylizeNofificationStyleNormal"
-
-@protocol StylizeNodeProtocol;
+@class StylizeCSSRule;
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
 
@@ -95,12 +91,10 @@
 
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIImage *backgroundImage;
-
 @property (nonatomic, strong) UIColor *color;
-
 @property (nonatomic, assign) CGFloat opacity;
 
-@property (nonatomic, assign) StylizeTextAlign *textAlign;
+@property (nonatomic, assign) StylizeTextAlign textAlign;
 @property (nonatomic, assign) NSInteger fontSize;
 @property (nonatomic, strong) NSString *fontFamily;
 @property (nonatomic, assign) NSInteger fontWeight;
@@ -114,5 +108,6 @@
 - (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary;
 - (void)updateRuleFromRaw:(NSString *)ruleRaw;
 - (void)updateRuleFromRule:(StylizeCSSRule *)rule;
+- (void)updatePositionAndDimensionFromRect:(CGRect)rect;
 
 @end

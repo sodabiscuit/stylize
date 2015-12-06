@@ -93,9 +93,10 @@
     
     StylizeTextNode *textNode = [StylizeTextNode new];
     textNode.CSS(@{
-                   @"position" : @"absolute",
+                   @"display" : @"inline",
                    @"background-color" : @"transparent",
                    @"font-size" : @"12",
+                   @"text-align" : @"center"
                    }, nil);
     textNode.text = nodeID;
     [ret addSubnode:textNode];

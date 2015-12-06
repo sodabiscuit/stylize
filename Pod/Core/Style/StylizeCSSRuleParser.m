@@ -272,11 +272,6 @@
     return ret;
 }
 
-
-@end
-
-@implementation StylizeCSSRuleParser(Utility)
-
 + (UIColor *)colorWithHexString:(NSString *)hexString {
     return [[self class] colorWithHexString:hexString alpha:1.0];
 }

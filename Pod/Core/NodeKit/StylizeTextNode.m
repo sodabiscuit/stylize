@@ -26,6 +26,10 @@
     label.textAlignment = (int)self.CSSRule.textAlign;
     label.textColor = self.CSSRule.color;
     label.font = self.CSSRule.font;
+    
+    if (self.CSSRule.display == StylizeDisplayInline) {
+        label.numberOfLines = 0;
+    }
 }
 
 - (void)setAttributedText:(NSAttributedString *)attributedText {
@@ -41,10 +45,15 @@
 }
 
 - (StylizeNodeMeasureBlock)classMeasure {
-    StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
-        return CGSizeMake(100, 50);
-    };
-    return block;
+    UILabel *label = (UILabel *)self.view;
+    if (self.CSSRule.display == StylizeDisplayInline) {
+        StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
+            return [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+        };
+        return block;
+    }
+    
+    return nil;
 }
 
 @end

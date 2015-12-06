@@ -8,7 +8,6 @@
 
 #import <objc/runtime.h>
 #import "StylizeCSSRule.h"
-#import "StylizeNode.h"
 #import "StylizeCSSRuleParser.h"
 
 static void *PrivateKVOContext = &PrivateKVOContext;
@@ -259,6 +258,13 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (void)updateRuleFromRule:(StylizeCSSRule *)rule {
     //TODO
+}
+
+- (void)updatePositionAndDimensionFromRect:(CGRect)rect {
+    self.top = rect.origin.x;
+    self.left = rect.origin.y;
+    self.width = rect.size.width;
+    self.height = rect.size.height;
 }
 
 + (NSArray *)getLayoutAffectedRuleKeys {

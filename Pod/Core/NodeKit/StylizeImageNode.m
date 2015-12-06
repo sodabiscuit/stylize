@@ -10,4 +10,16 @@
 
 @implementation StylizeImageNode
 
+- (instancetype)init {
+    return [self initWithViewClass:[UIImageView class]];
+}
+
+- (void)renderNode {
+    [super renderNode];
+}
+
+- (void)layoutNode {
+
+}
+
 @end

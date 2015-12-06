@@ -8,8 +8,6 @@
 
 #import "StylizeNode+Query.h"
 #import "UIView+StylizeNode.h"
-#import "StylizeCSSRule.h"
-#import "StylizeCSSRuleParser.h"
 
 NS_INLINE void add_valid_node_to_array(StylizeNode *node, NSString *selector, NSMutableArray *__autoreleasing *array) {
     if ([selector hasPrefix:@"."]) {

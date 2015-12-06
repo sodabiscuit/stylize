@@ -38,8 +38,8 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAFilter)(StylizeNodeQueryBlockB
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI);
 
 //event
-typedef StylizeNode* (^StylizeNodeQueryBlockNEventBind)(NSString *, NSString *, StylizeNodeEventBlockBind);
-typedef StylizeNode* (^StylizeNodeQueryBlockNEventUnbind)(NSString *, NSString *);
+typedef StylizeNode* (^StylizeNodeQueryBlockNEventBind)(NSString *, StylizeNodeEventBlockBind);
+typedef StylizeNode* (^StylizeNodeQueryBlockNEventUnbind)(NSString *);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEventBind)(NSString *, NSString *, StylizeNodeEventBlockBind);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEventUnbind)(NSString *, NSString *);
 

@@ -52,4 +52,14 @@
     control.selected = selected;
 }
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    UIControl *control = (UIControl *)self.view;
+    [control addTarget:target action:action forControlEvents:controlEvents];
+}
+
+- (void)removeTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    UIControl *control = (UIControl *)self.view;
+    [control removeTarget:target action:action forControlEvents:controlEvents];
+}
+
 @end

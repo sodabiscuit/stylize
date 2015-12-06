@@ -8,4 +8,4 @@
 
 @class StylizeNode;
 
-typedef StylizeNode* (^StylizeNodeEventBlockBind)(StylizeNode *, NSString *, id);
+typedef StylizeNode* (^StylizeNodeEventBlockBind)(id, id);

@@ -117,25 +117,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     return self;
 }
 
-- (void)addNodeClass:(NSString *)className {
-    NSMutableArray *classes = [@[] mutableCopy];
-    
-    if (_nodeClasses) {
-        classes = [[_nodeClasses allObjects] mutableCopy];
-    }
-    
-    [classes addObject:className];
-    _nodeClasses = [NSSet setWithArray:classes];
-}
-
-- (BOOL)hasNodeClass:(NSString *)className {
-    if (!_nodeClasses || [_nodeClasses count] == 0) {
-        return NO;
-    }
-    
-    return [[_nodeClasses allObjects] indexOfObject:className] != NSNotFound;
-}
-
 #pragma mark - Setter and Getter
 
 - (CGRect)frame {
@@ -151,6 +132,58 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     
     return (CGRect){(CGPoint){x, y}, (CGSize){w, h}};
 }
+
+#pragma mark - SuperClass Method and Protocol
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context {
+    if (context == PrivateKVOContext) {
+        if ([[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+            [self prepareForLayout];
+            if ([[[self.class CSSRuleClass] getBothAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+                [self renderNode];
+            }
+        } else if ([[[self.class CSSRuleClass] getRenderAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
+            [self renderNode];
+        } else {
+            //NOTHING
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
++ (Class)CSSRuleClass {
+    return [StylizeCSSRule class];
+}
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    UIView *view = (UIView *)self.view;
+    view.userInteractionEnabled = userInteractionEnabled;
+}
+
+- (BOOL)isUserInteractionEnabled {
+    UIView *view = (UIView *)self.view;
+    return view.userInteractionEnabled;
+}
+
+- (void)setTag:(NSInteger)tag {
+    UIView *view = (UIView *)self.view;
+    view.tag = tag;
+}
+
+- (NSInteger)tag {
+    UIView *view = (UIView *)self.view;
+    return view.tag;
+}
+
+@end
+
+
+#pragma mark - Layout
+
+@implementation StylizeNode(Layout)
 
 - (void)layoutNode {
     _hasLayout = YES;
@@ -179,27 +212,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         StylizeNode *subnode = (StylizeNode *)obj;
         [subnode layoutNode];
     }];
-}
-
-#pragma mark - SuperClass Method and Protocol
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context {
-    if (context == PrivateKVOContext) {
-        if ([[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
-            [self prepareForLayout];
-            if ([[[self.class CSSRuleClass] getBothAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
-                [self renderNode];
-            }
-        } else if ([[[self.class CSSRuleClass] getRenderAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
-            [self renderNode];
-        } else {
-            //NOTHING
-        }
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
 }
 
 - (void)renderNode {
@@ -256,30 +268,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         ret = [self flexSubnodesForLayout];
     }
     return ret;
-}
-
-+ (Class)CSSRuleClass {
-    return [StylizeCSSRule class];
-}
-
-- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
-    UIView *view = (UIView *)self.view;
-    view.userInteractionEnabled = userInteractionEnabled;
-}
-
-- (BOOL)isUserInteractionEnabled {
-    UIView *view = (UIView *)self.view;
-    return view.userInteractionEnabled;
-}
-
-- (void)setTag:(NSInteger)tag {
-    UIView *view = (UIView *)self.view;
-    view.tag = tag;
-}
-
-- (NSInteger)tag {
-    UIView *view = (UIView *)self.view;
-    return view.tag;
 }
 
 @end
@@ -347,6 +335,26 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         _supernode.subnodes = [subnodes copy];
     }
 }
+
+- (void)addNodeClass:(NSString *)className {
+    NSMutableArray *classes = [@[] mutableCopy];
+    
+    if (_nodeClasses) {
+        classes = [[_nodeClasses allObjects] mutableCopy];
+    }
+    
+    [classes addObject:className];
+    _nodeClasses = [NSSet setWithArray:classes];
+}
+
+- (BOOL)hasNodeClass:(NSString *)className {
+    if (!_nodeClasses || [_nodeClasses count] == 0) {
+        return NO;
+    }
+    
+    return [[_nodeClasses allObjects] indexOfObject:className] != NSNotFound;
+}
+
 
 @end
 

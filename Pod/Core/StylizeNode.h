@@ -67,6 +67,11 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 @property (nonatomic, readonly, copy) NSArray *subnodes;
 
 /**
+ *  事件列表
+ */
+@property (nonatomic, readonly) NSDictionary *events;
+
+/**
  *  节点所包含的UIView或UIView子类实例
  */
 @property (nonatomic, readonly, strong) id view;
@@ -130,6 +135,18 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 - (instancetype)initWithView:(UIView *)view;
 
 /**
+ *  规则类
+ *
+ *  @return 规则类
+ */
++ (Class)CSSRuleClass;
+
+@end
+
+
+@interface StylizeNode(Layout)
+
+/**
  *  布局前处理
  */
 -(void)prepareForLayout;
@@ -148,28 +165,6 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  布局之外的渲染
  */
 - (void)renderNode;
-
-/**
- *  添加class类
- *
- *  @param className 样式类名
- */
-- (void)addNodeClass:(NSString *)className;
-
-/**
- *  是否存在class
- *
- *  @param className 样式类名
- */
-- (BOOL)hasNodeClass:(NSString *)className;
-
-/**
- *  规则类
- *
- *  @return 规则类
- */
-+ (Class)CSSRuleClass;
-
 
 @end
 
@@ -226,6 +221,21 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  */
 - (void)removeFromSupernode;
 
+/**
+ *  添加class类
+ *
+ *  @param className 样式类名
+ */
+- (void)addNodeClass:(NSString *)className;
+
+/**
+ *  是否存在class
+ *
+ *  @param className 样式类名
+ */
+- (BOOL)hasNodeClass:(NSString *)className;
+
+
 @end
 
 @interface StylizeNode(CSS)
@@ -263,7 +273,19 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 
 @interface StylizeNode(Event)
 
-- (void)addEvent:(NSString *)event identifier:(NSString *)identifier block:(StylizeNodeEventBlockBind)nodeBlock;
-- (void)removeEvent:(NSString *)event identifier:(NSString *)identifier;
+/**
+ *  添加事件
+ *
+ *  @param event     事件识别符
+ *  @param nodeBlock 事件block
+ */
+- (void)addEvent:(id)event block:(StylizeNodeEventBlockBind)nodeBlock;
+
+/**
+ *  移除事件
+ *
+ *  @param event 事件识别符
+ */
+- (void)removeEvent:(id)event;
 
 @end

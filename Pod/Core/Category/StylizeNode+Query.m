@@ -282,8 +282,8 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
 }
 
 - (StylizeNodeQueryBlockNEventBind)on {
-    StylizeNodeQueryBlockNEventBind block = ^id(NSString *event, NSString *identifier, StylizeNodeEventBlockBind eventBlock) {
-        [self addEvent:event identifier:identifier block:eventBlock];
+    StylizeNodeQueryBlockNEventBind block = ^id(NSString *event, StylizeNodeEventBlockBind eventBlock) {
+        [self addEvent:event block:eventBlock];
         return self;
     };
     
@@ -291,8 +291,8 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
 }
 
 - (StylizeNodeQueryBlockNEventUnbind)off {
-    StylizeNodeQueryBlockNEventUnbind block = ^id(NSString *event, NSString *identifier) {
-        [self removeEvent:event identifier:identifier];
+    StylizeNodeQueryBlockNEventUnbind block = ^id(NSString *event) {
+        [self removeEvent:event];
         return self;
     };
     

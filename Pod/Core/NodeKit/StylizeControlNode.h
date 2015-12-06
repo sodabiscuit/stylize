@@ -14,4 +14,7 @@
 @property(nonatomic,getter=isSelected) BOOL selected;
 @property(nonatomic,getter=isHighlighted) BOOL highlighted;
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+- (void)removeTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+
 @end

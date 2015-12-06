@@ -14,5 +14,15 @@
     return [self initWithView:[UIButton buttonWithType:UIButtonTypeCustom]];
 }
 
+- (void)layoutNode {
+    [super layoutNode];
+    UIButton *button = (UIButton *)self.view;
+}
+
+- (void)renderNode {
+    [super renderNode];
+    UIButton *button = (UIButton *)self.view;
+}
+
 
 @end

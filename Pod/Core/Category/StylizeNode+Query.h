@@ -7,6 +7,7 @@
 //
 
 #import "StylizeNode.h"
+#import "StylizeEventDefinations.h"
 
 @class StylizeNodeQuery;
 
@@ -31,9 +32,16 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAOO)(id, id);
 typedef StylizeNode* (^StylizeNodeQueryBlockNOI)(id, NSUInteger);
 typedef BOOL (^StylizeNodeQueryBlockBOI)(id, NSUInteger);
 
+//map,reduce
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAMap)(StylizeNodeQueryBlockNN);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAFilter)(StylizeNodeQueryBlockBOI);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI);
+
+//event
+typedef StylizeNode* (^StylizeNodeQueryBlockNEventBind)(NSString *, NSString *, StylizeNodeEventBlockBind);
+typedef StylizeNode* (^StylizeNodeQueryBlockNEventUnbind)(NSString *, NSString *);
+typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEventBind)(NSString *, NSString *, StylizeNodeEventBlockBind);
+typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEventUnbind)(NSString *, NSString *);
 
 
 @interface StylizeNode(Query)
@@ -118,6 +126,18 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI
  *  nodeClasses是否包含class
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockBS hasClass;
+
+#pragma mark - events
+
+/**
+ *  绑定事件
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNEventBind on;
+
+/**
+ *  事件解除绑定
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNEventUnbind off;
 
 @end
 

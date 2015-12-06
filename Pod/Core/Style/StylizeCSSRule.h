@@ -76,6 +76,12 @@
 @property (nonatomic, assign) StylizeBorderType borderRightStyle;
 @property (nonatomic, strong) UIColor *borderRightColor;
 
+@property (nonatomic, assign) StylizeBorderRadius borderRadius;
+@property (nonatomic, assign) CGFloat borderTopLeftRadius;
+@property (nonatomic, assign) CGFloat borderTopRightRadius;
+@property (nonatomic, assign) CGFloat borderBottomRightRadius;
+@property (nonatomic, assign) CGFloat borderBottomLeftRadius;
+
 @property (nonatomic, assign) StylizeLayoutFlexDirection flexDirection;
 @property (nonatomic, assign) StylizeLayoutFlexJustifyContent justifyContent;
 @property (nonatomic, assign) StylizeLayoutFlexAlign alignItems;
@@ -93,6 +99,13 @@
 @property (nonatomic, strong) UIImage *backgroundImage;
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) CGFloat opacity;
+
+@property (nonatomic, strong) UIColor *backgroundColorDisabled;
+@property (nonatomic, strong) UIColor *backgroundColorSelected;
+@property (nonatomic, strong) UIColor *backgroundColorHighlighted;
+@property (nonatomic, strong) UIColor *colorDisabled;
+@property (nonatomic, strong) UIColor *colorSelected;
+@property (nonatomic, strong) UIColor *colorHighlighted;
 
 @property (nonatomic, assign) StylizeTextAlign textAlign;
 @property (nonatomic, assign) NSInteger fontSize;

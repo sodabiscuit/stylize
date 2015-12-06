@@ -8,6 +8,7 @@
 
 #import "StylizeGeometry.h"
 #import "Layout.h"
+#import "StylizeEventDefinations.h"
 
 @class StylizeCSSRule;
 @class StylizeNode;
@@ -73,7 +74,12 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 /**
  *  透传至view
  */
-@property(nonatomic,getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
+@property (nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
+
+/**
+ *  tag，透传至view
+ */
+@property (nonatomic, assign) NSInteger tag;
 
 /**
  *  flexbox布局节点
@@ -252,5 +258,12 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  @param CSSRaw CSS文本
  */
 - (void)applyCSSRaw:(NSString *)CSSRaw;
+
+@end
+
+@interface StylizeNode(Event)
+
+- (void)addEvent:(NSString *)event identifier:(NSString *)identifier block:(StylizeNodeEventBlockBind)nodeBlock;
+- (void)removeEvent:(NSString *)event identifier:(NSString *)identifier;
 
 @end

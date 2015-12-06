@@ -71,6 +71,13 @@ typedef struct {
     StylizeBorderSkeleton borderLeft;
 }  StylizeBorder;
 
+typedef struct {
+    CGFloat borderTopLeft;
+    CGFloat borderTopRight;
+    CGFloat borderBottomRight;
+    CGFloat borderBottomLeft;
+}  StylizeBorderRadius;
+
 CG_INLINE StylizeMargin
 StylizeMarginMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
 {
@@ -91,6 +98,17 @@ StylizePaddingMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
     padding.paddingBottom = bottom;
     padding.paddingLeft = right;
     return padding;
+}
+
+CG_INLINE StylizeBorderRadius
+StylizeBorderRadiusMake(CGFloat topleft, CGFloat topright, CGFloat bottomright, CGFloat bottomleft)
+{
+    StylizeBorderRadius radius;
+    radius.borderTopLeft = topleft;
+    radius.borderTopRight = topright;
+    radius.borderBottomRight = bottomright;
+    radius.borderBottomLeft = bottomleft;
+    return radius;
 }
 
 typedef enum {

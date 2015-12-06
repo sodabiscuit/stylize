@@ -22,4 +22,34 @@
     [super renderNode];
 }
 
+- (BOOL)isEnabled {
+    UIControl *control = (UIControl *)self.view;
+    return control.enabled;
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    UIControl *control = (UIControl *)self.view;
+    control.enabled = enabled;
+}
+
+- (BOOL)isHighlighted {
+    UIControl *control = (UIControl *)self.view;
+    return control.highlighted;
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+    UIControl *control = (UIControl *)self.view;
+    control.highlighted = highlighted;
+}
+
+- (BOOL)isSelected {
+    UIControl *control = (UIControl *)self.view;
+    return control.selected;
+}
+
+- (void)setSelected:(BOOL)selected {
+    UIControl *control = (UIControl *)self.view;
+    control.selected = selected;
+}
+
 @end

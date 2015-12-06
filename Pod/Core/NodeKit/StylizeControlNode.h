@@ -10,4 +10,8 @@
 
 @interface StylizeControlNode : StylizeNode
 
+@property(nonatomic,getter=isEnabled) BOOL enabled;
+@property(nonatomic,getter=isSelected) BOOL selected;
+@property(nonatomic,getter=isHighlighted) BOOL highlighted;
+
 @end

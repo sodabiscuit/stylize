@@ -272,6 +272,16 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     return view.userInteractionEnabled;
 }
 
+- (void)setTag:(NSInteger)tag {
+    UIView *view = (UIView *)self.view;
+    view.tag = tag;
+}
+
+- (NSInteger)tag {
+    UIView *view = (UIView *)self.view;
+    return view.tag;
+}
+
 @end
 
 #pragma mark - DOM

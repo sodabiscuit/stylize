@@ -90,6 +90,7 @@
 		1282FBF61C0AEE9A002CE583 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
 		1282FBF71C0AEE9A002CE583 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MDLaunchScreenLogo.png; sourceTree = "<group>"; };
+		12AEA9641C14696200FCA81D /* StylizeEventDefinations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeEventDefinations.h; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 				126ABC131B58B1F300A62026 /* StylizeTextNode.m */,
 				123990E31C1406B100E5A6D3 /* StylizeButtonNode.h */,
 				123990E41C1406B100E5A6D3 /* StylizeButtonNode.m */,
+				12AEA9641C14696200FCA81D /* StylizeEventDefinations.h */,
 			);
 			path = NodeKit;
 			sourceTree = "<group>";

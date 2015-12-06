@@ -15,6 +15,7 @@
 
 //NodeKit
 #import "StylizeControlNode.h"
+#import "StylizeButtonNode.h"
 #import "StylizeImageNode.h"
 #import "StylizeTextNode.h"
 #import "StylizeScrollNode.h"

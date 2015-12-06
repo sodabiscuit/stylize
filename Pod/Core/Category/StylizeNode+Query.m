@@ -8,6 +8,7 @@
 
 #import "StylizeNode+Query.h"
 #import "UIView+StylizeNode.h"
+#import "StylizeControlNode.h"
 
 NS_INLINE void add_valid_node_to_array(StylizeNode *node, NSString *selector, NSMutableArray *__autoreleasing *array) {
     if ([selector hasPrefix:@"."]) {
@@ -277,6 +278,24 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
     StylizeNodeQueryBlockBS block = ^BOOL(NSString *cls) {
         return [self hasNodeClass:cls];
     };
+    return block;
+}
+
+- (StylizeNodeQueryBlockNEventBind)on {
+    StylizeNodeQueryBlockNEventBind block = ^id(NSString *event, NSString *identifier, StylizeNodeEventBlockBind eventBlock) {
+        [self addEvent:event identifier:identifier block:eventBlock];
+        return self;
+    };
+    
+    return block;
+}
+
+- (StylizeNodeQueryBlockNEventUnbind)off {
+    StylizeNodeQueryBlockNEventUnbind block = ^id(NSString *event, NSString *identifier) {
+        [self removeEvent:event identifier:identifier];
+        return self;
+    };
+    
     return block;
 }
 

@@ -24,7 +24,7 @@
         NSString *key = [keyAndValue[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString *value = [keyAndValue[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        [self setRule:value forKey:key inRule:CSSRule];
+        [self setRule:value forKey:key pseudoKey:nil inRule:CSSRule];
     }];
 }
 
@@ -33,44 +33,55 @@
     [CSSDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if ([key isKindOfClass:[NSString class]]) {
             NSString *k = [key stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if ([obj isKindOfClass:[NSString class]]) {
-                NSString *val = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                [self setRule:val forKey:k inRule:CSSRule];
+            if ([k hasPrefix:@":"] &&
+                [obj isKindOfClass:[NSDictionary class]]) {
+                NSString *pseudo = [k substringFromIndex:1];
+                [((NSDictionary *)obj) enumerateKeysAndObjectsUsingBlock:^(id pseudoKey, id pseudoObj, BOOL *pseudoStop) {
+                    if ([obj isKindOfClass:[NSString class]]) {
+                        NSString *val = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        [self setRule:val forKey:k pseudoKey:pseudo inRule:CSSRule];
+                    } else {
+                        [self setRuleObject:obj forKey:k pseudoKey:pseudo inRule:CSSRule];
+                    }
+                }];
             } else {
-                [self setRuleObject:obj forKey:k inRule:CSSRule];
+                if ([obj isKindOfClass:[NSString class]]) {
+                    NSString *val = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                    [self setRule:val forKey:k pseudoKey:nil inRule:CSSRule];
+                } else {
+                    [self setRuleObject:obj forKey:k pseudoKey:nil inRule:CSSRule];
+                }
             }
         }
     }];
 }
 
 + (NSString *)getRuleKey:(NSString *)key {
-    NSString *ret = key;
     NSArray *keys = [key componentsSeparatedByString:@"-"];
     
-    if ([keys count] == 3) {
-        NSString *mainKey = keys[0];
-        NSString *suffixKey = [keys[1] capitalizedString];
-        NSString *extraKey = [keys[2] capitalizedString];
-        ret = [NSString stringWithFormat:@"%@%@%@", mainKey, suffixKey, extraKey];
-    } else if ([keys count] == 2) {
-        NSString *mainKey = keys[0];
-        NSString *suffixKey = [keys[1] capitalizedString];
-        ret = [NSString stringWithFormat:@"%@%@", mainKey, suffixKey];
-    } else {
-        //NOTHING
-    }
+    NSMutableString *ret = [@"" mutableCopy];
+    [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx != 0) {
+            [ret appendString:[((NSString *)obj) capitalizedString]];
+        } else {
+            [ret appendString:obj];
+        }
+    }];
     
     return ret;
 }
 
 + (void)setRuleObject:(id)value
                forKey:(NSString *)key
+            pseudoKey:(NSString *)pseudo
                inRule:(StylizeCSSRule *)CSSRule {
     NSString *ruleKey = [self getRuleKey:key];
+    pseudo = pseudo.length > 0 ? pseudo : @"";
+    NSString *outputKey = [NSString stringWithFormat:@"%@%@", ruleKey, [pseudo capitalizedString]];
     
     if ([ruleKey isEqualToString:@"font"]) {
         if ([value isKindOfClass:[UIFont class]]) {
-            [CSSRule setValue:value forKey:ruleKey];
+            [CSSRule setValue:value forKey:outputKey];
         }
         return;
     }
@@ -78,8 +89,11 @@
 
 + (void)setRule:(NSString *)value
          forKey:(NSString *)key
+      pseudoKey:(NSString *)pseudo
          inRule:(StylizeCSSRule *)CSSRule {
     NSString *ruleKey = [self getRuleKey:key];
+    pseudo = pseudo.length > 0 ? pseudo : @"";
+    NSString *outputKey = [NSString stringWithFormat:@"%@%@", ruleKey, [pseudo capitalizedString]];
     
     if ([ruleKey isEqualToString:@"top"] ||
         [ruleKey isEqualToString:@"right"] ||
@@ -96,18 +110,18 @@
         [ruleKey isEqualToString:@"opacity"] ||
         [ruleKey isEqualToString:@"fontSize"]
         ) {
-        [CSSRule setValue:[NSNumber numberWithDouble:[value doubleValue]] forKey:ruleKey];
+        [CSSRule setValue:[NSNumber numberWithDouble:[value doubleValue]] forKey:outputKey];
         return;
     }
     
     if ([ruleKey isEqualToString:@"fontWeight"]
         ) {
         if ([value isEqualToString:@"normal"]) {
-            [CSSRule setValue:[NSNumber numberWithInteger:400] forKey:ruleKey];
+            [CSSRule setValue:[NSNumber numberWithInteger:400] forKey:outputKey];
         } else if ([value isEqualToString:@"bold"]) {
-            [CSSRule setValue:[NSNumber numberWithInteger:700] forKey:ruleKey];
+            [CSSRule setValue:[NSNumber numberWithInteger:700] forKey:outputKey];
         } else if ([value integerValue] >= 100) {
-            [CSSRule setValue:[NSNumber numberWithInteger:[value integerValue]] forKey:ruleKey];
+            [CSSRule setValue:[NSNumber numberWithInteger:[value integerValue]] forKey:outputKey];
         }
     }
     
@@ -119,12 +133,12 @@
         [ruleKey isEqualToString:@"alignSelf"] ||
         [ruleKey isEqualToString:@"alignContent"]
         ) {
-        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
+        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:outputKey];
         return;
     }
     
     if ([ruleKey isEqualToString:@"flex"]) {
-        [CSSRule setValue:[NSNumber numberWithInteger:[value integerValue]] forKey:ruleKey];
+        [CSSRule setValue:[NSNumber numberWithInteger:[value integerValue]] forKey:outputKey];
         return;
     }
     
@@ -132,7 +146,7 @@
     if ([ruleKey isEqualToString:@"display"] ||
         [ruleKey isEqualToString:@"visibility"]
         ) {
-        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
+        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:outputKey];
         return;
     }
     
@@ -140,15 +154,15 @@
         [ruleKey isEqualToString:@"backgroundColor"]
         ) {
         if ([value hasPrefix:@"#"]) {
-            [CSSRule setValue:[self colorWithHexString:value] forKey:ruleKey];
+            [CSSRule setValue:[self colorWithHexString:value] forKey:outputKey];
         } else {
-            [CSSRule setValue:[self getPresetColor:value] forKey:ruleKey];
+            [CSSRule setValue:[self getPresetColor:value] forKey:outputKey];
         }
         return;
     }
     
     if ([ruleKey isEqualToString:@"textAlign"]) {
-        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:ruleKey];
+        [CSSRule setValue:[self getEnumValue:ruleKey value:value] forKey:outputKey];
         return;
     }
 }
@@ -157,80 +171,80 @@
     NSNumber *ret = [NSNumber numberWithInt:-9999];
     
     NSDictionary *dict = @{
-                               @"borderStyle" : @{
-                                   @"solid" : [NSNumber numberWithInt:StylizeBorderTypeSolid],
-                                   @"dash" : [NSNumber numberWithInt:StylizeBorderTypeDash],
-                                   @"dotted" : [NSNumber numberWithInt:StylizeBorderTypeDotted],
-                                   @"_" : [NSNumber numberWithInt:StylizeBorderTypeSolid]
-                               },
-                               @"textAlign" : @{
-                                   @"left" : [NSNumber numberWithInt:StylizeTextAlignLeft],
-                                   @"right" : [NSNumber numberWithInt:StylizeTextAlignRight],
-                                   @"center" : [NSNumber numberWithInt:StylizeTextAlignCenter],
-                                   @"justify" : [NSNumber numberWithInt:StylizeTextAlignJustify],
-                                   @"_" : [NSNumber numberWithInt:StylizeTextAlignLeft]
-                               },
-                               @"flexDirection" : @{
-                                   @"row" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionRow],
-                                   @"row-reverse" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionRowReverse],
-                                   @"column" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionColumn],
-                                   @"column-reverse" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionColumnReverse],
-                                   @"_" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionRow]
-                               },
-                               @"flexWrap" : @{
-                                   @"wrap" : [NSNumber numberWithInt:StylizeLayoutFlexFlexWrapWrap],
-                                   @"nowrap" : [NSNumber numberWithInt:StylizeLayoutFlexFlexWrapNowrap],
-                                   @"_" : [NSNumber numberWithInt:StylizeLayoutFlexFlexWrapNowrap]
-                               },
-                               @"justifyContent" : @{
-                                   @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentFlexStart],
-                                   @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentFlexEnd],
-                                   @"center" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentCenter],
-                                   @"space-between" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentSpaceBetween],
-                                   @"space-around" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentSpaceAround],
-                                   @"_" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentFlexStart]
-                               },
-                               @"alignItems" : @{
-                                   @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexStart],
-                                   @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexEnd],
-                                   @"center" : [NSNumber numberWithInt:StylizeLayoutFlexAlignCenter],
-                                   @"auto" : [NSNumber numberWithInt:StylizeLayoutFlexAlignAuto],
-                                   @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
-                                   @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
-                               },
-                               @"alignSelf" : @{
-                                   @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexStart],
-                                   @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexEnd],
-                                   @"center" : [NSNumber numberWithInt:StylizeLayoutFlexAlignCenter],
-                                   @"auto" : [NSNumber numberWithInt:StylizeLayoutFlexAlignAuto],
-                                   @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
-                                   @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
-                               },
-                               @"alignContent" : @{
-                                   @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexStart],
-                                   @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexEnd],
-                                   @"center" : [NSNumber numberWithInt:StylizeLayoutFlexAlignCenter],
-                                   @"auto" : [NSNumber numberWithInt:StylizeLayoutFlexAlignAuto],
-                                   @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
-                                   @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
-                               },
-                               @"position" : @{
-                                   @"relative" : [NSNumber numberWithInt:StylizePositionTypeRelative],
-                                   @"absolute" : [NSNumber numberWithInt:StylizePositionTypeAbsolute],
-                                   @"_" : [NSNumber numberWithInt:StylizePositionTypeRelative]
-                               },
-                               @"visibility" : @{
-                                   @"visible" : [NSNumber numberWithInt:StylizeVisibilityVisible],
-                                   @"hidden" : [NSNumber numberWithInt:StylizeVisibilityHidden],
-                                   @"_" : [NSNumber numberWithInt:StylizeVisibilityVisible]
-                               },
-                               @"display" : @{
-                                   @"block" : [NSNumber numberWithInt:StylizeDisplayBlock],
-                                   @"inline" : [NSNumber numberWithInt:StylizeDisplayInline],
-                                   @"none" : [NSNumber numberWithInt:StylizeDisplayNone],
-                                   @"_" : [NSNumber numberWithInt:StylizeDisplayBlock]
-                               },
-                           };
+                           @"borderStyle" : @{
+                               @"solid" : [NSNumber numberWithInt:StylizeBorderTypeSolid],
+                               @"dash" : [NSNumber numberWithInt:StylizeBorderTypeDash],
+                               @"dotted" : [NSNumber numberWithInt:StylizeBorderTypeDotted],
+                               @"_" : [NSNumber numberWithInt:StylizeBorderTypeSolid]
+                           },
+                           @"textAlign" : @{
+                               @"left" : [NSNumber numberWithInt:StylizeTextAlignLeft],
+                               @"right" : [NSNumber numberWithInt:StylizeTextAlignRight],
+                               @"center" : [NSNumber numberWithInt:StylizeTextAlignCenter],
+                               @"justify" : [NSNumber numberWithInt:StylizeTextAlignJustify],
+                               @"_" : [NSNumber numberWithInt:StylizeTextAlignLeft]
+                           },
+                           @"flexDirection" : @{
+                               @"row" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionRow],
+                               @"row-reverse" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionRowReverse],
+                               @"column" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionColumn],
+                               @"column-reverse" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionColumnReverse],
+                               @"_" : [NSNumber numberWithInt:StylizeLayoutFlexDirectionRow]
+                           },
+                           @"flexWrap" : @{
+                               @"wrap" : [NSNumber numberWithInt:StylizeLayoutFlexFlexWrapWrap],
+                               @"nowrap" : [NSNumber numberWithInt:StylizeLayoutFlexFlexWrapNowrap],
+                               @"_" : [NSNumber numberWithInt:StylizeLayoutFlexFlexWrapNowrap]
+                           },
+                           @"justifyContent" : @{
+                               @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentFlexStart],
+                               @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentFlexEnd],
+                               @"center" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentCenter],
+                               @"space-between" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentSpaceBetween],
+                               @"space-around" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentSpaceAround],
+                               @"_" : [NSNumber numberWithInt:StylizeLayoutFlexJustifyContentFlexStart]
+                           },
+                           @"alignItems" : @{
+                               @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexStart],
+                               @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexEnd],
+                               @"center" : [NSNumber numberWithInt:StylizeLayoutFlexAlignCenter],
+                               @"auto" : [NSNumber numberWithInt:StylizeLayoutFlexAlignAuto],
+                               @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
+                               @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
+                           },
+                           @"alignSelf" : @{
+                               @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexStart],
+                               @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexEnd],
+                               @"center" : [NSNumber numberWithInt:StylizeLayoutFlexAlignCenter],
+                               @"auto" : [NSNumber numberWithInt:StylizeLayoutFlexAlignAuto],
+                               @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
+                               @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
+                           },
+                           @"alignContent" : @{
+                               @"flex-start" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexStart],
+                               @"flex-end" : [NSNumber numberWithInt:StylizeLayoutFlexAlignFlexEnd],
+                               @"center" : [NSNumber numberWithInt:StylizeLayoutFlexAlignCenter],
+                               @"auto" : [NSNumber numberWithInt:StylizeLayoutFlexAlignAuto],
+                               @"stretch" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch],
+                               @"_" : [NSNumber numberWithInt:StylizeLayoutFlexAlignStretch]
+                           },
+                           @"position" : @{
+                               @"relative" : [NSNumber numberWithInt:StylizePositionTypeRelative],
+                               @"absolute" : [NSNumber numberWithInt:StylizePositionTypeAbsolute],
+                               @"_" : [NSNumber numberWithInt:StylizePositionTypeRelative]
+                           },
+                           @"visibility" : @{
+                               @"visible" : [NSNumber numberWithInt:StylizeVisibilityVisible],
+                               @"hidden" : [NSNumber numberWithInt:StylizeVisibilityHidden],
+                               @"_" : [NSNumber numberWithInt:StylizeVisibilityVisible]
+                           },
+                           @"display" : @{
+                               @"block" : [NSNumber numberWithInt:StylizeDisplayBlock],
+                               @"inline" : [NSNumber numberWithInt:StylizeDisplayInline],
+                               @"none" : [NSNumber numberWithInt:StylizeDisplayNone],
+                               @"_" : [NSNumber numberWithInt:StylizeDisplayBlock]
+                           },
+                       };
     
     
     if (dict[key] && [dict[key] count] > 0) {

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		123990E51C1406B100E5A6D3 /* StylizeButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 123990E41C1406B100E5A6D3 /* StylizeButtonNode.m */; };
+		123990EE1C141C8400E5A6D3 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 123990E81C141C8400E5A6D3 /* StylizeNode+Query.m */; };
+		123990EF1C141C8400E5A6D3 /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 123990EB1C141C8400E5A6D3 /* StylizeCSSRule.m */; };
+		123990F01C141C8400E5A6D3 /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 123990ED1C141C8400E5A6D3 /* StylizeCSSRuleParser.m */; };
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
 		126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC081B58B1F300A62026 /* StylizeNode+Flexbox.m */; };
 		126ABC2F1B58B1F300A62026 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC0B1B58B1F300A62026 /* StylizeCellNode.m */; };
@@ -15,9 +18,6 @@
 		126ABC311B58B1F300A62026 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC0F1B58B1F300A62026 /* StylizeImageNode.m */; };
 		126ABC321B58B1F300A62026 /* StylizeScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC111B58B1F300A62026 /* StylizeScrollNode.m */; };
 		126ABC331B58B1F300A62026 /* StylizeTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC131B58B1F300A62026 /* StylizeTextNode.m */; };
-		126ABC351B58B1F300A62026 /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC181B58B1F300A62026 /* StylizeCSSRule.m */; };
-		126ABC361B58B1F300A62026 /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC1A1B58B1F300A62026 /* StylizeCSSRuleParser.m */; };
-		126ABC381B58B1F300A62026 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC1F1B58B1F300A62026 /* StylizeNode+Query.m */; };
 		126ABC391B58B1F300A62026 /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC211B58B1F300A62026 /* StylizeNode.m */; };
 		126ABC3E1B58B1F300A62026 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 126ABC2D1B58B1F300A62026 /* UIView+StylizeNode.m */; };
 		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
@@ -47,6 +47,12 @@
 		0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		123990E31C1406B100E5A6D3 /* StylizeButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeButtonNode.h; sourceTree = "<group>"; };
 		123990E41C1406B100E5A6D3 /* StylizeButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeButtonNode.m; sourceTree = "<group>"; };
+		123990E71C141C8400E5A6D3 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
+		123990E81C141C8400E5A6D3 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
+		123990EA1C141C8400E5A6D3 /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
+		123990EB1C141C8400E5A6D3 /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
+		123990EC1C141C8400E5A6D3 /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
+		123990ED1C141C8400E5A6D3 /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
 		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		126ABC061B58B1F300A62026 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		126ABC071B58B1F300A62026 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
@@ -62,13 +68,7 @@
 		126ABC121B58B1F300A62026 /* StylizeTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeTextNode.h; sourceTree = "<group>"; };
 		126ABC131B58B1F300A62026 /* StylizeTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeTextNode.m; sourceTree = "<group>"; };
 		126ABC141B58B1F300A62026 /* Stylize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
-		126ABC171B58B1F300A62026 /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
-		126ABC181B58B1F300A62026 /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
-		126ABC191B58B1F300A62026 /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
-		126ABC1A1B58B1F300A62026 /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
 		126ABC1B1B58B1F300A62026 /* StylizeGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
-		126ABC1E1B58B1F300A62026 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
-		126ABC1F1B58B1F300A62026 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
 		126ABC201B58B1F300A62026 /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
 		126ABC211B58B1F300A62026 /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
 		126ABC2C1B58B1F300A62026 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
@@ -116,20 +116,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		123990E61C141C8400E5A6D3 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				123990E71C141C8400E5A6D3 /* StylizeNode+Query.h */,
+				123990E81C141C8400E5A6D3 /* StylizeNode+Query.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		123990E91C141C8400E5A6D3 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				123990EA1C141C8400E5A6D3 /* StylizeCSSRule.h */,
+				123990EB1C141C8400E5A6D3 /* StylizeCSSRule.m */,
+				123990EC1C141C8400E5A6D3 /* StylizeCSSRuleParser.h */,
+				123990ED1C141C8400E5A6D3 /* StylizeCSSRuleParser.m */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
 		126ABC041B58B1F300A62026 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				123990E61C141C8400E5A6D3 /* Category */,
+				123990E91C141C8400E5A6D3 /* Style */,
 				126ABC221B58B1F300A62026 /* ThirdParty */,
 				126ABC051B58B1F300A62026 /* Layout */,
 				126ABC091B58B1F300A62026 /* NodeKit */,
 				126ABC141B58B1F300A62026 /* Stylize.h */,
-				126ABC171B58B1F300A62026 /* StylizeCSSRule.h */,
-				126ABC181B58B1F300A62026 /* StylizeCSSRule.m */,
-				126ABC191B58B1F300A62026 /* StylizeCSSRuleParser.h */,
-				126ABC1A1B58B1F300A62026 /* StylizeCSSRuleParser.m */,
 				126ABC1B1B58B1F300A62026 /* StylizeGeometry.h */,
-				126ABC1E1B58B1F300A62026 /* StylizeNode+Query.h */,
-				126ABC1F1B58B1F300A62026 /* StylizeNode+Query.m */,
 				126ABC201B58B1F300A62026 /* StylizeNode.h */,
 				126ABC211B58B1F300A62026 /* StylizeNode.m */,
 				126ABC2C1B58B1F300A62026 /* UIView+StylizeNode.h */,
@@ -314,7 +330,7 @@
 		12728C8F1A8211E300E5E2F5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Yulin Ding";
 				TargetAttributes = {
 					12728C961A8211E300E5E2F5 = {
@@ -421,16 +437,16 @@
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
 				126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
+				123990F01C141C8400E5A6D3 /* StylizeCSSRuleParser.m in Sources */,
 				126ABC331B58B1F300A62026 /* StylizeTextNode.m in Sources */,
 				123990E51C1406B100E5A6D3 /* StylizeButtonNode.m in Sources */,
-				126ABC351B58B1F300A62026 /* StylizeCSSRule.m in Sources */,
-				126ABC381B58B1F300A62026 /* StylizeNode+Query.m in Sources */,
+				123990EE1C141C8400E5A6D3 /* StylizeNode+Query.m in Sources */,
 				126ABC391B58B1F300A62026 /* StylizeNode.m in Sources */,
+				123990EF1C141C8400E5A6D3 /* StylizeCSSRule.m in Sources */,
 				126ABC2F1B58B1F300A62026 /* StylizeCellNode.m in Sources */,
 				1282FBF81C0AEE9A002CE583 /* Layout.c in Sources */,
 				126ABC3E1B58B1F300A62026 /* UIView+StylizeNode.m in Sources */,
 				126ABC301B58B1F300A62026 /* StylizeControlNode.m in Sources */,
-				126ABC361B58B1F300A62026 /* StylizeCSSRuleParser.m in Sources */,
 				126ABC311B58B1F300A62026 /* StylizeImageNode.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
 				126ABC321B58B1F300A62026 /* StylizeScrollNode.m in Sources */,
@@ -495,6 +511,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -558,6 +575,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StylizeDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.twist.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -569,6 +587,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = StylizeDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.twist.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -587,6 +606,7 @@
 				);
 				INFOPLIST_FILE = StylizeDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.twist.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StylizeDemo.app/StylizeDemo";
 			};
@@ -602,6 +622,7 @@
 				);
 				INFOPLIST_FILE = StylizeDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.twist.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StylizeDemo.app/StylizeDemo";
 			};

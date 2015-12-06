@@ -178,6 +178,17 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     }
 }
 
+- (StylizeBorderRadius)borderRadius {
+    return (StylizeBorderRadius){self.borderTopLeftRadius, self.borderTopRightRadius, self.borderBottomRightRadius, self.borderBottomLeftRadius};
+}
+
+- (void)setBorderRadius:(StylizeBorderRadius)borderRadius {
+    _borderTopLeftRadius = borderRadius.borderTopLeft;
+    _borderTopRightRadius = borderRadius.borderTopRight;
+    _borderBottomRightRadius = borderRadius.borderBottomRight;
+    _borderBottomLeftRadius = borderRadius.borderBottomLeft;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     return self;
 }
@@ -187,33 +198,11 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     return CSSRule;
 }
 
-//+ (NSSet *)keyPathsForValuesAffectingValueForKey {
-//}
-//
-//+ (NSSet *)keyPathsForValuesAffectingObserverPropertyLayout {
-//    NSMutableArray *keys = [NSMutableArray array];
-//    unsigned int count;
-//    objc_property_t *properties = class_copyPropertyList([self class], &count);  // see imports above!
-//    for (size_t i = 0; i < count; ++i) {
-//        NSString *property = [NSString stringWithCString:property_getName(properties[i])
-//                                                encoding:NSASCIIStringEncoding];
-//        
-//        if (![property isEqualToString:@"observerPropertyLayout"] &&
-//            ![property isEqualToString:@"observerPropertyRender"] &&
-//            ![property isEqualToString:@"observerPropertyAll"]) {
-//            [keys addObject:property];
-//        }
-//    }
-//    free(properties);
-//    return [NSSet setWithArray:keys];
-//    
-//}
-
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
     NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
     
-//    if ([key isEqualToString:@"todoSectionTitle"]) {
-//        NSSet *affectingKeys = [NSSet setWithObjects:@"todoStatus", @"todoStartDate", @"timeNow", nil];
+//    if ([key isEqualToString:@"border"]) {
+//        NSSet *affectingKeys = [NSSet setWithObjects:@"borderTop", @"borderRight", @"borderBottom", nil];
 //        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKeys];
 //    }
     
@@ -273,6 +262,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
              @"padding", @"paddingTop", @"paddingRight", @"paddingBottom", @"paddingBottom",
              @"width", @"height", @"maxWidth", @"maxHeight", @"minWidth", @"minHeight",
              @"borderTopWidth", @"borderRightWidth", @"borderBottomWidth", @"borderLeftWidth",
+             @"borderTopLeftRadius", @"borderTopRightRadius", @"borderBottomRightRadius", @"borderBottomLeftRadius",
              @"flexDirection", @"justifyContent", @"alignItems", @"alignContent", @"alignSelf", @"flexWrap", @"flex",
              @"position", @"display", @"visibility", @"overflow", @"overflowX", @"overflowY",
              @"font"];

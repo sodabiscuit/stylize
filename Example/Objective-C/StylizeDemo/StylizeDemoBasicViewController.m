@@ -74,7 +74,8 @@
             .CSS(@{
                    @"background-color" : @"cyan",
                    @"opacity" : @"0.5",
-                   @"max-width" : @"50"
+                   @"border-top-left-radius" : @"4",
+                   @"max-width" : @"50",
                    }, nil);
     
     fifthNode.prependTo(_rootNode);

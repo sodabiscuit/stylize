@@ -114,6 +114,14 @@
         return;
     }
     
+    if ([ruleKey hasPrefix:@"border"] &&
+        [ruleKey hasSuffix:@"Radius"]) {
+        if (![ruleKey isEqualToString:@"borderRadius"]) {
+            [CSSRule setValue:[NSNumber numberWithDouble:[value doubleValue]] forKey:outputKey];
+        }
+        return;
+    }
+    
     if ([ruleKey isEqualToString:@"fontWeight"]
         ) {
         if ([value isEqualToString:@"normal"]) {

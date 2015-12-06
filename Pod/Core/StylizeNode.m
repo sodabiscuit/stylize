@@ -207,6 +207,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     }
     
     ((UIView *)self.view).frame = self.frame;
+    [self renderNode];
     
     [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         StylizeNode *subnode = (StylizeNode *)obj;
@@ -221,6 +222,8 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     view.backgroundColor = CSSRule.backgroundColor;
     view.hidden = CSSRule.visibility == StylizeVisibilityHidden || CSSRule.display == StylizeDisplayNone;
     view.alpha = CSSRule.opacity;
+    
+    [self setRoundedCorners:UIRectCornerAllCorners radius:self.CSSRule.borderRadius];
 }
 
 - (void)prepareForLayout {
@@ -268,6 +271,36 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         ret = [self flexSubnodesForLayout];
     }
     return ret;
+}
+
+- (void)setRoundedCorners:(UIRectCorner)corners
+                   radius:(StylizeBorderRadius)radius {
+    
+    CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    CGFloat minx = CGRectGetMinX(rect);
+    CGFloat midx = CGRectGetMidX(rect);
+    CGFloat maxx = CGRectGetMaxX(rect);
+    CGFloat miny = CGRectGetMinY(rect);
+    CGFloat midy = CGRectGetMidY(rect);
+    CGFloat maxy = CGRectGetMaxY(rect);
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, nil, minx, midy);
+    CGPathAddArcToPoint(path, nil, minx, miny, midx, miny, (corners & UIRectCornerTopLeft) ? radius.borderTopLeft : 0);
+    CGPathAddArcToPoint(path, nil, maxx, miny, maxx, midy, (corners & UIRectCornerTopRight) ? radius.borderTopRight : 0);
+    CGPathAddArcToPoint(path, nil, maxx, maxy, midx, maxy, (corners & UIRectCornerBottomRight) ? radius.borderBottomRight: 0);
+    CGPathAddArcToPoint(path, nil, minx, maxy, minx, midy, (corners & UIRectCornerBottomLeft) ? radius.borderBottomLeft : 0);
+    CGPathCloseSubpath(path);
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.backgroundColor = [[UIColor clearColor] CGColor];
+    [maskLayer setPath:path];
+    
+    UIView *view = (UIView *)self.view;
+    [[view layer] setMask:nil];
+    [[view layer] setMask:maskLayer];
+    
+    CFRelease(path);
 }
 
 @end

@@ -8,9 +8,7 @@
 
 #import "StylizeNode.h"
 
-@protocol StylizeNodeFlexProtocol <NSObject>
-
-@required
+@interface StylizeNode(Flexbox)
 
 /**
  *  计算尺寸
@@ -37,9 +35,5 @@
  *  @return 可布局子节点
  */
 - (NSArray *)flexSubnodesForLayout;
-
-@end
-
-@interface StylizeNode(Flexbox) <StylizeNodeFlexProtocol>
 
 @end

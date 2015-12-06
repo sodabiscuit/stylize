@@ -23,6 +23,7 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAS)(NSString *);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAV)(void);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAV)(void);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAA)(StylizeNodeQuery *);
+typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAN)(StylizeNode *);
 
 //specical
 typedef StylizeNode* (^StylizeNodeQueryBlockNOO)(id, id);
@@ -94,6 +95,26 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockNS ID;
 
 /**
+ *  添加后置节点
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNN append;
+
+/**
+ *  添加前置节点
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNN prepend;
+
+/**
+ *  添加节点到尾部
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNN appendTo;
+
+/**
+ *  添加节点到头部
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNN prependTo;
+
+/**
  *  nodeClasses是否包含class
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockBS hasClass;
@@ -146,6 +167,16 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEach)(StylizeNodeQueryBlockNOI
  *  增加nodeclass
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockAS Class;
+
+/**
+ *  添加节点到尾部
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockAN appendTo;
+
+/**
+ *  添加节点到头部
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockAN prependTo;
 
 /**
  *  map方法

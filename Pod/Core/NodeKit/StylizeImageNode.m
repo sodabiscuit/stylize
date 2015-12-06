@@ -19,7 +19,17 @@
 }
 
 - (void)layoutNode {
+    [super layoutNode];
+}
 
+- (void)setImage:(UIImage *)image {
+    _image = image;
+    UIImageView *imageView = (UIImageView *)self.view;
+    imageView.image = _image;
+}
+
+- (void)setImageURL:(NSURL *)imageURL {
+    _imageURL = imageURL;
 }
 
 @end

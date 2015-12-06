@@ -71,6 +71,11 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 @property (nonatomic, readonly, strong) id view;
 
 /**
+ *  透传至view
+ */
+@property(nonatomic,getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
+
+/**
  *  flexbox布局节点
  */
 @property (nonatomic, readonly, assign) css_node_t *node;

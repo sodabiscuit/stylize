@@ -10,7 +10,7 @@
 
 @interface StylizeTextNode : StylizeNode
 
-@property(nonatomic, copy) NSAttributedString *attributedText NS_AVAILABLE_IOS(6_0);
+@property(nonatomic, copy) NSAttributedString *attributedText;
 @property(nonatomic, copy) NSString *text;
 
 @end

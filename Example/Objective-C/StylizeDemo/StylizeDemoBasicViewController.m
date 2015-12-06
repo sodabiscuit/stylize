@@ -8,6 +8,7 @@
 
 #import "StylizeDemoBasicViewController.h"
 #import "Stylize.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface StylizeDemoBasicViewController ()
 
@@ -38,41 +39,45 @@
     [self.view addStylizeNode:_rootNode];
     
     StylizeNode *firstNode = [self createUnitNode:@"first"];
-    [_rootNode addSubnode:firstNode];
     firstNode.CSS(@{
                     @"justify-content" : @"space-around",
                     @"flex-wrap" : @"wrap"
                     }, nil);
-    
     StylizeNode *interFirstNode = [self createInterUnitNode:@"innerFirst"];
-    [firstNode addSubnode:interFirstNode];
-    
     StylizeNode *interSecondNode = [self createInterUnitNode:@"innerSecond"];
-    [firstNode addSubnode:interSecondNode];
+    
+    firstNode.append(interFirstNode)
+            .append(interSecondNode)
+            .appendTo(_rootNode);
     
     StylizeNode *secondNode = [self createUnitNode:@"second"];
-    secondNode.CSSRule.alignSelf = StylizeLayoutFlexAlignFlexEnd;
-    [_rootNode addSubnode:secondNode];
+    secondNode.CSS(@{
+                     @"align-self" : @"flex-end"
+                     }, nil)
+                .appendTo(_rootNode);
     
-    StylizeNode *thirdNode = [self createUnitNode:@"third"];
-    [_rootNode addSubnode:thirdNode];
+    StylizeNode *thirdNode = [self createUnitImageNode:@"third"];
+    StylizeNode *fourthNode = [self createUnitNode:@"fourth"];
+    _rootNode.append(thirdNode).append(fourthNode);
+    
+    [_rootNode layoutNode];
     
 //    thirdNode.measure = ^CGSize(CGFloat width) {
 //        return CGSizeMake(100, 50);
 //    };
     
-    StylizeNode *fourthNode = [self createUnitNode:@"fourth"];
-    [_rootNode addSubnode:fourthNode];
-    
-    [_rootNode layoutNode];
-    
-    _rootNode.Query(@"#fourth").CSS(@{
-                     @"background-color" : @"cyan",
-                     @"opacity" : @"0.5"
-                     }, nil);
     
     StylizeNode *fifthNode = [self createUnitNode:@"fifth"];
     [_rootNode addSubnode:fifthNode];
+    
+    _rootNode.Query(@"#fourth")
+            .CSS(@{
+                   @"background-color" : @"cyan",
+                   @"opacity" : @"0.5",
+                   @"max-width" : @"50"
+                   }, nil);
+    
+    fifthNode.prependTo(_rootNode);
     
     [_rootNode layoutNode];
 }
@@ -104,6 +109,26 @@
     return ret;
 }
 
+- (StylizeImageNode *)createUnitImageNode:(NSString *)nodeID {
+    StylizeImageNode *ret = [StylizeImageNode new];
+   
+    ret.CSS(@{
+              @"margin-right" : @"10",
+              @"margin-bottom" : @"10",
+              @"width" : @"100",
+              @"height" : @"100",
+              @"flex" : @"1",
+              @"background-color" : @"orange"
+              }, nil)
+        .Class(@"child")
+        .ID(nodeID);
+    
+//    ret.imageURL = [NSURL URLWithString:@"http://img.alicdn.com/tps/TB1erQQKFXXXXc7XpXXXXXXXXXX-520-280.jpg"];
+    ret.image = [UIImage imageNamed:@"MDLaunchScreenLogo"];
+    
+    return ret;
+}
+
 
 - (StylizeNode *)createInterUnitNode:(NSString *)nodeID {
     StylizeNode *ret = [[StylizeNode alloc] initWithViewClass:[UIView class]];
@@ -119,13 +144,5 @@
     return ret;
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc {
-    //TODO
-}
 
 @end

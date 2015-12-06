@@ -262,6 +262,16 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     return [StylizeCSSRule class];
 }
 
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    UIView *view = (UIView *)self.view;
+    view.userInteractionEnabled = userInteractionEnabled;
+}
+
+- (BOOL)isUserInteractionEnabled {
+    UIView *view = (UIView *)self.view;
+    return view.userInteractionEnabled;
+}
+
 @end
 
 #pragma mark - DOM

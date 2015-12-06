@@ -241,6 +241,38 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
     return block;
 }
 
+- (StylizeNodeQueryBlockNN)append {
+    StylizeNodeQueryBlockNN block = ^id(StylizeNode *node) {
+        [self addSubnode:node];
+        return self;
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockNN)prepend {
+    StylizeNodeQueryBlockNN block = ^id(StylizeNode *node) {
+        [self insertSubnode:node atIndex:0];
+        return self;
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockNN)appendTo {
+    StylizeNodeQueryBlockNN block = ^id(StylizeNode *node) {
+        [node addSubnode:self];
+        return self;
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockNN)prependTo {
+    StylizeNodeQueryBlockNN block = ^id(StylizeNode *node) {
+        [node insertSubnode:self atIndex:0];
+        return self;
+    };
+    return block;
+}
+
 - (StylizeNodeQueryBlockBS)hasClass {
     StylizeNodeQueryBlockBS block = ^BOOL(NSString *cls) {
         return [self hasNodeClass:cls];
@@ -377,6 +409,34 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
         for (StylizeNode *child in self) {
             [child addNodeClass:cls];
             [ret addObject:child];
+        }
+        
+        return [StylizeNodeQuery arrayWithArray:ret];
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockAN)appendTo {
+    StylizeNodeQueryBlockAN block = ^id(StylizeNode *node) {
+        NSMutableArray *ret = [NSMutableArray array];
+        
+        for (StylizeNode *child in self) {
+            [node addSubnode:child];
+            [ret addObject:child];
+        }
+        
+        return [StylizeNodeQuery arrayWithArray:ret];
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockAN)prependTo {
+    StylizeNodeQueryBlockAN block = ^id(StylizeNode *node) {
+        NSMutableArray *ret = [NSMutableArray array];
+        
+        for (StylizeNode *child in self) {
+            [node insertSubnode:child atIndex:0];
+            [ret insertObject:child atIndex:0];
         }
         
         return [StylizeNodeQuery arrayWithArray:ret];

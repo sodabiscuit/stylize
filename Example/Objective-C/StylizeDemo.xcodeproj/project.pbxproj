@@ -28,6 +28,7 @@
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
 		1282FBF81C0AEE9A002CE583 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 1282FBF61C0AEE9A002CE583 /* Layout.c */; };
+		12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
 		50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */; };
@@ -88,6 +89,7 @@
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
 		1282FBF61C0AEE9A002CE583 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
 		1282FBF71C0AEE9A002CE583 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
+		12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MDLaunchScreenLogo.png; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		12728C9A1A8211E300E5E2F5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */,
 				12728C9B1A8211E400E5E2F5 /* Info.plist */,
 				12728C9C1A8211E400E5E2F5 /* main.m */,
 			);
@@ -368,6 +371,7 @@
 			files = (
 				12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */,
 				12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */,
+				12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */,
 				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,14 @@
 #import "StylizeTextNode.h"
 #import "StylizeCSSRule.h"
 
+@interface StylizeTextNode()
+
+@property (nonatomic, strong) NSString *cachedText;
+@property (nonatomic, strong) NSAttributedString *cachedAttributedText;
+@property (nonatomic, assign) CGSize cachedSize;
+
+@end
+
 @implementation StylizeTextNode
 
 - (instancetype)init {
@@ -48,12 +56,27 @@
     UILabel *label = (UILabel *)self.view;
     if (self.CSSRule.display == StylizeDisplayInline) {
         StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
-            return [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+            if ([self hasAttributedText]) {
+                if (![self.attributedText isEqualToAttributedString:self.cachedAttributedText]) {
+                    _cachedSize = [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+                    _cachedAttributedText = self.attributedText;
+                }
+            } else {
+                if (![self.text isEqualToString:self.cachedText]) {
+                    _cachedSize = [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+                    _cachedText = self.text;
+                }
+            }
+            return _cachedSize;
         };
         return block;
     }
     
     return nil;
+}
+
+- (BOOL)hasAttributedText {
+    return _attributedText.length > 0;
 }
 
 @end

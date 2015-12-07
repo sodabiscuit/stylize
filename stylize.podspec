@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "stylize"
-  s.version          = "0.2.0"
+  s.version          = "0.3.0"
   s.summary          = "a simple layout framework."
   s.description      = <<-DESC
                        An optional longer description of stylize

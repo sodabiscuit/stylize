@@ -10,11 +10,14 @@
 #import "StylizeGeometry.h"
 #import "StylizeLayoutFlexGeometry.h"
 
+#define kStylizeCSSRuleParserUnrecoginzeNotification  @"kStylizeCSSRuleParserUnrecoginzeNotification"
+
 @class StylizeCSSRule;
 
 @interface StylizeCSSRule : NSObject <NSCopying, NSMutableCopying>
 
 @property (nonatomic, strong) NSString *ruleUUID;
+@property (nonatomic, strong) NSArray *ruleKeys;
 
 @property (nonatomic, assign) StylizePositionType position;
 @property (nonatomic, assign) StylizeDisplay display;
@@ -117,6 +120,7 @@
 + (NSArray *)getRenderAffectedRuleKeys;
 + (NSArray *)getBothAffectedRuleKeys;
 + (NSArray *)getUnAffectedRuleKeys;
++ (NSArray *)getAllRuleKeys;
 
 - (void)updateRuleFromDictionay:(NSDictionary *)ruleDictionary;
 - (void)updateRuleFromRaw:(NSString *)ruleRaw;

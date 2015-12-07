@@ -213,11 +213,10 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
     StylizeNodeQueryBlockNOO block = ^id(id key, id val) {
         if ([key isKindOfClass:[NSDictionary class]]) {
             [self applyCSSDictionary:key];
-        } else if ([key isKindOfClass:[NSString class]] && [val isKindOfClass:[NSString class]]) {
+        } else if ([key isKindOfClass:[NSString class]]) {
             NSString *k = (NSString *)key;
-            NSString *v = (NSString *)val;
-            if (k.length > 0 && v.length > 0) {
-                [self applyRule:k value:v];
+            if (k.length > 0) {
+                [self applyRule:k value:val];
             }
         }
         
@@ -405,11 +404,10 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
         for (StylizeNode *child in self) {
             if ([key isKindOfClass:[NSDictionary class]]) {
                 [child applyCSSDictionary:key];
-            } else if ([key isKindOfClass:[NSString class]] && [val isKindOfClass:[NSString class]]) {
+            } else if ([key isKindOfClass:[NSString class]]) {
                 NSString *k = (NSString *)key;
-                NSString *v = (NSString *)val;
-                if (k.length > 0 && v.length > 0) {
-                    [child applyRule:k value:v];
+                if (k.length > 0) {
+                    [child applyRule:k value:val];
                 }
             }
             [ret addObject:child];

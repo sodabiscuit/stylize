@@ -29,7 +29,7 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAN)(StylizeNode *);
 //specical
 typedef StylizeNode* (^StylizeNodeQueryBlockNOO)(id, id);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAOO)(id, id);
-typedef StylizeNode* (^StylizeNodeQueryBlockNOI)(id, NSUInteger);
+typedef StylizeNode* (^StylizeNodeQueryBlockNOI)(id, NSInteger);
 typedef BOOL (^StylizeNodeQueryBlockBOI)(id, NSUInteger);
 
 //map,reduce

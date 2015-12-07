@@ -32,4 +32,12 @@
     _imageURL = imageURL;
 }
 
+- (void)parseUnrecoginzedCSSRule:(NSString *)key value:(id)value {
+    [super parseUnrecoginzedCSSRule:key value:value];
+    UIImageView *imageView = (UIImageView *)self.view;
+    if ([key isEqualToString:@"contentMode"]) {
+        imageView.contentMode = [value integerValue];
+    }
+}
+
 @end

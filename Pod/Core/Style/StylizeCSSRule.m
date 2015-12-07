@@ -45,6 +45,8 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         
         _widthAuto = YES;
         _heightAuto = YES;
+        
+        _ruleKeys = [self.class getAllRuleKeys];
     }
     return self;
 }
@@ -273,7 +275,7 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 }
 
 + (NSArray *)getUnAffectedRuleKeys {
-    return @[@"ruleUUID"];
+    return @[@"ruleUUID", @"ruleKeys"];
 }
 
 + (NSArray *)getRenderAffectedRuleKeys {
@@ -287,6 +289,24 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         
         if ([[self getLayoutAffectedRuleKeys] indexOfObject:property] == NSNotFound &&
             [[self getUnAffectedRuleKeys] indexOfObject:property] == NSNotFound) {
+            [ret addObject: property];
+        }
+    }
+    free(properties);
+    
+    return [ret copy];
+}
+
++ (NSArray *)getAllRuleKeys {
+    NSMutableArray *ret = [@[] mutableCopy];
+    unsigned int count;
+    
+    objc_property_t *properties = class_copyPropertyList(self, &count);  // see imports above!
+    for (size_t i = 0; i < count; ++i) {
+        NSString *property = [NSString stringWithCString:property_getName(properties[i])
+                                                encoding:NSASCIIStringEncoding];
+        
+        if ([[self getUnAffectedRuleKeys] indexOfObject:property] == NSNotFound) {
             [ret addObject: property];
         }
     }

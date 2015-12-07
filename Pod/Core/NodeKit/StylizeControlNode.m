@@ -7,6 +7,7 @@
 //
 
 #import "StylizeControlNode.h"
+#import "StylizeCSSRule.h"
 
 @implementation StylizeControlNode
 

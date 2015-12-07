@@ -260,7 +260,7 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  @param key   ruleKey
  *  @param value ruleValue
  */
-- (void)applyRule:(NSString *)ruleKey value:(NSString *)ruleValue;
+- (void)applyRule:(NSString *)ruleKey value:(id)ruleValue;
 
 /**
  *  通过解析CSS文本添加CSS规则
@@ -268,6 +268,14 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  @param CSSRaw CSS文本
  */
 - (void)applyCSSRaw:(NSString *)CSSRaw;
+
+/**
+ *  解析CSSParser无法处理的属性
+ *
+ *  @param key   rule键
+ *  @param value rule值
+ */
+- (void)parseUnrecoginzedCSSRule:(NSString *)key value:(id)value;
 
 @end
 

@@ -29,6 +29,9 @@
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
 		1282FBF81C0AEE9A002CE583 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 1282FBF61C0AEE9A002CE583 /* Layout.c */; };
 		12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */; };
+		12AEA96B1C158A2C00FCA81D /* StylizeRegexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AEA9691C158A2C00FCA81D /* StylizeRegexUtility.m */; };
+		12AEA96E1C158A3F00FCA81D /* StylizeColorUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AEA96D1C158A3F00FCA81D /* StylizeColorUtility.m */; };
+		12AEA9711C158A8700FCA81D /* StylizeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AEA9701C158A8700FCA81D /* StylizeUtility.m */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
 		50ECAD8664A81EC93ABB9F0A /* libPods-StylizeDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F86003E1CBE76D224D378DA3 /* libPods-StylizeDemo.a */; };
@@ -91,6 +94,12 @@
 		1282FBF71C0AEE9A002CE583 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MDLaunchScreenLogo.png; sourceTree = "<group>"; };
 		12AEA9641C14696200FCA81D /* StylizeEventDefinations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StylizeEventDefinations.h; sourceTree = "<group>"; };
+		12AEA9691C158A2C00FCA81D /* StylizeRegexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeRegexUtility.m; sourceTree = "<group>"; };
+		12AEA96A1C158A2C00FCA81D /* StylizeRegexUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeRegexUtility.h; sourceTree = "<group>"; };
+		12AEA96C1C158A3F00FCA81D /* StylizeColorUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeColorUtility.h; sourceTree = "<group>"; };
+		12AEA96D1C158A3F00FCA81D /* StylizeColorUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeColorUtility.m; sourceTree = "<group>"; };
+		12AEA96F1C158A8700FCA81D /* StylizeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeUtility.h; sourceTree = "<group>"; };
+		12AEA9701C158A8700FCA81D /* StylizeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeUtility.m; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28895344B8993F3EE29E8977 /* Pods-StylizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +151,7 @@
 		126ABC041B58B1F300A62026 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				12AEA9681C158A0C00FCA81D /* Utility */,
 				123990E61C141C8400E5A6D3 /* Category */,
 				123990E91C141C8400E5A6D3 /* Style */,
 				126ABC221B58B1F300A62026 /* ThirdParty */,
@@ -266,6 +276,19 @@
 				1282FBF71C0AEE9A002CE583 /* Layout.h */,
 			);
 			path = "css-layout";
+			sourceTree = "<group>";
+		};
+		12AEA9681C158A0C00FCA81D /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				12AEA9691C158A2C00FCA81D /* StylizeRegexUtility.m */,
+				12AEA96A1C158A2C00FCA81D /* StylizeRegexUtility.h */,
+				12AEA96C1C158A3F00FCA81D /* StylizeColorUtility.h */,
+				12AEA96D1C158A3F00FCA81D /* StylizeColorUtility.m */,
+				12AEA96F1C158A8700FCA81D /* StylizeUtility.h */,
+				12AEA9701C158A8700FCA81D /* StylizeUtility.m */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
@@ -441,9 +464,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
+				12AEA9711C158A8700FCA81D /* StylizeUtility.m in Sources */,
 				126ABC2E1B58B1F300A62026 /* StylizeNode+Flexbox.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
 				123990F01C141C8400E5A6D3 /* StylizeCSSRuleParser.m in Sources */,
+				12AEA96B1C158A2C00FCA81D /* StylizeRegexUtility.m in Sources */,
 				126ABC331B58B1F300A62026 /* StylizeTextNode.m in Sources */,
 				123990E51C1406B100E5A6D3 /* StylizeButtonNode.m in Sources */,
 				123990EE1C141C8400E5A6D3 /* StylizeNode+Query.m in Sources */,
@@ -456,6 +481,7 @@
 				126ABC311B58B1F300A62026 /* StylizeImageNode.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
 				126ABC321B58B1F300A62026 /* StylizeScrollNode.m in Sources */,
+				12AEA96E1C158A3F00FCA81D /* StylizeColorUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

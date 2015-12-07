@@ -7,7 +7,16 @@
 //
 
 #import "StylizeControlNode.h"
+#import "StylizeNode+Query.h"
 
 @interface StylizeButtonNode : StylizeControlNode
+
+- (void)setTitle:(NSString *)title forState:(UIControlState)state;
+- (void)setAttributedTitle:(NSAttributedString *)title forState:(UIControlState)state;
+
+/**
+ *  根据传入的UIControlState设置title
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockNOI title;
 
 @end

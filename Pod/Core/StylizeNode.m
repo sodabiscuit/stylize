@@ -113,6 +113,11 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         }];
         
         [_CSSRule updatePositionAndDimensionFromRect:_defaultFrame];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(parseUnrecoginzedCSSRule:)
+                                                     name:kStylizeCSSRuleParserUnrecoginzeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -176,6 +181,13 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 - (NSInteger)tag {
     UIView *view = (UIView *)self.view;
     return view.tag;
+}
+
+- (void)parseUnrecoginzedCSSRule:(NSNotification *)notification {
+    NSString *ruleUUID = notification.object[@"ruleUUID"];
+    if ([ruleUUID isEqualToString:self.CSSRule.ruleUUID]) {
+        [self parseUnrecoginzedCSSRule:notification.object[@"key"] value:notification.object[@"value"]];
+    }
 }
 
 @end
@@ -404,13 +416,17 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)applyRule:(NSString *)ruleKey
-            value:(NSString *)ruleValue {
+            value:(id)ruleValue {
     NSDictionary *dict = @{ruleKey : ruleValue};
     [self.CSSRule updateRuleFromDictionay:dict];
 }
 
 - (void)applyCSSDictionary:(NSDictionary *)CSSDictionary {
     [self.CSSRule updateRuleFromDictionay:CSSDictionary];
+}
+
+- (void)parseUnrecoginzedCSSRule:(NSString *)key value:(id)value {
+    //TODO
 }
 
 @end

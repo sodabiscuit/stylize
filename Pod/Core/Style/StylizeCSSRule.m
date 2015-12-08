@@ -43,9 +43,6 @@ static void *PrivateKVOContext = &PrivateKVOContext;
         _fontSize = 14;
         _fontWeight = 400;
         
-        _widthAuto = YES;
-        _heightAuto = YES;
-        
         _ruleKeys = [self.class getAllRuleKeys];
     }
     return self;
@@ -73,61 +70,52 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     [self updateDefinedRules:@[@"heightAuto", @"-height"]];
 }
 
-- (void)setTop:(CGFloat)top {
-    _top = top;
-    [self updateDefinedRules:@[@"top"]];
+- (StylizeOrdered)padding {
+    StylizeOrdered ret;
+    ret.ordered[StylizeRuleOrderedTypeTop] = self.paddingTop;
+    ret.ordered[StylizeRuleOrderedTypeRight] = self.paddingRight;
+    ret.ordered[StylizeRuleOrderedTypeBottom] = self.paddingBottom;
+    ret.ordered[StylizeRuleOrderedTypeLeft] = self.paddingLeft;
+    return ret;
 }
 
-- (void)setBottom:(CGFloat)bottom {
-    _bottom = bottom;
-    [self updateDefinedRules:@[@"bottom"]];
+- (void)setPadding:(StylizeOrdered)padding {
+    _paddingTop = padding.ordered[StylizeRuleOrderedTypeTop];
+    _paddingRight = padding.ordered[StylizeRuleOrderedTypeRight];
+    _paddingBottom = padding.ordered[StylizeRuleOrderedTypeBottom];
+    _paddingLeft = padding.ordered[StylizeRuleOrderedTypeLeft];
 }
 
-- (void)setLeft:(CGFloat)left {
-    _left = left;
-    [self updateDefinedRules:@[@"left"]];
+- (StylizeOrdered)margin {
+    StylizeOrdered ret;
+    ret.ordered[StylizeRuleOrderedTypeTop] = self.marginTop;
+    ret.ordered[StylizeRuleOrderedTypeRight] = self.marginRight;
+    ret.ordered[StylizeRuleOrderedTypeBottom] = self.marginBottom;
+    ret.ordered[StylizeRuleOrderedTypeLeft] = self.marginLeft;
+    return ret;
 }
 
-- (void)setRight:(CGFloat)right {
-    _right = right;
-    [self updateDefinedRules:@[@"right"]];
+- (void)setMargin:(StylizeOrdered)margin {
+    _marginTop = margin.ordered[StylizeRuleOrderedTypeTop];
+    _marginRight = margin.ordered[StylizeRuleOrderedTypeRight];
+    _marginBottom = margin.ordered[StylizeRuleOrderedTypeBottom];
+    _marginLeft = margin.ordered[StylizeRuleOrderedTypeLeft];
 }
 
-- (StylizePadding)padding {
-    return (StylizePadding){self.paddingTop, self.paddingRight, self.paddingBottom, self.paddingLeft};
+- (StylizeOrdered)borderWidth {
+    StylizeOrdered ret;
+    ret.ordered[StylizeRuleOrderedTypeTop] = self.borderTopWidth;
+    ret.ordered[StylizeRuleOrderedTypeRight] = self.borderRightWidth;
+    ret.ordered[StylizeRuleOrderedTypeBottom] = self.borderBottomWidth;
+    ret.ordered[StylizeRuleOrderedTypeLeft] = self.borderLeftWidth;
+    return ret;
 }
 
-- (void)setPadding:(StylizePadding)padding {
-    _paddingLeft = padding.paddingLeft;
-    _paddingRight = padding.paddingRight;
-    _paddingTop = padding.paddingTop;
-    _paddingBottom = padding.paddingBottom;
-    [self updateDefinedRules:@[@"padding", @"paddingLeft", @"paddingRight", @"paddingTop", @"paddingBottom"]];
-}
-
-- (StylizeMargin)margin {
-    return (StylizeMargin){self.marginTop, self.marginRight, self.marginBottom, self.marginLeft};
-}
-
-- (void)setMargin:(StylizeMargin)margin {
-    _marginLeft = margin.marginLeft;
-    _marginRight = margin.marginRight;
-    _marginTop = margin.marginTop;
-    _marginBottom = margin.marginBottom;
-}
-
-- (StylizeLayoutFlexFlow)flexFlow {
-    return (StylizeLayoutFlexFlow){self.flexDirection, self.flexWrap};
-}
-
-- (void)setFlexFlow:(StylizeLayoutFlexFlow)flexFlow {
-    _flexDirection = flexFlow.direction;
-    _flexWrap = flexFlow.flexWrap;
-}
-
-- (void)setAlignSelf:(StylizeLayoutFlexAlign)alignSelf {
-    _alignSelf = alignSelf;
-    [self updateDefinedRules:@[@"alignSelf"]];
+- (void)setBorderWidth:(StylizeOrdered)borderWidth {
+    _borderTopWidth = borderWidth.ordered[StylizeRuleOrderedTypeTop];
+    _borderRightWidth = borderWidth.ordered[StylizeRuleOrderedTypeRight];
+    _borderBottomWidth = borderWidth.ordered[StylizeRuleOrderedTypeBottom];
+    _borderLeftWidth = borderWidth.ordered[StylizeRuleOrderedTypeLeft];
 }
 
 - (StylizeOverflow)overflow {
@@ -137,7 +125,6 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 - (void)setOverflow:(StylizeOverflow)overflow {
     _overflowX = overflow.overflowX;
     _overflowY = overflow.overflowY;
-    [self updateDefinedRules:@[@"overflow", @"overflowX", @"overflowY"]];
 }
 
 - (CGSize)maxSize {
@@ -146,6 +133,15 @@ static void *PrivateKVOContext = &PrivateKVOContext;
 
 - (CGSize)minSize {
     return (CGSize){_minWidth, _minHeight};
+}
+
+- (StylizeLayoutFlexFlow)flexFlow {
+    return (StylizeLayoutFlexFlow){self.flexDirection, self.flexWrap};
+}
+
+- (void)setFlexFlow:(StylizeLayoutFlexFlow)flexFlow {
+    _flexDirection = flexFlow.direction;
+    _flexWrap = flexFlow.flexWrap;
 }
 
 - (UIFont *)font {
@@ -180,15 +176,20 @@ static void *PrivateKVOContext = &PrivateKVOContext;
     }
 }
 
-- (StylizeBorderRadius)borderRadius {
-    return (StylizeBorderRadius){self.borderTopLeftRadius, self.borderTopRightRadius, self.borderBottomRightRadius, self.borderBottomLeftRadius};
+- (StylizeOrdered)borderRadius {
+    StylizeOrdered ret;
+    ret.ordered[StylizeRuleOrderedTypeTop] = self.borderTopLeftRadius;
+    ret.ordered[StylizeRuleOrderedTypeRight] = self.borderTopRightRadius;
+    ret.ordered[StylizeRuleOrderedTypeBottom] = self.borderBottomRightRadius;
+    ret.ordered[StylizeRuleOrderedTypeLeft] = self.borderBottomLeftRadius;
+    return ret;
 }
 
-- (void)setBorderRadius:(StylizeBorderRadius)borderRadius {
-    _borderTopLeftRadius = borderRadius.borderTopLeft;
-    _borderTopRightRadius = borderRadius.borderTopRight;
-    _borderBottomRightRadius = borderRadius.borderBottomRight;
-    _borderBottomLeftRadius = borderRadius.borderBottomLeft;
+- (void)setBorderRadius:(StylizeOrdered)borderRadius {
+    _borderTopLeftRadius = borderRadius.ordered[StylizeRuleOrderedTypeTop];
+    _borderTopRightRadius = borderRadius.ordered[StylizeRuleOrderedTypeRight];
+    _borderBottomRightRadius = borderRadius.ordered[StylizeRuleOrderedTypeBottom];
+    _borderBottomLeftRadius = borderRadius.ordered[StylizeRuleOrderedTypeLeft];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

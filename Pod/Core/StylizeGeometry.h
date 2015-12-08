@@ -33,6 +33,20 @@ typedef enum {
 } StylizeLayoutType;
 
 typedef enum {
+    StylizeRuleOrderedTypeTop,
+    StylizeRuleOrderedTypeRight,
+    StylizeRuleOrderedTypeBottom,
+    StylizeRuleOrderedTypeLeft,
+} StylizeRuleOrderedType;
+
+typedef enum {
+    StylizeRuleRadiusOrderedTypeTopLeft,
+    StylizeRuleRadiusOrderedTypeTopRight,
+    StylizeRuleRadiusOrderedTypeBottomRight,
+    StylizeRuleRadiusOrderedTypeBottomLeft,
+} StylizeRuleRadiusOrderedType;
+
+typedef enum {
 //    StylizePositionTypeStatic = CSS_POSITION_RELATIVE,
     StylizePositionTypeRelative = CSS_POSITION_RELATIVE,
     StylizePositionTypeAbsolute = CSS_POSITION_ABSOLUTE,
@@ -64,6 +78,11 @@ typedef struct {
     StylizeBorderType style;
 } StylizeBorderSkeleton;
 
+
+typedef struct {
+  CGFloat ordered[4];
+}  StylizeOrdered;
+
 typedef struct {
     StylizeBorderSkeleton borderTop;
     StylizeBorderSkeleton borderRight;
@@ -78,37 +97,15 @@ typedef struct {
     CGFloat borderBottomLeft;
 }  StylizeBorderRadius;
 
-CG_INLINE StylizeMargin
-StylizeMarginMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
+CG_INLINE StylizeOrdered
+StylizeOrderedMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
 {
-    StylizeMargin margin;
-    margin.marginTop = top;
-    margin.marginRight = right;
-    margin.marginBottom = bottom;
-    margin.marginLeft = right;
-    return margin;
-}
-
-CG_INLINE StylizePadding
-StylizePaddingMake(CGFloat top, CGFloat right, CGFloat bottom, CGFloat left)
-{
-    StylizePadding padding;
-    padding.paddingTop = top;
-    padding.paddingRight = right;
-    padding.paddingBottom = bottom;
-    padding.paddingLeft = right;
-    return padding;
-}
-
-CG_INLINE StylizeBorderRadius
-StylizeBorderRadiusMake(CGFloat topleft, CGFloat topright, CGFloat bottomright, CGFloat bottomleft)
-{
-    StylizeBorderRadius radius;
-    radius.borderTopLeft = topleft;
-    radius.borderTopRight = topright;
-    radius.borderBottomRight = bottomright;
-    radius.borderBottomLeft = bottomleft;
-    return radius;
+    StylizeOrdered ret;
+    ret.ordered[StylizeRuleOrderedTypeTop] = top;
+    ret.ordered[StylizeRuleOrderedTypeRight] = right;
+    ret.ordered[StylizeRuleOrderedTypeBottom] = bottom;
+    ret.ordered[StylizeRuleOrderedTypeLeft] = left;
+    return ret;
 }
 
 typedef enum {

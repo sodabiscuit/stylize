@@ -41,7 +41,7 @@
 @property (nonatomic, assign) CGFloat minHeight;
 @property (nonatomic, assign) CGFloat maxHeight;
 @property (nonatomic, assign) BOOL heightAuto;
-@property (nonatomic, assign) StylizeMargin margin;
+@property (nonatomic, assign) StylizeOrdered margin;
 @property (nonatomic, assign) BOOL marginAuto;
 @property (nonatomic, assign) CGFloat marginTop;
 @property (nonatomic, assign) BOOL marginTopAuto;
@@ -51,13 +51,14 @@
 @property (nonatomic, assign) BOOL marginLeftAuto;
 @property (nonatomic, assign) CGFloat marginRight;
 @property (nonatomic, assign) CGFloat marginRightAuto;
-@property (nonatomic, assign) StylizePadding padding;
+@property (nonatomic, assign) StylizeOrdered padding;
 @property (nonatomic, assign) CGFloat paddingTop;
 @property (nonatomic, assign) CGFloat paddingBottom;
 @property (nonatomic, assign) CGFloat paddingLeft;
 @property (nonatomic, assign) CGFloat paddingRight;
 
 @property (nonatomic, assign) StylizeBorder border;
+@property (nonatomic, assign) StylizeOrdered borderWidth;
 
 @property (nonatomic, assign) StylizeBorderSkeleton borderTop;
 @property (nonatomic, assign) CGFloat borderTopWidth;
@@ -79,7 +80,7 @@
 @property (nonatomic, assign) StylizeBorderType borderRightStyle;
 @property (nonatomic, strong) UIColor *borderRightColor;
 
-@property (nonatomic, assign) StylizeBorderRadius borderRadius;
+@property (nonatomic, assign) StylizeOrdered borderRadius;
 @property (nonatomic, assign) CGFloat borderTopLeftRadius;
 @property (nonatomic, assign) CGFloat borderTopRightRadius;
 @property (nonatomic, assign) CGFloat borderBottomRightRadius;

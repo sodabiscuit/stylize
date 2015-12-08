@@ -54,7 +54,8 @@
 
 - (StylizeNodeMeasureBlock)classMeasure {
     UILabel *label = (UILabel *)self.view;
-    if (self.CSSRule.display == StylizeDisplayInline) {
+    if (self.CSSRule.width == 0 &&
+        self.CSSRule.height == 0) {
         StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
             if ([self hasAttributedText]) {
                 if (![self.attributedText isEqualToAttributedString:self.cachedAttributedText]) {

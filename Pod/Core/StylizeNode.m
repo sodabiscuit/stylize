@@ -23,11 +23,11 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     return child.node;
 }
 
-//static css_dim_t Stylize_measureNode(void *context, float width) {
-//    StylizeNode *node = (__bridge StylizeNode*)context;
-//    CGSize size = node.measure ? node.measure(width) : node.classMeasure(width);
-//    return (css_dim_t){size.width, size.height};
-//}
+static css_dim_t Stylize_measureNode(void *context, float width) {
+    StylizeNode *node = (__bridge StylizeNode*)context;
+    CGSize size = node.measure ? node.measure(width) : node.classMeasure(width);
+    return (css_dim_t){size.width, size.height};
+}
 
 @interface StylizeNode()
 
@@ -94,9 +94,9 @@ static css_node_t *Stylize_getChild(void *context, int i) {
         _node->is_dirty = Stylize_alwaysDirty;
         _node->get_child = Stylize_getChild;
         
-//        if (self.measure || self.classMeasure) {
-//            _node->measure = Stylize_measureNode;
-//        }
+        if (self.measure || self.classMeasure) {
+            _node->measure = Stylize_measureNode;
+        }
         
         [[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [_CSSRule addObserver:self
@@ -209,6 +209,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 
 - (void)beforeLayout {
     [self prepareForLayout];
+//    [self measureNodeImpl];
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexBeforeLayout];
     }
@@ -230,20 +231,22 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)layoutNodeImpl {
-    if (self.measure) {
-        CGSize measureSize = self.measure(self.frame.size.width);
-        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
-        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
-    } else if (self.classMeasure) {
-        CGSize measureSize = self.classMeasure(self.frame.size.width);
-        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
-        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
-    }
-    
     ((UIView *)self.view).frame = self.frame;
     [self renderNode];
     
 }
+
+//- (void)measureNodeImpl {
+//    if (self.measure) {
+//        CGSize measureSize = self.measure(self.frame.size.width);
+//        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
+//        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
+//    } else if (self.classMeasure) {
+//        CGSize measureSize = self.classMeasure(self.frame.size.width);
+//        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
+//        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
+//    }
+//}
 
 - (void)renderNode {
     UIView *view = (UIView *)self.view;
@@ -304,7 +307,7 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 }
 
 - (void)setRoundedCorners:(UIRectCorner)corners
-                   radius:(StylizeBorderRadius)radius {
+                   radius:(StylizeOrdered)radius {
     
     CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     CGFloat minx = CGRectGetMinX(rect);
@@ -316,10 +319,10 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, nil, minx, midy);
-    CGPathAddArcToPoint(path, nil, minx, miny, midx, miny, (corners & UIRectCornerTopLeft) ? radius.borderTopLeft : 0);
-    CGPathAddArcToPoint(path, nil, maxx, miny, maxx, midy, (corners & UIRectCornerTopRight) ? radius.borderTopRight : 0);
-    CGPathAddArcToPoint(path, nil, maxx, maxy, midx, maxy, (corners & UIRectCornerBottomRight) ? radius.borderBottomRight: 0);
-    CGPathAddArcToPoint(path, nil, minx, maxy, minx, midy, (corners & UIRectCornerBottomLeft) ? radius.borderBottomLeft : 0);
+    CGPathAddArcToPoint(path, nil, minx, miny, midx, miny, (corners & UIRectCornerTopLeft) ? radius.ordered[StylizeRuleOrderedTypeTop] : 0);
+    CGPathAddArcToPoint(path, nil, maxx, miny, maxx, midy, (corners & UIRectCornerTopRight) ? radius.ordered[StylizeRuleOrderedTypeRight] : 0);
+    CGPathAddArcToPoint(path, nil, maxx, maxy, midx, maxy, (corners & UIRectCornerBottomRight) ? radius.ordered[StylizeRuleOrderedTypeBottom] : 0);
+    CGPathAddArcToPoint(path, nil, minx, maxy, minx, midy, (corners & UIRectCornerBottomLeft) ? radius.ordered[StylizeRuleOrderedTypeLeft] : 0);
     CGPathCloseSubpath(path);
     
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];

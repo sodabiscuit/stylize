@@ -200,14 +200,36 @@ static css_node_t *Stylize_getChild(void *context, int i) {
 - (void)layoutNode {
     _hasLayout = YES;
     
-    [self prepareForLayout];
+    [self beforeLayout];
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexLayoutNode];
     }
-    
-    /**
-     *  TODO 需要确认是否存在问题
-     */
+    [self afterLayout];
+}
+
+- (void)beforeLayout {
+    [self prepareForLayout];
+    if (self.layoutType == StylizeLayoutTypeFlex) {
+        [self flexBeforeLayout];
+    }
+    [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StylizeNode *subnode = (StylizeNode *)obj;
+        [subnode beforeLayout];
+    }];
+}
+
+- (void)afterLayout {
+    [self layoutNodeImpl];
+    if (self.layoutType == StylizeLayoutTypeFlex) {
+        [self flexAfterLayout];
+    }
+    [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StylizeNode *subnode = (StylizeNode *)obj;
+        [subnode afterLayout];
+    }];
+}
+
+- (void)layoutNodeImpl {
     if (self.measure) {
         CGSize measureSize = self.measure(self.frame.size.width);
         self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
@@ -221,10 +243,6 @@ static css_node_t *Stylize_getChild(void *context, int i) {
     ((UIView *)self.view).frame = self.frame;
     [self renderNode];
     
-    [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        StylizeNode *subnode = (StylizeNode *)obj;
-        [subnode layoutNode];
-    }];
 }
 
 - (void)renderNode {

@@ -23,20 +23,17 @@
 #pragma mark - StylizeNodeFlexProtocol
 
 - (void)flexLayoutNode {
+    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
+}
+
+- (void)flexBeforeLayout {
     NSArray *subnodes = [self flexSubnodesForLayout];
     self.node->children_count = (int)[subnodes count];
-    
-    if (!self.supernode) {
-        [self resetPositionsAndDimensions];
-    }
-    
-    [self.subnodes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        StylizeNode *subnode = (StylizeNode *)obj;
-        [subnode prepareForLayout];
-        [subnode resetPositionsAndDimensions];
-    }];
-    
-    layoutNode(self.node, self.node->layout.dimensions[CSS_WIDTH], self.node->style.direction);
+    [self resetPositionsAndDimensions];
+}
+
+- (void)flexAfterLayout {
+    //NOTHING
 }
 
 - (CGSize)flexComputeSize:(CGSize)aSize {

@@ -20,6 +20,16 @@
 - (CGSize)flexComputeSize:(CGSize)aSize;
 
 /**
+ *  布局前
+ */
+- (void)flexBeforeLayout;
+
+/**
+ *  布局后
+ */
+- (void)flexAfterLayout;
+
+/**
  *  位置计算
  */
 - (void)flexLayoutNode;

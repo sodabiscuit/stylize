@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *cachedText;
 @property (nonatomic, strong) NSAttributedString *cachedAttributedText;
 @property (nonatomic, assign) CGSize cachedSize;
+@property (nonatomic, assign) CGSize cachedAttributedSize;
 
 @end
 
@@ -35,8 +36,8 @@
     label.textColor = self.CSSRule.color;
     label.font = self.CSSRule.font;
     
-    if (self.CSSRule.display == StylizeDisplayInline) {
-        label.numberOfLines = 0;
+    if ([self hasAttributedText]) {
+        [label setAttributedText:_attributedText];
     }
 }
 
@@ -54,30 +55,34 @@
 
 - (StylizeNodeMeasureBlock)classMeasure {
     UILabel *label = (UILabel *)self.view;
-    if (self.CSSRule.width == 0 &&
-        self.CSSRule.height == 0) {
-        StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
-            if ([self hasAttributedText]) {
-                if (![self.attributedText isEqualToAttributedString:self.cachedAttributedText]) {
-                    _cachedSize = [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
-                    _cachedAttributedText = self.attributedText;
-                }
-            } else {
-                if (![self.text isEqualToString:self.cachedText]) {
-                    _cachedSize = [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
-                    _cachedText = self.text;
-                }
+    StylizeNodeMeasureBlock block = ^CGSize(CGFloat width) {
+        if ([self hasAttributedText]) {
+            if (![self.attributedText isEqualToAttributedString:self.cachedAttributedText]) {
+                _cachedAttributedSize = [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+                _cachedAttributedText = self.attributedText;
+            }
+            return _cachedAttributedSize;
+        } else {
+            if (![self.text isEqualToString:self.cachedText]) {
+                _cachedSize = [label sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+                _cachedText = self.text;
             }
             return _cachedSize;
-        };
-        return block;
-    }
-    
-    return nil;
+        }
+    };
+    return block;
 }
 
 - (BOOL)hasAttributedText {
     return _attributedText.length > 0;
+}
+
+- (void)parseUnrecoginzedCSSRule:(NSString *)key value:(id)value {
+    [super parseUnrecoginzedCSSRule:key value:value];
+    UILabel *label = (UILabel *)self.view;
+    if ([key isEqualToString:@"numberOfLines"]) {
+        label.numberOfLines = [value integerValue];
+    }
 }
 
 @end

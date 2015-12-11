@@ -273,6 +273,13 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
     return block;
 }
 
+- (StylizeNodeQueryBlockVN)remove {
+    StylizeNodeQueryBlockVN block = ^void(StylizeNode *node) {
+        [node removeFromSupernode];
+    };
+    return block;
+}
+
 - (StylizeNodeQueryBlockBS)hasClass {
     StylizeNodeQueryBlockBS block = ^BOOL(NSString *cls) {
         return [self hasNodeClass:cls];
@@ -454,6 +461,19 @@ NS_INLINE NSArray *stylize_find_sibling(StylizeNode *node, NSString *selector, N
         for (StylizeNode *child in self) {
             [node insertSubnode:child atIndex:0];
             [ret insertObject:child atIndex:0];
+        }
+        
+        return [StylizeNodeQuery arrayWithArray:ret];
+    };
+    return block;
+}
+
+- (StylizeNodeQueryBlockAV)remove {
+    StylizeNodeQueryBlockAV block = ^id(void) {
+        NSMutableArray *ret = [NSMutableArray array];
+        
+        for (StylizeNode *child in self) {
+            [child removeFromSupernode];
         }
         
         return [StylizeNodeQuery arrayWithArray:ret];

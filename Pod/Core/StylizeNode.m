@@ -19,6 +19,9 @@ static bool Stylize_alwaysDirty(void *context) {
 static css_node_t *Stylize_getChild(void *context, int i) {
     StylizeNode *node = (__bridge StylizeNode*)context;
     NSArray *children = [node allSubnodesForLayout];
+    if (i >= [children count]) {
+        return nil;
+    }
     StylizeNode *child = [children objectAtIndex:i];
     return child.node;
 }
@@ -94,7 +97,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
         _node->is_dirty = Stylize_alwaysDirty;
         _node->get_child = Stylize_getChild;
         
-        if (self.measure || self.classMeasure) {
+        if (self.classMeasure) {
             _node->measure = Stylize_measureNode;
         }
         
@@ -163,6 +166,15 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return [StylizeCSSRule class];
 }
 
+- (void)setMeasure:(StylizeNodeMeasureBlock)measure {
+    _measure = measure;
+    if (measure || self.classMeasure) {
+        _node->measure = Stylize_measureNode;
+    } else {
+        _node->measure = nil;
+    }
+}
+
 - (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
     UIView *view = (UIView *)self.view;
     view.userInteractionEnabled = userInteractionEnabled;
@@ -200,16 +212,20 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 - (void)layoutNode {
     _hasLayout = YES;
     
-    [self beforeLayout];
-    if (self.layoutType == StylizeLayoutTypeFlex) {
-        [self flexLayoutNode];
-    }
-    [self afterLayout];
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [weakSelf beforeLayout];
+        if (weakSelf.layoutType == StylizeLayoutTypeFlex) {
+            [weakSelf flexLayoutNode];
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^(void) {
+            [weakSelf afterLayout];
+        });
+    });
 }
 
 - (void)beforeLayout {
     [self prepareForLayout];
-//    [self measureNodeImpl];
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexBeforeLayout];
     }
@@ -236,18 +252,6 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     
 }
 
-//- (void)measureNodeImpl {
-//    if (self.measure) {
-//        CGSize measureSize = self.measure(self.frame.size.width);
-//        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
-//        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
-//    } else if (self.classMeasure) {
-//        CGSize measureSize = self.classMeasure(self.frame.size.width);
-//        self.node->layout.dimensions[CSS_WIDTH] = measureSize.width;
-//        self.node->layout.dimensions[CSS_HEIGHT] = measureSize.height;
-//    }
-//}
-
 - (void)renderNode {
     UIView *view = (UIView *)self.view;
     StylizeCSSRule *CSSRule = self.CSSRule;
@@ -256,7 +260,8 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     view.hidden = CSSRule.visibility == StylizeVisibilityHidden || CSSRule.display == StylizeDisplayNone;
     view.alpha = CSSRule.opacity;
     
-    [self setRoundedCorners:UIRectCornerAllCorners radius:self.CSSRule.borderRadius];
+//    [self setRoundedCorners:UIRectCornerAllCorners radius:self.CSSRule.borderRadius];
+    [self setBorderAndRadius];
 }
 
 - (void)prepareForLayout {
@@ -306,6 +311,12 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return ret;
 }
 
+- (void)setBorderAndRadius {
+    UIView *view = (UIView *)self.view;
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = self.CSSRule.borderRadius.ordered[StylizeRuleOrderedTypeTop];
+}
+
 - (void)setRoundedCorners:(UIRectCorner)corners
                    radius:(StylizeOrdered)radius {
     
@@ -325,11 +336,11 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     CGPathAddArcToPoint(path, nil, minx, maxy, minx, midy, (corners & UIRectCornerBottomLeft) ? radius.ordered[StylizeRuleOrderedTypeLeft] : 0);
     CGPathCloseSubpath(path);
     
+    
+    UIView *view = (UIView *)self.view;
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.backgroundColor = [[UIColor clearColor] CGColor];
     [maskLayer setPath:path];
-    
-    UIView *view = (UIView *)self.view;
     [[view layer] setMask:nil];
     [[view layer] setMask:maskLayer];
     
@@ -379,10 +390,6 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     [subnodes insertObject:subnode atIndex:index];
     [self.view insertSubview:subnode.view atIndex:index];
     _subnodes = [subnodes copy];
-    
-//    if (_hasLayout) {
-//        [self layoutNode];
-//    }
 }
 
 - (void)replaceSubnode:(StylizeNode *)subnode withSubnode:(StylizeNode *)replacement {

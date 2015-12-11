@@ -25,6 +25,7 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAV)(void);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAV)(void);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAA)(StylizeNodeQuery *);
 typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAN)(StylizeNode *);
+typedef void (^StylizeNodeQueryBlockVN)(StylizeNode *);
 
 //specical
 typedef StylizeNode* (^StylizeNodeQueryBlockNOO)(id, id);
@@ -123,6 +124,11 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEventUnbind)(NSString *, NSStr
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockNN prependTo;
 
 /**
+ *  删除节点
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockVN remove;
+
+/**
  *  nodeClasses是否包含class
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockBS hasClass;
@@ -197,6 +203,11 @@ typedef StylizeNodeQuery* (^StylizeNodeQueryBlockAEventUnbind)(NSString *, NSStr
  *  添加节点到头部
  */
 @property (nonatomic, weak, readonly) StylizeNodeQueryBlockAN prependTo;
+
+/**
+ *  删除节点
+ */
+@property (nonatomic, weak, readonly) StylizeNodeQueryBlockAV remove;
 
 /**
  *  map方法

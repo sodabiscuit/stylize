@@ -47,6 +47,9 @@
                     }
                 }];
             } else {
+                if ([k hasPrefix:@"-uikit-"]) {
+                    k = [k substringFromIndex:7];
+                }
                 if ([obj isKindOfClass:[NSString class]]) {
                     NSString *val = [obj stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                     [self setRule:val forKey:k pseudoKey:nil inRule:CSSRule];

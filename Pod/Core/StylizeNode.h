@@ -103,7 +103,7 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  1. 使用时注意避免循环引用；
  *  2. 当前实现导致此方法在父节点布局完成后调用，因此不会影响父节点的调用。
  */
-@property (nonatomic, strong) StylizeNodeMeasureBlock measure;
+@property (nonatomic, copy) StylizeNodeMeasureBlock measure;
 
 /**
  *  以类初始化

@@ -65,6 +65,8 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
                       forKeyPath:obj
                          context:PrivateKVOContext];
     }];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (instancetype)initWithViewClass:(Class)viewClass {

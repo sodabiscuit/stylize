@@ -9,6 +9,7 @@ target 'StylizeDemo' do
     pod 'SDWebImage'
     pod "NSLogger"
     pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+    pod 'Ono', '~>1.2.2'
 end
 
 target 'StylizeDemoTests' do

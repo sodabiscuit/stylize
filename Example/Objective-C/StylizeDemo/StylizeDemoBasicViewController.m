@@ -82,6 +82,10 @@
     
     [_rootNode layoutNode];
     
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"StylizeDemoBasicNode" ofType:@"xml"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    StylizeNode *t = [[StylizeNode alloc] initWithDocument:data andStyleSheet:nil];
+    
 }
 
 - (StylizeNode *)createUnitNode:(NSString *)nodeID {

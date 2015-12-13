@@ -30,6 +30,7 @@ PODS:
   - NSLogger (1.5.1):
     - NSLogger/Standard (= 1.5.1)
   - NSLogger/Standard (1.5.1)
+  - Ono (1.2.2)
   - Reveal-iOS-SDK (1.6.2)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - GRMustache
   - Masonry
   - NSLogger
+  - Ono (~> 1.2.2)
   - Reveal-iOS-SDK
   - SDWebImage
 
@@ -51,6 +53,7 @@ SPEC CHECKSUMS:
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   NSLogger: 5ed223a2436df96244e033be750656dacdeec034
+  Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 

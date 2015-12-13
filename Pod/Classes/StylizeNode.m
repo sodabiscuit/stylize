@@ -9,6 +9,8 @@
 #import "StylizeNode.h"
 #import "StylizeCSSRule.h"
 #import "StylizeNode+Flexbox.h"
+#import "StylizeUtility.h"
+#import "Ono.h"
 
 static void *PrivateKVOContext = &PrivateKVOContext;
 
@@ -36,6 +38,8 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 
 @property (nonatomic, readwrite, assign) CGRect frame;
 @property (nonatomic, readwrite, copy) NSArray *subnodes;
+@property (nonatomic, readwrite, copy) NSDictionary *attributes;
+@property (nonatomic, readwrite, copy) NSSet *nodeClasses;
 @property (nonatomic, readwrite, weak) StylizeNode *supernode;
 @property (nonatomic, readwrite, strong) id view;
 @property (nonatomic, readwrite, strong) StylizeCSSRule *CSSRule;
@@ -85,7 +89,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     NSAssert([[view class] isSubclassOfClass:[UIView class]], @"view Class must be a UIView or a subclass of it.");
     NSAssert([[self.class CSSRuleClass] isSubclassOfClass:[StylizeCSSRule class]], @"CSSRuleClass must be a StylizeCSSRule or a subclass of it.");
     
-    if (self = [self initImpl]) {
+    if (self = [self initImpl:[view class]]) {
         
         _view = view;
         _defaultFrame = view.frame;
@@ -114,7 +118,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return self;
 }
 
-- (instancetype)initImpl {
+- (instancetype)initImpl:(Class)viewClass {
     if (self = [super init]) {
         _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
         _hasLayout = NO;
@@ -135,8 +139,48 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return self;
 }
 
-+ (instancetype)shadowNode {
-    return [[[self class] alloc] initImpl];
+- (instancetype)initWithDocument:(NSData *)document
+                   andStyleSheet:(NSData *)styleSheet {
+    NSError *error = nil;
+    ONOXMLDocument *doc = [ONOXMLDocument XMLDocumentWithData:document error:&error];
+    ONOXMLElement *rootElement = doc.rootElement;
+    StylizeNode *ret = [StylizeNode generateNodeWithElement:rootElement andStyleSheet:styleSheet];
+    return ret;
+}
+
++ (instancetype)generateNodeWithElement:(ONOXMLElement *)element
+                          andStyleSheet:(NSData *)styleSheet {
+    Class tagClass = NSClassFromString(element.tag);
+    if (!tagClass) {
+        return nil;
+    }
+    
+    StylizeNode *ret = [[tagClass alloc] init];
+    
+    ret.attributes = element.attributes;
+    [element.attributes enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([key isEqualToString:@"id"]) {
+            ret.nodeID = obj;
+        } else if ([key isEqualToString:@"class"]) {
+            NSString *classStr = [StylizeRegexUtility string:obj
+                                                     replace:@"\\s+"
+                                                        with:@","
+                                                  ignoreCase:YES];
+            NSArray *classArray = [classStr componentsSeparatedByString:@","];
+            ret.nodeClasses = [NSSet  setWithArray:classArray];
+        }
+    }];
+    
+    [[element children] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        StylizeNode *node = [StylizeNode generateNodeWithElement:obj andStyleSheet:styleSheet];
+        [ret addSubnode:node];
+    }];
+    
+    return ret;
+}
+
++ (instancetype)shadowNode:(NSString *)tagName {
+    return [[[self class] alloc] initImpl:NSClassFromString(tagName)];
 }
 
 #pragma mark - Setter and Getter
@@ -394,6 +438,10 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 }
 
 - (void)insertSubnode:(StylizeNode *)subnode atIndex:(NSInteger)index {
+    if (!subnode) {
+        return;
+    }
+    
     if (index > [_subnodes count]) {
         index = [_subnodes count];
     }
@@ -449,6 +497,13 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return [[_nodeClasses allObjects] indexOfObject:className] != NSNotFound;
 }
 
+- (id)getAttribute:(NSString *)key {
+    return nil;
+}
+
+- (void)setAttribute:(NSString *)key value:(id)value {
+    //TODO
+}
 
 @end
 

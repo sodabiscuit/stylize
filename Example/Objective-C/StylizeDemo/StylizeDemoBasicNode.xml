@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<StylizeNode>
+    <StylizeNode id="first" class="child normal"></StylizeNode>
+    <StylizeNode id="second"></StylizeNode>
+    <StylizeImageNode id="third"></StylizeImageNode>
+    <StylizeButtonNode id="fourth"></StylizeButtonNode>
+</StylizeNode>

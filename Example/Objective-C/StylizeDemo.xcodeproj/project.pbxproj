@@ -16,7 +16,6 @@
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
 		129F841E1C1D5E1100F19FB2 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */; };
-		129F841F1C1D5E1100F19FB2 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F01C1D5E1100F19FB2 /* UIView+StylizeNode.m */; };
 		129F84201C1D5E1100F19FB2 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F41C1D5E1100F19FB2 /* StylizeNode+Flexbox.m */; };
 		129F84211C1D5E1100F19FB2 /* StylizeButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F71C1D5E1100F19FB2 /* StylizeButtonNode.m */; };
 		129F84221C1D5E1100F19FB2 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F91C1D5E1100F19FB2 /* StylizeCellNode.m */; };
@@ -32,6 +31,8 @@
 		129F842E1C1D5E1100F19FB2 /* StylizeColorUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84191C1D5E1100F19FB2 /* StylizeColorUtility.m */; };
 		129F842F1C1D5E1100F19FB2 /* StylizeRegexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F841B1C1D5E1100F19FB2 /* StylizeRegexUtility.m */; };
 		129F84301C1D5E1100F19FB2 /* StylizeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F841D1C1D5E1100F19FB2 /* StylizeUtility.m */; };
+		129F84331C1D790E00F19FB2 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */; };
+		129F84471C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml in Resources */ = {isa = PBXBuildFile; fileRef = 129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */; };
 		12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
@@ -66,8 +67,6 @@
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
 		129F83ED1C1D5E1100F19FB2 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
 		129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
-		129F83EF1C1D5E1100F19FB2 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
-		129F83F01C1D5E1100F19FB2 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
 		129F83F21C1D5E1100F19FB2 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
 		129F83F31C1D5E1100F19FB2 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
 		129F83F41C1D5E1100F19FB2 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
@@ -102,6 +101,10 @@
 		129F841B1C1D5E1100F19FB2 /* StylizeRegexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeRegexUtility.m; sourceTree = "<group>"; };
 		129F841C1C1D5E1100F19FB2 /* StylizeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeUtility.h; sourceTree = "<group>"; };
 		129F841D1C1D5E1100F19FB2 /* StylizeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeUtility.m; sourceTree = "<group>"; };
+		129F84311C1D790E00F19FB2 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
+		129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
+		129F84431C1D98A200F19FB2 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StylizeDemoBasicNode.xml; sourceTree = "<group>"; };
 		12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MDLaunchScreenLogo.png; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -163,6 +166,7 @@
 				12728CA71A8211E400E5E2F5 /* Images.xcassets */,
 				12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */,
 				12728C9A1A8211E300E5E2F5 /* Supporting Files */,
+				129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */,
 			);
 			path = StylizeDemo;
 			sourceTree = "<group>";
@@ -218,6 +222,8 @@
 		129F83EB1C1D5E1100F19FB2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				129F84311C1D790E00F19FB2 /* UIView+StylizeNode.h */,
+				129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -227,8 +233,6 @@
 			children = (
 				129F83ED1C1D5E1100F19FB2 /* StylizeNode+Query.h */,
 				129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */,
-				129F83EF1C1D5E1100F19FB2 /* UIView+StylizeNode.h */,
-				129F83F01C1D5E1100F19FB2 /* UIView+StylizeNode.m */,
 			);
 			path = Improved;
 			sourceTree = "<group>";
@@ -323,6 +327,7 @@
 		362F8ACE82DC5E727EA396EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				129F84431C1D98A200F19FB2 /* libxml2.tbd */,
 				12C62D801AE6571900B09438 /* SystemConfiguration.framework */,
 				12C62D7E1AE6570B00B09438 /* CFNetwork.framework */,
 				1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */,
@@ -426,6 +431,7 @@
 				12728CA61A8211E400E5E2F5 /* Main.storyboard in Resources */,
 				12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */,
 				12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */,
+				129F84471C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml in Resources */,
 				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,9 +503,9 @@
 				129F842D1C1D5E1100F19FB2 /* Layout.c in Sources */,
 				129F842F1C1D5E1100F19FB2 /* StylizeRegexUtility.m in Sources */,
 				129F84291C1D5E1100F19FB2 /* StylizeCSSRuleParser.m in Sources */,
+				129F84331C1D790E00F19FB2 /* UIView+StylizeNode.m in Sources */,
 				129F84251C1D5E1100F19FB2 /* StylizeScrollNode.m in Sources */,
 				129F84241C1D5E1100F19FB2 /* StylizeImageNode.m in Sources */,
-				129F841F1C1D5E1100F19FB2 /* UIView+StylizeNode.m in Sources */,
 				129F84271C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m in Sources */,
 				129F84261C1D5E1100F19FB2 /* StylizeTextNode.m in Sources */,
 				129F84231C1D5E1100F19FB2 /* StylizeControlNode.m in Sources */,

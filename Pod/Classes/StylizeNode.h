@@ -29,7 +29,17 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 /**
  *  class选择符信息
  */
-@property (nonatomic, readonly, strong) NSSet *nodeClasses;
+@property (nonatomic, readonly, copy) NSSet *nodeClasses;
+
+/**
+ *  标签名称
+ */
+@property (nonatomic, readonly, strong) NSString *tagName;
+
+/**
+ *  属性
+ */
+@property (nonatomic, readonly, copy) NSDictionary *attributes;
 
 /**
  *  uuid信息
@@ -106,6 +116,28 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 @property (nonatomic, copy) StylizeNodeMeasureBlock measure;
 
 /**
+ *  使用结构文本数据以及stylesheet创建节点
+ *
+ *  @param document   结构文本数据
+ *  @param styleSheet 样式文本数据
+ *
+ *  @return 节点
+ */
+- (instancetype)initWithDocument:(NSData *)document
+                   andStyleSheet:(NSData *)styleSheet;
+
+/**
+ *  下载结构文本数据以及stylesheet创建节点
+ *
+ *  @param documentURL   结构文本数据地址
+ *  @param styleSheetURL 样式文本数据地址
+ *
+ *  @return 节点
+ */
+- (instancetype)initWithDocumentURL:(NSString *)documentURL
+                   andStyleSheetURL:(NSString *)styleSheetURL;
+
+/**
  *  以类初始化
  *
  *  @param viewClass 类
@@ -139,7 +171,7 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *
  *  @return Stylize节点，view属性为空
  */
-+ (instancetype)shadowNode;
++ (instancetype)shadowNode:(NSString *)tagName;
 
 /**
  *  规则类
@@ -176,6 +208,23 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 @end
 
 @interface StylizeNode(DOM)
+
+/**
+ *  设置属性
+ *
+ *  @param key   属性键
+ *  @param value 属性值
+ */
+- (void)setAttribute:(NSString *)key value:(id)value;
+
+/**
+ *  获取属性值
+ *
+ *  @param key 属性键
+ *
+ *  @return 属性值
+ */
+- (id)getAttribute:(NSString *)key;
 
 /**
  *  通过添加view添加子节点

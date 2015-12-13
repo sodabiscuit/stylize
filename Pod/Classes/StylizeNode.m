@@ -54,6 +54,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 
 - (void)dealloc {
     free_css_node(_node);
+    
     [[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [_CSSRule removeObserver:self
                       forKeyPath:obj
@@ -84,24 +85,10 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     NSAssert([[view class] isSubclassOfClass:[UIView class]], @"view Class must be a UIView or a subclass of it.");
     NSAssert([[self.class CSSRuleClass] isSubclassOfClass:[StylizeCSSRule class]], @"CSSRuleClass must be a StylizeCSSRule or a subclass of it.");
     
-    if (self=[super init]) {
+    if (self = [self initImpl]) {
+        
         _view = view;
         _defaultFrame = view.frame;
-        
-        _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
-        _hasLayout = NO;
-        _layoutType = StylizeLayoutTypeFlex;
-        _subnodes = [NSArray array];
-        _CSSRule = (StylizeCSSRule *)[[[self.class CSSRuleClass] alloc] init];
-        
-        _node = new_css_node();
-        _node->context = (__bridge void *)self;
-        _node->is_dirty = Stylize_alwaysDirty;
-        _node->get_child = Stylize_getChild;
-        
-        if (self.classMeasure) {
-            _node->measure = Stylize_measureNode;
-        }
         
         [[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [_CSSRule addObserver:self
@@ -127,6 +114,31 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return self;
 }
 
+- (instancetype)initImpl {
+    if (self = [super init]) {
+        _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
+        _hasLayout = NO;
+        _layoutType = StylizeLayoutTypeFlex;
+        _subnodes = [NSArray array];
+        _CSSRule = (StylizeCSSRule *)[[[self.class CSSRuleClass] alloc] init];
+        
+        _node = new_css_node();
+        _node->context = (__bridge void *)self;
+        _node->is_dirty = Stylize_alwaysDirty;
+        _node->get_child = Stylize_getChild;
+        
+        if (self.classMeasure) {
+            _node->measure = Stylize_measureNode;
+        }
+    }
+    
+    return self;
+}
+
++ (instancetype)shadowNode {
+    return [[[self class] alloc] initImpl];
+}
+
 #pragma mark - Setter and Getter
 
 - (CGRect)frame {
@@ -150,7 +162,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
                         change:(NSDictionary *)change context:(void *)context {
     if (context == PrivateKVOContext) {
         if ([[[self.class CSSRuleClass] getLayoutAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
-            [self prepareForLayout];
+            [self syncCSSRuleForLayout];
             if ([[[self.class CSSRuleClass] getBothAffectedRuleKeys] indexOfObject:keyPath] != NSNotFound) {
                 [self renderNode];
             }
@@ -227,7 +239,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 }
 
 - (void)beforeLayout {
-    [self prepareForLayout];
+    [self syncCSSRuleForLayout];
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexBeforeLayout];
     }
@@ -249,9 +261,10 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 }
 
 - (void)layoutNodeImpl {
-    ((UIView *)self.view).frame = self.frame;
-    [self renderNode];
-    
+    if (self.view) {
+        ((UIView *)self.view).frame = self.frame;
+        [self renderNode];
+    }
 }
 
 - (void)renderNode {
@@ -266,7 +279,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     [self setBorderAndRadius];
 }
 
-- (void)prepareForLayout {
+- (void)syncCSSRuleForLayout {
     StylizeCSSRule *CSSRule = self.CSSRule;
     
     self.node->style.position_type = (int)CSSRule.position;
@@ -300,9 +313,13 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     self.node->style.border[CSS_RIGHT] = CSSRule.borderRight.width;
     self.node->style.border[CSS_BOTTOM] = CSSRule.borderBottom.width;
     
-    if (self.layoutType == StylizeLayoutTypeFlex) {
-        [self flexPrepareForLayout];
-    }
+    self.node->style.flex_direction = (int)CSSRule.flexDirection;
+    self.node->style.flex_wrap = (int)CSSRule.flexWrap;
+    self.node->style.flex = CSSRule.flex;
+    self.node->style.align_content = (int)CSSRule.alignContent;
+    self.node->style.align_items = (int)CSSRule.alignItems;
+    self.node->style.align_self = (int)CSSRule.alignSelf;
+    self.node->style.justify_content = (int)CSSRule.justifyContent;
 }
 
 - (NSArray *)allSubnodesForLayout {
@@ -385,12 +402,14 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
         [subnode removeFromSupernode];
     }
     
-    [subnode prepareForLayout];
-    
     NSMutableArray *subnodes = [self.subnodes mutableCopy];
     subnode.supernode = self;
     [subnodes insertObject:subnode atIndex:index];
-    [self.view insertSubview:subnode.view atIndex:index];
+    
+    if (self.view && subnode.view) {
+        [self.view insertSubview:subnode.view atIndex:index];
+    }
+    
     _subnodes = [subnodes copy];
 }
 

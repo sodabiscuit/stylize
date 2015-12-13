@@ -35,11 +35,6 @@
 - (void)flexLayoutNode;
 
 /**
- *  设置布局初始化参数
- */
-- (void)flexPrepareForLayout;
-
-/**
  *  获取可布局子节点
  *
  *  @return 可布局子节点

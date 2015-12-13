@@ -84,18 +84,6 @@
     return [ret copy];
 }
 
-- (void)flexPrepareForLayout {
-    StylizeCSSRule *CSSRule = self.CSSRule;
-    
-    self.node->style.flex_direction = (int)CSSRule.flexDirection;
-    self.node->style.flex_wrap = (int)CSSRule.flexWrap;
-    self.node->style.flex = CSSRule.flex;
-    self.node->style.align_content = (int)CSSRule.alignContent;
-    self.node->style.align_items = (int)CSSRule.alignItems;
-    self.node->style.align_self = (int)CSSRule.alignSelf;
-    self.node->style.justify_content = (int)CSSRule.justifyContent;
-}
-
 - (void)resetPositionsAndDimensions {
     self.node->layout.position[CSS_LEFT] = 0;
     self.node->layout.position[CSS_RIGHT] = 0;

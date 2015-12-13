@@ -135,6 +135,13 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 - (instancetype)initWithView:(UIView *)view;
 
 /**
+ *  不创建包含view的context
+ *
+ *  @return Stylize节点，view属性为空
+ */
++ (instancetype)shadowNode;
+
+/**
  *  规则类
  *
  *  @return 规则类
@@ -149,7 +156,7 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 /**
  *  布局前处理
  */
--(void)prepareForLayout;
+-(void)syncCSSRuleForLayout;
 
 /**
  *  手动触发位置计算

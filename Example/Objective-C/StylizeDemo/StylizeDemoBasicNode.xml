@@ -4,4 +4,5 @@
     <StylizeNode id="second"></StylizeNode>
     <StylizeImageNode id="third"></StylizeImageNode>
     <StylizeButtonNode id="fourth"></StylizeButtonNode>
+    <StylizeTextNode id="fifth">fifthtext</StylizeTextNode>
 </StylizeNode>

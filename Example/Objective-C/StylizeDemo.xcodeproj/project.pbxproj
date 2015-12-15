@@ -33,6 +33,7 @@
 		129F84301C1D5E1100F19FB2 /* StylizeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F841D1C1D5E1100F19FB2 /* StylizeUtility.m */; };
 		129F84331C1D790E00F19FB2 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */; };
 		129F84471C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml in Resources */ = {isa = PBXBuildFile; fileRef = 129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */; };
+		129F844A1C1EDD4300F19FB2 /* StylizeStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84491C1EDD4300F19FB2 /* StylizeStyleSheet.m */; };
 		12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
@@ -105,6 +106,8 @@
 		129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
 		129F84431C1D98A200F19FB2 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StylizeDemoBasicNode.xml; sourceTree = "<group>"; };
+		129F84481C1EDD4300F19FB2 /* StylizeStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeStyleSheet.h; sourceTree = "<group>"; };
+		129F84491C1EDD4300F19FB2 /* StylizeStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeStyleSheet.m; sourceTree = "<group>"; };
 		12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MDLaunchScreenLogo.png; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -283,6 +286,8 @@
 				129F84081C1D5E1100F19FB2 /* StylizeCSSRule.m */,
 				129F84091C1D5E1100F19FB2 /* StylizeCSSRuleParser.h */,
 				129F840A1C1D5E1100F19FB2 /* StylizeCSSRuleParser.m */,
+				129F84481C1EDD4300F19FB2 /* StylizeStyleSheet.h */,
+				129F84491C1EDD4300F19FB2 /* StylizeStyleSheet.m */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 				129F84331C1D790E00F19FB2 /* UIView+StylizeNode.m in Sources */,
 				129F84251C1D5E1100F19FB2 /* StylizeScrollNode.m in Sources */,
 				129F84241C1D5E1100F19FB2 /* StylizeImageNode.m in Sources */,
+				129F844A1C1EDD4300F19FB2 /* StylizeStyleSheet.m in Sources */,
 				129F84271C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m in Sources */,
 				129F84261C1D5E1100F19FB2 /* StylizeTextNode.m in Sources */,
 				129F84231C1D5E1100F19FB2 /* StylizeControlNode.m in Sources */,

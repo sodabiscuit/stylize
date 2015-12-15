@@ -22,6 +22,11 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 }
 
 /**
+ *  uuid信息
+ */
+@property (nonatomic, readonly, strong) NSString *nodeUUID;
+
+/**
  *  id信息
  */
 @property (nonatomic, strong) NSString *nodeID;
@@ -37,14 +42,19 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
 @property (nonatomic, readonly, strong) NSString *tagName;
 
 /**
+ *  绑定view的class
+ */
+@property (nonatomic, readonly, assign) Class viewClass;
+
+/**
  *  属性
  */
 @property (nonatomic, readonly, copy) NSDictionary *attributes;
 
 /**
- *  uuid信息
+ *  文本内容
  */
-@property (nonatomic, readonly, strong) NSString *nodeUUID;
+@property (nonatomic, strong) NSString *content;
 
 /**
  *  输出的位置信息
@@ -324,6 +334,13 @@ typedef CGSize (^StylizeNodeMeasureBlock)(CGFloat);
  *  @param CSSRaw CSS文本
  */
 - (void)applyCSSRaw:(NSString *)CSSRaw;
+
+/**
+ *  应用规则集合stylesheet
+ *
+ *  @param styleSheet 要应用的stylesheet
+ */
+- (void)applyStyleSheet:(NSData *)styleSheet;
 
 /**
  *  解析CSSParser无法处理的属性

@@ -12,6 +12,8 @@
 #import "StylizeUtility.h"
 #import "Ono.h"
 
+typedef void (^StylizeNodeLayoutCallback)(void);
+
 static void *PrivateKVOContext = &PrivateKVOContext;
 
 static bool Stylize_alwaysDirty(void *context) {
@@ -37,13 +39,12 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 @interface StylizeNode()
 
 @property (nonatomic, readwrite, assign) CGRect frame;
-@property (nonatomic, readwrite, copy) NSArray *subnodes;
 @property (nonatomic, readwrite, copy) NSDictionary *attributes;
 @property (nonatomic, readwrite, copy) NSSet *nodeClasses;
 @property (nonatomic, readwrite, weak) StylizeNode *supernode;
+@property (nonatomic, readwrite, copy) NSArray *subnodes;
 @property (nonatomic, readwrite, strong) id view;
 @property (nonatomic, readwrite, strong) StylizeCSSRule *CSSRule;
-@property (nonatomic, assign) BOOL hasLayout;
 @property (nonatomic, readwrite, assign) css_node_t *node;
 
 @end
@@ -121,7 +122,6 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 - (instancetype)initImpl:(Class)viewClass {
     if (self = [super init]) {
         _nodeUUID = [NSString stringWithFormat:@"%@", [[[NSUUID alloc] init] UUIDString]];
-        _hasLayout = NO;
         _layoutType = StylizeLayoutTypeFlex;
         _subnodes = [NSArray array];
         _CSSRule = (StylizeCSSRule *)[[[self.class CSSRuleClass] alloc] init];
@@ -144,12 +144,18 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     NSError *error = nil;
     ONOXMLDocument *doc = [ONOXMLDocument XMLDocumentWithData:document error:&error];
     ONOXMLElement *rootElement = doc.rootElement;
-    StylizeNode *ret = [StylizeNode generateNodeWithElement:rootElement andStyleSheet:styleSheet];
+    StylizeNode *ret = [StylizeNode generateNodeWithElement:rootElement withoutView:NO];
+    return ret;
+}
+
+- (instancetype)initWithDocumentURL:(NSString *)documentURL
+                   andStyleSheetURL:(NSString *)styleSheetURL {
+    StylizeNode *ret = [StylizeNode generateNodeWithElement:nil withoutView:NO];
     return ret;
 }
 
 + (instancetype)generateNodeWithElement:(ONOXMLElement *)element
-                          andStyleSheet:(NSData *)styleSheet {
+                            withoutView:(BOOL)withoutView {
     Class tagClass = NSClassFromString(element.tag);
     if (!tagClass) {
         return nil;
@@ -157,6 +163,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     
     StylizeNode *ret = [[tagClass alloc] init];
     
+    ret.content = [element stringValue].length > 0 ? [element stringValue] : nil;
     ret.attributes = element.attributes;
     [element.attributes enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if ([key isEqualToString:@"id"]) {
@@ -172,7 +179,7 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     }];
     
     [[element children] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        StylizeNode *node = [StylizeNode generateNodeWithElement:obj andStyleSheet:styleSheet];
+        StylizeNode *node = [StylizeNode generateNodeWithElement:obj withoutView:withoutView];
         [ret addSubnode:node];
     }];
     
@@ -224,6 +231,10 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
     return [StylizeCSSRule class];
 }
 
++ (Class)viewClass {
+    return [UIView class];
+}
+
 - (void)setMeasure:(StylizeNodeMeasureBlock)measure {
     _measure = measure;
     if (measure || self.classMeasure) {
@@ -267,19 +278,24 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 
 @implementation StylizeNode(Layout)
 
-- (void)layoutNode {
-    _hasLayout = YES;
+- (CGSize)computeSizeWithDocument:(NSData *)document
+                    andStyleSheet:(NSData *)styleSheet {
+    NSError *error = nil;
+    ONOXMLDocument *doc = [ONOXMLDocument XMLDocumentWithData:document error:&error];
+    ONOXMLElement *rootElement = doc.rootElement;
     
+    StylizeNode *ret = [StylizeNode generateNodeWithElement:rootElement withoutView:YES];
+    [ret applyStyleSheet:styleSheet];
+    [ret layoutNodeImpl];
+
+    return ret.frame.size;
+}
+
+- (void)layoutNode {
     __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [weakSelf beforeLayout];
-        if (weakSelf.layoutType == StylizeLayoutTypeFlex) {
-            [weakSelf flexLayoutNode];
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^(void) {
-            [weakSelf afterLayout];
-        });
-    });
+    [self layoutNodeWithCallback:^{
+        [weakSelf afterLayout];
+    }];
 }
 
 - (void)beforeLayout {
@@ -294,7 +310,10 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 }
 
 - (void)afterLayout {
-    [self layoutNodeImpl];
+    if (self.view) {
+        ((UIView *)self.view).frame = self.frame;
+        [self renderNode];
+    }
     if (self.layoutType == StylizeLayoutTypeFlex) {
         [self flexAfterLayout];
     }
@@ -302,13 +321,6 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
         StylizeNode *subnode = (StylizeNode *)obj;
         [subnode afterLayout];
     }];
-}
-
-- (void)layoutNodeImpl {
-    if (self.view) {
-        ((UIView *)self.view).frame = self.frame;
-        [self renderNode];
-    }
 }
 
 - (void)renderNode {
@@ -372,6 +384,25 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
         ret = [self flexSubnodesForLayout];
     }
     return ret;
+}
+
+- (void)layoutNodeWithCallback:(StylizeNodeLayoutCallback)callback {
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [weakSelf layoutNodeImpl];
+        if (callback) {
+            dispatch_sync(dispatch_get_main_queue(), ^(void) {
+                callback();
+            });
+        }
+    });
+}
+
+- (void)layoutNodeImpl {
+    [self beforeLayout];
+    if (self.layoutType == StylizeLayoutTypeFlex) {
+        [self flexLayoutNode];
+    }
 }
 
 - (void)setBorderAndRadius {
@@ -510,6 +541,10 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 #pragma mark - CSS
 
 @implementation StylizeNode(CSS)
+
+- (void)applyStyleSheet:(NSData *)styleSheet {
+
+}
 
 - (void)applyCSSRule:(StylizeCSSRule *)CSSRule {
     //TODO

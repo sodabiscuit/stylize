@@ -15,6 +15,10 @@
 		12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA71A8211E400E5E2F5 /* Images.xcassets */; };
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
+		1288933E1C1FFA4500A8D63A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288933A1C1FFA4500A8D63A /* StylizeCSSParser.m */; };
+		1288933F1C1FFA4500A8D63A /* ESCssTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288933B1C1FFA4500A8D63A /* ESCssTokenizer.m */; };
+		128893401C1FFA4500A8D63A /* ESCssTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288933D1C1FFA4500A8D63A /* ESCssTokens.m */; };
+		128893421C1FFBEF00A8D63A /* StylizeDemoBasicNode.css in Resources */ = {isa = PBXBuildFile; fileRef = 128893411C1FFBEF00A8D63A /* StylizeDemoBasicNode.css */; };
 		129F841E1C1D5E1100F19FB2 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */; };
 		129F84201C1D5E1100F19FB2 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F41C1D5E1100F19FB2 /* StylizeNode+Flexbox.m */; };
 		129F84211C1D5E1100F19FB2 /* StylizeButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F71C1D5E1100F19FB2 /* StylizeButtonNode.m */; };
@@ -66,6 +70,12 @@
 		12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylizeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728CB51A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
+		128893391C1FFA4500A8D63A /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
+		1288933A1C1FFA4500A8D63A /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
+		1288933B1C1FFA4500A8D63A /* ESCssTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokenizer.m; sourceTree = "<group>"; };
+		1288933C1C1FFA4500A8D63A /* ESCssTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssTokens.h; sourceTree = "<group>"; };
+		1288933D1C1FFA4500A8D63A /* ESCssTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokens.m; sourceTree = "<group>"; };
+		128893411C1FFBEF00A8D63A /* StylizeDemoBasicNode.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = StylizeDemoBasicNode.css; sourceTree = "<group>"; };
 		129F83ED1C1D5E1100F19FB2 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
 		129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
 		129F83F21C1D5E1100F19FB2 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
@@ -170,6 +180,7 @@
 				12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */,
 				12728C9A1A8211E300E5E2F5 /* Supporting Files */,
 				129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */,
+				128893411C1FFBEF00A8D63A /* StylizeDemoBasicNode.css */,
 			);
 			path = StylizeDemo;
 			sourceTree = "<group>";
@@ -199,6 +210,18 @@
 				12728CB51A8211E400E5E2F5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		128893381C1FFA4500A8D63A /* ESCSSParser */ = {
+			isa = PBXGroup;
+			children = (
+				128893391C1FFA4500A8D63A /* StylizeCSSParser.h */,
+				1288933A1C1FFA4500A8D63A /* StylizeCSSParser.m */,
+				1288933B1C1FFA4500A8D63A /* ESCssTokenizer.m */,
+				1288933C1C1FFA4500A8D63A /* ESCssTokens.h */,
+				1288933D1C1FFA4500A8D63A /* ESCssTokens.m */,
+			);
+			path = ESCSSParser;
 			sourceTree = "<group>";
 		};
 		129F83EA1C1D5E1100F19FB2 /* Classes */ = {
@@ -302,6 +325,7 @@
 		129F84121C1D5E1100F19FB2 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				128893381C1FFA4500A8D63A /* ESCSSParser */,
 				129F84141C1D5E1100F19FB2 /* css-layout */,
 			);
 			path = ThirdParty;
@@ -437,6 +461,7 @@
 				12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */,
 				12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */,
 				129F84471C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml in Resources */,
+				128893421C1FFBEF00A8D63A /* StylizeDemoBasicNode.css in Resources */,
 				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,6 +530,7 @@
 			files = (
 				129F842E1C1D5E1100F19FB2 /* StylizeColorUtility.m in Sources */,
 				129F84281C1D5E1100F19FB2 /* StylizeCSSRule.m in Sources */,
+				1288933E1C1FFA4500A8D63A /* StylizeCSSParser.m in Sources */,
 				129F842D1C1D5E1100F19FB2 /* Layout.c in Sources */,
 				129F842F1C1D5E1100F19FB2 /* StylizeRegexUtility.m in Sources */,
 				129F84291C1D5E1100F19FB2 /* StylizeCSSRuleParser.m in Sources */,
@@ -522,6 +548,8 @@
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
 				129F84221C1D5E1100F19FB2 /* StylizeCellNode.m in Sources */,
 				129F842B1C1D5E1100F19FB2 /* StylizeNode.m in Sources */,
+				1288933F1C1FFA4500A8D63A /* ESCssTokenizer.m in Sources */,
+				128893401C1FFA4500A8D63A /* ESCssTokens.m in Sources */,
 				129F84301C1D5E1100F19FB2 /* StylizeUtility.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
 			);

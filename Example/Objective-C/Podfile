@@ -10,6 +10,7 @@ target 'StylizeDemo' do
     pod "NSLogger"
     pod 'Reveal-iOS-SDK', :configurations => ['Debug']
     pod 'Ono', '~>1.2.2'
+    #pod 'stylize'
 end
 
 target 'StylizeDemoTests' do

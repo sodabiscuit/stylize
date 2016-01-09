@@ -10,4 +10,6 @@
 
 @interface StylizeStyleSheet : NSObject
 
+- (void)loadFromCSSPath:(NSString *)filePath;
+
 @end

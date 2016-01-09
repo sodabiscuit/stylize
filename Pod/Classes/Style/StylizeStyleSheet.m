@@ -10,4 +10,8 @@
 
 @implementation StylizeStyleSheet
 
+- (void)loadFromCSSPath:(NSString *)filePath {
+
+}
+
 @end

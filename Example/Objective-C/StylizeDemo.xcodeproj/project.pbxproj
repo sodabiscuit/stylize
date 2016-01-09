@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1247B7B41A8B03DC00A4987A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */; };
+		126DE81C1C41489F00944460 /* StylizeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 126DE81B1C41489F00944460 /* StylizeLayout.m */; };
+		126DE81F1C4148DF00944460 /* StylizeLayoutFlexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 126DE81E1C4148DF00944460 /* StylizeLayoutFlexbox.m */; };
 		12728C9D1A8211E400E5E2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9C1A8211E400E5E2F5 /* main.m */; };
 		12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728C9F1A8211E400E5E2F5 /* AppDelegate.m */; };
 		12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CA21A8211E400E5E2F5 /* StylizeDemoBasicViewController.m */; };
@@ -15,29 +17,30 @@
 		12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA71A8211E400E5E2F5 /* Images.xcassets */; };
 		12728CAB1A8211E400E5E2F5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12728CA91A8211E400E5E2F5 /* LaunchScreen.xib */; };
 		12728CB71A8211E400E5E2F5 /* StylizeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */; };
-		1288933E1C1FFA4500A8D63A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288933A1C1FFA4500A8D63A /* StylizeCSSParser.m */; };
-		1288933F1C1FFA4500A8D63A /* ESCssTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288933B1C1FFA4500A8D63A /* ESCssTokenizer.m */; };
-		128893401C1FFA4500A8D63A /* ESCssTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288933D1C1FFA4500A8D63A /* ESCssTokens.m */; };
 		128893421C1FFBEF00A8D63A /* StylizeDemoBasicNode.css in Resources */ = {isa = PBXBuildFile; fileRef = 128893411C1FFBEF00A8D63A /* StylizeDemoBasicNode.css */; };
-		129F841E1C1D5E1100F19FB2 /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */; };
-		129F84201C1D5E1100F19FB2 /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F41C1D5E1100F19FB2 /* StylizeNode+Flexbox.m */; };
-		129F84211C1D5E1100F19FB2 /* StylizeButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F71C1D5E1100F19FB2 /* StylizeButtonNode.m */; };
-		129F84221C1D5E1100F19FB2 /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83F91C1D5E1100F19FB2 /* StylizeCellNode.m */; };
-		129F84231C1D5E1100F19FB2 /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83FB1C1D5E1100F19FB2 /* StylizeControlNode.m */; };
-		129F84241C1D5E1100F19FB2 /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F83FE1C1D5E1100F19FB2 /* StylizeImageNode.m */; };
-		129F84251C1D5E1100F19FB2 /* StylizeScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84001C1D5E1100F19FB2 /* StylizeScrollNode.m */; };
-		129F84261C1D5E1100F19FB2 /* StylizeTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84021C1D5E1100F19FB2 /* StylizeTextNode.m */; };
-		129F84271C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84061C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m */; };
-		129F84281C1D5E1100F19FB2 /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84081C1D5E1100F19FB2 /* StylizeCSSRule.m */; };
-		129F84291C1D5E1100F19FB2 /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F840A1C1D5E1100F19FB2 /* StylizeCSSRuleParser.m */; };
-		129F842B1C1D5E1100F19FB2 /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84101C1D5E1100F19FB2 /* StylizeNode.m */; };
-		129F842D1C1D5E1100F19FB2 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 129F84151C1D5E1100F19FB2 /* Layout.c */; };
-		129F842E1C1D5E1100F19FB2 /* StylizeColorUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84191C1D5E1100F19FB2 /* StylizeColorUtility.m */; };
-		129F842F1C1D5E1100F19FB2 /* StylizeRegexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F841B1C1D5E1100F19FB2 /* StylizeRegexUtility.m */; };
-		129F84301C1D5E1100F19FB2 /* StylizeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F841D1C1D5E1100F19FB2 /* StylizeUtility.m */; };
-		129F84331C1D790E00F19FB2 /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */; };
+		1288937D1C20014900A8D63A /* UIView+StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893461C20014900A8D63A /* UIView+StylizeNode.m */; };
+		1288937E1C20014900A8D63A /* StylizeNode+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893491C20014900A8D63A /* StylizeNode+Query.m */; };
+		1288937F1C20014900A8D63A /* StylizeNode+Flexbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288934D1C20014900A8D63A /* StylizeNode+Flexbox.m */; };
+		128893801C20014900A8D63A /* StylizeButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893501C20014900A8D63A /* StylizeButtonNode.m */; };
+		128893811C20014900A8D63A /* StylizeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893521C20014900A8D63A /* StylizeCellNode.m */; };
+		128893821C20014900A8D63A /* StylizeControlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893541C20014900A8D63A /* StylizeControlNode.m */; };
+		128893831C20014900A8D63A /* StylizeImageNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893571C20014900A8D63A /* StylizeImageNode.m */; };
+		128893841C20014900A8D63A /* StylizeScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893591C20014900A8D63A /* StylizeScrollNode.m */; };
+		128893851C20014900A8D63A /* StylizeTextNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288935B1C20014900A8D63A /* StylizeTextNode.m */; };
+		128893861C20014900A8D63A /* StylizeCSSMediaQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288935F1C20014900A8D63A /* StylizeCSSMediaQuery.m */; };
+		128893871C20014900A8D63A /* StylizeCSSRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893611C20014900A8D63A /* StylizeCSSRule.m */; };
+		128893881C20014900A8D63A /* StylizeCSSRuleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893631C20014900A8D63A /* StylizeCSSRuleParser.m */; };
+		128893891C20014900A8D63A /* StylizeStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893651C20014900A8D63A /* StylizeStyleSheet.m */; };
+		1288938A1C20014900A8D63A /* StylizeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893691C20014900A8D63A /* StylizeNode.m */; };
+		1288938B1C20014900A8D63A /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 1288936C1C20014900A8D63A /* .gitkeep */; };
+		1288938C1C20014900A8D63A /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 1288936E1C20014900A8D63A /* Layout.c */; };
+		1288938D1C20014900A8D63A /* ESCssTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893711C20014900A8D63A /* ESCssTokenizer.m */; };
+		1288938E1C20014900A8D63A /* ESCssTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893731C20014900A8D63A /* ESCssTokens.m */; };
+		1288938F1C20014900A8D63A /* StylizeCSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893751C20014900A8D63A /* StylizeCSSParser.m */; };
+		128893901C20014900A8D63A /* StylizeColorUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 128893781C20014900A8D63A /* StylizeColorUtility.m */; };
+		128893911C20014900A8D63A /* StylizeRegexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288937A1C20014900A8D63A /* StylizeRegexUtility.m */; };
+		128893921C20014900A8D63A /* StylizeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 1288937C1C20014900A8D63A /* StylizeUtility.m */; };
 		129F84471C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml in Resources */ = {isa = PBXBuildFile; fileRef = 129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */; };
-		129F844A1C1EDD4300F19FB2 /* StylizeStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 129F84491C1EDD4300F19FB2 /* StylizeStyleSheet.m */; };
 		12AEA9631C143C8800FCA81D /* MDLaunchScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */; };
 		12C62D7F1AE6570B00B09438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D7E1AE6570B00B09438 /* CFNetwork.framework */; };
 		12C62D811AE6571900B09438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C62D801AE6571900B09438 /* SystemConfiguration.framework */; };
@@ -57,6 +60,10 @@
 /* Begin PBXFileReference section */
 		0BD7EE0BF0AD680ABABB4AA9 /* Pods-StylizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StylizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-StylizeDemo/Pods-StylizeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		1247B7B31A8B03DC00A4987A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		126DE81A1C41489F00944460 /* StylizeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayout.h; sourceTree = "<group>"; };
+		126DE81B1C41489F00944460 /* StylizeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayout.m; sourceTree = "<group>"; };
+		126DE81D1C4148DF00944460 /* StylizeLayoutFlexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexbox.h; sourceTree = "<group>"; };
+		126DE81E1C4148DF00944460 /* StylizeLayoutFlexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeLayoutFlexbox.m; sourceTree = "<group>"; };
 		12728C971A8211E300E5E2F5 /* StylizeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StylizeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728C9B1A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728C9C1A8211E400E5E2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -70,54 +77,55 @@
 		12728CB01A8211E400E5E2F5 /* StylizeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StylizeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728CB51A8211E400E5E2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728CB61A8211E400E5E2F5 /* StylizeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StylizeDemoTests.m; sourceTree = "<group>"; };
-		128893391C1FFA4500A8D63A /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
-		1288933A1C1FFA4500A8D63A /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
-		1288933B1C1FFA4500A8D63A /* ESCssTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokenizer.m; sourceTree = "<group>"; };
-		1288933C1C1FFA4500A8D63A /* ESCssTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssTokens.h; sourceTree = "<group>"; };
-		1288933D1C1FFA4500A8D63A /* ESCssTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokens.m; sourceTree = "<group>"; };
 		128893411C1FFBEF00A8D63A /* StylizeDemoBasicNode.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = StylizeDemoBasicNode.css; sourceTree = "<group>"; };
-		129F83ED1C1D5E1100F19FB2 /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
-		129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
-		129F83F21C1D5E1100F19FB2 /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
-		129F83F31C1D5E1100F19FB2 /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
-		129F83F41C1D5E1100F19FB2 /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
-		129F83F61C1D5E1100F19FB2 /* StylizeButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeButtonNode.h; sourceTree = "<group>"; };
-		129F83F71C1D5E1100F19FB2 /* StylizeButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeButtonNode.m; sourceTree = "<group>"; };
-		129F83F81C1D5E1100F19FB2 /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
-		129F83F91C1D5E1100F19FB2 /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
-		129F83FA1C1D5E1100F19FB2 /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
-		129F83FB1C1D5E1100F19FB2 /* StylizeControlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeControlNode.m; sourceTree = "<group>"; };
-		129F83FC1C1D5E1100F19FB2 /* StylizeEventDefinations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeEventDefinations.h; sourceTree = "<group>"; };
-		129F83FD1C1D5E1100F19FB2 /* StylizeImageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeImageNode.h; sourceTree = "<group>"; };
-		129F83FE1C1D5E1100F19FB2 /* StylizeImageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeImageNode.m; sourceTree = "<group>"; };
-		129F83FF1C1D5E1100F19FB2 /* StylizeScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeScrollNode.h; sourceTree = "<group>"; };
-		129F84001C1D5E1100F19FB2 /* StylizeScrollNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeScrollNode.m; sourceTree = "<group>"; };
-		129F84011C1D5E1100F19FB2 /* StylizeTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeTextNode.h; sourceTree = "<group>"; };
-		129F84021C1D5E1100F19FB2 /* StylizeTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeTextNode.m; sourceTree = "<group>"; };
-		129F84051C1D5E1100F19FB2 /* StylizeCSSMediaQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSMediaQuery.h; sourceTree = "<group>"; };
-		129F84061C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSMediaQuery.m; sourceTree = "<group>"; };
-		129F84071C1D5E1100F19FB2 /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
-		129F84081C1D5E1100F19FB2 /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
-		129F84091C1D5E1100F19FB2 /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
-		129F840A1C1D5E1100F19FB2 /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
-		129F840B1C1D5E1100F19FB2 /* Stylize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
-		129F840E1C1D5E1100F19FB2 /* StylizeGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
-		129F840F1C1D5E1100F19FB2 /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
-		129F84101C1D5E1100F19FB2 /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
-		129F84151C1D5E1100F19FB2 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
-		129F84161C1D5E1100F19FB2 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
-		129F84181C1D5E1100F19FB2 /* StylizeColorUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeColorUtility.h; sourceTree = "<group>"; };
-		129F84191C1D5E1100F19FB2 /* StylizeColorUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeColorUtility.m; sourceTree = "<group>"; };
-		129F841A1C1D5E1100F19FB2 /* StylizeRegexUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeRegexUtility.h; sourceTree = "<group>"; };
-		129F841B1C1D5E1100F19FB2 /* StylizeRegexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeRegexUtility.m; sourceTree = "<group>"; };
-		129F841C1C1D5E1100F19FB2 /* StylizeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeUtility.h; sourceTree = "<group>"; };
-		129F841D1C1D5E1100F19FB2 /* StylizeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeUtility.m; sourceTree = "<group>"; };
-		129F84311C1D790E00F19FB2 /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
-		129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
+		128893451C20014900A8D63A /* UIView+StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+StylizeNode.h"; sourceTree = "<group>"; };
+		128893461C20014900A8D63A /* UIView+StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+StylizeNode.m"; sourceTree = "<group>"; };
+		128893481C20014900A8D63A /* StylizeNode+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Query.h"; sourceTree = "<group>"; };
+		128893491C20014900A8D63A /* StylizeNode+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Query.m"; sourceTree = "<group>"; };
+		1288934B1C20014900A8D63A /* StylizeLayoutFlexGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeLayoutFlexGeometry.h; sourceTree = "<group>"; };
+		1288934C1C20014900A8D63A /* StylizeNode+Flexbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StylizeNode+Flexbox.h"; sourceTree = "<group>"; };
+		1288934D1C20014900A8D63A /* StylizeNode+Flexbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StylizeNode+Flexbox.m"; sourceTree = "<group>"; };
+		1288934F1C20014900A8D63A /* StylizeButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeButtonNode.h; sourceTree = "<group>"; };
+		128893501C20014900A8D63A /* StylizeButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeButtonNode.m; sourceTree = "<group>"; };
+		128893511C20014900A8D63A /* StylizeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCellNode.h; sourceTree = "<group>"; };
+		128893521C20014900A8D63A /* StylizeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCellNode.m; sourceTree = "<group>"; };
+		128893531C20014900A8D63A /* StylizeControlNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeControlNode.h; sourceTree = "<group>"; };
+		128893541C20014900A8D63A /* StylizeControlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeControlNode.m; sourceTree = "<group>"; };
+		128893551C20014900A8D63A /* StylizeEventDefinations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeEventDefinations.h; sourceTree = "<group>"; };
+		128893561C20014900A8D63A /* StylizeImageNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeImageNode.h; sourceTree = "<group>"; };
+		128893571C20014900A8D63A /* StylizeImageNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeImageNode.m; sourceTree = "<group>"; };
+		128893581C20014900A8D63A /* StylizeScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeScrollNode.h; sourceTree = "<group>"; };
+		128893591C20014900A8D63A /* StylizeScrollNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeScrollNode.m; sourceTree = "<group>"; };
+		1288935A1C20014900A8D63A /* StylizeTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeTextNode.h; sourceTree = "<group>"; };
+		1288935B1C20014900A8D63A /* StylizeTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeTextNode.m; sourceTree = "<group>"; };
+		1288935E1C20014900A8D63A /* StylizeCSSMediaQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSMediaQuery.h; sourceTree = "<group>"; };
+		1288935F1C20014900A8D63A /* StylizeCSSMediaQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSMediaQuery.m; sourceTree = "<group>"; };
+		128893601C20014900A8D63A /* StylizeCSSRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRule.h; sourceTree = "<group>"; };
+		128893611C20014900A8D63A /* StylizeCSSRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRule.m; sourceTree = "<group>"; };
+		128893621C20014900A8D63A /* StylizeCSSRuleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSRuleParser.h; sourceTree = "<group>"; };
+		128893631C20014900A8D63A /* StylizeCSSRuleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSRuleParser.m; sourceTree = "<group>"; };
+		128893641C20014900A8D63A /* StylizeStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeStyleSheet.h; sourceTree = "<group>"; };
+		128893651C20014900A8D63A /* StylizeStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeStyleSheet.m; sourceTree = "<group>"; };
+		128893661C20014900A8D63A /* Stylize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stylize.h; sourceTree = "<group>"; };
+		128893671C20014900A8D63A /* StylizeGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeGeometry.h; sourceTree = "<group>"; };
+		128893681C20014900A8D63A /* StylizeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeNode.h; sourceTree = "<group>"; };
+		128893691C20014900A8D63A /* StylizeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeNode.m; sourceTree = "<group>"; };
+		1288936C1C20014900A8D63A /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		1288936E1C20014900A8D63A /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
+		1288936F1C20014900A8D63A /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
+		128893711C20014900A8D63A /* ESCssTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokenizer.m; sourceTree = "<group>"; };
+		128893721C20014900A8D63A /* ESCssTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCssTokens.h; sourceTree = "<group>"; };
+		128893731C20014900A8D63A /* ESCssTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCssTokens.m; sourceTree = "<group>"; };
+		128893741C20014900A8D63A /* StylizeCSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeCSSParser.h; sourceTree = "<group>"; };
+		128893751C20014900A8D63A /* StylizeCSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeCSSParser.m; sourceTree = "<group>"; };
+		128893771C20014900A8D63A /* StylizeColorUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeColorUtility.h; sourceTree = "<group>"; };
+		128893781C20014900A8D63A /* StylizeColorUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeColorUtility.m; sourceTree = "<group>"; };
+		128893791C20014900A8D63A /* StylizeRegexUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeRegexUtility.h; sourceTree = "<group>"; };
+		1288937A1C20014900A8D63A /* StylizeRegexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeRegexUtility.m; sourceTree = "<group>"; };
+		1288937B1C20014900A8D63A /* StylizeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeUtility.h; sourceTree = "<group>"; };
+		1288937C1C20014900A8D63A /* StylizeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeUtility.m; sourceTree = "<group>"; };
 		129F84431C1D98A200F19FB2 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		129F84461C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = StylizeDemoBasicNode.xml; sourceTree = "<group>"; };
-		129F84481C1EDD4300F19FB2 /* StylizeStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizeStyleSheet.h; sourceTree = "<group>"; };
-		129F84491C1EDD4300F19FB2 /* StylizeStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizeStyleSheet.m; sourceTree = "<group>"; };
 		12AEA9621C143C8800FCA81D /* MDLaunchScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MDLaunchScreenLogo.png; sourceTree = "<group>"; };
 		12C62D7E1AE6570B00B09438 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		12C62D801AE6571900B09438 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -150,7 +158,7 @@
 		12728C8E1A8211E300E5E2F5 = {
 			isa = PBXGroup;
 			children = (
-				129F83EA1C1D5E1100F19FB2 /* Classes */,
+				128893431C20014900A8D63A /* Classes */,
 				12728C991A8211E300E5E2F5 /* StylizeDemo */,
 				12728CB31A8211E400E5E2F5 /* StylizeDemoTests */,
 				12728C981A8211E300E5E2F5 /* Products */,
@@ -212,143 +220,148 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		128893381C1FFA4500A8D63A /* ESCSSParser */ = {
+		128893431C20014900A8D63A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				128893391C1FFA4500A8D63A /* StylizeCSSParser.h */,
-				1288933A1C1FFA4500A8D63A /* StylizeCSSParser.m */,
-				1288933B1C1FFA4500A8D63A /* ESCssTokenizer.m */,
-				1288933C1C1FFA4500A8D63A /* ESCssTokens.h */,
-				1288933D1C1FFA4500A8D63A /* ESCssTokens.m */,
-			);
-			path = ESCSSParser;
-			sourceTree = "<group>";
-		};
-		129F83EA1C1D5E1100F19FB2 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				129F83EB1C1D5E1100F19FB2 /* Category */,
-				129F83EC1C1D5E1100F19FB2 /* Improved */,
-				129F83F11C1D5E1100F19FB2 /* Layout */,
-				129F83F51C1D5E1100F19FB2 /* NodeKit */,
-				129F84031C1D5E1100F19FB2 /* Shared */,
-				129F84041C1D5E1100F19FB2 /* Style */,
-				129F840B1C1D5E1100F19FB2 /* Stylize.h */,
-				129F840E1C1D5E1100F19FB2 /* StylizeGeometry.h */,
-				129F840F1C1D5E1100F19FB2 /* StylizeNode.h */,
-				129F84101C1D5E1100F19FB2 /* StylizeNode.m */,
-				129F84111C1D5E1100F19FB2 /* Template */,
-				129F84121C1D5E1100F19FB2 /* ThirdParty */,
-				129F84171C1D5E1100F19FB2 /* Utility */,
+				128893441C20014900A8D63A /* Category */,
+				128893471C20014900A8D63A /* Improved */,
+				1288934A1C20014900A8D63A /* Layout */,
+				1288934E1C20014900A8D63A /* NodeKit */,
+				1288935C1C20014900A8D63A /* Shared */,
+				1288935D1C20014900A8D63A /* Style */,
+				128893661C20014900A8D63A /* Stylize.h */,
+				128893671C20014900A8D63A /* StylizeGeometry.h */,
+				128893681C20014900A8D63A /* StylizeNode.h */,
+				128893691C20014900A8D63A /* StylizeNode.m */,
+				1288936A1C20014900A8D63A /* Template */,
+				1288936B1C20014900A8D63A /* ThirdParty */,
+				128893761C20014900A8D63A /* Utility */,
 			);
 			name = Classes;
 			path = ../../Pod/Classes;
 			sourceTree = "<group>";
 		};
-		129F83EB1C1D5E1100F19FB2 /* Category */ = {
+		128893441C20014900A8D63A /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				129F84311C1D790E00F19FB2 /* UIView+StylizeNode.h */,
-				129F84321C1D790E00F19FB2 /* UIView+StylizeNode.m */,
+				128893451C20014900A8D63A /* UIView+StylizeNode.h */,
+				128893461C20014900A8D63A /* UIView+StylizeNode.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
 		};
-		129F83EC1C1D5E1100F19FB2 /* Improved */ = {
+		128893471C20014900A8D63A /* Improved */ = {
 			isa = PBXGroup;
 			children = (
-				129F83ED1C1D5E1100F19FB2 /* StylizeNode+Query.h */,
-				129F83EE1C1D5E1100F19FB2 /* StylizeNode+Query.m */,
+				128893481C20014900A8D63A /* StylizeNode+Query.h */,
+				128893491C20014900A8D63A /* StylizeNode+Query.m */,
 			);
 			path = Improved;
 			sourceTree = "<group>";
 		};
-		129F83F11C1D5E1100F19FB2 /* Layout */ = {
+		1288934A1C20014900A8D63A /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				129F83F21C1D5E1100F19FB2 /* StylizeLayoutFlexGeometry.h */,
-				129F83F31C1D5E1100F19FB2 /* StylizeNode+Flexbox.h */,
-				129F83F41C1D5E1100F19FB2 /* StylizeNode+Flexbox.m */,
+				1288934B1C20014900A8D63A /* StylizeLayoutFlexGeometry.h */,
+				1288934C1C20014900A8D63A /* StylizeNode+Flexbox.h */,
+				1288934D1C20014900A8D63A /* StylizeNode+Flexbox.m */,
+				126DE81A1C41489F00944460 /* StylizeLayout.h */,
+				126DE81B1C41489F00944460 /* StylizeLayout.m */,
+				126DE81D1C4148DF00944460 /* StylizeLayoutFlexbox.h */,
+				126DE81E1C4148DF00944460 /* StylizeLayoutFlexbox.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		129F83F51C1D5E1100F19FB2 /* NodeKit */ = {
+		1288934E1C20014900A8D63A /* NodeKit */ = {
 			isa = PBXGroup;
 			children = (
-				129F83F61C1D5E1100F19FB2 /* StylizeButtonNode.h */,
-				129F83F71C1D5E1100F19FB2 /* StylizeButtonNode.m */,
-				129F83F81C1D5E1100F19FB2 /* StylizeCellNode.h */,
-				129F83F91C1D5E1100F19FB2 /* StylizeCellNode.m */,
-				129F83FA1C1D5E1100F19FB2 /* StylizeControlNode.h */,
-				129F83FB1C1D5E1100F19FB2 /* StylizeControlNode.m */,
-				129F83FC1C1D5E1100F19FB2 /* StylizeEventDefinations.h */,
-				129F83FD1C1D5E1100F19FB2 /* StylizeImageNode.h */,
-				129F83FE1C1D5E1100F19FB2 /* StylizeImageNode.m */,
-				129F83FF1C1D5E1100F19FB2 /* StylizeScrollNode.h */,
-				129F84001C1D5E1100F19FB2 /* StylizeScrollNode.m */,
-				129F84011C1D5E1100F19FB2 /* StylizeTextNode.h */,
-				129F84021C1D5E1100F19FB2 /* StylizeTextNode.m */,
+				1288934F1C20014900A8D63A /* StylizeButtonNode.h */,
+				128893501C20014900A8D63A /* StylizeButtonNode.m */,
+				128893511C20014900A8D63A /* StylizeCellNode.h */,
+				128893521C20014900A8D63A /* StylizeCellNode.m */,
+				128893531C20014900A8D63A /* StylizeControlNode.h */,
+				128893541C20014900A8D63A /* StylizeControlNode.m */,
+				128893551C20014900A8D63A /* StylizeEventDefinations.h */,
+				128893561C20014900A8D63A /* StylizeImageNode.h */,
+				128893571C20014900A8D63A /* StylizeImageNode.m */,
+				128893581C20014900A8D63A /* StylizeScrollNode.h */,
+				128893591C20014900A8D63A /* StylizeScrollNode.m */,
+				1288935A1C20014900A8D63A /* StylizeTextNode.h */,
+				1288935B1C20014900A8D63A /* StylizeTextNode.m */,
 			);
 			path = NodeKit;
 			sourceTree = "<group>";
 		};
-		129F84031C1D5E1100F19FB2 /* Shared */ = {
+		1288935C1C20014900A8D63A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		129F84041C1D5E1100F19FB2 /* Style */ = {
+		1288935D1C20014900A8D63A /* Style */ = {
 			isa = PBXGroup;
 			children = (
-				129F84051C1D5E1100F19FB2 /* StylizeCSSMediaQuery.h */,
-				129F84061C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m */,
-				129F84071C1D5E1100F19FB2 /* StylizeCSSRule.h */,
-				129F84081C1D5E1100F19FB2 /* StylizeCSSRule.m */,
-				129F84091C1D5E1100F19FB2 /* StylizeCSSRuleParser.h */,
-				129F840A1C1D5E1100F19FB2 /* StylizeCSSRuleParser.m */,
-				129F84481C1EDD4300F19FB2 /* StylizeStyleSheet.h */,
-				129F84491C1EDD4300F19FB2 /* StylizeStyleSheet.m */,
+				1288935E1C20014900A8D63A /* StylizeCSSMediaQuery.h */,
+				1288935F1C20014900A8D63A /* StylizeCSSMediaQuery.m */,
+				128893601C20014900A8D63A /* StylizeCSSRule.h */,
+				128893611C20014900A8D63A /* StylizeCSSRule.m */,
+				128893621C20014900A8D63A /* StylizeCSSRuleParser.h */,
+				128893631C20014900A8D63A /* StylizeCSSRuleParser.m */,
+				128893641C20014900A8D63A /* StylizeStyleSheet.h */,
+				128893651C20014900A8D63A /* StylizeStyleSheet.m */,
 			);
 			path = Style;
 			sourceTree = "<group>";
 		};
-		129F84111C1D5E1100F19FB2 /* Template */ = {
+		1288936A1C20014900A8D63A /* Template */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Template;
 			sourceTree = "<group>";
 		};
-		129F84121C1D5E1100F19FB2 /* ThirdParty */ = {
+		1288936B1C20014900A8D63A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				128893381C1FFA4500A8D63A /* ESCSSParser */,
-				129F84141C1D5E1100F19FB2 /* css-layout */,
+				1288936C1C20014900A8D63A /* .gitkeep */,
+				1288936D1C20014900A8D63A /* css-layout */,
+				128893701C20014900A8D63A /* ESCSSParser */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
 		};
-		129F84141C1D5E1100F19FB2 /* css-layout */ = {
+		1288936D1C20014900A8D63A /* css-layout */ = {
 			isa = PBXGroup;
 			children = (
-				129F84151C1D5E1100F19FB2 /* Layout.c */,
-				129F84161C1D5E1100F19FB2 /* Layout.h */,
+				1288936E1C20014900A8D63A /* Layout.c */,
+				1288936F1C20014900A8D63A /* Layout.h */,
 			);
 			path = "css-layout";
 			sourceTree = "<group>";
 		};
-		129F84171C1D5E1100F19FB2 /* Utility */ = {
+		128893701C20014900A8D63A /* ESCSSParser */ = {
 			isa = PBXGroup;
 			children = (
-				129F84181C1D5E1100F19FB2 /* StylizeColorUtility.h */,
-				129F84191C1D5E1100F19FB2 /* StylizeColorUtility.m */,
-				129F841A1C1D5E1100F19FB2 /* StylizeRegexUtility.h */,
-				129F841B1C1D5E1100F19FB2 /* StylizeRegexUtility.m */,
-				129F841C1C1D5E1100F19FB2 /* StylizeUtility.h */,
-				129F841D1C1D5E1100F19FB2 /* StylizeUtility.m */,
+				128893711C20014900A8D63A /* ESCssTokenizer.m */,
+				128893721C20014900A8D63A /* ESCssTokens.h */,
+				128893731C20014900A8D63A /* ESCssTokens.m */,
+				128893741C20014900A8D63A /* StylizeCSSParser.h */,
+				128893751C20014900A8D63A /* StylizeCSSParser.m */,
+			);
+			path = ESCSSParser;
+			sourceTree = "<group>";
+		};
+		128893761C20014900A8D63A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				128893771C20014900A8D63A /* StylizeColorUtility.h */,
+				128893781C20014900A8D63A /* StylizeColorUtility.m */,
+				128893791C20014900A8D63A /* StylizeRegexUtility.h */,
+				1288937A1C20014900A8D63A /* StylizeRegexUtility.m */,
+				1288937B1C20014900A8D63A /* StylizeUtility.h */,
+				1288937C1C20014900A8D63A /* StylizeUtility.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -463,6 +476,7 @@
 				129F84471C1D9AF100F19FB2 /* StylizeDemoBasicNode.xml in Resources */,
 				128893421C1FFBEF00A8D63A /* StylizeDemoBasicNode.css in Resources */,
 				12728CA81A8211E400E5E2F5 /* Images.xcassets in Resources */,
+				1288938B1C20014900A8D63A /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,30 +542,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				129F842E1C1D5E1100F19FB2 /* StylizeColorUtility.m in Sources */,
-				129F84281C1D5E1100F19FB2 /* StylizeCSSRule.m in Sources */,
-				1288933E1C1FFA4500A8D63A /* StylizeCSSParser.m in Sources */,
-				129F842D1C1D5E1100F19FB2 /* Layout.c in Sources */,
-				129F842F1C1D5E1100F19FB2 /* StylizeRegexUtility.m in Sources */,
-				129F84291C1D5E1100F19FB2 /* StylizeCSSRuleParser.m in Sources */,
-				129F84331C1D790E00F19FB2 /* UIView+StylizeNode.m in Sources */,
-				129F84251C1D5E1100F19FB2 /* StylizeScrollNode.m in Sources */,
-				129F84241C1D5E1100F19FB2 /* StylizeImageNode.m in Sources */,
-				129F844A1C1EDD4300F19FB2 /* StylizeStyleSheet.m in Sources */,
-				129F84271C1D5E1100F19FB2 /* StylizeCSSMediaQuery.m in Sources */,
-				129F84261C1D5E1100F19FB2 /* StylizeTextNode.m in Sources */,
-				129F84231C1D5E1100F19FB2 /* StylizeControlNode.m in Sources */,
-				129F84201C1D5E1100F19FB2 /* StylizeNode+Flexbox.m in Sources */,
+				128893871C20014900A8D63A /* StylizeCSSRule.m in Sources */,
+				1288938E1C20014900A8D63A /* ESCssTokens.m in Sources */,
+				1288938C1C20014900A8D63A /* Layout.c in Sources */,
+				128893881C20014900A8D63A /* StylizeCSSRuleParser.m in Sources */,
+				128893841C20014900A8D63A /* StylizeScrollNode.m in Sources */,
+				126DE81F1C4148DF00944460 /* StylizeLayoutFlexbox.m in Sources */,
+				128893831C20014900A8D63A /* StylizeImageNode.m in Sources */,
 				12728CA31A8211E400E5E2F5 /* StylizeDemoBasicViewController.m in Sources */,
-				129F84211C1D5E1100F19FB2 /* StylizeButtonNode.m in Sources */,
-				129F841E1C1D5E1100F19FB2 /* StylizeNode+Query.m in Sources */,
+				128893861C20014900A8D63A /* StylizeCSSMediaQuery.m in Sources */,
+				128893851C20014900A8D63A /* StylizeTextNode.m in Sources */,
+				1288938D1C20014900A8D63A /* ESCssTokenizer.m in Sources */,
+				128893821C20014900A8D63A /* StylizeControlNode.m in Sources */,
+				1288937F1C20014900A8D63A /* StylizeNode+Flexbox.m in Sources */,
+				1288937E1C20014900A8D63A /* StylizeNode+Query.m in Sources */,
+				1288938F1C20014900A8D63A /* StylizeCSSParser.m in Sources */,
+				128893801C20014900A8D63A /* StylizeButtonNode.m in Sources */,
+				1288937D1C20014900A8D63A /* UIView+StylizeNode.m in Sources */,
+				128893911C20014900A8D63A /* StylizeRegexUtility.m in Sources */,
+				126DE81C1C41489F00944460 /* StylizeLayout.m in Sources */,
+				128893891C20014900A8D63A /* StylizeStyleSheet.m in Sources */,
 				12728CA01A8211E400E5E2F5 /* AppDelegate.m in Sources */,
-				129F84221C1D5E1100F19FB2 /* StylizeCellNode.m in Sources */,
-				129F842B1C1D5E1100F19FB2 /* StylizeNode.m in Sources */,
-				1288933F1C1FFA4500A8D63A /* ESCssTokenizer.m in Sources */,
-				128893401C1FFA4500A8D63A /* ESCssTokens.m in Sources */,
-				129F84301C1D5E1100F19FB2 /* StylizeUtility.m in Sources */,
+				128893921C20014900A8D63A /* StylizeUtility.m in Sources */,
+				128893811C20014900A8D63A /* StylizeCellNode.m in Sources */,
+				1288938A1C20014900A8D63A /* StylizeNode.m in Sources */,
 				12728C9D1A8211E400E5E2F5 /* main.m in Sources */,
+				128893901C20014900A8D63A /* StylizeColorUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

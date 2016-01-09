@@ -387,15 +387,19 @@ static css_dim_t Stylize_measureNode(void *context, float width) {
 }
 
 - (void)layoutNodeWithCallback:(StylizeNodeLayoutCallback)callback {
-    __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [weakSelf layoutNodeImpl];
-        if (callback) {
-            dispatch_sync(dispatch_get_main_queue(), ^(void) {
-                callback();
-            });
-        }
-    });
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+//        [weakSelf layoutNodeImpl];
+//        if (callback) {
+//            dispatch_sync(dispatch_get_main_queue(), ^(void) {
+//                callback();
+//            });
+//        }
+//    });
+    [self layoutNodeImpl];
+    if (callback) {
+        callback();
+    }
 }
 
 - (void)layoutNodeImpl {
